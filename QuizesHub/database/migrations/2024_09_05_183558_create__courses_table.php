@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('Course', function (Blueprint $table) {
+        Schema::create('courses', function (Blueprint $table) {
             $table->id();
-            $table->varchar('name')->notNullable();
-            $table->varchar('code')->notNullable();
+            $table->string('name',30)->notNullable();
+            $table->string('code',15)->notNullable();
             $table->unsignedbiginteger('major_id')->notNullable();
-            $table->foreign('major_id')->references('id')->on('Majors');
+            $table->foreign('major_id')->references('id')->on('majors');
             $table->timestamps();
         });
     }

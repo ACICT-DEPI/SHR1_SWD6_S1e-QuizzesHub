@@ -11,15 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('AnswerAttempt', function (Blueprint $table) {
+        Schema::create('answer_attempts', function (Blueprint $table) {
             $table->id();
             $table->unsignedbiginteger('user_id')->notNullable();
             $table->unsignedbiginteger('question_id')->notNullable();
             $table->unsignedbiginteger('selected_answer_id')->notNullable();
             $table->integer('attempt_number')->notNullable();
-            $table->foreign('user_id')->references('id')->on('Users');
-            // $table->foreign('question_id')->references('id')->on('Questions');
-            // $table->foreign('selected_answer_id')->references('id')->on('Answers');
+            $table->foreign('user_id')->references('id')->on('users');
+            // $table->foreign('question_id')->references('id')->on('questions');
+            // $table->foreign('selected_answer_id')->references('id')->on('answers');
             $table->timestamps();
         });
     }
