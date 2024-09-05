@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('Major', function (Blueprint $table) {
             $table->id();
-            $table->varchar('name')->notNullable();
+            $table->string('name',30)->notNullable();
             $table->unsignedbiginteger('faculty_id')->notNullable();
-            // $table->foreign('faculty_id')->references('id')->on('Faculties');
+            $table->foreign('faculty_id')->references('id')->on('Faculties');
             $table->timestamps();
         });
     }

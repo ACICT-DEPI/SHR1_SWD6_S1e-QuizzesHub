@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('Levels', function (Blueprint $table) {
             $table->id();
-            $table->varchar('name')->notNullable();
+            $table->string('name',30)->notNullable();
             $table->text('description');
             $table->timestamps();
         });
