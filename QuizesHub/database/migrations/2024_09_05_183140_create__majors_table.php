@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('Major', function (Blueprint $table) {
+        Schema::create('majors', function (Blueprint $table) {
             $table->id();
             $table->string('name',30)->notNullable();
             $table->unsignedbiginteger('faculty_id')->notNullable();
-            $table->foreign('faculty_id')->references('id')->on('Faculties');
+            $table->foreign('faculty_id')->references('id')->on('faculties');
             $table->timestamps();
         });
     }

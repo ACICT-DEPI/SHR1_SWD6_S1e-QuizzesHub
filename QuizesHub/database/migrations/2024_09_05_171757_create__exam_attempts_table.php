@@ -11,16 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('ExamAttempts', function (Blueprint $table) {
+        Schema::create('exam_attempts', function (Blueprint $table) {
             $table->id();
             $table->unsignedbiginteger('user_id')->notNullable();
             $table->unsignedbiginteger('exam_id')->notNullable();
             $table->integer('attempt_numper')->notNullable();
             $table->timestamp('start_time');
-            $table->timestamp('end_time');
+            $table->timestamp('end_time')->nullable();
             $table->integer('score');
-            $table->foreign('user_id')->references('id')->on('Users');
-            // $table->foreign('exam_id')->references('id')->on('Exams');
+            $table->foreign('user_id')->references('id')->on('users');
+            // $table->foreign('exam_id')->references('id')->on('exams');
             $table->timestamps();
         });
     }
