@@ -22,10 +22,10 @@ return new class extends Migration
             $table->string('phone',11)->nullable();
             $table->string('image_path')->nullable();
             $table->enum('gender', ['M', 'F']);
-            $table->bigInteger('university_id')->unsigned();
-            $table->bigInteger('faculty_id')->unsigned();
-            $table->bigInteger('major_id')->unsigned();
-            $table->bigInteger('level_id')->unsigned();
+            $table->unsignedBigInteger('university_id');
+            $table->unsignedBigInteger('faculty_id');
+            $table->unsignedBigInteger('major_id');
+            $table->unsignedBigInteger('level_id');
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();
