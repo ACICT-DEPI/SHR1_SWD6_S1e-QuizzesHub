@@ -11,13 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('Feedback', function (Blueprint $table) {
+        Schema::create('ExamAttempts', function (Blueprint $table) {
             $table->id();
             $table->unsignedbiginteger('user_id')->notNullable();
             $table->unsignedbiginteger('exam_id')->notNullable();
-            $table->integer('rating');
-            $table->text('comments');
-            // $table->foreign('user_id')->references('id')->on('Users');
+            $table->integer('attempt_numper')->notNullable();
+            $table->timestamp('start_time');
+            $table->timestamp('end_time');
+            $table->integer('score');
+            $table->foreign('user_id')->references('id')->on('Users');
             // $table->foreign('exam_id')->references('id')->on('Exams');
             $table->timestamps();
         });
@@ -28,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('Feedback');
+        Schema::dropIfExists('ExamAttempt');
     }
 };

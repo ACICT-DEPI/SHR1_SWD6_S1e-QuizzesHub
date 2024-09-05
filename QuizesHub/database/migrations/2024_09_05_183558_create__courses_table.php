@@ -16,7 +16,7 @@ return new class extends Migration
             $table->varchar('name')->notNullable();
             $table->varchar('code')->notNullable();
             $table->unsignedbiginteger('major_id')->notNullable();
-            // $table->foreign('major_id')->references('id')->on('Major');
+            $table->foreign('major_id')->references('id')->on('Majors');
             $table->timestamps();
         });
     }
