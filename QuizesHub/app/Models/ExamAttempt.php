@@ -12,13 +12,13 @@ class exam_attempt extends Model
     protected $fillable =['user_id','exam_id','attempt_number','start_time','end_time','score'];
     public function exam()
     {
-       return $this->belongsTo(exam::class,'exam_id','id');
+       return $this->belongsTo(Exam::class,'exam_id','id');
     }
 public function user()
     {
-       return $this->belongsto(user::class,'user_id','id');
+       return $this->belongsto(User::class,'user_id','id');
     }
 
-    
+
 }
 

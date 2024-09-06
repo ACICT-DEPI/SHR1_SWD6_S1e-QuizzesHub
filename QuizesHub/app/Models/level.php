@@ -13,7 +13,7 @@ class level extends Model
 
     public function fuculty()
     {
-       return $this->belongsTo(faculty::class);
+       return $this->belongsTo(Faculty::class);
     }
 
 }

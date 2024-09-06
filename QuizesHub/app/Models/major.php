@@ -13,17 +13,17 @@ class major extends Model
 
     public function fuculty()
     {
-       return $this->belongsTo(faculty::class,'faculty_id','id');
+       return $this->belongsTo(Faculty::class,'faculty_id','id');
     }
 
     public function user()
     {
-       return $this->hasMany(user::class);
+       return $this->hasMany(User::class);
     }
     public function course(){
-        return $this->hasMany(course::class);
+        return $this->hasMany(Course::class);
 
     }
-    
+
 }
 

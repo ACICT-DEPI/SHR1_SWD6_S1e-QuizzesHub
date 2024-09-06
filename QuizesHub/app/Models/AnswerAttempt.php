@@ -13,16 +13,16 @@ class answer_attempt extends Model
 
     public function question()
     {
-       return $this->belongsTo(question::class,'question_id','id');
+       return $this->belongsTo(Question::class,'question_id','id');
     }
 public function answer()
     {
-       return $this->belongsto(answer::class,'selected_answer_id','id');
+       return $this->belongsto(Answer::class,'selected_answer_id','id');
     }
     public function user()
     {
-       return $this->belongsto(user::class,'user_id','id');
+       return $this->belongsto(User::class,'user_id','id');
     }
 
-    
+
 }

@@ -13,13 +13,13 @@ class course extends Model
 
     public function exam()
     {
-       return $this->hasMany(exam::class);
+       return $this->hasMany(Exam::class);
     }
 
     public function major()
     {
-       return $this->belongsTo(major::class,'major_id','id');
+       return $this->belongsTo(Major::class,'major_id','id');
     }
 
-   
+
 }
