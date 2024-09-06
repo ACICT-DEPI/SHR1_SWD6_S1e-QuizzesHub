@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->foreign('university_id')->references('id')->on('universities');
             $table->foreign('faculty_id')->references('id')->on('faculties');
-            // $table->foreign('major_id')->references('id')->on('majors');
-            // $table->foreign('level_id')->references('id')->on('levels');
+            $table->foreign('major_id')->references('id')->on('majors');
+            $table->foreign('level_id')->references('id')->on('levels');
         });
     }
 

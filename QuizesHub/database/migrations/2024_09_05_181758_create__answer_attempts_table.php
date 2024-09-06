@@ -17,9 +17,6 @@ return new class extends Migration
             $table->unsignedbiginteger('question_id')->notNullable();
             $table->unsignedbiginteger('selected_answer_id')->notNullable();
             $table->integer('attempt_number')->notNullable();
-            $table->foreign('user_id')->references('id')->on('users');
-            // $table->foreign('question_id')->references('id')->on('questions');
-            // $table->foreign('selected_answer_id')->references('id')->on('answers');
             $table->timestamps();
         });
     }
