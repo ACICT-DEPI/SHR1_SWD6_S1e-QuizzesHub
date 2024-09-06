@@ -11,14 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('feedback', function (Blueprint $table) {
+        Schema::create('feedbacks', function (Blueprint $table) {
             $table->id();
             $table->unsignedbiginteger('user_id')->notNullable();
-            $table->unsignedbiginteger('exam_id')->notNullable();
             $table->integer('rating');
             $table->text('comments');
             $table->foreign('user_id')->references('id')->on('users');
-            // $table->foreign('exam_id')->references('id')->on('exams');
             $table->timestamps();
         });
     }
