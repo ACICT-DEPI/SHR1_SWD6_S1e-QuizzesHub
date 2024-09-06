@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class answer_attempt extends Model
+class AnswerAttempt extends Model
 {
     use HasFactory;
     // public $incrementing=false;
@@ -15,7 +15,7 @@ class answer_attempt extends Model
     {
        return $this->belongsTo(Question::class,'question_id','id');
     }
-public function answer()
+    public function answer()
     {
        return $this->belongsto(Answer::class,'selected_answer_id','id');
     }

@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class exam_attempt extends Model
+class ExamAttempt extends Model
 {
     use HasFactory;
     // public $incrementing=false;
@@ -14,7 +14,7 @@ class exam_attempt extends Model
     {
        return $this->belongsTo(Exam::class,'exam_id','id');
     }
-public function user()
+    public function user()
     {
        return $this->belongsto(User::class,'user_id','id');
     }

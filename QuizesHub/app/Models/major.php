@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class major extends Model
+class Major extends Model
 {
     use HasFactory;
     // public $incrementing=false;
@@ -16,12 +16,12 @@ class major extends Model
        return $this->belongsTo(Faculty::class,'faculty_id','id');
     }
 
-    public function user()
+    public function users()
     {
-       return $this->hasMany(User::class);
+       return $this->hasMany(User::class,'major_id','id');
     }
-    public function course(){
-        return $this->hasMany(Course::class);
+    public function courses(){
+        return $this->hasMany(Course::class,'major_id','id');
 
     }
 
