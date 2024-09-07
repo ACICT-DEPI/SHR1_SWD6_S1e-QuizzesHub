@@ -18,6 +18,7 @@ return new class extends Migration
             $table->unsignedbiginteger('major_id')->notNullable();
             $table->foreign('major_id')->references('id')->on('majors');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
