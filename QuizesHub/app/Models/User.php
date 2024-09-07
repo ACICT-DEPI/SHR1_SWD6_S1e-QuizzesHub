@@ -83,12 +83,12 @@ class User extends Authenticatable
 
     public function roles()
     {
-        return $this->belongsToMany(Role::class, 'role_user', 'user_id', 'role_id')->withPivot('created_at', 'updated_at');
+        return $this->belongsToMany(Role::class, 'role_user', 'user_id', 'role_id')->withPivot('created_at', 'updated_at', 'deleted_at');
     }
 
     public function exams()
     {
-        return $this->belongsToMany(Exam::class, 'exam_attempts', 'user_id', 'exam_id')->withPivot('score', 'attempt_number', 'start_time', 'end_time', 'created_at', 'updated_at');
+        return $this->belongsToMany(Exam::class, 'exam_attempts', 'user_id', 'exam_id')->withPivot('score', 'attempt_number', 'start_time', 'end_time', 'created_at', 'updated_at', 'deleted_at');
     }
 
     public function feedbacks()
@@ -104,5 +104,10 @@ class User extends Authenticatable
     public function answerAttempts()
     {
         return $this->hasMany(AnswerAttempt::class, 'user_id', 'id');
+    }
+
+    public function examAttempts()
+    {
+        return $this->hasMany(ExamAttempt::class, 'user_id', 'id');
     }
 }

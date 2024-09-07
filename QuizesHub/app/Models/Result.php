@@ -16,8 +16,14 @@ class Result extends Model
         'total_score',
         'completion_time',
     ];
-    
-    public function user() {
-        // return $this->belongsTo(User::class, '')
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
+    public function exam()
+    {
+        return $this->belongsTo(Exam::class, 'exam_id', 'id');
     }
 }
