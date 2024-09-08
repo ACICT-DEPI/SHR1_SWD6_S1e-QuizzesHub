@@ -33,4 +33,14 @@ class Exam extends Model
     public function results() {
         return $this->hasMany(Result::class, 'exam_id', 'id');
     }
+
+    public function feedbacks()
+    {
+        return $this->hasMany(Feedback::class, 'exam_id', 'id');
+    }
+
+    public function users()
+    {
+        return $this->belongsToMany(Exam::class, 'exam_attempts', 'exam_id', 'user_id')->withPivot('score', 'attempt_number', 'start_time', 'end_time', 'created_at', 'updated_at', 'deleted_at');
+    }
 }

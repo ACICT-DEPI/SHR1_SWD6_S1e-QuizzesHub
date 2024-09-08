@@ -18,6 +18,7 @@ return new class extends Migration
             $table->unsignedbiginteger('selected_answer_id')->notNullable();
             $table->integer('attempt_number')->notNullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
