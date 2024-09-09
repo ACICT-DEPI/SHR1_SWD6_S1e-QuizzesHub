@@ -5,10 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+
 class Feedback extends Model
 {
-    use HasFactory;
+   use HasFactory;
     // public $incrementing=false;
+    protected $table = 'feedbacks';
     protected $fillable =['user_id','exam_id','rating','comments'];
 
     public function exam()
