@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="apple-touch-icon" href="apple-icon.png">
-    <link rel="shortcut icon" href="exam.ico">
+    <link rel="shortcut icon" href="{{ asset('exam.ico') }}">
 
     <link rel="stylesheet" href="{{ asset('dashboard/assets') }}/vendors/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ asset('dashboard/assets') }}/vendors/font-awesome/css/font-awesome.min.css">
