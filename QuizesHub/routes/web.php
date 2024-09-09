@@ -2,7 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ExamAttemptController;
+use App\Http\Controllers\ExamController;
+use App\Http\Controllers\QuestionController;
+
 use App\Http\Controllers\HomeController;
+
+
 
 
 Route::get('/', function () {
