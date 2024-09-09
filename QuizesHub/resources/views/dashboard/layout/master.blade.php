@@ -59,7 +59,6 @@
     <!-- Right Panel -->
 
     @include('dashboard.layout.scripts')
-    @yield('scripts')
 
 </body>
 

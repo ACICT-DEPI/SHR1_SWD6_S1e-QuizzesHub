@@ -24,3 +24,5 @@
             });
         })(jQuery);
     </script>
+
+    @yield('scripts')
