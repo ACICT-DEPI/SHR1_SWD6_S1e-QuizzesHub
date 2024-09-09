@@ -81,6 +81,7 @@ class FacultyController extends Controller
         $faculty = Faculty::whereHas('university', function ($query) use ($name) {
             $query->where('name', $name);
         })->get();
+       
     }
 
     public function getFacultyByUniversityNameAndFacultyName(string $universityName, string $facultyName)
