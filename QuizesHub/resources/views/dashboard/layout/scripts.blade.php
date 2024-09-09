@@ -2,6 +2,7 @@
     <script src="{{ asset('dashboard/assets') }}/vendors/popper.js/dist/umd/popper.min.js"></script>
     <script src="{{ asset('dashboard/assets') }}/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="{{ asset('dashboard/assets') }}/js/main.js"></script>
+ 
 
 
     <script src="{{ asset('dashboard/assets') }}/js/dashboard.js"></script>
