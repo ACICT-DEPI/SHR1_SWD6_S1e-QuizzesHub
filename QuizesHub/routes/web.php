@@ -16,4 +16,5 @@ Route::get('/', function () {
 
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/home', HomeController::class)->name('home');
+    Route::resource('/questions', QuestionController::class);
 });
