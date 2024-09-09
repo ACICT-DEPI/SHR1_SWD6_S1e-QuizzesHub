@@ -66,7 +66,8 @@ VALUES
 INSERT INTO exams (id, type, course_id, date, duration, created_at, updated_at)
 VALUES 
 (1, 'final', 1, '2024-09-10', 120, NOW(), NOW()),
-(2, 'midterm', 2, '2024-09-12', 90, NOW(), NOW());
+(2, 'midterm', 2, '2024-09-12', 90, NOW(), NOW()),
+(3, 'oral', '2', '2024-09-08', '120', NOW, NOW());
 
 -- 16. questions Table:
 INSERT INTO questions (id, type, text, exam_id, created_at, updated_at)
