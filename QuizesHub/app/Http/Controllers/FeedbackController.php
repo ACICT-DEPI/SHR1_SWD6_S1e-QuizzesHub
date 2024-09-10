@@ -10,9 +10,8 @@ class FeedbackController extends Controller
 {
     public function index()
     {   
-       $feedbackData=feedback::all();
-       return $feedbackData;
-       //return view('admin.index',compact('feedbackData'));
+        $feedbackData=feedback::get();
+        return view('dashboard.feedback.index',compact('feedbackData'));
     }
     public function create()
     {  
@@ -59,12 +58,12 @@ class FeedbackController extends Controller
     }
     public function destroy(string $id)
     {
-        feedback::findorfail($id)->delete();
+        // feedback::findorfail($id)->delete();
         // return redirect()->back()->with('messege','feedback deleted successfully..');
         return "destroy";
     }
     public function archive(){
-       $feedbackData =feedback::onlyTrashed()->get();
+    //    $feedbackData =feedback::onlyTrashed()->get();
         // return view('admin.archive',compact('feedbackData'));
         return "archive";
     }
