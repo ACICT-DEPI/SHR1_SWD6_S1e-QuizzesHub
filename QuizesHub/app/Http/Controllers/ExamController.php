@@ -15,7 +15,12 @@ use App\Models\Level;
 class ExamController extends Controller
 {
     public function index() {  
-        return Exam::all();
+        // $exams =  Exam::get()->toArray();
+        // $courses = [];
+        $exams = Exam::with('course')->get();
+        
+        return view('dashboard.exams.index', ['exams'=>$exams]);
+        // return view('welcome');
     }
 
     public function create() {
@@ -36,7 +41,13 @@ class ExamController extends Controller
     }
 
     public function show($id) {
-        return Exam::findorfail($id);
+        // $exam = Exam::findorfail($id);
+        // $exam = Exam::findorfail($id);
+        // dd($exam->questions->answers);
+        // // $exam = Exam::with('questions')->get()->toArray();
+        $exam = Exam::with('course','questions.answers')->findOrFail($id);
+
+        return view('dashboard.exams.show', ['exam'=>$exam]);
     }
     
     public function edit($id) {
