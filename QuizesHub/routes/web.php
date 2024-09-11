@@ -25,6 +25,5 @@ Route::prefix('admin')->name('admin.')->group(function () {
     );
     Route::get('/courses/archive', [CourseController::class, 'archive'])->name('courses.archive');
     Route::resource('/courses', CourseController::class);
-    
-
+    Route::resource('/exams', ExamController::class);
 });

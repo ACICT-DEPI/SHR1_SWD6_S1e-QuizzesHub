@@ -36,6 +36,15 @@
                 </ul>
             </li>
 
+            {{-- Exams --}}
+            <li class="menu-item-has-children dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Exams</a>
+                <ul class="sub-menu children dropdown-menu">
+                    <li><i class="fa fa-id-badg"></i><a href="{{route('admin.exams.index')}}">All Exams</a></li>
+                    <li><i class="fa fa-id-plus"></i><a href="#">Add Exam</a></li>
+                </ul>
+            </li>
+
             <h3 class="menu-title">Extras</h3><!-- /.menu-title -->
             <li class="menu-item-has-children dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-glass"></i>Pages</a>

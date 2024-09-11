@@ -14,9 +14,10 @@ return new class extends Migration
         Schema::create('courses', function (Blueprint $table) {
             $table->id();
             $table->string('name',30)->notNullable();
-            $table->string('code',15)->notNullable();
             $table->unsignedbiginteger('major_id')->notNullable();
+            $table->unsignedBigInteger('faculty_id')->notNullable();
             $table->foreign('major_id')->references('id')->on('majors');
+            $table->foreign('faculty_id')->references('id')->on('faculties');
             $table->timestamps();
             $table->softDeletes();
         });
