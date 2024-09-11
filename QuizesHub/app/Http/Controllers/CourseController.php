@@ -5,39 +5,42 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Course;
 use App\Http\Requests\CourseRequest;
+use App\Models\faculty;
 
 
 class CourseController extends Controller
 {
     public function index()
     {   
-       $CourseData=course::all();
-       return $CourseData;
-       //return view('admin.index',compact('CourseData'));
+        $CourseData = Course::with('major')->get();
+       return view('dashboard.course.index',compact('CourseData'));
+       
     }
     public function create()
     {  
-        //return view('admin.create');
-        return "create";
+        $CourseData = Course::with('major')->get();
+       
+        return view('dashboard.course.create',compact('CourseData'));
+        
     }
     public function store(CourseRequest $request)
     {
-        $validatedData=$request->validate();
+        
+        $validatedData=$request->validated();
         course::create([
-            'id'=>$request->id,
             'name'=>$request->name,
             'code'=>$request->code,
             'major_id'=>$request->major_id,
 
         ]);
-        // return redirect()->back()->with('messege','Course added successfully..');
-        return "store";
+         return redirect()->back()->with('messege','Course added successfully..');
+       
     }
     public function show(string $id)    
     {
         $CourseData=course::findorfail($id);
-        // return view('admin.show',compact('CourseData'));
-        return "show";
+         return view('dashboard.course.show',compact('CourseData'));
+       
     }
     public function edit(string $id)
     {
@@ -63,7 +66,7 @@ class CourseController extends Controller
         return "destroy";
     }
     public function archive(){
-       $CourseData=course::onlyTrashed()->get();
+    //    $CourseData=course::onlyTrashed()->get();
         // return view('admin.archive',compact('CourseData'));
         return "archive";
     }

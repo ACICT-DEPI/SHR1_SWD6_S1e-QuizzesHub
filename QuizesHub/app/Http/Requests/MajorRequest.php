@@ -22,7 +22,7 @@ class MajorRequest extends FormRequest
     public function onUpdate(): array
     {
         return [
-         'name'=>['required','string'],
+         'name'=>['required','string','unique:majors,name'],
          'faculty_id'=>['required','integer']
            
         ];
@@ -30,8 +30,8 @@ class MajorRequest extends FormRequest
     public function onCreate(): array
     {
         return [
-            'id'=>['required','integer','unique:majors,id'],
-            'name'=>['required','string'],
+            
+            'name'=>['required','string','unique:majors,name'],
             'faculty_id'=>['required','integer']
            
         ];
@@ -47,12 +47,13 @@ class MajorRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'id.required' => 'Please enter id',
-            'id.unique'=>'this id already exist',
+            
             'name.required' => 'Please enter name',
             'name.string' => 'Invalid name',
+            'name.unique' => 'Major already exists',
             'faculty_id.required' => 'Please enter faculty id',
             'faculty_id.integer' => 'Invalid faculty id',
+            
 
            
         ];

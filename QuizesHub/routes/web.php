@@ -19,8 +19,12 @@ Route::get('/', function () {
 
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/home', HomeController::class)->name('home');
-    Route::get('/feedbacks/archive', [FeedbackController::class, 'archive'])->name('feedbacks.archive');
     Route::resource('/questions', QuestionController::class);
-    Route::resource('/feedbacks', FeedbackController::class);
+    Route::resource('/feedbacks', FeedbackController::class)->only(
+        ['index', 'show']
+    );
+    Route::get('/courses/archive', [CourseController::class, 'archive'])->name('courses.archive');
+    Route::resource('/courses', CourseController::class);
+    
 
 });

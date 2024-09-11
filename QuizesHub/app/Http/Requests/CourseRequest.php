@@ -19,42 +19,25 @@ class CourseRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
-    public function onUpdate(): array
+   
+    public function rules(): array
     {
         return [
-         'name'=>['required','string'],
-         'code'=>['required','string'],
-         'major_id'=>['required','integer'],
-           
-        ];
-    }
-    public function onCreate(): array
-    {
-        return [
-            'id'=>['required','integer','unique:levels,id'],
             'name'=>['required','string'],
             'code'=>['required','string'],
             'major_id'=>['required','integer'],
-           
+ 
         ];
-    }
-    public function rules(): array
-    {
-      if(@request()->isMethod('put')){
-        return $this->onUpdate();
-      }else{
-        return $this->onCreate();
-      }
     }
     public function messages(): array
     {
         return [
-            'id.required' => 'Please enter id',
-            'id.unique'=>'this id already exist',
             'name.required' => 'Please enter name',
             'name.string' => 'Invalid name',
+            'name.unique' => 'Course already exists',
             'code.required' => 'Please enter code',
             'code.string' => 'Invalid code',
+            'code.unique' => 'Course already exists',
             'major_id.required' => 'Please enter major_id',
             'major_id.integer' => 'Invalid major_id',
 
