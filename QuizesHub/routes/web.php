@@ -24,6 +24,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
         ['index', 'show']
     );
     Route::get('/courses/archive', [CourseController::class, 'archive'])->name('courses.archive');
+    Route::post('/courses/{course}/restore', [CourseController::class, 'restore'])->name('courses.restore');
+    Route::delete('/courses/{course}/forceDelete', [CourseController::class, 'forceDelete'])->name('courses.forceDelete');
     Route::resource('/courses', CourseController::class);
     Route::resource('/exams', ExamController::class);
 });

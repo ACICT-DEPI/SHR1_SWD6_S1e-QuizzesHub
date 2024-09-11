@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class CourseRequest extends FormRequest
 {
@@ -23,10 +24,19 @@ class CourseRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'=>['required','string'],
-            'code'=>['required','string'],
-            'major_id'=>['required','integer'],
- 
+            
+            'name' => ['required', 'string',
+                Rule::unique('courses')->where(function ($query) {
+                    return $query->where('major_id', $this->major_id)
+                                 ->where('faculty_id', $this->faculty_id);
+
+                })
+                
+                ],
+
+            'major_id' => ['required', 'integer'],
+            'faculty_id' => ['required', 'integer'],
+            
         ];
     }
     public function messages(): array
@@ -34,12 +44,14 @@ class CourseRequest extends FormRequest
         return [
             'name.required' => 'Please enter name',
             'name.string' => 'Invalid name',
+           
             'name.unique' => 'Course already exists',
-            'code.required' => 'Please enter code',
-            'code.string' => 'Invalid code',
-            'code.unique' => 'Course already exists',
             'major_id.required' => 'Please enter major_id',
             'major_id.integer' => 'Invalid major_id',
+            'faculty_id.required' => 'Please enter faculty_id',
+            'faculty_id.integer' => 'Invalid faculty_id',
+           
+            
 
         ];
     }
