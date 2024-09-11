@@ -16,40 +16,40 @@
                                     <thead>
                                         <tr>
                                             
-                                            <th>User_Name</th>
+                                            <th>Course_Name</th>
+                                            <th>Course_Code</th>
+                                            <th>Major</th>
+                                            <th>Faculty</th>
                                             <th>University</th>
-                                            <th>faculty</th>
-                                            <th>Course</th>
-                                            <th>Level</th>
-                                            <th>Exam_Type</th>
-                                            <th>Exam_Date</th>
-                                            <th>Rating</th>
-                                            <th>Comments</th>
                                             <th></th>
                                             
                                         </tr>
                                     </thead>
                                     <tbody>
-                         @foreach ($UserData as $feedback)
+                         @foreach ($CourseData as $Course)
                      <tr> 
-                     <td>{{ $feedback->user->fname." ".$feedback->user->lname}}</td>
-                          <td>{{ $feedback->user->University->name}}</td>
-                          <td>{{ $feedback->user->faculty->name}}</td>
-                          <td>{{ $feedback->exam->course->name}}</td>
-                          <td>{{ $feedback->user->level->name}}</td>
-                          <td>{{$feedback->exam->type }}</td>
-                          <td>{{ $feedback->exam->date}}</td>
-                          <td>{{ $feedback->rating}}</td>
-                          <td>{{ $feedback->comments}}</td>
+                          <td>{{$Course->name}}</td>
+                          <td>{{$Course->code}}</td>
+                          <td>{{$Course->major->name}}</td>
+                        <td>{{$Course->major->faculty->name}}</td>
+                          <td>{{$Course->major->faculty->university->name}}</td>
+                          
+                          
+                         
                           <td>
-                            <a href="{{route('admin.feedbacks.show',$feedback->id)}}" class="btn btn-danger" id="show">Show</a>
-                        
-                               <style>
-                                  #show{
-                                    border-radius: 10px;
-                                    background-color:rgb(231, 76, 60);
-                                  }
+                            <a href="{{route('admin.courses.show',$Course->id)}}" class="btn btn-success" >Show</a>
+                            <a href="{{route('admin.courses.edit',$Course->id)}}" class="btn btn-primary">Edit</a>
+                            <form method="POST" action="{{route('admin.courses.destroy',$Course->code)}}" style="display:inline">
+                              @csrf
+                              @method('delete')
+                              <input type="submit" id="delete"  class="btn btn-danger" onclick="return confirm('Are you sure?')" value="Delete">
+                              <style>
+                                #delete{
+                                  background-color:red;
+                                }
                               </style>
+                            </form>
+
                             </form>
                           </td>
                                         </tr>
@@ -93,7 +93,3 @@
 
 @endsection
 @endsection
-
-
-
-

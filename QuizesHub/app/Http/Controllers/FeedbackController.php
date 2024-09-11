@@ -6,37 +6,47 @@ use Illuminate\Http\Request;
 use App\Models\feedback;
 use App\Http\Requests\FeedbackRequest;
 
+
 class FeedbackController extends Controller
 {
     public function index()
     {   
-        $feedbackData=feedback::get();
-        return view('dashboard.feedback.index',compact('feedbackData'));
+        $UserData = Feedback::with('user')->get();
+         return view('dashboard.feedback.index',compact('UserData'));
     }
     public function create()
     {  
-        //return view('admin.create');
-        return "create";
+        $feedbackData=feedback::get();
+        $Allusers=feedback::findOrFail(1);
+        $Allexams=feedback::findOrFail(1);
+        $allUsers=$Allusers->user->get();
+        $allExams=$Allexams->exam->get();
+
+        return view('dashboard.feedback.create',compact('feedbackData','allUsers','allExams'));
+        
     }
-    public function store(FeedbackRequest $request)
-    {
-        $validatedData=$request->validate();
+    
+    public function store(FeedbackRequest $request){
+       
+        $validatedData=$request->validated();
+        return $request->all();
+       
         feedback::create([
             'id'=>$request->id,
             'user_id'=>$request->user_id,
             'exam_id'=>$request->exam_id,
             'rating'=>$request->rating,
-            'comments'=>$request->comment,
-      
+            'comments'=>$request->comments,
         ]);
-        // return redirect()->back()->with('messege','feedback added successfully..');
-        return "store";
+        return redirect()->back()->with('messege','feedback added successfully..');
+        
     }
     public function show(string $id)    
     {
-        $feedbackData=feedback::findorfail($id);
-        // return view('admin.show',compact('feedbackData'));
-        return "show";
+        
+        $UserData=feedback::findorfail($id);
+        return view('dashboard.feedback.show',compact('UserData'));
+        
     }
     public function edit(string $id)
     {

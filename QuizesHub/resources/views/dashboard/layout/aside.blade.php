@@ -21,11 +21,18 @@
                 </ul>
             </li>
             <li class="menu-item-has-children dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Feedbacks</a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-book"></i>Courses</a>
+                <ul class="sub-menu children dropdown-menu">
+                    <li><i class="fa fa-id-badg"></i><a href="{{ route('admin.courses.index')}}">All Courses</a></li>
+                    <li><i class="fa fa-id-plus"></i><a href="{{ route('admin.courses.create')}}">Add Course</a></li>
+                    <li><i class="fa fa-id-plus"></i><a href="{{ route('admin.courses.archive')}}">Archive</a></li>
+                </ul>
+            </li>
+            <li class="menu-item-has-children dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-paper-plane"></i>Feedbacks</a>
                 <ul class="sub-menu children dropdown-menu">
                     <li><i class="fa fa-id-badg"></i><a href="{{ route('admin.feedbacks.index')}}">All Feedbacks</a></li>
-                    <li><i class="fa fa-id-plus"></i><a href="{{ route('admin.feedbacks.create')}}">Add Feedback</a></li>
-                    <li><i class="fa fa-id-badg"></i><a href="{{ route('admin.feedbacks.archive')}}">Archive</a></li>
+
                 </ul>
             </li>
 
