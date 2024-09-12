@@ -1,3 +1,5 @@
+@dd($courses)
+
 @extends('dashboard.layout.master')
 
 @section('content')
@@ -15,6 +17,20 @@
                         method="post">
                         @csrf
                         <div class="card-body card-block">
+                            {{-- university
+                            <div class="form-group">
+                                <label for="university" class="form-control-label">University</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="menu-icon fa fa-book"></i></div>
+                                    <select name="university" id="university" class="form-control">
+                                        @foreach ($universities as $university)
+                                            
+                                        @endforeach
+                                        <option value="oral" @if(old('type')=='midterm' ) selected @endif>oral</option>
+                                        <option value="final" @if(old('type')=='midterm' ) selected @endif>final</option>
+                                    </select>
+                                </div>
+                            </div> --}}
                             {{-- type --}}
                             <div class="form-group">
                                 <label for="type" class="form-control-label">Type</label>
@@ -55,7 +71,7 @@
                                     <div class="input-group-addon"><i class="menu-icon fa fa-book"></i></div>
                                     <select name="course_id" id="course_id" class="form-control @error('course_name') is-invalid @enderror">
                                         @foreach ($courses as $course)
-                                        <option value="{{$course['id']}}">{{$course['name']}}</option>
+                                        <option value="{{$course['id']}}">{{$course['name'] . ' ' . $facul}}</option>
                                         @endforeach
                                     </select>
                                     @error('course_id')

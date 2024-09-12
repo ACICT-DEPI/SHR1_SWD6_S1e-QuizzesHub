@@ -12,6 +12,7 @@ use App\Models\Admin\Faculty;
 use App\Models\Admin\Major;
 use App\Models\Admin\Level;
 use App\Models\Admin\Course;
+use App\Models\Admin\User;
 
 
 class ExamController extends Controller
@@ -30,9 +31,18 @@ class ExamController extends Controller
         // $faculties = Faculty::get()->toArray();
         // $majors = Major::get()->toArray();
         // $levels = Level::get()->toArray();
-        $courses = Course::get()->toArray();
+        // $courses = Course::get()->toArray();
+        // $courses = Course::with('faulty', 'u')
         // return $universities;
-        return view('dashboard.exams.create', compact('courses'));
+        // return view('dashboard.exams.create', ['universities'=>$universities, 'faculties'=>$faculties, 'courses'=>$courses]);
+
+        $courses =  Course::with('exams')->get()->toArray();
+        $exam = Exam::with('course', 'faculty', '')->get()->toArray();
+
+        echo '<pre>';
+        print_r($exam);
+        echo '</pre>';
+        die();
     }
 
     public function archive() {
