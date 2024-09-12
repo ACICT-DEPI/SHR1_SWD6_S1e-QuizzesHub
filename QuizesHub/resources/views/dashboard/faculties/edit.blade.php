@@ -10,7 +10,7 @@
                         </alert>
                     @endif
 
-                    <form class="form-horizontal" action="{{ route('admin.universities.update', $university->id) }}"
+                    <form class="form-horizontal" action="{{ route('admin.faculties.update', $faculty->id) }}"
                         enctype="multipart/form-data" method="post">
                         @csrf
                         @method('PUT')
@@ -19,10 +19,10 @@
 
 
                             <div class="form-group">
-                                <label class=" form-control-label" for="name">University Name</label>
+                                <label class=" form-control-label" for="name">Faculty Name</label>
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="menu-icon fa fa-book"></i></div>
-                                    <input type="text" id="name" value="{{ $university->name }}"
+                                    <input type="text" id="name" value="{{ $faculty->name }}"
                                         class="form-control @error('name') is-invalid @enderror" name="name">
                                     @error('name')
                                         <span class="invalid-feedback" role="alert">
@@ -32,42 +32,25 @@
                                 </div>
                             </div>
 
-                            <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th>Faculty Name</th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-
-                                    @forelse ($university->faculties as $faculty)
-
-                                        <tr>
-
-                                            <td>{{ $faculty->name }}</td>
-                                            <td>
-                                                <a href="{{ route('admin.faculties.show', $faculty->id) }}" class="btn btn-success">Show</a>
-                                                <a href="{{ route('admin.faculties.edit', $faculty->id) }}" class="btn btn-primary">Edit</a>
-                                                <form method="POST" action="{{ route('admin.faculties.destroy', $faculty->id) }}"
-                                                    style="display:inline">
-                                                    @csrf
-                                                    @method('delete')
-                                                    <input type="submit" id="delete" class="btn btn-danger"
-                                                        onclick="return confirm('Are you sure?')" value="Delete">
-                                                </form>
-                                            </td>
-                                        </tr>
-                                    @empty
-                                        <tr>
-                                            <td colspan="2">No faculties found</td>
-                                        </tr>
-                                    @endforelse
-
-                                </tbody>
-
-                            </table>
+                            <div class="form-group">
+                                <label class=" form-control-label" for="university_id">University Name</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="fa fa-bank"></i></div>
+                                    <select class="form-control @error('university_id') is-invalid @enderror" name="university_id"
+                                        id="university_id" >
+                                        @foreach ($universities as $university)
+                                            <option value="{{ $university->id }}" @selected($faculty->university->id == $university->id) >{{ $university->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('university_id')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
                         </div>
+
 
                         <div class="card-footer">
                             <button type="submit" class="btn btn-success btn-sm" id="submit">

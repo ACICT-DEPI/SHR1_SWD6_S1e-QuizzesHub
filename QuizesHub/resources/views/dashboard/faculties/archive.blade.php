@@ -15,23 +15,23 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <strong class="card-title">Universities Table</strong>
+                        <strong class="card-title">Faculties Table</strong>
                     </div>
                     <div class="card-body">
                         <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
                             <thead>
                                 <tr>
                                     <th>Name</th>
-                                    <th></th>
+                                    <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($data as $university)
+                                @foreach ($data as $faculty)
                                     <tr>
 
-                                        <td>{{ $university->name }}</td>
+                                        <td>{{ $faculty->name }}</td>
                                         <td>
-                                            <form method="POST" action="{{ route('admin.universities.restore', $university->id) }}"
+                                            <form method="POST" action="{{ route('admin.faculties.restore', $faculty->id) }}"
                                                 style="display:inline">
                                                 @csrf
 
@@ -40,7 +40,7 @@
 
                                             </form>
                                             <form method="POST"
-                                                action="{{ route('admin.universities.forceDelete', $university->id) }}"
+                                                action="{{ route('admin.faculties.forceDelete', $faculty->id) }}"
                                                 style="display:inline">
                                                 @csrf
                                                 @method('delete')

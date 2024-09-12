@@ -13,8 +13,7 @@ return new class extends Migration
     {
         Schema::create('faculties', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 100);
-            $table->foreignId('university_id')->constrained();
+            $table->string('name', 100)->unique();
             $table->timestamps();
             $table->softDeletes();
         });
