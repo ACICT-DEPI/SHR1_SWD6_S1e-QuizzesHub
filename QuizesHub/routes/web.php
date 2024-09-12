@@ -29,6 +29,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::post('/courses/{course}/restore', [CourseController::class, 'restore'])->name('courses.restore');
     Route::delete('/courses/{course}/forceDelete', [CourseController::class, 'forceDelete'])->name('courses.forceDelete');
     Route::resource('/courses', CourseController::class);
+    Route::get('/levels/archive', [LevelController::class, 'archive'])->name('levels.archive');
+    Route::post('/levels/{level}/restore', [LevelController::class, 'restore'])->name('levels.restore');
+    Route::delete('/levels/{level}/forceDelete', [LevelController::class, 'forceDelete'])->name('levels.forceDelete');
+    Route::resource('/levels', LevelController::class);
     Route::resource('/exams', ExamController::class);
     Route::resource('/universities', UniversityController::class)->where(['university' => '[0-9]+']);
     Route::get('/universities/archive', [UniversityController::class, 'archive'])->name('universities.archive');

@@ -46,6 +46,14 @@
             </li>
 
             <li class="menu-item-has-children dropdown">
+
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Levels</a>
+                <ul class="sub-menu children dropdown-menu">
+                    <li><i class="fa fa-id-badg"></i><a href="{{ route('admin.levels.index')}}">All Levels</a></li>
+                    <li><i class="fa fa-id-plus"></i><a href="{{ route('admin.levels.create')}}">Add Level</a></li>
+                    <li><i class="fa fa-id-plus"></i><a href="{{ route('admin.levels.archive')}}">Archive</a></li>
+                </ul>
+
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-building-o"></i>Universities</a>
                 <ul class="sub-menu children dropdown-menu">
                     <li><i class="fa fa-id-badg"></i><a href="{{ route('admin.universities.index')}}">All Universities</a></li>
@@ -62,6 +70,7 @@
                     <li><i class="fa fa-id-plus"></i><a href="{{ route('admin.faculties.create')}}">Add Faculty</a></li>
                     <li><i class="fa fa-id-plus"></i><a href="{{ route('admin.faculties.archive')}}">Archive</a></li>
                     <i class="fa-solid fa-school"></i>
+
                 </ul>
             </li>
 
