@@ -39,7 +39,7 @@
                           <td>{{$Course->name}}</td>
                           
                           <td>{{$Course->major->name}}</td>
-                        <td>{{$Course->major->faculty->name}}</td>
+                        <td>{{$Course->faculty->name}}</td>
                           <td>
                           <form method="POST" action="{{route('admin.courses.restore',$Course->id)}}" style="display:inline">
                               @csrf

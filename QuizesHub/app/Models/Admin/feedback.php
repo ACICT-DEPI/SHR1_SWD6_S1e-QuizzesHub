@@ -15,7 +15,7 @@ class Feedback extends Model
 
     public function exam()
     {
-       return $this->belongsTo(Exam::class,'exam_id','id');
+      return $this->belongsto(Exam::class,'exam_id','id');
     }
 
     public function user()

@@ -38,7 +38,7 @@
 
             {{-- Exams --}}
             <li class="menu-item-has-children dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Exams</a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-file"></i>Exams</a>
                 <ul class="sub-menu children dropdown-menu">
                     <li><i class="fa fa-id-badg"></i><a href="{{route('admin.exams.index')}}">All Exams</a></li>
                     <li><i class="menu-icon fa fa-id-plus"></i><a href="{{route('admin.exams.create')}}">Add Exam</a></li>
@@ -47,7 +47,7 @@
 
             <li class="menu-item-has-children dropdown">
 
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Levels</a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-tags"></i>Levels</a>
                 <ul class="sub-menu children dropdown-menu">
                     <li><i class="fa fa-id-badg"></i><a href="{{ route('admin.levels.index')}}">All Levels</a></li>
                     <li><i class="fa fa-id-plus"></i><a href="{{ route('admin.levels.create')}}">Add Level</a></li>
@@ -65,7 +65,7 @@
             </li>
 
             <li class="menu-item-has-children dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-desktop"></i>Faculties</a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-bank"></i>Faculties</a>
                 <ul class="sub-menu children dropdown-menu">
                     <li><i class="fa fa-id-badg"></i><a href="{{ route('admin.faculties.index')}}">All Faculties</a></li>
                     <li><i class="fa fa-id-plus"></i><a href="{{ route('admin.faculties.create')}}">Add Faculty</a></li>
