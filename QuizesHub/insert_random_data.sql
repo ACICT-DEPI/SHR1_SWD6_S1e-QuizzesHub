@@ -12,20 +12,17 @@ VALUES
 --  faculties Table:
 INSERT INTO faculties ( name, created_at, updated_at)
 VALUES
-('Faculty of Science', 1, NOW(), NOW()),
-('Faculty of Engineering', 2, NOW(), NOW()),
-('Faculty of Science', 6, NOW(), NOW()),
-('Faculty of Science', 3, NOW(), NOW());
 ('Faculty of Science', NOW(), NOW()),
 ('Faculty of Engineering', NOW(), NOW()),
 ('Faculty of Medicine', NOW(), NOW());
 
 --  faculty_university Table:
-INSERT INTO faculty_university ( university_id, faculty_id,created_at, updated_at)
+INSERT INTO faculty_university (university_id, faculty_id,created_at, updated_at)
 VALUES
 (1,1, NOW(), NOW()),
 (2,2, NOW(), NOW()),
-(3,3, NOW(), NOW());
+(3,3, NOW(), NOW()),
+(6,1, NOW(), NOW());
 
 
 -- . levels Table:
@@ -49,7 +46,8 @@ INSERT INTO faculty_major ( faculty_id, major_id,created_at, updated_at)
 VALUES
 (1,1, NOW(), NOW()),
 (2,2, NOW(), NOW()),
-(3,3, NOW(), NOW());
+(3,3, NOW(), NOW()),
+(1,2, NOW(), NOW());
 
 -- users
 INSERT INTO users (fname, lname, username, email, email_verified_at, password, phone, image_path, gender, role,  university_id, faculty_id, major_id, level_id, remember_token, created_at, updated_at, deleted_at)
@@ -74,7 +72,7 @@ INSERT INTO courses (name,  major_id, faculty_id, created_at, updated_at)
 VALUES
 ('Physics', 1, 1,NOW(), NOW()),
 ('Chemistry', 2,2, NOW(), NOW()),
-('Thermodynamic of Solutoin (2)', 5,3, NOW(), NOW());
+('Thermodynamic Of Solution (2)', 2, 1,NOW(), NOW());
 
 -- 7. exams Table:
 INSERT INTO exams (type, course_name ,course_id, date, duration, created_at, updated_at)
@@ -82,13 +80,13 @@ VALUES
 ('final', 'Physics', 1, '2024-09-10', 120, NOW(), NOW()),
 ('midterm', 'Chemistry', 2, '2024-09-12', 90, NOW(), NOW()),
 ('oral', 'Chemistry',2, '2024-09-08', '120', NOW(), NOW()),
-('final', 'Thermodynamic of Solutoin (2)',3, '2024-09-11', '120', NOW(), NOW());
+('final', 'Thermodynamic Of Solution (2)', 3, '2024-09-11', 120, NOW(), NOW());
 
 -- 16. questions Table:
 INSERT INTO questions (type, text, exam_id, created_at, updated_at)
 VALUES
-( 'mcq', 'What is the speed of light?', 1, NOW(), NOW()),
-('true_false', 'The Earth is flat.', 2, NOW(), NOW()),
+  ( 'mcq', 'What is the speed of light?', 1, NOW(), NOW()),
+  ('true_false', 'The Earth is flat.', 2, NOW(), NOW()),
 
   ('true_false', 'J.R.Ryderg correlates between Wavelength and no. of energy levels.', 4, NOW(), NOW()),
   ('true_false', 'Filters and monochromators are the two types of wavelength selectors.', 4, NOW(), NOW()),
@@ -134,11 +132,11 @@ VALUES
 -- answers Table
 INSERT INTO answers (question_id, type, text, is_correct, created_at, updated_at)
 VALUES
-(1, 'normal_text', 'Option A', 0, NOW(), NOW()),
-( 1, 'normal_text', 'Option B', 1, NOW(), NOW()),
-( 2, 'image_path', '/images/option1.png', 0, NOW(), NOW()),
+  (1, 'normal_text', 'Option A', 0, NOW(), NOW()),
+  ( 1, 'normal_text', 'Option B', 1, NOW(), NOW()),
+  ( 2, 'image_path', '/images/option1.png', 0, NOW(), NOW()),
 
-(3, 'normal_text', 'true', 1, NOW(), NOW()),
+  (3, 'normal_text', 'true', 1, NOW(), NOW()),
 (3, 'normal_text', 'false', 0, NOW(), NOW()),
 
 (4, 'normal_text', 'true', 1, NOW(), NOW()),
@@ -245,6 +243,7 @@ VALUES
 (35, 'normal_text', 'no existing answers yet', 0, NOW(), NOW()),
 (36, 'normal_text', 'no existing answers yet', 0, NOW(), NOW()),
 (37, 'normal_text', 'no existing answers yet', 0, NOW(), NOW());
+
 
 
 -- 3. answer_attempts Table:
