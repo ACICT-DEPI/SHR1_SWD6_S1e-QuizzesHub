@@ -16,28 +16,30 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <strong class="card-title">Universities Table</strong>
+                        <strong class="card-title">Faculties Table</strong>
                     </div>
                     <div class="card-body">
                         <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
                             <thead>
                                 <tr>
-                                    <th>Name</th>
-                                    <th></th>
+                                    <th>Faculty</th>
+                                    <th>University</th>
+                                    <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($data as $university)
+                                @foreach ($data as $faculty)
                                     <tr>
 
-                                        <td>{{ $university->name }}</td>
+                                        <td>{{ $faculty->name }}</td>
+                                        <td>{{ $faculty->university->name }}</td>
                                         <td>
-                                            <a href="{{ route('admin.universities.show', $university->id) }}"
+                                            <a href="{{ route('admin.faculties.show', $faculty->id) }}"
                                                 class="btn btn-success">Show</a>
-                                            <a href="{{ route('admin.universities.edit', $university->id) }}"
+                                            <a href="{{ route('admin.faculties.edit', $faculty->id) }}"
                                                 class="btn btn-primary">Edit</a>
                                             <form method="POST"
-                                                action="{{ route('admin.universities.destroy', $university->id) }}"
+                                                action="{{ route('admin.faculties.destroy', $faculty->id) }}"
                                                 style="display:inline">
                                                 @csrf
                                                 @method('delete')
