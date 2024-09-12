@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\FacultyRequest;
 use App\Models\Faculty;
+use App\Models\University;
 
 class FacultyController extends Controller
 {
@@ -14,6 +15,7 @@ class FacultyController extends Controller
     public function index()
     {
         $data= Faculty::get();
+        return view('dashboard.faculties.index', compact('data'));
     }
 
     /**
@@ -21,7 +23,8 @@ class FacultyController extends Controller
      */
     public function create()
     {
-
+        $universities = University::get();
+        return view('dashboard.faculties.create', compact('universities'));
     }
 
     /**
@@ -33,6 +36,7 @@ class FacultyController extends Controller
             'name' => $request->name,
             'university_id' => $request->university_id,
         ]);
+        return redirect()->back()->with('msg', 'Faculty added successfully');
     }
 
     /**
@@ -41,6 +45,7 @@ class FacultyController extends Controller
     public function show(string $id)
     {
         $faculty = Faculty::findOrFail($id);
+        return view('dashboard.faculties.show', compact('faculty'));
     }
 
     /**
@@ -49,6 +54,8 @@ class FacultyController extends Controller
     public function edit(string $id)
     {
         $faculty = Faculty::findOrFail($id);
+        $universities = University::get();
+        return view('dashboard.faculties.edit', compact('faculty', 'universities'));
     }
 
     /**
@@ -61,6 +68,7 @@ class FacultyController extends Controller
             'name' => $request->name,
             'university_id' => $request->university_id,
         ]);
+        return redirect()->back()->with('msg', 'Faculty updated successfully');
     }
 
     /**
@@ -69,6 +77,8 @@ class FacultyController extends Controller
     public function destroy(string $id)
     {
         $faculty = Faculty::findOrFail($id);
+        $faculty->delete();
+        return redirect()->back()->with('msg', 'Faculty deleted successfully');
     }
 
     public function getFacultyByUniversityId(string $id)
@@ -81,7 +91,7 @@ class FacultyController extends Controller
         $faculty = Faculty::whereHas('university', function ($query) use ($name) {
             $query->where('name', $name);
         })->get();
-       
+
     }
 
     public function getFacultyByUniversityNameAndFacultyName(string $universityName, string $facultyName)
@@ -100,19 +110,19 @@ class FacultyController extends Controller
     public function archive()
     {
         $data=Faculty::onlyTrashed()->get();
-        // return view('admin.users.archive', compact('data'));
+        return view('dashboard.faculties.archive', compact('data'));
     }
 
     public function restore(string $id)
     {
         Faculty::withTrashed()->where('id', $id)->restore();
-        // return redirect()->route('admin.users.index')->with('msg', 'User restored successfully');
+        return redirect()->back()->with('msg', 'Faculty restored successfully');
     }
 
     public function forceDelete(string $id)
     {
         $faculty=Faculty::withTrashed()->where('id', $id)->first();
         $faculty->forceDelete();
-        // return redirect()->back()->with('msg', 'User deleted permanently');
+        return redirect()->back()->with('msg', 'Faculty deleted permanently');
     }
 }
