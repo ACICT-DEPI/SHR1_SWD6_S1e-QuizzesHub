@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\UniversityRequest;
 use App\Models\University;
+use App\Models\Faculty;
 
 class UniversityController extends Controller
 {
@@ -14,6 +15,7 @@ class UniversityController extends Controller
     public function index()
     {
         $data= University::get();
+        return view('dashboard.universities.index', compact('data'));
     }
 
     /**
@@ -21,7 +23,7 @@ class UniversityController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.universities.create');
     }
 
     /**
@@ -32,6 +34,7 @@ class UniversityController extends Controller
         University::create([
             'name' => $request->name,
         ]);
+        return redirect()->back()->with('msg', 'University added successfully');
     }
 
     /**
@@ -40,6 +43,7 @@ class UniversityController extends Controller
     public function show(string $id)
     {
         $university = University::findOrFail($id);
+        return view('dashboard.universities.show', compact('university'));
     }
 
     /**
@@ -48,6 +52,7 @@ class UniversityController extends Controller
     public function edit(string $id)
     {
         $university = University::findOrFail($id);
+        return view('dashboard.universities.edit', compact('university'));
     }
 
     /**
@@ -59,6 +64,7 @@ class UniversityController extends Controller
         $university->update([
             'name' => $request->name,
         ]);
+        return redirect()->back()->with('msg', 'University updated successfully');
     }
 
     /**
@@ -68,24 +74,25 @@ class UniversityController extends Controller
     {
         $university = University::findOrFail($id);
         $university->delete();
+        return redirect()->back()->with('msg', 'University deleted successfully');
     }
 
     public function archive()
     {
         $data=University::onlyTrashed()->get();
-        // return view('admin.users.archive', compact('data'));
+        return view('dashboard.universities.archive', compact('data'));
     }
 
     public function restore(string $id)
     {
         University::withTrashed()->where('id', $id)->restore();
-        // return redirect()->route('admin.users.index')->with('msg', 'User restored successfully');
+        return redirect()->route('admin.universities.index')->with('msg', 'University restored successfully');
     }
 
     public function forceDelete(string $id)
     {
         $university=University::withTrashed()->where('id', $id)->first();
         $university->forceDelete();
-        // return redirect()->back()->with('msg', 'User deleted permanently');
+        return redirect()->back()->with('msg', 'University deleted permanently');
     }
 }
