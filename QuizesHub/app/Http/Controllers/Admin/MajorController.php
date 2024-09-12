@@ -11,70 +11,57 @@ class MajorController extends Controller
 {
     public function index()
     {
-       $MajorData=major::all();
-       return $MajorData;
-       //return view('admin.index',compact('MajorData'));
+       $data=Major::all();
+       return view('dashboard.majors.index',compact('data'));
     }
     public function create()
     {
-        //return view('admin.create');
-        return "create";
+        return view('dashboard.majors.create');
     }
     public function store(MajorRequest $request)
     {
-        $validatedData=$request->validate();
-        major::create([
-            'id'=>$request->id,
+        Major::create([
             'name'=>$request->name,
-            'faculty_id'=>$request->faculty_id,
-
         ]);
-        // return redirect()->back()->with('messege','major added successfully..');
-        return "store";
+        return redirect()->back()->with('msg','major added successfully..');
     }
     public function show(string $id)
     {
-        $MajorData=major::findorfail($id);
-        // return view('admin.show',compact('MajorData'));
-        return "show";
+        $major=Major::findorfail($id);
+        return view('dashboard.majors.show',compact('major'));
     }
     public function edit(string $id)
     {
-       $MajorData=major::findorfail($id);
-    //    return view('admin.update',compact('MajorData'));
-        return "edit";
+        $major=Major::findorfail($id);
+        return view('dashboard.majors.edit',compact('major'));
     }
     public function update(MajorRequest $request, string $id)
     {
-        $request->validate();
-        major::findorfail($id)->update([
+        $major=Major::findorfail($id);
+        $major->update([
             'name'=>$request->name,
-            'faculty_id'=>$request->faculty_id,
         ]);
-        // return redirect()->back()->with('messege','major updated successfully..');
-        return "update";
+        return redirect()->back()->with('messege','major updated successfully..');
     }
     public function destroy(string $id)
     {
-        major::findorfail($id)->delete();
-        // return redirect()->back()->with('messege','major deleted successfully..');
-        return "destroy";
+        $major=Major::findorfail($id);
+        $major->delete();
+        return redirect()->back()->with('messege','major deleted successfully..');
     }
     public function archive(){
-       $MajorData =major::onlyTrashed()->get();
-        // return view('admin.archive',compact('MajorData'));
-        return "archive";
+        $data =major::onlyTrashed()->get();
+        return view('dashboard.majors.archive',compact('data'));
     }
-    public function forceDelet(string $id)
+    public function forceDelete(string $id)
     {
-        major::onlyTrashed()->findorfail($id)->forceDelete();
-        // return redirect()->back()->with('messege','major deleted successfully..');
-        return "forceDelet";
+        $major=Major::withTrashed()->where('id', $id)->first();
+        $major->forceDelete();
+        return redirect()->back()->with('msg', 'Major deleted permanently');
     }
     public function restore(string $id)
     {
-        major::onlyTrashed()->findorfail($id)->restore();
-        // return redirect()->back()->with('messege','major deleted successfully..');
-        return "restore";
+        Major::withTrashed()->where('id', $id)->restore();
+        return redirect()->route('admin.universities.index')->with('msg', 'Major restored successfully');
     }
 }

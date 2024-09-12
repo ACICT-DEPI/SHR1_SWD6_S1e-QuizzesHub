@@ -43,4 +43,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/faculties/archive', [FacultyController::class, 'archive'])->name('faculties.archive');
     Route::post('/faculties/{faculty}/restore', [FacultyController::class, 'restore'])->name('faculties.restore');
     Route::delete('/faculties/{faculty}/forceDelete', [FacultyController::class, 'forceDelete'])->name('faculties.forceDelete');
+    Route::resource('/majors', MajorController::class)->where(['major' => '[0-9]+']);
+    Route::get('/majors/archive', [MajorController::class, 'archive'])->name('majors.archive');
+    Route::post('/majors/{major}/restore', [MajorController::class, 'restore'])->name('majors.restore');
+    Route::delete('/majors/{major}/forceDelete', [MajorController::class, 'forceDelete'])->name('majors.forceDelete');
 });

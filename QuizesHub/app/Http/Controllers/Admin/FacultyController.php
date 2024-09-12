@@ -24,8 +24,7 @@ class FacultyController extends Controller
      */
     public function create()
     {
-        $universities = University::get();
-        return view('dashboard.faculties.create', compact('universities'));
+        return view('dashboard.faculties.create');
     }
 
     /**
@@ -35,7 +34,6 @@ class FacultyController extends Controller
     {
         Faculty::create([
             'name' => $request->name,
-            'university_id' => $request->university_id,
         ]);
         return redirect()->back()->with('msg', 'Faculty added successfully');
     }
@@ -55,8 +53,7 @@ class FacultyController extends Controller
     public function edit(string $id)
     {
         $faculty = Faculty::findOrFail($id);
-        $universities = University::get();
-        return view('dashboard.faculties.edit', compact('faculty', 'universities'));
+        return view('dashboard.faculties.edit', compact('faculty'));
     }
 
     /**
@@ -67,7 +64,6 @@ class FacultyController extends Controller
         $faculty = Faculty::findOrFail($id);
         $faculty->update([
             'name' => $request->name,
-            'university_id' => $request->university_id,
         ]);
         return redirect()->back()->with('msg', 'Faculty updated successfully');
     }
@@ -81,32 +77,6 @@ class FacultyController extends Controller
         $faculty->delete();
         return redirect()->back()->with('msg', 'Faculty deleted successfully');
     }
-
-    public function getFacultyByUniversityId(string $id)
-    {
-        $faculty = Faculty::where('university_id', $id)->get();
-    }
-
-    public function getFacultyByUniversityName(string $name)
-    {
-        $faculty = Faculty::whereHas('university', function ($query) use ($name) {
-            $query->where('name', $name);
-        })->get();
-
-    }
-
-    public function getFacultyByUniversityNameAndFacultyName(string $universityName, string $facultyName)
-    {
-        $faculty = Faculty::whereHas('university', function ($query) use ($universityName) {
-            $query->where('name', $universityName);
-        })->where('name', $facultyName)->get();
-    }
-
-    public function getFacultyByUniversityIdAndFacultyName(string $universityId, string $facultyName)
-    {
-        $faculty = Faculty::where('university_id', $universityId)->where('name', $facultyName)->get();
-    }
-
 
     public function archive()
     {

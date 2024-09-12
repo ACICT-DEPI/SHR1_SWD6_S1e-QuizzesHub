@@ -13,7 +13,7 @@ class Faculty extends Model
 
     protected $fillable = ['name', 'university_id'];
 
-    public function university()
+    public function universities()
     {
         return $this->belongsToMany(University::class, 'faculty_university', 'faculty_id', 'university_id');
     }

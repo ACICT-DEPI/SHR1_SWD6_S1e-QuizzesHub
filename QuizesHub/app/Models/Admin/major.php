@@ -13,7 +13,7 @@ class Major extends Model
     // public $incrementing=false;
     protected $fillable =['name','faculty_id'];
 
-    public function faculty()
+    public function faculties()
     {
        return $this->belongsToMany(Faculty::class,'faculty_major','major_id','faculty_id');
     }
