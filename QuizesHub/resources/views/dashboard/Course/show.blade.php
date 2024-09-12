@@ -18,10 +18,6 @@
                                             <td>{{$CourseData->name}}</td>
                                             </tr>
                                         <tr>
-                                            <th>Course_Code</th>
-                                            <td>{{$CourseData->code}}</td>
-                                        </tr>
-                                        <tr>
                                             <th>Major_Name</th>
                                             <td>{{ $CourseData->major->name}}</td>
                                         </tr>

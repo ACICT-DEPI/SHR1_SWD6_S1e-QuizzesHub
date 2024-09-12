@@ -16,30 +16,25 @@
                                     <thead>
                                         <tr>
                                             
-                                            <th>Course_Name</th>
-                                            <th>Course_Code</th>
+                                            <th>Course</th>
                                             <th>Major</th>
                                             <th>Faculty</th>
-                                            <th>University</th>
-                                            <th></th>
+                                            <th>Action</th>
                                             
                                         </tr>
                                     </thead>
                                     <tbody>
                          @foreach ($CourseData as $Course)
+                        
                      <tr> 
                           <td>{{$Course->name}}</td>
-                          <td>{{$Course->code}}</td>
+                          
                           <td>{{$Course->major->name}}</td>
                         <td>{{$Course->major->faculty->name}}</td>
-                          <td>{{$Course->major->faculty->university->name}}</td>
-                          
-                          
-                         
                           <td>
                             <a href="{{route('admin.courses.show',$Course->id)}}" class="btn btn-success" >Show</a>
                             <a href="{{route('admin.courses.edit',$Course->id)}}" class="btn btn-primary">Edit</a>
-                            <form method="POST" action="{{route('admin.courses.destroy',$Course->code)}}" style="display:inline">
+                            <form method="POST" action="{{route('admin.courses.destroy',$Course->id)}}" style="display:inline">
                               @csrf
                               @method('delete')
                               <input type="submit" id="delete"  class="btn btn-danger" onclick="return confirm('Are you sure?')" value="Delete">
