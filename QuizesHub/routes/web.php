@@ -21,6 +21,7 @@ Route::get('/', function () {
 
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/home', HomeController::class)->name('home');
+    Route::resource('/exams', ExamController::class);
     Route::resource('/questions', QuestionController::class);
     Route::resource('/feedbacks', FeedbackController::class)->only(
         ['index', 'show']
