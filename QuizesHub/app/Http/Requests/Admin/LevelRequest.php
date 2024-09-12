@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class LevelRequest extends FormRequest
 {
@@ -19,38 +20,23 @@ class LevelRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
-    public function onUpdate(): array
-    {
-        return [
-         'name'=>['required','string'],
-         'description'=>['required','string']
-
-        ];
-    }
-    public function onCreate(): array
-    {
-        return [
-            'id'=>['required','integer','unique:levels,id'],
-            'name'=>['required','string'],
-            'description'=>['required','string']
-
-        ];
-    }
+ 
+    
     public function rules(): array
     {
-      if(@request()->isMethod('put')){
-        return $this->onUpdate();
-      }else{
-        return $this->onCreate();
-      }
+        return [
+            
+            'name' => ['required', 'string', 'max:255', 'unique:levels,name'],
+            'description' => ['required', 'string', 'max:255'],
+        ];
     }
     public function messages(): array
     {
         return [
-            'id.required' => 'Please enter id',
-            'id.unique'=>'this id already exist',
+          
             'name.required' => 'Please enter name',
             'name.string' => 'Invalid name',
+            'name.unique' => 'Name already exists',
             'description.required' => 'Please enter description',
             'description.string' => 'Invalid description',
 

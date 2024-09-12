@@ -2,6 +2,15 @@
 @extends('dashboard.layout.master')
 
 @section('content')
+<div class="container-fluid">
+          <div class="row">
+            <div class="col-12">
+            <div class="card">
+              @if(Session::has('messege'))
+              <alert class="alert alert-success">
+                {{Session::get('messege')}}
+              </alert>
+              @endif
 
             <div class="animated fadeIn">
                 <div class="row">
@@ -14,35 +23,41 @@
                             <div class="card-body">
                                 <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
                                     <thead>
-                                        <tr>
-                                            
-                                            <th>User_Name</th>
-                                            <th>Course</th>
-                                            <th>Exam_Type</th>
-                                            <th>Exam_Date</th>
-                                            <th>Rating</th>
-                                            <th>Comments</th>
-                                            <th></th>
-                                            
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                         @foreach ($UserData as $feedback)
-                     <tr> 
-                     <td>{{ $feedback->user->fname." ".$feedback->user->lname}}</td>
-                          
-                          <td>{{ $feedback->exam->course->name}}</td>
-                          
-                          <td>{{$feedback->exam->type }}</td>
-                          <td>{{ $feedback->exam->date}}</td>
-                          <td>{{ $feedback->rating}}</td>
-                          <td>{{ $feedback->comments}}</td>
-                          <td>
-                            <a href="{{route('admin.feedbacks.show',$feedback->id)}}" class="btn btn-primary" id="show">Show</a>
-                        
-                            
+                                    <tr>
+                                         
+                                         <th>Levels</th>
+                                         <th>Description</th>
+                                         <th></th>
+                                         
+                                         
+                                     </tr>
+                                 </thead>
+                                 <tbody>
+                      @foreach ($LevelData as $level)
+                     
+                  <tr> 
+                       <td>{{$level->name}}</td>
+                       
+                       <td>{{$level->description}}</td>
+                       <td>
+                          <form method="POST" action="{{route('admin.levels.restore',$level->id)}}" style="display:inline">
+                              @csrf
+                              
+                              <input type="submit" id="restore"  class="btn btn-success" onclick="return confirm('Are you sure?')" value="ReStore">
+                              
                             </form>
-                          </td>
+                            <form method="POST" action="{{route('admin.levels.forceDelete',$level->id)}}" style="display:inline">
+                              @csrf
+                              @method('DELETE')
+                              <input type="submit" id="delete"  class="btn btn-danger" onclick="return confirm('Are you sure?')" value="Delete">
+                              <style>
+                                #delete{
+                                  background-color:red;
+                                }
+                              </style>
+                            </form>  
+                        
+                        </td>
                                         </tr>
                                         @endforeach
                                      
@@ -84,7 +99,3 @@
 
 @endsection
 @endsection
-
-
-
-

@@ -30,7 +30,7 @@
                           <td>{{$Course->name}}</td>
                           
                           <td>{{$Course->major->name}}</td>
-                        <td>{{$Course->major->faculty->name}}</td>
+                        <td>{{$Course->faculty->name}}</td>
                           <td>
                             <a href="{{route('admin.courses.show',$Course->id)}}" class="btn btn-success" >Show</a>
                             <a href="{{route('admin.courses.edit',$Course->id)}}" class="btn btn-primary">Edit</a>
