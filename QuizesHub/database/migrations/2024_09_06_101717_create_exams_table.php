@@ -14,7 +14,9 @@ return new class extends Migration
         Schema::create('exams', function (Blueprint $table) {
             $table->id();
             $table->enum('type', ['final', 'midterm', 'oral']);
-            $table->foreignId('course_id')->constrained();
+            $table->string('course_name');
+            $table->unsignedBigInteger('course_id')->nullable();
+            $table->foreign('course_id')->references('id')->on('courses')->onDelete('set null');
             $table->date('date');
             $table->integer('duration');
             $table->timestamps();
