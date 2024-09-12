@@ -75,12 +75,12 @@ VALUES
 ('Thermodynamic Of Solution (2)', 2, 1,NOW(), NOW());
 
 -- 7. exams Table:
-INSERT INTO exams (type, course_name ,course_id, date, duration, created_at, updated_at)
+INSERT INTO exams (type, course_name ,course_id, faculty_id, university_id, date, duration, created_at, updated_at)
 VALUES
-('final', 'Physics', 1, '2024-09-10', 120, NOW(), NOW()),
-('midterm', 'Chemistry', 2, '2024-09-12', 90, NOW(), NOW()),
-('oral', 'Chemistry',2, '2024-09-08', '120', NOW(), NOW()),
-('final', 'Thermodynamic Of Solution (2)', 3, '2024-09-11', 120, NOW(), NOW());
+('final', 'Physics', 1, 1, 6, '2024-09-10', 120, NOW(), NOW()),
+('midterm', 'Chemistry', 2, 1, 6, '2024-09-12', 90, NOW(), NOW()),
+('oral', 'Chemistry',2, 1, 6, '2024-09-08', '120', NOW(), NOW()),
+('final', 'Thermodynamic Of Solution (2)', 3, 1, 6, '2024-09-11', 120, NOW(), NOW());
 
 -- 16. questions Table:
 INSERT INTO questions (type, text, exam_id, created_at, updated_at)

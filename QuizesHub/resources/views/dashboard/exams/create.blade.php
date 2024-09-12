@@ -1,4 +1,31 @@
 @dd($courses)
+<table>
+    <thead>
+        <tr>
+            <th>Course Name</th>
+            <th>Faculty Name</th>
+            <th>University Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach ($courses as $course)
+            @foreach ($course->faculty->universities as $university)
+                <tr>
+                    <td>{{ $course->name }}</td>
+                    <td>{{ $course->faculty->name }}</td>
+                    <td>{{ $university->name }}</td>
+                </tr>
+            @endforeach
+        @endforeach
+    </tbody>
+</table>
+<?php die(); ?>
+
+
+
+
+
+@dd($courses)
 
 @extends('dashboard.layout.master')
 
