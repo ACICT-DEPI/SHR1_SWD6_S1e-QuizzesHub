@@ -41,6 +41,8 @@
                                                 class="btn btn-success">Show</a>
                                             <a href="{{ route('admin.faculties.edit', $faculty->id) }}"
                                                 class="btn btn-primary">Edit</a>
+                                            <a href="{{ route('admin.faculties.majors', $faculty->id) }}"
+                                                class="btn btn-info">Majors</a>
                                             <form method="POST"
                                                 action="{{ route('admin.faculties.destroy', $faculty->id) }}"
                                                 style="display:inline">

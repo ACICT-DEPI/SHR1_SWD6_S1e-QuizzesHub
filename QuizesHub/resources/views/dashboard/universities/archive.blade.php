@@ -14,6 +14,11 @@
 
             <div class="col-md-12">
                 <div class="card">
+                    @if (Session::has('msg'))
+                        <alert class="alert alert-success">
+                            {{ Session::get('msg') }}
+                        </alert>
+                    @endif
                     <div class="card-header">
                         <strong class="card-title">Universities Table</strong>
                     </div>

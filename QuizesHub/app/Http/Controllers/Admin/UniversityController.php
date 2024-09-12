@@ -44,7 +44,8 @@ class UniversityController extends Controller
     public function show(string $id)
     {
         $university = University::findOrFail($id);
-        return view('dashboard.universities.show', compact('university'));
+        $faculties = Faculty::get();
+        return view('dashboard.universities.show', compact('university', 'faculties'));
     }
 
     /**
@@ -53,7 +54,8 @@ class UniversityController extends Controller
     public function edit(string $id)
     {
         $university = University::findOrFail($id);
-        return view('dashboard.universities.edit', compact('university'));
+        $faculties = Faculty::get();
+        return view('dashboard.universities.edit', compact('university', 'faculties'));
     }
 
     /**
@@ -95,5 +97,26 @@ class UniversityController extends Controller
         $university=University::withTrashed()->where('id', $id)->first();
         $university->forceDelete();
         return redirect()->back()->with('msg', 'University deleted permanently');
+    }
+
+    public function addFaculties(Request $Request,string $id)
+    {
+        $university = University::findOrFail($id);
+        $university->faculties()->syncWithoutDetaching($Request->faculties);
+        return redirect()->back()->with('msg', 'Faculties added successfully');
+    }
+
+    public function removeFaculty(Request $Request,string $id)
+    {
+        $university = University::findOrFail($id);
+        $university->faculties()->detach($Request->faculty);
+        return redirect()->back()->with('msg', 'Faculty removed successfully');
+    }
+
+    public function faculties(string $id)
+    {
+        $university = University::findOrFail($id);
+        $faculties = Faculty::get();
+        return view('dashboard.universities.faculties', compact('university', 'faculties'));
     }
 }
