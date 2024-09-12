@@ -10,6 +10,7 @@ use App\Models\Admin\faculty;
 use App\Models\Admin\major;
 
 
+
 class CourseController extends Controller
 {
     public function index()

@@ -15,25 +15,26 @@
                                 <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
                                     <thead>
                                         <tr>
-                                            
-                                            <th>Faculty</th>
+                                         
                                             <th>Levels</th>
+                                            <th>Description</th>
+                                            <th></th>
                                             
                                             
                                         </tr>
                                     </thead>
                                     <tbody>
-                         @foreach ($CourseData as $Course)
+                         @foreach ($LevelData as $level)
                         
                      <tr> 
-                          <td>{{$Course->name}}</td>
+                          <td>{{$level->name}}</td>
                           
-                          <td>{{$Course->major->name}}</td>
-                        <td>{{$Course->major->faculty->name}}</td>
+                          <td>{{$level->description}}</td>
+                        
                           <td>
-                            <a href="{{route('admin.levels.show',$Course->id)}}" class="btn btn-success" >Show</a>
-                            <a href="{{route('admin.courses.edit',$Course->id)}}" class="btn btn-primary">Edit</a>
-                            <form method="POST" action="{{route('admin.courses.destroy',$Course->id)}}" style="display:inline">
+                            <a href="{{route('admin.levels.show',$level->id)}}" class="btn btn-success" >Show</a>
+                            <a href="{{route('admin.levels.edit',$level->id)}}" class="btn btn-primary">Edit</a>
+                            <form method="POST" action="{{route('admin.levels.destroy',$level->id)}}" style="display:inline">
                               @csrf
                               @method('delete')
                               <input type="submit" id="delete"  class="btn btn-danger" onclick="return confirm('Are you sure?')" value="Delete">

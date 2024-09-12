@@ -13,71 +13,66 @@ class LevelController extends Controller
     public function index()
     {
        $LevelData=level::get();
-
-       return $LevelData;
-    //    return $LevelData;
-
-    //    return view('dashboard.levels.index',compact('LevelData'));
+     return view('dashboard.levels.index',compact('LevelData'));
     }
     public function create()
     {
-        //return view('admin.create');
-        return "create";
+        return view('dashboard.levels.create');
+        
     }
     public function store(LevelRequest $request)
     {
-        $validatedData=$request->validate();
+        
+        $validatedData=$request->validated();
         level::create([
-            'id'=>$request->id,
             'name'=>$request->name,
             'description'=>$request->description,
         ]);
-        // return redirect()->back()->with('messege','level added successfully..');
-        return "store";
+         return redirect()->back()->with('messege','level added successfully..');
+        
     }
     public function show(string $id)
     {
         $LevelData=level::findorfail($id);
-        // return view('admin.show',compact('LevelData'));
-        return "show";
+       return view('dashboard.levels.show',compact('LevelData'));
+       
     }
     public function edit(string $id)
     {
        $LevelData=level::findorfail($id);
-    //    return view('admin.update',compact('LevelData'));
-        return "edit";
+      return view('dashboard.levels.edit',compact('LevelData'));
+        
     }
     public function update(LevelRequest $request, string $id)
     {
-        $request->validate();
+       $request->validated();
         level::findorfail($id)->update([
             'name'=>$request->name,
             'description'=>$request->description,
         ]);
-        // return redirect()->back()->with('messege','level updated successfully..');
-        return "update";
+       return redirect()->back()->with('messege','level updated successfully..');
     }
     public function destroy(string $id)
     {
         level::findorfail($id)->delete();
-        // return redirect()->back()->with('messege','  level deleted successfully..');
-        return "destroy";
+         return redirect()->back()->with('messege','  level deleted successfully..');
+     
     }
     public function archive(){
        $LevelData =level::onlyTrashed()->get();
-        // return view('admin.archive',compact('LevelData'));
-        return "archive";
+       return view('dashboard.levels.archive',compact('LevelData'));
+       
     }
-    public function forceDelet(string $id)
+    public function forceDelete(string $id)
     {
         level::onlyTrashed()->findorfail($id)->forceDelete();
-        // return redirect()->back()->with('messege','level deleted successfully..');
-        return "forceDelet";
+         return redirect()->back()->with('messege','level deleted successfully..');
+       
     }
     public function restore(string $id)
     {
         level::onlyTrashed()->findorfail($id)->restore();
-        // return redirect()->back()->with('messege','level deleted successfully..');
-        return "restore";
+         return redirect()->back()->with('messege','level restored successfully..');
+       
     }
 }
