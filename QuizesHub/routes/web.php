@@ -1,16 +1,16 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ExamAttemptController;
-use App\Http\Controllers\ExamController;
-use App\Http\Controllers\QuestionController;
-use App\Http\Controllers\FeedbackController;
-use App\Http\Controllers\CourseController;
-use App\Http\Controllers\LevelController;
-use App\Http\Controllers\MajorController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\UniversityController;
-use App\Http\Controllers\FacultyController;
+use App\Http\Controllers\Admin\ExamAttemptController;
+use App\Http\Controllers\Admin\ExamController;
+use App\Http\Controllers\Admin\QuestionController;
+use App\Http\Controllers\Admin\FeedbackController;
+use App\Http\Controllers\Admin\CourseController;
+use App\Http\Controllers\Admin\LevelController;
+use App\Http\Controllers\Admin\MajorController;
+use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\Admin\UniversityController;
+use App\Http\Controllers\Admin\FacultyController;
 
 
 
