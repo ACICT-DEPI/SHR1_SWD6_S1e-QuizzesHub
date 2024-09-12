@@ -16,14 +16,14 @@
                                 <th>Faculty Name</th>
                                 <td>{{ $faculty->name }}</td>
                             </tr>
-                            <tr>
-                                <th>University Name</th>
-                                <td>{{ $faculty->university->name }}</td>
-                            </tr>
-                            <tr>
-                                <th>Created at</th>
-                                <td>{{ $faculty->created_at->format('y-m-d') }}</td>
-                            </tr>
+                            {{-- @foreach ($faculty->universities as $university)
+                                <tr>
+                                    <th>University Name</th>
+                                    <td>{{ $university->name }}</td>
+                                </tr>
+                            @endforeach --}}
+
+
 
                         </table>
                     </div>
