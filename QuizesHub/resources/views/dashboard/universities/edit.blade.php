@@ -32,50 +32,22 @@
                                 </div>
                             </div>
 
-                            <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th>Faculty Name</th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
 
-                                    @forelse ($university->faculties as $faculty)
-
-                                        <tr>
-
-                                            <td>{{ $faculty->name }}</td>
-                                            <td>
-                                                <a href="{{ route('admin.faculties.show', $faculty->id) }}" class="btn btn-success">Show</a>
-                                                <a href="{{ route('admin.faculties.edit', $faculty->id) }}" class="btn btn-primary">Edit</a>
-                                                <form method="POST" action="{{ route('admin.faculties.destroy', $faculty->id) }}"
-                                                    style="display:inline">
-                                                    @csrf
-                                                    @method('delete')
-                                                    <input type="submit" id="delete" class="btn btn-danger"
-                                                        onclick="return confirm('Are you sure?')" value="Delete">
-                                                </form>
-                                            </td>
-                                        </tr>
-                                    @empty
-                                        <tr>
-                                            <td colspan="2">No faculties found</td>
-                                        </tr>
-                                    @endforelse
-
-                                </tbody>
-
-                            </table>
                         </div>
 
                         <div class="card-footer">
                             <button type="submit" class="btn btn-success btn-sm" id="submit">
                                 <i class="fa fa-dot-circle-o"></i> Update
                             </button>
+
+                            <a href="{{ route('admin.faculties.create') }}" class="btn btn-info btn-sm " style="margin-left:70%">
+                                <i class="fa fa-plus"></i> Create Faculty
+                            </a>
                         </div>
 
                     </form>
+
+
                 </div>
             </div>
         </div>

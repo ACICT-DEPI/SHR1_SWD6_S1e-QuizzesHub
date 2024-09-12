@@ -41,7 +41,7 @@
                                 <i class="fa fa-dot-circle-o"></i> Update
                             </button>
 
-                            <a href="{{ route('admin.majors.create',['major_id'=>$faculty->id]) }}" class="btn btn-info btn-sm " style="margin-left:70%">
+                            <a href="{{ route('admin.majors.create') }}" class="btn btn-info btn-sm " style="margin-left:70%">
                                 <i class="fa fa-plus"></i> Create Major
                             </a>
                         </div>
