@@ -27,22 +27,25 @@ class ExamController extends Controller
     }
 
     public function create() {
-        // $universities = University::get()->toArray();
-        // $faculties = Faculty::get()->toArray();
+        $universities = University::get()->toArray();
+        $faculties = Faculty::get()->toArray();
         // $majors = Major::get()->toArray();
         // $levels = Level::get()->toArray();
         // $courses = Course::get()->toArray();
         // $courses = Course::with('faulty', 'u')
         // return $universities;
-        // return view('dashboard.exams.create', ['universities'=>$universities, 'faculties'=>$faculties, 'courses'=>$courses]);
+        
+        // $courses =  Course::with('exams')->get()->toArray();
+        // $exam = Exam::with('course', 'faculty', '')->get()->toArray();
+        // $exams = Exam::with('course.faculty.universities')->get();
+        $courses = Course::with('faculty.universities')->get()->toArray();
+        
+        return view('dashboard.exams.create', ['courses'=>$courses]);
 
-        $courses =  Course::with('exams')->get()->toArray();
-        $exam = Exam::with('course', 'faculty', '')->get()->toArray();
-
-        echo '<pre>';
-        print_r($exam);
-        echo '</pre>';
-        die();
+        // echo '<pre>';
+        // print_r($courses);
+        // echo '</pre>';
+        // die();
     }
 
     public function archive() {
