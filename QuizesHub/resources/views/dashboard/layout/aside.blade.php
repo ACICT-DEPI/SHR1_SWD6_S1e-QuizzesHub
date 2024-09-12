@@ -53,7 +53,8 @@
                     <li><i class="fa fa-id-plus"></i><a href="{{ route('admin.levels.create')}}">Add Level</a></li>
                     <li><i class="fa fa-id-plus"></i><a href="{{ route('admin.levels.archive')}}">Archive</a></li>
                 </ul>
-
+            </li>
+            <li class="menu-item-has-children dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-building-o"></i>Universities</a>
                 <ul class="sub-menu children dropdown-menu">
                     <li><i class="fa fa-id-badg"></i><a href="{{ route('admin.universities.index')}}">All Universities</a></li>
