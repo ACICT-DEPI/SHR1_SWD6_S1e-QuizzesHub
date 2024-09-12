@@ -23,7 +23,6 @@
                             <thead>
                                 <tr>
                                     <th>Faculty</th>
-                                    <th>University</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -31,8 +30,7 @@
                                 @foreach ($data as $faculty)
                                     <tr>
 
-                                        <td>{{ $faculty->name }}</td>
-                                        <td>{{ $faculty->university->name }}</td>
+                                        <td>{{ $faculty->name}}</td>
                                         <td>
                                             <a href="{{ route('admin.faculties.show', $faculty->id) }}"
                                                 class="btn btn-success">Show</a>

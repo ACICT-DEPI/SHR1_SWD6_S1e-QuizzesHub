@@ -15,12 +15,12 @@ class Faculty extends Model
 
     public function university()
     {
-        return $this->belongsTo(University::class, 'university_id', 'id');
+        return $this->belongsToMany(University::class, 'faculty_university', 'faculty_id', 'university_id');
     }
 
     public function majors()
     {
-        return $this->hasMany(Major::class, 'faculty_id', 'id');
+        return $this->belongsToMany(Major::class, 'faculty_major', 'faculty_id', 'major_id');
     }
 
     public function users()
