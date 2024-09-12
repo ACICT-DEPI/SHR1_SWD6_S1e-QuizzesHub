@@ -15,7 +15,7 @@
                             <thead>
                                 <tr>
                                     <th>Faculty Name</th>
-                                    <th></th>
+                                    <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -45,6 +45,9 @@
                             </tbody>
 
                         </table>
+                        <div class="card-footer">
+                            <a href="{{ route('admin.faculties.create', ['university_id'=>$university->id]) }}" class="btn btn-primary">Add New Faculty</a>
+                        </div>
                     </div>
                 </div>
             </div>

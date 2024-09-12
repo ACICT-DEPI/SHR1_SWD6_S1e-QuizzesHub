@@ -13,9 +13,7 @@ return new class extends Migration
     {
         Schema::create('majors', function (Blueprint $table) {
             $table->id();
-            $table->string('name',30)->notNullable();
-            $table->unsignedbiginteger('faculty_id')->notNullable();
-            $table->foreign('faculty_id')->references('id')->on('faculties');
+            $table->string('name',30)->unique();    
             $table->timestamps();
             $table->softDeletes();
         });

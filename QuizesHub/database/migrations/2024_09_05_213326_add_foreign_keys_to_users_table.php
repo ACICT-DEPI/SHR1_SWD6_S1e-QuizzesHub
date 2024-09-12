@@ -12,10 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->foreign('university_id')->references('id')->on('universities');
-            $table->foreign('faculty_id')->references('id')->on('faculties');
-            $table->foreign('major_id')->references('id')->on('majors');
-            $table->foreign('level_id')->references('id')->on('levels');
+            $table->foreign('university_id')->references('id')->on('universities')->onDelete('set null');
+            $table->foreign('faculty_id')->references('id')->on('faculties')->onDelete('set null');
+            $table->foreign('major_id')->references('id')->on('majors')->onDelete('set null');
+            $table->foreign('level_id')->references('id')->on('levels')->onDelete('set null');
         });
     }
 

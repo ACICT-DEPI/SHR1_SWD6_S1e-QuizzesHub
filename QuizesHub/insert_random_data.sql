@@ -9,11 +9,19 @@ VALUES
 
 
 --  faculties Table:
-INSERT INTO faculties ( name, university_id, created_at, updated_at)
+INSERT INTO faculties ( name, created_at, updated_at)
 VALUES
-('Faculty of Science', 1, NOW(), NOW()),
-('Faculty of Engineering', 2, NOW(), NOW()),
-('Faculty of Science', 3, NOW(), NOW());
+('Faculty of Science', NOW(), NOW()),
+('Faculty of Engineering', NOW(), NOW()),
+('Faculty of Medicine', NOW(), NOW());
+
+--  faculty_university Table:
+INSERT INTO faculty_university ( university_id, faculty_id,created_at, updated_at)
+VALUES
+(1,1, NOW(), NOW()),
+(2,2, NOW(), NOW()),
+(3,3, NOW(), NOW());
+
 
 -- . levels Table:
 INSERT INTO levels ( name, description, created_at, updated_at)
@@ -24,12 +32,19 @@ VALUES
 ('Level 4', 'Second year students', NOW(), NOW());
 
 -- . majors Table:
-INSERT INTO majors (name, faculty_id, created_at, updated_at)
+INSERT INTO majors (name, created_at, updated_at)
 VALUES
-('Physics', 1, NOW(), NOW()),
-('Chemistry', 2, NOW(), NOW()),
-('Math', 1, NOW(), NOW()),
-('CS', 2, NOW(), NOW());
+('Physics',  NOW(), NOW()),
+('Chemistry',  NOW(), NOW()),
+('Math',  NOW(), NOW()),
+('CS',  NOW(), NOW());
+
+--  faculty_major Table:
+INSERT INTO faculty_major ( faculty_id, major_id,created_at, updated_at)
+VALUES
+(1,1, NOW(), NOW()),
+(2,2, NOW(), NOW()),
+(3,3, NOW(), NOW());
 
 -- users
 INSERT INTO users (fname, lname, username, email, email_verified_at, password, phone, image_path, gender, role,  university_id, faculty_id, major_id, level_id, remember_token, created_at, updated_at, deleted_at)
