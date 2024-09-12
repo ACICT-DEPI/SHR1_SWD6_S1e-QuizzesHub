@@ -41,13 +41,13 @@ class MajorController extends Controller
         $major->update([
             'name'=>$request->name,
         ]);
-        return redirect()->back()->with('messege','major updated successfully..');
+        return redirect()->back()->with('msg','major updated successfully..');
     }
     public function destroy(string $id)
     {
         $major=Major::findorfail($id);
         $major->delete();
-        return redirect()->back()->with('messege','major deleted successfully..');
+        return redirect()->back()->with('msg','major deleted successfully..');
     }
     public function archive(){
         $data =major::onlyTrashed()->get();
@@ -62,6 +62,6 @@ class MajorController extends Controller
     public function restore(string $id)
     {
         Major::withTrashed()->where('id', $id)->restore();
-        return redirect()->route('admin.universities.index')->with('msg', 'Major restored successfully');
+        return redirect()->route('admin.majors.index')->with('msg', 'Major restored successfully');
     }
 }

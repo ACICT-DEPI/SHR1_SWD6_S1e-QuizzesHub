@@ -87,7 +87,7 @@ class FacultyController extends Controller
     public function restore(string $id)
     {
         Faculty::withTrashed()->where('id', $id)->restore();
-        return redirect()->back()->with('msg', 'Faculty restored successfully');
+        return redirect()->route('admin.faculties.index')->with('msg', 'University restored successfully');
     }
 
     public function forceDelete(string $id)

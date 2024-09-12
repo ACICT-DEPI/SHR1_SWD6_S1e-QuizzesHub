@@ -8,6 +8,11 @@
 
                     <div class="col-md-12">
                         <div class="card">
+                            @if (Session::has('msg'))
+                        <alert class="alert alert-success">
+                            {{ Session::get('msg') }}
+                        </alert>
+                    @endif
                             <div class="card-header">
                                 <strong class="card-title">Data Table</strong>
                             </div>
@@ -15,20 +20,20 @@
                                 <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
                                     <thead>
                                         <tr>
-                                            
+
                                             <th>Course</th>
                                             <th>Major</th>
                                             <th>Faculty</th>
                                             <th>Action</th>
-                                            
+
                                         </tr>
                                     </thead>
                                     <tbody>
                          @foreach ($CourseData as $Course)
-                        
-                     <tr> 
+
+                     <tr>
                           <td>{{$Course->name}}</td>
-                          
+
                           <td>{{$Course->major->name}}</td>
                         <td>{{$Course->faculty->name}}</td>
                           <td>
@@ -49,7 +54,7 @@
                           </td>
                                         </tr>
                                         @endforeach
-                                     
+
                                     </tbody>
                                 </table>
                             </div>
