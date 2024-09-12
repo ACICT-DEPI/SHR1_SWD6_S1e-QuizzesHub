@@ -15,7 +15,7 @@ class University extends Model
 
     public function faculties()
     {
-        return $this->hasMany(Faculty::class, 'university_id', 'id');
+        return $this->belongsToMany(Faculty::class, 'faculty_university', 'university_id', 'faculty_id');   
     }
 
     public function users()
