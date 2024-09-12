@@ -5,14 +5,18 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\level;
 use App\Http\Requests\LevelRequest;
+use App\Models\faculty;
 
 class LevelController extends Controller
 {
     public function index()
     {   
-       $LevelData=level::all();
+       $LevelData=level::get();
+      
        return $LevelData;
-       //return view('admin.index',compact('LevelData'));
+    //    return $LevelData;
+      
+    //    return view('dashboard.levels.index',compact('LevelData'));
     }
     public function create()
     {  
