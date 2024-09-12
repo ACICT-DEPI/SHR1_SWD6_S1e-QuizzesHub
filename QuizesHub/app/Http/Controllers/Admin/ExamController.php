@@ -11,6 +11,7 @@ use App\Models\Admin\University;
 use App\Models\Admin\Faculty;
 use App\Models\Admin\Major;
 use App\Models\Admin\Level;
+use App\Models\Admin\Course;
 
 
 class ExamController extends Controller
@@ -25,11 +26,13 @@ class ExamController extends Controller
     }
 
     public function create() {
-        $universities = University::get()->toArray();
-        $faculties = Faculty::get()->toArray();
-        $majors = Major::get()->toArray();
-        $levels = Level::get()->toArray();
-        return $universities;
+        // $universities = University::get()->toArray();
+        // $faculties = Faculty::get()->toArray();
+        // $majors = Major::get()->toArray();
+        // $levels = Level::get()->toArray();
+        $courses = Course::get()->toArray();
+        // return $universities;
+        return view('dashboard.exams.create', compact('courses'));
     }
 
     public function archive() {
