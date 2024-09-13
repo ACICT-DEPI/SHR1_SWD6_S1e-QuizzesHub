@@ -14,6 +14,11 @@
 
             <div class="col-md-12">
                 <div class="card">
+                    @if (Session::has('msg'))
+                        <alert class="alert alert-success">
+                            {{ Session::get('msg') }}
+                        </alert>
+                    @endif
                     <div class="card-header">
                         <strong class="card-title">Faculties Table</strong>
                     </div>
@@ -26,12 +31,12 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($data as $faculty)
+                                @foreach ($data as $major)
                                     <tr>
 
-                                        <td>{{ $faculty->name }}</td>
+                                        <td>{{ $major->name }}</td>
                                         <td>
-                                            <form method="POST" action="{{ route('admin.faculties.restore', $faculty->id) }}"
+                                            <form method="POST" action="{{ route('admin.majors.restore', $major->id) }}"
                                                 style="display:inline">
                                                 @csrf
 
@@ -40,7 +45,7 @@
 
                                             </form>
                                             <form method="POST"
-                                                action="{{ route('admin.faculties.forceDelete', $faculty->id) }}"
+                                                action="{{ route('admin.majors.forceDelete', $major->id) }}"
                                                 style="display:inline">
                                                 @csrf
                                                 @method('delete')

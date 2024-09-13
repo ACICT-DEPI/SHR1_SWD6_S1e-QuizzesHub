@@ -16,8 +16,9 @@
             <li class="menu-item-has-children dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-users"></i>Users</a>
                 <ul class="sub-menu children dropdown-menu">
-                    <li><i class="fa fa-id-badg"></i><a href="ui-buttons.html">All Users</a></li>
-                    <li><i class="fa fa-id-plus"></i><a href="ui-badges.html">Add user</a></li>
+                    <li><i class="menu-icon fa fa-id-badg"></i><a href="{{ route('admin.users.index')}}">All Users</a></li>
+                    <li><i class="menu-icon fa fa-id-plus"></i><a href="{{ route('admin.users.create')}}">Add user</a></li>
+                    <li><i class="menu-icon fa fa-id-plus"></i><a href="{{ route('admin.users.archive')}}">Archive</a></li>
                 </ul>
             </li>
             <li class="menu-item-has-children dropdown">
@@ -61,7 +62,6 @@
                     <li><i class="fa fa-id-badg"></i><a href="{{ route('admin.universities.index')}}">All Universities</a></li>
                     <li><i class="fa fa-id-plus"></i><a href="{{ route('admin.universities.create')}}">Add University</a></li>
                     <li><i class="fa fa-id-plus"></i><a href="{{ route('admin.universities.archive')}}">Archive</a></li>
-                    <i class="fa-solid fa-school"></i>
                 </ul>
             </li>
 
@@ -71,7 +71,6 @@
                     <li><i class="fa fa-id-badg"></i><a href="{{ route('admin.faculties.index')}}">All Faculties</a></li>
                     <li><i class="fa fa-id-plus"></i><a href="{{ route('admin.faculties.create')}}">Add Faculty</a></li>
                     <li><i class="fa fa-id-plus"></i><a href="{{ route('admin.faculties.archive')}}">Archive</a></li>
-                    <i class="fa-solid fa-school"></i>
 
                 </ul>
             </li>
@@ -82,7 +81,6 @@
                     <li><i class="fa fa-id-badg"></i><a href="{{ route('admin.majors.index')}}">All Majors</a></li>
                     <li><i class="fa fa-id-plus"></i><a href="{{ route('admin.majors.create')}}">Add Major</a></li>
                     <li><i class="fa fa-id-plus"></i><a href="{{ route('admin.majors.archive')}}">Archive</a></li>
-                    <i class="fa-solid fa-school"></i>
 
                 </ul>
             </li>

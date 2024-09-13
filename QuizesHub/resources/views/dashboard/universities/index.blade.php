@@ -15,6 +15,11 @@
 
             <div class="col-md-12">
                 <div class="card">
+                    @if (Session::has('msg'))
+                        <alert class="alert alert-success">
+                            {{ Session::get('msg') }}
+                        </alert>
+                    @endif
                     <div class="card-header">
                         <strong class="card-title">Universities Table</strong>
                     </div>
@@ -36,6 +41,8 @@
                                                 class="btn btn-success">Show</a>
                                             <a href="{{ route('admin.universities.edit', $university->id) }}"
                                                 class="btn btn-primary">Edit</a>
+                                            <a href="{{ route('admin.universities.faculties', $university->id) }}"
+                                                class="btn btn-info">Faculties</a>
                                             <form method="POST"
                                                 action="{{ route('admin.universities.destroy', $university->id) }}"
                                                 style="display:inline">

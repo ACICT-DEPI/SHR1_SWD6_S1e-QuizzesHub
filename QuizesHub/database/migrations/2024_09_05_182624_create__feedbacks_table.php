@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedbiginteger('user_id')->notNullable();
             $table->integer('rating');
             $table->text('comments');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
             $table->softDeletes();
         });

@@ -9,6 +9,7 @@
 @endsection
 
 @section('content')
+
     <div class="animated fadeIn">
         <div class="row">
 
@@ -26,26 +27,26 @@
                         <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
                             <thead>
                                 <tr>
-                                    <th>Name</th>
+                                    <th >fname</th>
+                                    <th>lname</th>
+                                    <th>email</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($data as $faculty)
+                                @foreach ($data as $user)
                                     <tr>
 
-                                        <td>{{ $faculty->name }}</td>
-                                        <td>
-                                            <form method="POST" action="{{ route('admin.faculties.restore', $faculty->id) }}"
-                                                style="display:inline">
-                                                @csrf
-
-                                                <input type="submit" id="restore" class="btn btn-success"
-                                                   value="Restore">
-
-                                            </form>
+                                        <td>{{ $user->fname}}</td>
+                                        <td>{{ $user->lname}}</td>
+                                        <td>{{ $user->email}}</td>
+                                        <td >
+                                            <a href="{{ route('admin.users.show', $user->id) }}"
+                                                class="btn btn-success">Show</a>
+                                            <a href="{{ route('admin.users.edit', $user->id) }}"
+                                                class="btn btn-primary">Edit</a>
                                             <form method="POST"
-                                                action="{{ route('admin.faculties.forceDelete', $faculty->id) }}"
+                                                action="{{ route('admin.users.destroy', $user->id) }}"
                                                 style="display:inline">
                                                 @csrf
                                                 @method('delete')
@@ -65,6 +66,8 @@
 
         </div>
     </div><!-- .animated -->
+
+
 @endsection
 
 @section('scripts')

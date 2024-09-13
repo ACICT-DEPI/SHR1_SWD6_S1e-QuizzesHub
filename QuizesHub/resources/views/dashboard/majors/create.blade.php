@@ -11,7 +11,7 @@
                     @endif
 
 
-                    <form class="form-horizontal" action="{{ route('admin.faculties.store') }}" enctype="multipart/form-data"
+                    <form class="form-horizontal" action="{{ route('admin.majors.store') }}" enctype="multipart/form-data"
                         method="post">
                         @csrf
 
@@ -20,11 +20,11 @@
 
 
                             <div class="form-group">
-                                <label class=" form-control-label" for="name">Faculty Name</label>
+                                <label class=" form-control-label" for="name">Major Name</label>
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="menu-icon fa fa-book"></i></div>
                                     <input type="text" id="name" value="{{ old('name') }}"
-                                        class="form-control @error('name') is-invalid @enderror" name="name" placeholder="Faculty Name">
+                                        class="form-control @error('name') is-invalid @enderror" name="name" placeholder="Major Name">
                                     @error('name')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -37,7 +37,7 @@
 
                         <div class="card-footer">
                             <button type="submit" class="btn btn-success btn-sm" id="submit" >
-                                <i class="fa fa-dot-circle-o"></i> Add Faculty
+                                <i class="fa fa-dot-circle-o"></i> Add Major
                             </button>
                         </div>
 

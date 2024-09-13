@@ -32,23 +32,7 @@
                                 </div>
                             </div>
 
-                            <div class="form-group">
-                                <label class=" form-control-label" for="university_id">University Name</label>
-                                <div class="input-group">
-                                    <div class="input-group-addon"><i class="fa fa-bank"></i></div>
-                                    <select class="form-control @error('university_id') is-invalid @enderror" name="university_id"
-                                        id="university_id" >
-                                        @foreach ($universities as $university)
-                                            <option value="{{ $university->id }}" @selected($faculty->university->id == $university->id) >{{ $university->name }}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('university_id')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
+
                         </div>
 
 
@@ -56,6 +40,10 @@
                             <button type="submit" class="btn btn-success btn-sm" id="submit">
                                 <i class="fa fa-dot-circle-o"></i> Update
                             </button>
+
+                            <a href="{{ route('admin.majors.create') }}" class="btn btn-info btn-sm " style="margin-left:70%">
+                                <i class="fa fa-plus"></i> Create Major
+                            </a>
                         </div>
 
                     </form>

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\Admin\FacultyRequest;
 use App\Models\Admin\Faculty;
+use App\Models\Admin\Major;
 use App\Models\Admin\University;
 
 class FacultyController extends Controller
@@ -87,7 +88,7 @@ class FacultyController extends Controller
     public function restore(string $id)
     {
         Faculty::withTrashed()->where('id', $id)->restore();
-        return redirect()->back()->with('msg', 'Faculty restored successfully');
+        return redirect()->route('admin.faculties.index')->with('msg', 'University restored successfully');
     }
 
     public function forceDelete(string $id)
@@ -95,5 +96,26 @@ class FacultyController extends Controller
         $faculty=Faculty::withTrashed()->where('id', $id)->first();
         $faculty->forceDelete();
         return redirect()->back()->with('msg', 'Faculty deleted permanently');
+    }
+
+    public function majors(string $id)
+    {
+        $faculty = Faculty::findOrFail($id);
+        $majors = Major::get();
+        return view('dashboard.faculties.majors', compact('faculty', 'majors'));
+    }
+
+    public function addMajors(Request $request, string $id)
+    {
+        $faculty = Faculty::findOrFail($id);
+        $faculty->majors()->syncWithoutDetaching($request->majors);
+        return redirect()->back()->with('msg', 'Major added to faculty successfully');
+    }
+
+    public function removeMajor(Request $request, string $id)
+    {
+        $faculty = Faculty::findOrFail($id);
+        $faculty->majors()->detach($request->major);
+        return redirect()->back()->with('msg', 'Major removed from faculty successfully');
     }
 }

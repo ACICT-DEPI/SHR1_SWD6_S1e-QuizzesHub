@@ -6,48 +6,37 @@
 
             <div class="col-md-12">
                 <div class="card">
+                    @if (Session::has('msg'))
+                        <alert class="alert alert-success">
+                            {{ Session::get('msg') }}
+                        </alert>
+                    @endif
                     <div class="card-header" style="text-align: center;">
                         <strong class="card-title" >{{ $university->name }} </strong>
                     </div>
                     <div class="card-body">
 
                         <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>Faculty Name</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @forelse ($university->faculties as $faculty)
-
-                                <tr>
-
-                                    <td>{{ $faculty->name }}</td>
-                                    <td>
-                                        <a href="{{ route('admin.faculties.show', $faculty->id) }}" class="btn btn-success">Show</a>
-                                        <a href="{{ route('admin.faculties.edit', $faculty->id) }}" class="btn btn-primary">Edit</a>
-                                        <form method="POST" action="{{ route('admin.faculties.destroy', $faculty->id) }}"
-                                            style="display:inline">
-                                            @csrf
-                                            @method('delete')
-                                            <input type="submit" id="delete" class="btn btn-danger"
-                                                onclick="return confirm('Are you sure?')" value="Delete">
-                                        </form>
-                                    </td>
-                                </tr>
-                                @empty
-                                    <tr>
-                                        <td colspan="2">No faculties found</td>
-                                    </tr>
-                                @endforelse
-
-                            </tbody>
+                            <tr>
+                                <th>University Name</th>
+                                <td>{{ $university->name }}</td>
+                            </tr>
+                            <tr>
+                                <th>Faculties</th>
+                                <td>
+                                    @if ($university->faculties->count() == 0)
+                                        <span class="badge badge-danger">No Faculties</span>
+                                    @else
+                                        <ul style="padding-left:10px">
+                                            @foreach ($university->faculties as $faculty)
+                                                <li>{{ $faculty->name }}</li>
+                                            @endforeach
+                                        </ul>
+                                    @endif
+                                </td>
+                            </tr>
 
                         </table>
-                        <div class="card-footer">
-                            <a href="{{ route('admin.faculties.create', ['university_id'=>$university->id]) }}" class="btn btn-primary">Add New Faculty</a>
-                        </div>
                     </div>
                 </div>
             </div>
