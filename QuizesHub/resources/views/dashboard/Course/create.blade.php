@@ -44,7 +44,8 @@
                                     <select class="form-control @error('major_id') is-invalid @enderror" name="major_id"
                                         id="major_id">
                                         @foreach ($AllMajors as $major)
-                                            <option value="{{ $major->id }}" @selected($majorId == $major->id)>{{ $major->name }}</option>
+                                            <option value="{{ $major->id }}" @selected($majorId == $major->id)>
+                                                {{ $major->name }}</option>
                                         @endforeach
                                     </select>
                                     @error('major_id')
@@ -77,14 +78,10 @@
                         </div>
 
                         <div class="card-footer">
-                            <button type="submit" class="btn btn-danger btn-sm" id="submit">
+                            <button type="submit" class="btn btn-success btn-sm" id="submit">
                                 <i class="fa fa-dot-circle-o"></i> Add Course
                             </button>
-                            <style>
-                                #submit {
-                                    background-color: rgb(231, 76, 60);
-                                }
-                            </style>
+
                         </div>
 
 

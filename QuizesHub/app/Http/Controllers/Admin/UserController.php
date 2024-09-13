@@ -6,6 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\Admin\UserRequest;
 use App\Models\Admin\User;
+use App\Models\Admin\University;
+use App\Models\Admin\Faculty;
+use App\Models\Admin\Major;
+use App\Models\Admin\Level;
 use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
@@ -16,7 +20,7 @@ class UserController extends Controller
     public function index()
     {
         $data= User::get();
-        //return view('admin.users.index', compact('data'));
+        return view('dashboard.users.index', compact('data'));
     }
 
     /**
@@ -24,7 +28,11 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        $universities = University::get();
+        $faculties = Faculty::get();
+        $majors = Major::get();
+        $levels = Level::get();
+        return view('dashboard.users.create', compact('universities', 'faculties', 'majors', 'levels'));
     }
 
     /**
@@ -32,16 +40,21 @@ class UserController extends Controller
      */
     public function store(UserRequest $request)
     {
-        $image=$request->file('image')->storeAs('public/uploads', $request->file('image')->getClientOriginalName());
+        // return $request->all();
+        $file = $request->file('image_path');
+        $photoExt = $file->getClientOriginalExtension();
+        $photoName = $request->username . '.' . $photoExt;
+        $photo = $file->storeAs('images/users', $photoName);
         User::create([
             'fname' => $request->fname,
             'lname' => $request->lname,
             'username' => $request->username,
             'email' => $request->email,
-            'password' => $request->password,
+            'password' => bcrypt($request->password),
             'phone' => $request->phone,
-            'image_path' => $image,
+            'image_path' => $photo,
             'gender' => $request->gender,
+            // 'role' => $request->role,
             'university_id' => $request->university_id,
             'faculty_id' => $request->faculty_id,
             'major_id' => $request->major_id,
@@ -56,7 +69,7 @@ class UserController extends Controller
     public function show(string $id)
     {
         $user = User::findOrFail($id);
-        // return view('admin.users.show', compact('user'));
+        return view('dashboard.users.show', compact('user'));
     }
 
     /**
@@ -65,7 +78,11 @@ class UserController extends Controller
     public function edit(string $id)
     {
         $user = User::findOrFail($id);
-        // return view('admin.users.edit', compact('user'));
+        $universities = University::get();
+        $faculties = Faculty::get();
+        $majors = Major::get();
+        $levels = Level::get();
+        return view('dashboard.users.edit', compact('user', 'universities', 'faculties', 'majors', 'levels'));
     }
 
     /**
@@ -74,7 +91,22 @@ class UserController extends Controller
     public function update(UserRequest $request, string $id)
     {
         $user = User::findOrFail($id);
-        $image=$request->file('image')->storeAs('public/uploads', $request->file('image')->getClientOriginalName());
+        $file = $request->file('image_path');
+        if( !empty($student->image_path) && !empty($file) && Storage::exists($user->image_path)  ){
+            Storage::delete($user->image_path);
+            if(empty(Storage::files('images/users'))){
+                Storage::deleteDirectory('images/users');
+            }
+            $photoExt = $file->getClientOriginalExtension();
+            $photoName = $user->username . '.' . $photoExt;
+            $photo = $file->storeAs('images/users', $photoName);
+        }elseif(!empty($file)){
+            $photoExt = $file->getClientOriginalExtension();
+            $photoName = $user->username . '.' . $photoExt;
+            $photo = $file->storeAs('images/users', $photoName);
+        }else{
+            $photo = $user->photo;
+        }
         $user->update([
             'fname' => $request->fname,
             'lname' => $request->lname,
@@ -82,14 +114,14 @@ class UserController extends Controller
             'email' => $request->email,
             'password' => $request->password,
             'phone' => $request->phone,
-            'image_path' => $image,
+            'image_path' => $photo,
             'gender' => $request->gender,
             'university_id' => $request->university_id,
             'faculty_id' => $request->faculty_id,
             'major_id' => $request->major_id,
             'level_id' => $request->level_id,
         ]);
-        // return redirect()->back()->with('msg', 'User updated successfully');
+        return redirect()->back()->with('msg', 'User updated successfully');
     }
 
     /**
@@ -99,28 +131,31 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
         $user->delete();
-        // return redirect()->back()->with('msg', 'User deleted successfully');
+        return redirect()->back()->with('msg', 'User deleted successfully');
     }
 
     public function archive()
     {
         $data=User::onlyTrashed()->get();
-        // return view('admin.users.archive', compact('data'));
+        return view('dashboard.users.archive', compact('data'));
     }
 
     public function restore(string $id)
     {
         User::withTrashed()->where('id', $id)->restore();
-        // return redirect()->route('admin.users.index')->with('msg', 'User restored successfully');
+        return redirect()->route('admin.users.index')->with('msg', 'User restored successfully');
     }
 
     public function forceDelete(string $id)
     {
         $user=User::withTrashed()->where('id', $id)->first();
-        if(Storage::exists($user->image_path) && !empty($user->image_path)){
+        if(!empty($user->image_path) && Storage::exists($user->image_path) ){
             Storage::delete($user->image_path);
+            if(empty(Storage::files('images/users'))){
+                Storage::deleteDirectory('images/users');
+            }
         }
         $user->forceDelete();
-        // return redirect()->back()->with('msg', 'User deleted permanently');
+        return redirect()->back()->with('msg', 'User deleted permanently');
     }
 }

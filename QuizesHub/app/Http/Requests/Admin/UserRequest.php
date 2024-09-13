@@ -19,21 +19,51 @@ class UserRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
-    public function rules(): array
+    private function onCreate(): array
     {
         return [
             'fname' => 'required',
             'lname' => 'required',
-            'username' => 'required|unique:user,username',
-            'email' => 'required|email|unique:user,email',
-            'password' => 'required|password',
-            'phone' => ['nullable', 'regex:/^(010|011|012|015)[0-9]{8}$/', 'unique:user,phone'],
+            'username' => 'required|unique:users,username',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|string|min:8',
+            'phone' => ['nullable', 'regex:/^(010|011|012|015)[0-9]{8}$/', 'unique:users,phone'],
             'image_path' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
-            'gender' => 'M|F',
+            'gender' => 'required|in:M,F',
+            // 'role' => 'required|in:user,admin',
             'university_id' => 'required|integer',
             'faculty_id' => 'required|integer',
             'major_id' => 'required|integer',
             'level_id' => 'required|integer',
         ];
+    }
+
+    private function onUpdate(): array
+    {
+        $userId = $this->route('user');
+        return [
+            'fname' => 'required',
+            'lname' => 'required',
+            // 'username' => 'required||unique:users,username,'.$this->username.'username',
+            'username' => 'required|unique:users,username,' .  $userId . ',id',
+            'email' => 'required|email|unique:users,email,'.$userId.',id',
+            'password' => 'nullable|string|min:8',
+            'phone' => ['nullable', 'regex:/^(010|011|012|015)[0-9]{8}$/', 'unique:users,phone,'.$userId.',id'],
+            'image_path' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
+            'gender' => 'required|in:M,F',
+            // 'role' => 'required|in:user,admin',
+            'university_id' => 'required|integer',
+            'faculty_id' => 'required|integer',
+            'major_id' => 'required|integer',
+            'level_id' => 'required|integer',
+        ];
+    }
+    public function rules(): array
+    {
+        if ($this->isMethod('post')) {
+            return $this->onCreate();
+        } else {
+            return $this->onUpdate();
+        }
     }
 }
