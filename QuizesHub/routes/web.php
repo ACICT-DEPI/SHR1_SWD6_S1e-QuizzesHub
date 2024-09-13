@@ -22,34 +22,45 @@ Route::get('/', function () {
 
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/home', HomeController::class)->name('home');
+
+    Route::get('/exams/archive', [ExamController::class, 'archive'])->name('exams.archive');
+    Route::get('/exams/{restore}/restore', [ExamController::class, 'restore'])->name('exams.restore');
     Route::resource('/exams', ExamController::class);
+
     Route::resource('/questions', QuestionController::class);
+
     Route::resource('/feedbacks', FeedbackController::class)->only(
         ['index', 'show']
     );
+
     Route::get('/courses/archive', [CourseController::class, 'archive'])->name('courses.archive');
     Route::post('/courses/{course}/restore', [CourseController::class, 'restore'])->name('courses.restore');
     Route::delete('/courses/{course}/forceDelete', [CourseController::class, 'forceDelete'])->name('courses.forceDelete');
     Route::resource('/courses', CourseController::class);
+
     Route::get('/levels/archive', [LevelController::class, 'archive'])->name('levels.archive');
     Route::post('/levels/{level}/restore', [LevelController::class, 'restore'])->name('levels.restore');
     Route::delete('/levels/{level}/forceDelete', [LevelController::class, 'forceDelete'])->name('levels.forceDelete');
     Route::resource('/levels', LevelController::class);
-    Route::resource('/exams', ExamController::class);
+
     Route::resource('/universities', UniversityController::class)->where(['university' => '[0-9]+']);
     Route::get('/universities/archive', [UniversityController::class, 'archive'])->name('universities.archive');
     Route::post('/universities/{university}/restore', [UniversityController::class, 'restore'])->name('universities.restore');
     Route::delete('/universities/{university}/forceDelete', [UniversityController::class, 'forceDelete'])->name('universities.forceDelete');
+
     Route::get('/universities/{university}/faculties', [UniversityController::class, 'faculties'])->name('universities.faculties');
     Route::post('/universities/{university}/faculties', [UniversityController::class, 'addFaculties'])->name('universities.addFaculties');
     Route::delete('/universities/{university}/faculties/{faculty}', [UniversityController::class, 'removeFaculty'])->name('universities.removeFaculty');
+
     Route::resource('/faculties', FacultyController::class)->where(['faculty' => '[0-9]+']);
     Route::get('/faculties/archive', [FacultyController::class, 'archive'])->name('faculties.archive');
     Route::post('/faculties/{faculty}/restore', [FacultyController::class, 'restore'])->name('faculties.restore');
     Route::delete('/faculties/{faculty}/forceDelete', [FacultyController::class, 'forceDelete'])->name('faculties.forceDelete');
+
     Route::get('/faculties/{faculty}/majors', [FacultyController::class, 'majors'])->name('faculties.majors');
     Route::post('/faculties/{faculty}/majors', [FacultyController::class, 'addMajors'])->name('faculties.addMajors');
     Route::delete('/faculties/{faculty}/majors/{major}', [FacultyController::class, 'removeMajor'])->name('faculties.removeMajor');
+
     Route::resource('/majors', MajorController::class)->where(['major' => '[0-9]+']);
     Route::get('/majors/archive', [MajorController::class, 'archive'])->name('majors.archive');
     Route::post('/majors/{major}/restore', [MajorController::class, 'restore'])->name('majors.restore');
