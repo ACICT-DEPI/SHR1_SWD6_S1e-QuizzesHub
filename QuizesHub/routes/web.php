@@ -12,13 +12,20 @@ use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\UniversityController;
 use App\Http\Controllers\Admin\FacultyController;
 use App\Http\Controllers\Admin\UserController;
-
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
 
 
 
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/login',[LoginController::class, 'login'])->name('login');
+Route::post('/login',[LoginController::class, 'handleLogin'])->name('handleLogin');
+Route::post('/logout',[LoginController::class, 'logout'])->name('logout');
+Route::get('/register',[RegisterController::class, 'register'])->name('register');
+Route::post('/register',[RegisterController::class, 'handleRegister'])->name('handleRegister');
 
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/home', HomeController::class)->name('home');

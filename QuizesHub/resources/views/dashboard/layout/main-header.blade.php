@@ -1,3 +1,10 @@
+@if(empty(Auth::user()->role) || Auth::user()->role != 'admin' )
+    @php
+        header("Location: " . URL::to('/login'), true, 302);
+        exit();
+    @endphp
+@endif
+
 <div class="header-menu">
     <div class="col-sm-7">
         <a id="menuToggle" class="menutoggle pull-left"><i class="fa fa fa-tasks"></i></a>
@@ -23,9 +30,12 @@
             </a>
 
             <div class="user-menu dropdown-menu">
-                <a class="nav-link" href="#"><i class="fa fa-user"></i> My Profile</a>
+                <a class="nav-link" href="#"><i class="fa fa-user"></i>{{ Auth::user()->fname }}</a>
 
-                <a class="nav-link" href="#"><i class="fa fa-power-off"></i> Logout</a>
+                <form class="dropdown-item" action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <button type="submit" ><span class="">Logout</span></button>
+                  </form>
             </div>
         </div>
 
