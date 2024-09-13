@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\MajorController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\UniversityController;
 use App\Http\Controllers\Admin\FacultyController;
+use App\Http\Controllers\Admin\UserController;
 
 
 
@@ -53,4 +54,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/majors/archive', [MajorController::class, 'archive'])->name('majors.archive');
     Route::post('/majors/{major}/restore', [MajorController::class, 'restore'])->name('majors.restore');
     Route::delete('/majors/{major}/forceDelete', [MajorController::class, 'forceDelete'])->name('majors.forceDelete');
+    Route::resource('/users', UserController::class)->where(['user' => '[0-9]+']);
+    Route::get('/users/archive', [UserController::class, 'archive'])->name('users.archive');
+    Route::post('/users/{user}/restore', [UserController::class, 'restore'])->name('users.restore');
+    Route::delete('/users/{user}/forceDelete', [UserController::class, 'forceDelete'])->name('users.forceDelete');
 });

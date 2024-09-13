@@ -27,5 +27,22 @@ class Major extends Model
 
     }
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($major) {
+            if ($major->isForceDeleting()) {
+                $major->courses()->forceDelete();
+            } else {
+                $major->courses()->delete();
+            }
+        });
+
+        static::restored(function ($major) {
+            $major->courses()->withTrashed()->restore();
+        });
+    }
+
 }
 
