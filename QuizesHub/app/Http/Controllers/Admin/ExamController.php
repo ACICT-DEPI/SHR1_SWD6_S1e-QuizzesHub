@@ -20,7 +20,8 @@ class ExamController extends Controller
     public function index() {
         // $exams =  Exam::get()->toArray();
         // $courses = [];
-        $exams = Exam::with('course')->get();
+        $exams = Exam::with('course', 'faculty', 'university')->get();
+        // dd($exams);
 
         return view('dashboard.exams.index', ['exams'=>$exams]);
         // return view('welcome');
@@ -29,18 +30,9 @@ class ExamController extends Controller
     public function create() {
         $universities = University::get()->toArray();
         $faculties = Faculty::get()->toArray();
-        // $majors = Major::get()->toArray();
-        // $levels = Level::get()->toArray();
-        // $courses = Course::get()->toArray();
-        // $courses = Course::with('faulty', 'u')
-        // return $universities;
+        $courses = Course::get()->toArray();
         
-        // $courses =  Course::with('exams')->get()->toArray();
-        // $exam = Exam::with('course', 'faculty', '')->get()->toArray();
-        // $exams = Exam::with('course.faculty.universities')->get();
-        $courses = Course::with('faculty.universities')->get()->toArray();
-        
-        return view('dashboard.exams.create', ['courses'=>$courses]);
+        return view('dashboard.exams.create', ['courses'=>$courses, 'faculties'=>$faculties, 'universities'=>$universities]);
 
         // echo '<pre>';
         // print_r($courses);
@@ -49,12 +41,22 @@ class ExamController extends Controller
     }
 
     public function archive() {
-        $exams = Exam::onlyTrashed()->get()->toArray();
-        return $exams;
+        $exams = Exam::onlyTrashed()->get();
+        // return $exams;
+        return view('dashboard.exams.archive', compact('exams'));
     }
 
     public function store(ExamRequest $request) {
-        return 'stored';
+        Exam::create([
+            'type'=>$request->type,
+            'course_name'=>$request->course_name,
+            'course_id'=>$request->course_id,
+            'faculty_id'=>$request->faculty_id,
+            'university_id'=>$request->university_id,
+            'date'=>$request->date,
+            'duration'=>$request->duration,
+        ]);
+        return redirect()->back()->with('msg', 'Exam Added Successfully');
     }
 
     public function show($id) {
@@ -70,15 +72,24 @@ class ExamController extends Controller
     public function edit($id) {
         $universities = University::get()->toArray();
         $faculties = Faculty::get()->toArray();
+        $courses = Faculty::get()->toArray();
         $exam = Exam::findorfail($id)->toArray();
-        return 'edit view';
+        // return 'edit view';
+        // echo '<pre>';
+        // print_r($exam);
+        // echo '</pre>';
+        // die();
+        return view('dashboard.exams.edit', ['exam'=>$exam, 'courses'=>$courses, 'faculties'=>$faculties, 'universities'=>$universities]);
     }
 
     public function update(ExamRequest $request, $id) {
         $exam = Exam::findOrFail($id);
         $exam->update([
             'type'=>$request->type,
+            'course_name'=>$request->course_name,
             'course_id'=>$request->course_id,
+            'faculty_id'=>$request->faculty_id,
+            'university_id'=>$request->university_id,
             'date'=>$request->date,
             'duration'=>$request->duration,
         ]);

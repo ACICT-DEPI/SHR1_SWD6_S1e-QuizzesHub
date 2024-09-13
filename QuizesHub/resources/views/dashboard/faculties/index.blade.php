@@ -1,3 +1,4 @@
+
 @extends('dashboard.layout.master')
 
 @section('styles')

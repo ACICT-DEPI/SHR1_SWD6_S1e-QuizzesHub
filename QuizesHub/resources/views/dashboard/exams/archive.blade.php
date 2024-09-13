@@ -47,14 +47,9 @@
                                   <td>{{ $exam->university->name }}</td>
                                   <td>{{ $exam->date }}</td>
                                   <td>
-                                    <a href="{{ route('admin.exams.show', $exam->id) }}" class="btn btn-primary">Show</a>
+                                    <a href="{{ route('admin.exams.restore', $exam->id) }}" class="btn btn-success">Restore</a>
                                     {{-- <a href="#" class="btn btn-primary">Show</a> --}}
-                                    <a href="{{ route('admin.exams.edit', $exam->id)}}" class="btn btn-success">Edit</a>
-                                    <form style="display:inline" action="{{route('admin.exams.destroy', $exam->id)}}" method="POST">
-                                      @csrf
-                                      @method('delete')
-                                      <button class="btn btn-danger" id="delete" onclick="return confirm('Are you sure?')" value="Delete">Delete</button>
-                                    </form>
+                                    {{-- <a href="#" class="btn btn-success">Edit</a> --}}
                                     {{-- <a href="#" class="btn btn-danger">Delete</a> --}}
                                   </td>
                                 </tr>

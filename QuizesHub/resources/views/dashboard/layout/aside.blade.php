@@ -42,6 +42,7 @@
                 <ul class="sub-menu children dropdown-menu">
                     <li><i class="fa fa-id-badg"></i><a href="{{route('admin.exams.index')}}">All Exams</a></li>
                     <li><i class="menu-icon fa fa-id-plus"></i><a href="{{route('admin.exams.create')}}">Add Exam</a></li>
+                    <li><i class="menu-icon fa fa-id-plus"></i><a href="{{route('admin.exams.archive')}}">Archive</a></li>
                 </ul>
             </li>
 
