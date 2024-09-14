@@ -51,6 +51,7 @@ class UserRequest extends FormRequest
             'phone' => ['nullable', 'regex:/^(010|011|012|015)[0-9]{8}$/', 'unique:users,phone,'.$userId.',id'],
             'image_path' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
             'gender' => 'required|in:M,F',
+            'score' => 'nullable|integer',
             // 'role' => 'required|in:user,admin',
             'university_id' => 'required|integer',
             'faculty_id' => 'required|integer',

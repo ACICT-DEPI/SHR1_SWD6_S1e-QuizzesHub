@@ -11,13 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('exams', function (Blueprint $table) {
+        Schema::create('course_faculty_major', function (Blueprint $table) {
             $table->id();
-            $table->enum('type', ['final', 'midterm', 'oral','sheet']);
             $table->unsignedBigInteger('course_id');
+            $table->unsignedBigInteger('faculty_id');
+            $table->unsignedBigInteger('major_id');
+            $table->unique(['course_id', 'faculty_id', 'major_id']);
+            $table->unsignedBigInteger('degree');
             $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
-            $table->date('date');
-            $table->integer('duration');
+            $table->foreign('faculty_id')->references('id')->on('faculties')->onDelete('cascade');
+            $table->foreign('major_id')->references('id')->on('majors')->onDelete('cascade');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -28,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('exams');
+        Schema::dropIfExists('course_faculty_major');
     }
 };

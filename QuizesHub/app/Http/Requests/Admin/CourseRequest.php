@@ -4,6 +4,7 @@ namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use App\Models\Admin\Course;
 
 class CourseRequest extends FormRequest
 {
@@ -25,20 +26,25 @@ class CourseRequest extends FormRequest
     {
         return [
 
-            'name' => ['required', 'string',
-                Rule::unique('courses')->where(function ($query) {
-                    return $query->where('major_id', $this->major_id)
-                                 ->where('faculty_id', $this->faculty_id);
+            'name' => ['required', 'string', 'unique:courses,name'],
+            'code' => ['required', 'string', 'unique:courses,code', $this->uniqueCompositeRule()],
 
-                })
-
-                ],
-
-            'major_id' => ['required', 'integer'],
-            'faculty_id' => ['required', 'integer'],
 
         ];
     }
+
+    private function uniqueCompositeRule()
+    {
+        return function ($attribute, $value, $fail) {
+            $exists = Course::where('name', $this->input('name'))
+                               ->where('code', $this->input('code'))
+                               ->exists();
+            if ($exists) {
+                $fail('Course already exists');
+            }
+        };
+    }
+
     public function messages(): array
     {
         return [
@@ -46,10 +52,6 @@ class CourseRequest extends FormRequest
             'name.string' => 'Invalid name',
 
             'name.unique' => 'Course already exists',
-            'major_id.required' => 'Please enter major_id',
-            'major_id.integer' => 'Invalid major_id',
-            'faculty_id.required' => 'Please enter faculty_id',
-            'faculty_id.integer' => 'Invalid faculty_id',
 
 
 

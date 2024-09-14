@@ -11,21 +11,24 @@ class Major extends Model
     use HasFactory;
     use SoftDeletes;
     // public $incrementing=false;
-    protected $fillable =['name','faculty_id'];
+    protected $fillable =['name'];
 
-    public function faculties()
-    {
-       return $this->belongsToMany(Faculty::class,'faculty_major','major_id','faculty_id');
-    }
 
     public function users()
     {
        return $this->hasMany(User::class,'major_id','id');
     }
-    public function courses(){
-        return $this->hasMany(Course::class,'major_id','id');
 
+    public function courses()
+    {
+        return $this->belongsToMany(Course::class, 'course_faculty_major', 'major_id', 'course_id');
     }
+
+    public function faculties()
+    {
+        return $this->belongsToMany(Faculty::class, 'course_faculty_major', 'major_id', 'faculty_id');
+    }
+
 
     protected static function boot()
     {
