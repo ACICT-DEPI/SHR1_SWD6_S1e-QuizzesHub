@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UserRequest extends FormRequest
 {
@@ -40,16 +41,15 @@ class UserRequest extends FormRequest
 
     private function onUpdate(): array
     {
-        $userId = $this->route('user');
+        // $userId = $this->route('user');
         return [
-            // Rule::unique('courses', 'name')->ignore($this->course)
             'fname' => 'required',
             'lname' => 'required',
             // 'username' => 'required||unique:users,username,'.$this->username.'username',
-            'username' => 'required|unique:users,username,' .  $userId . ',id',
-            'email' => 'required|email|unique:users,email,'.$userId.',id',
+            'username' => ['required',Rule::unique('users', 'username')->ignore($this->username, 'username')],
+            'email' => ['required','email',Rule::unique('users', 'email')->ignore($this->email, 'email')],
             'password' => 'nullable|string|min:8',
-            'phone' => ['nullable', 'regex:/^(010|011|012|015)[0-9]{8}$/', 'unique:users,phone,'.$userId.',id'],
+            'phone' => ['nullable', 'regex:/^(010|011|012|015)[0-9]{8}$/',Rule::unique('users', 'phone')->ignore($this->phone, 'phone')],
             'image_path' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
             'gender' => 'required|in:M,F',
             'score' => 'nullable|integer',

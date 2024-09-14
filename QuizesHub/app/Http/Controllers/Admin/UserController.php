@@ -91,6 +91,7 @@ class UserController extends Controller
     public function update(UserRequest $request, string $id)
     {
         $user = User::findOrFail($id);
+        // return $request->all();
         $file = $request->file('image_path');
         if( !empty($student->image_path) && !empty($file) && Storage::exists($user->image_path)  ){
             Storage::delete($user->image_path);
@@ -107,12 +108,17 @@ class UserController extends Controller
         }else{
             $photo = $user->photo;
         }
+        if(empty($request->password)){
+            $password= $user->password;
+        }else{
+            $password= bcrypt($request->password);
+        }
         $user->update([
             'fname' => $request->fname,
             'lname' => $request->lname,
             'username' => $request->username,
             'email' => $request->email,
-            'password' => $request->password,
+            'password' => $password,
             'phone' => $request->phone,
             'image_path' => $photo,
             'gender' => $request->gender,
