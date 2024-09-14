@@ -75,11 +75,11 @@ VALUES
 ('Thermodynamic Of Solution (2)','CHEM2',NOW(), NOW());
 
 -- 6. courses Table:
-INSERT INTO course_faculty_major (faculty_id, major_id,course_id, created_at, updated_at)
+INSERT INTO course_faculty_major (faculty_id, major_id,course_id, degree,created_at, updated_at)
 VALUES
-(1, 1, 1,NOW(), NOW()),
-(2,3,3, NOW(), NOW()),
-(3,2,2,NOW(), NOW());
+(1, 1, 1,100,NOW(), NOW()),
+(2,3,3,100, NOW(), NOW()),
+(3,2,2,100,NOW(), NOW());
 
 -- 7. exams Table:
 INSERT INTO exams (type ,course_id, date, duration, created_at, updated_at)
