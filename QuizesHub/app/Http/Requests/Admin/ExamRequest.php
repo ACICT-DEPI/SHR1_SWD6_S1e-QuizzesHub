@@ -23,7 +23,6 @@ class ExamRequest extends FormRequest
     {
         return [
             'type'=>['required', 'regex:/(final|midterm|oral)/'],
-            'course_name'=>['required'],
             'course_id'=>['required', 'regex:/[0-9]+/'],
             'faculty_id'=>['required', 'regex:/[0-9]+/'],
             'university_id'=>['required', 'regex:/[0-9]+/'],

@@ -11,7 +11,7 @@ class Course extends Model
     use HasFactory;
     // public $incrementing=false;
     use SoftDeletes;
-    protected $fillable =['name','major_id','faculty_id'];
+    protected $fillable =['name','code'];
 
     public function exams()
     {
@@ -19,14 +19,14 @@ class Course extends Model
     }
 
 
-    public function major()
+    public function faculties()
     {
-       return $this->belongsTo(Major::class,'major_id','id');
+        return $this->belongsToMany(Faculty::class, 'course_faculty_major', 'course_id', 'faculty_id');
     }
 
-    public function faculty(){
-        return $this->belongsTo(Faculty::class,'faculty_id','id');
-
+    public function majors()
+    {
+        return $this->belongsToMany(Major::class, 'course_faculty_major', 'course_id', 'major_id');
     }
 
 }

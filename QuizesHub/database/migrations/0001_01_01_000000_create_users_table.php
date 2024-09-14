@@ -22,7 +22,8 @@ return new class extends Migration
             $table->string('phone',11)->nullable();
             $table->string('image_path')->nullable();
             $table->enum('gender', ['M', 'F']);
-            $table->enum('role', ['admin', 'user'])->default('user');
+            $table->enum('role', ['owner', 'admin', 'user'])->default('user');
+            $table->unsignedBigInteger('score')->default(0);
             $table->unsignedBigInteger('university_id')->nullable();
             $table->unsignedBigInteger('faculty_id')->nullable();
             $table->unsignedBigInteger('major_id')->nullable();

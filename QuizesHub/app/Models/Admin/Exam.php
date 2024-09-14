@@ -13,10 +13,7 @@ class Exam extends Model
 
     protected $fillable = [
         'type',
-        'course_name',
         'course_id',
-        'faculty_id',
-        'university_id',
         'date',
         'duration',
     ];
@@ -47,11 +44,4 @@ class Exam extends Model
         return $this->belongsToMany(Exam::class, 'exam_attempts', 'exam_id', 'user_id')->withPivot('score', 'attempt_number', 'start_time', 'end_time', 'created_at', 'updated_at', 'deleted_at');
     }
 
-    public function faculty() {
-        return $this->belongsTo(Faculty::class, 'faculty_id', 'id');
-    }
-
-    public function university() {
-        return $this->belongsTo(University::class, 'university_id', 'id');
-    }
 }

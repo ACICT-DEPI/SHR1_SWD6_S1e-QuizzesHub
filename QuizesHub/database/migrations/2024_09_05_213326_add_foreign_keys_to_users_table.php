@@ -27,8 +27,8 @@ return new class extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->dropForeign(['university_id']);
             $table->dropForeign(['faculty_id']);
-            // $table->dropForeign(['major_id']);
-            // $table->dropForeign(['level_id']);
+            $table->dropForeign(['major_id']);
+            $table->dropForeign(['level_id']);
         });
     }
 };

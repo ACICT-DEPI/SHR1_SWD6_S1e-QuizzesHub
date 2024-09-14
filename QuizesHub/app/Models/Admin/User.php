@@ -31,6 +31,7 @@ class User extends Authenticatable
         'image_path',
         'gender',
         'role',
+        'score',
         'university_id',
         'faculty_id',
         'major_id',
