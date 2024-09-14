@@ -42,6 +42,7 @@ class UserRequest extends FormRequest
     {
         $userId = $this->route('user');
         return [
+            // Rule::unique('courses', 'name')->ignore($this->course)
             'fname' => 'required',
             'lname' => 'required',
             // 'username' => 'required||unique:users,username,'.$this->username.'username',

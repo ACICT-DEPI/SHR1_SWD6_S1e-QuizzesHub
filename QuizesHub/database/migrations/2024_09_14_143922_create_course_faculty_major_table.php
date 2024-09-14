@@ -17,7 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('faculty_id');
             $table->unsignedBigInteger('major_id');
             $table->unique(['course_id', 'faculty_id', 'major_id']);
-            $table->unsignedBigInteger('degree');
+            $table->unsignedBigInteger('degree')->default(0);
             $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
             $table->foreign('faculty_id')->references('id')->on('faculties')->onDelete('cascade');
             $table->foreign('major_id')->references('id')->on('majors')->onDelete('cascade');
