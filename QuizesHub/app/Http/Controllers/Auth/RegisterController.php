@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-// use App\Models\Admin\User;
+use App\Models\Admin\User;
 use Illuminate\Support\Facades\Auth;
 
 class RegisterController extends Controller
@@ -29,16 +29,16 @@ class RegisterController extends Controller
         // $data['password'] = $password;
         // $user = User::create($data);
 
-        // $user = User::create([
-        //     'fname' => $request->fname,
-        //     'lname' => $request->lname,
-        //     'username' => $request->username,
-        //     'email' => $request->email,
-        //     'password' => bcrypt($request->password),
-        //     'gender' => $request->gender,
-        // ]);
+        $user = User::create([
+            'fname' => $request->fname,
+            'lname' => $request->lname,
+            'username' => $request->username,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+            'gender' => $request->gender,
+        ]);
 
-        // Auth::login($user);
+        Auth::login($user);
         return redirect()->route('admin.home');
     }
 }
