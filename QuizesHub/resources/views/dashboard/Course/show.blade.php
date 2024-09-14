@@ -18,18 +18,19 @@
                                             <td>{{$CourseData->name}}</td>
                                             </tr>
                                         <tr>
-                                            <th>Major_Name</th>
-                                            <td>{{ $CourseData->major->name}}</td>
+                                            <th>Code</th>
+                                            <td>{{$CourseData->code}}</td>
                                         </tr>
                                         <tr>
-                                            <th>Faculty_Name</th>
-                                            <td>{{ $CourseData->major->faculty->name}}</td>
-                                        </tr>
-                                        <tr>
-                                            <th>University_Name</th>
-                                            <td>{{ $CourseData->major->faculty->university->name}}</td>
-                                        </tr>
-                                      
+                                            <th>MajorsOfCourse</th>
+                                            <td>
+                                                @foreach($CourseInfo as $course)
+                                                    <li>{{$course->major->name.' - '. $course->faculty->name }}</li>
+                                                    @endforeach
+                                              
+                                            </td>
+                                         </tr>                                
+                                                                       
                                        
                                     </thead>
                                    
@@ -40,6 +41,7 @@
                                         color: white;
                                     }
                                 </style>
+                                <a href="" class="btn btn-primary">Add to another major and faculty</a>
                             </div>
                         </div>
                     </div>
