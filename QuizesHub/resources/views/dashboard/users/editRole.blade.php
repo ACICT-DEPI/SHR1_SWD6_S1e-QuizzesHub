@@ -36,9 +36,10 @@
                                 <tr>
                                     <th>Image</th>
                                     <td>
-                                    @if(!empty($user->image_path) && file_exists(public_path('storage/' . $user->image_path)))
-                                    <img src="{{ asset('storage/' . $user->image_path) }}" width="100px" height="100px">
-                                    @endif
+                                        @if (!empty($user->image_path) && file_exists(public_path('storage/' . $user->image_path)))
+                                            <img src="{{ asset('storage/' . $user->image_path) }}" width="100px"
+                                                height="100px">
+                                        @endif
                                     </td>
                                 </tr>
                                 <tr>
@@ -47,49 +48,81 @@
                                 </tr>
                                 <tr>
                                     <th>Role</th>
-                                    <td>{{ $user->role }}</td>
+                                    <td>{{ $user->role }} </td>
                                 </tr>
                                 <tr>
                                     <th>University</th>
-                                    @if(!empty($user->University))
-                                    <td>{{ $user->University->name }}</td>
+                                    @if (!empty($user->University))
+                                        <td>{{ $user->University->name }}</td>
                                     @else
-                                    <td>Not Set</td>
+                                        <td>Not Set</td>
                                     @endif
 
                                 </tr>
                                 <tr>
                                     <th>faculty</th>
-                                    @if(!empty($user->faculty))
-                                    <td>{{ $user->faculty->name }}</td>
+                                    @if (!empty($user->faculty))
+                                        <td>{{ $user->faculty->name }}</td>
                                     @else
-                                    <td>Not Set</td>
+                                        <td>Not Set</td>
                                     @endif
                                 </tr>
                                 <tr>
                                     <th>Major</th>
-                                    @if(!empty($user->major))
-                                    <td>{{ $user->major->name }}</td>
+                                    @if (!empty($user->major))
+                                        <td>{{ $user->major->name }}</td>
                                     @else
-                                    <td>Not Set</td>
+                                        <td>Not Set</td>
                                     @endif
                                 </tr>
                                 <tr>
                                     <th>Level</th>
-                                    @if(!empty($user->level))
-                                    <td>{{ $user->level->name }}</td>
+                                    @if (!empty($user->level))
+                                        <td>{{ $user->level->name }}</td>
                                     @else
-                                    <td>Not Set</td>
+                                        <td>Not Set</td>
                                     @endif
                                 </tr>
                             </thead>
 
                         </table>
+                        <div class="card-footer">
+                            <form method="POST" action="{{ route('admin.users.updateRole', $user->id) }}"
+                                style="display:inline">
+                                @csrf
+                                @method('put')
+
+                                <div class="form-group row">
+                                    <label class="col-sm-3 text-end control-label col-form-label">Role</label>
+                                    <div class="col-md-9">
+                                        <div class="form-check">
+                                            <input type="radio" class="form-check-input " id="user" name="role"
+                                                value="user" @if($user->role == 'user') checked @endif/>
+                                            <label class="form-check-label mb-0" for="user">user</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input type="radio" class="form-check-input" id="admin" name="role"
+                                                value="admin" @if($user->role == 'admin') checked @endif/>
+                                            <label class="form-check-label mb-0" for="admin">admin</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="btn btn-success btn-sm" id="submit"
+                                    style="text-align: center">
+                                    <i class="fa fa-dot-circle-o"></i> Update User
+                                </button>
+
+                            </form>
+
+
+                        </div>
                     </div>
                 </div>
             </div>
-
-
         </div>
+
+
+    </div>
     </div><!-- .animated -->
 @endsection

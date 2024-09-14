@@ -164,4 +164,21 @@ class UserController extends Controller
         $user->forceDelete();
         return redirect()->back()->with('msg', 'User deleted permanently');
     }
+
+    public function editRole(string $id)
+    {
+        $user = User::findOrFail($id);
+        return view('dashboard.users.editRole', compact('user'));
+    }
+
+    public function updateRole(Request $request, string $id)
+    {
+        // return $request->all();
+        $user = User::findOrFail($id);
+        $user->update([
+            'role' => $request->role,
+        ]);
+        return redirect()->back()->with('msg', 'Role updated successfully');
+    }
+
 }
