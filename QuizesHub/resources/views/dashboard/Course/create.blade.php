@@ -32,9 +32,40 @@
                                     @enderror
                                 </div>
                             </div>
-                            @php
+                            <!-- @php
                                 $majorId = request('major_id');
-                            @endphp
+                            @endphp -->
+
+                            <div class="form-group">
+                                <label class=" form-control-label" for="code">Course_Code</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="menu-icon fa fa-code"></i></div>
+                                    <input type="text" id="code" value="{{ old('code') }}"
+                                        class="form-control @error('code') is-invalid @enderror" name="code">
+                                    @error('code')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+
+                            
+
+                            <div class="form-group">
+                                <label class=" form-control-label" for="degree">Degree</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="menu-icon fa fa-certificate"></i></div>
+                                    <input type="text" id="degree" value="{{ old('degree') }}"
+                                        class="form-control @error('degree') is-invalid @enderror" name="degree">
+                                    @error('degree')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
 
 
                             <div class="form-group">
@@ -55,6 +86,7 @@
                                     @enderror
                                 </div>
                             </div>
+
 
 
 

@@ -21,40 +21,56 @@ class CourseRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
-
-    public function rules(): array
+    public function uniqueCompositeRule()
+    {
+        return Rule::unique('courses', 'code');
+    }
+    public function onCreate(): array
     {
         return [
-
+            
             'name' => ['required', 'string', 'unique:courses,name'],
             'code' => ['required', 'string', 'unique:courses,code', $this->uniqueCompositeRule()],
-
-
+            'degree'=>['required', 'integer'],
+            'major_id' => ['required'],
+            'faculty_id' => ['required'],
         ];
     }
 
-    private function uniqueCompositeRule()
+    public function onUpdate(): array
     {
-        return function ($attribute, $value, $fail) {
-            $exists = Course::where('name', $this->input('name'))
-                               ->where('code', $this->input('code'))
-                               ->exists();
-            if ($exists) {
-                $fail('Course already exists');
-            }
-        };
+        return [
+            'name' => ['required', 'string', 'max:255', Rule::unique('courses', 'name')->ignore($this->course), $this->uniqueCompositeRule()],
+            'code' => ['required', 'string', 'max:255', Rule::unique('courses', 'code')->ignore($this->course)],
+            'degree' => ['required','integer'],
+            'major_id' => ['required'],
+            'faculty_id' => ['required'],
+        ];
     }
+
+    public function rules(): array
+    {
+        if ($this->isMethod('put')) {
+            return $this->onUpdate();
+        }
+
+        return $this->onCreate();
+    }
+
+   
 
     public function messages(): array
     {
         return [
-            'name.required' => 'Please enter name',
-            'name.string' => 'Invalid name',
-
-            'name.unique' => 'Course already exists',
-
-
-
+            'name.required' => 'Please enter a name.',
+            'name.string' => 'The name must be a valid string.',
+            'name.unique' => 'A course with this name already exists.',
+            'code.required' => 'Please enter a code.',
+            'code.unique' => 'A course with this code already exists.',
+            'degree.required' => 'Please enter a degree.',
+            'major_id.required' => 'Please select a major.',
+            'faculty_id.required' => 'Please select a faculty.',
         ];
     }
 }
+
