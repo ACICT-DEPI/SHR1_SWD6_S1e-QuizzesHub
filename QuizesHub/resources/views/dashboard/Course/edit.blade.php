@@ -37,6 +37,35 @@
                                    </div>
 
 
+                                   <div class="form-group">
+                                    <label class=" form-control-label" for="code">Code</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="menu-icon fa fa-code"></i></div>
+                                        <input type="text" id="code" value="{{$CourseData->code}}" class="form-control @error('code') is-invalid @enderror" name="code">
+                                          @error('code')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                    </div>
+                                   </div>
+
+
+                                   <div class="form-group">
+                                    <label class=" form-control-label" for="degree">Degree</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="menu-icon fa fa-code"></i></div>
+                                        <input type="text" id="degree" value="{{$CourseInfo[0]->degree}}" class="form-control @error('degree') is-invalid @enderror" name="degree">
+                                          @error('degree')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                    </div>
+                                   </div>
+
+
+
                                   
                                 
 

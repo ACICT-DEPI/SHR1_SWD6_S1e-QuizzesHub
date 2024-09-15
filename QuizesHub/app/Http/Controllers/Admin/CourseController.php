@@ -8,6 +8,7 @@ use App\Models\Admin\Course;
 use App\Http\Requests\Admin\CourseRequest;
 use App\Models\Admin\faculty;
 use App\Models\Admin\major;
+use App\Models\Admin\CourseFacultyMajor;
 
 
 
@@ -15,7 +16,7 @@ class CourseController extends Controller
 {
     public function index()
     {
-        $CourseData = Course::with('major','faculty')->get();
+        $CourseData = Course::get();
 
         return view('dashboard.course.index',compact('CourseData'));
 
@@ -31,13 +32,19 @@ class CourseController extends Controller
     }
     public function store(CourseRequest $request)
     {
-
+            
         $validatedData=$request->validated();
+      
         course::create([
             'name'=>$request->name,
+            'code'=>$request->code,
+        ]);
+        $Course_id=course::where('name',$request->name)->first()->id;
+        CourseFacultyMajor::create([
+            'course_id'=>$Course_id,
             'major_id'=>$request->major_id,
             'faculty_id'=>$request->faculty_id,
-
+            'degree'=>$request->degree,
         ]);
          return redirect()->back()->with('messege','Course added successfully..');
 
@@ -45,8 +52,8 @@ class CourseController extends Controller
     public function show(string $id)
     {
         $CourseData=course::findorfail($id);
-
-         return view('dashboard.course.show',compact('CourseData'));
+         $CourseInfo=CourseFacultyMajor::where('course_id',$id)->get();
+         return view('dashboard.course.show',compact('CourseData','CourseInfo'));
 
     }
     public function edit(string $id)
@@ -54,15 +61,23 @@ class CourseController extends Controller
        $CourseData=course::findorfail($id);
        $AllMajors=major::select('id','name')->distinct()->get();
        $AllFaculties=faculty::select('id','name')->distinct()->get();
-        return view('dashboard.course.edit',compact('CourseData','AllMajors','AllFaculties'));
+       $CourseInfo=CourseFacultyMajor::where('course_id',$id)->get();
+      
+        return view('dashboard.course.edit',compact('CourseData','AllMajors','AllFaculties','CourseInfo'));
 
     }
     public function update(CourseRequest $request, string $id)
     {
 
-        $request->validated();
+         $request->validated();
+    
         course::findorfail($id)->update([
             'name'=>$request->name,
+            'code'=>$request->code,
+        ]);
+        
+        CourseFacultyMajor::where('course_id',$id)->update([
+            'course_id'=>$id,
             'major_id'=>$request->major_id,
             'faculty_id'=>$request->faculty_id,
         ]);
