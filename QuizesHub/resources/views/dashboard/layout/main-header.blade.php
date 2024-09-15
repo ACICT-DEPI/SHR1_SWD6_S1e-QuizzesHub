@@ -1,9 +1,9 @@
-@if(empty(Auth::user()->role) || Auth::user()->role != 'admin' )
+{{-- @if(empty(Auth::user()->role) || Auth::user()->role != 'admin' )
     @php
         header("Location: " . URL::to('/login'), true, 302);
         exit();
     @endphp
-@endif
+@endif --}}
 
 <div class="header-menu">
     <div class="col-sm-7">
@@ -26,16 +26,18 @@
     <div class="col-sm-5">
         <div class="user-area dropdown float-right">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <img class="user-avatar rounded-circle" src="images/admin.jpg" alt="User Avatar">
+                @if(!empty(Auth::user()->image_path) && file_exists('storage/'.Auth::user()->image_path))
+                    <img class="user-avatar rounded-circle" src="{{ asset('storage/'.Auth::user()->image_path) }}" alt="User Avatar">
+                @else
+                    <img class="user-avatar rounded-circle" src="{{ asset('dashboard/assets/images/default.jpg') }}" alt="User Avatar">
+                @endif
+                {{-- <img class="user-avatar rounded-circle" src="" alt="User Avatar"> --}}
             </a>
 
             <div class="user-menu dropdown-menu">
-                <a class="nav-link" href="#"><i class="fa fa-user"></i>{{ Auth::user()->fname }}</a>
+                <a class="nav-link" href="#"><i class="fa fa-user"></i> {{ Auth::user()->fname }}</a>
+                <a class="nav-link" href="{{ route('logout') }}"><i class="fa fa-power-off"></i> Logout</a>
 
-                <form class="dropdown-item" action="{{ route('logout') }}" method="POST">
-                    @csrf
-                    <button type="submit" ><span class="">Logout</span></button>
-                  </form>
             </div>
         </div>
 

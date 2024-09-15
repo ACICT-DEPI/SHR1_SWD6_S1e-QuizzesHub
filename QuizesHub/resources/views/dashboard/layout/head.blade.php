@@ -7,10 +7,10 @@
     <link rel="apple-touch-icon" href="apple-icon.png">
     <link rel="shortcut icon" href="{{ asset('exam.ico') }}">
 
-    <link rel="stylesheet" href="{{ asset('dashboard/assets') }}/vendors/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{{ asset('dashboard/assets') }}/vendors/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="{{ asset('dashboard/assets') }}/vendors/themify-icons/css/themify-icons.css">
-    <link rel="stylesheet" href="{{ asset('dashboard/assets') }}/vendors/selectFX/css/cs-skin-elastic.css">
+    <link rel="stylesheet" href="{{ asset('dashboard/assets') }}/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ asset('dashboard/assets') }}/css/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{{ asset('dashboard/assets') }}/css/themify-icons/css/themify-icons.css">
+    <link rel="stylesheet" href="{{ asset('dashboard/assets') }}/css/selectFX/css/cs-skin-elastic.css">
 
 
     <link rel="stylesheet" href="{{ asset('dashboard/assets') }}/css/style.css">

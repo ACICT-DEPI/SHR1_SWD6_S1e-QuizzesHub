@@ -109,8 +109,8 @@
                                         </span>
                                     @enderror
                                 </div>
-                                @if (!@empty($user->image_path))
-                                    <img src="{{asset('storage/'.$user->image_path)}}" width="70" height="70">
+                                @if(!empty($user->image_path) && file_exists(public_path('storage/' . $user->image_path)))
+                                <img src="{{ asset('storage/' . $user->image_path) }}" width="100px" height="100px">
                                 @endif
                             </div>
                             <div class="form-group row">
