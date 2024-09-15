@@ -70,6 +70,10 @@ class UserController extends Controller
     public function show(string $id)
     {
         $user = User::findOrFail($id);
+        if($user->role == 'owner' && Auth::user()->role != 'owner'){
+            return redirect()->back()->with('msg', 'You are not allowed to access this page');
+        }
+        $user = User::findOrFail($id);
         return view('dashboard.users.show', compact('user'));
     }
 
@@ -80,7 +84,7 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
         if($user->role == 'owner' && Auth::user()->role != 'owner'){
-            return redirect()->back()->with('msg', 'You can not edit admin');
+            return redirect()->back()->with('msg', 'You are not allowed to access this page');
         }
         $universities = University::get();
         $faculties = Faculty::get();
@@ -140,6 +144,10 @@ class UserController extends Controller
     public function destroy(string $id)
     {
         $user = User::findOrFail($id);
+        $user = User::findOrFail($id);
+        if($user->role == 'owner' && Auth::user()->role != 'owner'){
+            return redirect()->back()->with('msg', 'You are not allowed to access this page');
+        }
         $user->delete();
         return redirect()->back()->with('msg', 'User deleted successfully');
     }
