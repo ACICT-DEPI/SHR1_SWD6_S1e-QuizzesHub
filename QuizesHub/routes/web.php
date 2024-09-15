@@ -46,6 +46,7 @@ Route::middleware(['auth','IsAdmin'])->prefix('admin')->name('admin.')->group(fu
     Route::get('/courses/archive', [CourseController::class, 'archive'])->name('courses.archive');
     Route::post('/courses/{course}/restore', [CourseController::class, 'restore'])->name('courses.restore')->middleware('IsOwner');
     Route::delete('/courses/{course}/forceDelete', [CourseController::class, 'forceDelete'])->name('courses.forceDelete')->middleware('IsOwner');
+    Route::post('/courses/{course}/addMajorsAndFaculties', [CourseController::class, 'addMajorsAndFaculties'])->name('courses.addMajorsAndFaculties');
     Route::resource('/courses', CourseController::class);
 
     Route::get('/levels/archive', [LevelController::class, 'archive'])->name('levels.archive');

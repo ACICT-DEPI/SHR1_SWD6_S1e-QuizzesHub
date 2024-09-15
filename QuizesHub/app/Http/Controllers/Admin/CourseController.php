@@ -12,6 +12,7 @@ use App\Models\Admin\CourseFacultyMajor;
 
 
 
+
 class CourseController extends Controller
 {
     public function index()
@@ -40,30 +41,34 @@ class CourseController extends Controller
             'code'=>$request->code,
         ]);
         $Course_id=course::where('name',$request->name)->first()->id;
-        CourseFacultyMajor::create([
-            'course_id'=>$Course_id,
-            'major_id'=>$request->major_id,
-            'faculty_id'=>$request->faculty_id,
-            'degree'=>$request->degree,
-        ]);
+        $CourseData=course::findorfail($Course_id);
+        $CourseData->majors()->syncWithoutDetaching($request->major_id);
+        $CourseData->faculties()->syncWithoutDetaching($request->faculty_id);
          return redirect()->back()->with('messege','Course added successfully..');
 
     }
     public function show(string $id)
     {
         $CourseData=course::findorfail($id);
-         $CourseInfo=CourseFacultyMajor::where('course_id',$id)->get();
-         return view('dashboard.course.show',compact('CourseData','CourseInfo'));
+        $majors=major::get();
+        $fs=faculty::get();
+
+     $faculties=[];
+     foreach($CourseData->majors as $major){
+        $faculty=faculty::where('id',$major->pivot->faculty_id)->first();
+        $faculties[$CourseData->id.'-'.$major->id.'-'.$major->pivot->faculty_id]=$faculty->name;
+     }
+
+      return view('dashboard.course.show',compact('CourseData','majors','fs','faculties'));
 
     }
     public function edit(string $id)
     {
        $CourseData=course::findorfail($id);
-       $AllMajors=major::select('id','name')->distinct()->get();
-       $AllFaculties=faculty::select('id','name')->distinct()->get();
-       $CourseInfo=CourseFacultyMajor::where('course_id',$id)->get();
+     
+    
       
-        return view('dashboard.course.edit',compact('CourseData','AllMajors','AllFaculties','CourseInfo'));
+        return view('dashboard.course.edit',compact('CourseData'));
 
     }
     public function update(CourseRequest $request, string $id)
@@ -74,12 +79,6 @@ class CourseController extends Controller
         course::findorfail($id)->update([
             'name'=>$request->name,
             'code'=>$request->code,
-        ]);
-        
-        CourseFacultyMajor::where('course_id',$id)->update([
-            'course_id'=>$id,
-            'major_id'=>$request->major_id,
-            'faculty_id'=>$request->faculty_id,
         ]);
        return redirect()->back()->with('messege','Course updated successfully..');
 
@@ -104,9 +103,18 @@ return redirect()->back()->with('messege','Course deleted successfully..');
     }
     public function restore(string $id)
     {
+       
         course::onlyTrashed()->findorfail($id)->restore();
         return redirect()->back()->with('messege','Course restored successfully..');
-        return "restore";
+        
+    }
+
+    public function addMajorsAndFaculties(Request $request,string $id){
+        $course=course::findorfail($id);
+        return $request->validated();
+       $course->majors()->syncWithoutDetaching($request->major);
+        $course->faculties()->syncWithoutDetaching($request->faculty);
+      return redirect()->back()->with('messege','Course Added successfully..'); 
     }
 
 }

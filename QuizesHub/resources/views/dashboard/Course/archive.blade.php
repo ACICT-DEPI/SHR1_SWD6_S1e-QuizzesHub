@@ -26,29 +26,26 @@
                                         <tr>
 
                                             <th>Course</th>
-                                            <th>Major</th>
-                                            <th>Faculty</th>
-                                            <th>Action</th>
+                                            <th>Code</th>
                                             <th ></th>
 
                                         </tr>
                                     </thead>
                                     <tbody>
-                         @foreach ($CourseData as $Course)
-
+                         
+                                    @foreach ($CourseData as $Course)
                      <tr>
+                     
                           <td>{{$Course->name}}</td>
-                          <td>{{$Course->major->name}}</td>
-                        <td>{{$Course->faculty->name}}</td>
-                         <td>{{$Course->code}}</td>
+                          <td>{{$Course->code}}</td>
                           <td>
-                          <form method="POST" action="{{route('admin.courses.restore',$Course->id)}}" style="display:inline">
+                          <form method="post" action="{{route('admin.courses.restore',$Course->id)}}" style="display:inline">
                               @csrf
 
                               <input type="submit" id="restore"  class="btn btn-success" onclick="return confirm('Are you sure?')" value="ReStore">
 
                             </form>
-                            <form method="POST" action="{{route('admin.courses.forceDelete',$Course->id)}}" style="display:inline">
+                            <form method="post" action="{{route('admin.courses.forceDelete',$Course->id)}}" style="display:inline">
                               @csrf
                               @method('DELETE')
                               <input type="submit" id="delete"  class="btn btn-danger" onclick="return confirm('Are you sure?')" value="Delete">
@@ -61,6 +58,7 @@
 
                         </td>
                                         </tr>
+
                                         @endforeach
 
                                     </tbody>
