@@ -11,6 +11,7 @@ use App\Models\Admin\Faculty;
 use App\Models\Admin\Major;
 use App\Models\Admin\Level;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -78,6 +79,9 @@ class UserController extends Controller
     public function edit(string $id)
     {
         $user = User::findOrFail($id);
+        if($user->role == 'owner' && Auth::user()->role != 'owner'){
+            return redirect()->back()->with('msg', 'You can not edit admin');
+        }
         $universities = University::get();
         $faculties = Faculty::get();
         $majors = Major::get();
