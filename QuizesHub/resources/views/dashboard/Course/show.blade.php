@@ -3,6 +3,14 @@
 @section('content')
 
 <div class="animated fadeIn">
+<div class="row">
+            <div class="col-12">
+            <div class="card">
+              @if(Session::has('messege'))
+              <alert class="alert alert-success">
+                {{Session::get('messege')}}
+              </alert>
+              @endif
                 <div class="row">
 
                     <div class="col-md-12">
@@ -18,18 +26,28 @@
                                             <td>{{$CourseData->name}}</td>
                                             </tr>
                                         <tr>
-                                            <th>Major_Name</th>
-                                            <td>{{ $CourseData->major->name}}</td>
+                                            <th>Code</th>
+                                            <td>{{$CourseData->code}}</td>
                                         </tr>
+
                                         <tr>
-                                            <th>Faculty_Name</th>
-                                            <td>{{ $CourseData->major->faculty->name}}</td>
-                                        </tr>
-                                        <tr>
-                                            <th>University_Name</th>
-                                            <td>{{ $CourseData->major->faculty->university->name}}</td>
-                                        </tr>
-                                      
+                                            <th>Majors Of Course</th>
+                                            <td>
+                                                @if(count($CourseData->majors)>0)
+                                                <ul style="padding-left:10px">
+                                            @foreach($CourseData->majors as $major )
+                                              
+                                            <li>{{$faculties[$CourseData->id.'-'.$major->id.'-'.$major->pivot->faculty_id]." - ".$major->name ." - ". $major->pivot->degree}}</li>
+                                                
+                                            @endforeach
+                                            @else 
+                                            <span class="badge badge-danger">No majors Or faculties</span>
+                                            @endif
+</ul>
+                                              
+                                            </td>
+                                         </tr>                                
+                                                                       
                                        
                                     </thead>
                                    
@@ -40,6 +58,49 @@
                                         color: white;
                                     }
                                 </style>
+                                <!-- <a href="" class="btn btn-primary">Add to another major and faculty</a> -->
+                                 <form method="post" action="{{ route('admin.courses.addMajorsAndFaculties',$CourseData->id) }}" enctype="multipart/form-data">
+                                 @csrf
+
+                                 
+                                 
+                                 <div class="form-group">
+                                    <div>
+                                    <label
+                                for="major"
+                                class="inline control-label col-form-label"
+                                style="color:rgb(0, 123, 255)"
+                                >Select majors</label>
+                                 <select name="major" id="major" class="d-inline  form-control" multiple size="2" style="height: 80px; " >
+                                 @foreach($majors as $major) 
+                                 <option value="{{$major->id}}">{{ $major->name}}</option>
+                                 @endforeach
+                                </select>
+                            </div>
+
+
+                                   <div>
+                                   <label
+                                for="faculty"
+                                class="inline control-label col-form-label"
+                                style="color:rgb(0, 123, 255)"
+                                >Select faculty</label>
+                            <select name="faculty" id="faculty" class="d-inline  form-control" multiple size="2" style="height: 80px">
+                            @foreach($fs as $faculty) 
+                                 <option value="{{$faculty->id}}">{{ $faculty->name}}</option>
+                                 @endforeach
+                                </select>
+                            </div>
+
+
+
+                                <div class="card-footer">
+                            <button type="submit" class="btn btn-primary btn-sm" id="submit">
+                                <i class="fa fa-dot-circle-o"></i> Add Course to Major
+                            </button>
+
+                        </div>
+                                </form>
                             </div>
                         </div>
                     </div>

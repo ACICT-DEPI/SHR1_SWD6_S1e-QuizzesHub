@@ -37,47 +37,21 @@
                                    </div>
 
 
-                                  
+                                   <div class="form-group">
+                                    <label class=" form-control-label" for="code">Code</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="menu-icon fa fa-code"></i></div>
+                                        <input type="text" id="code" value="{{$CourseData->code}}" class="form-control @error('code') is-invalid @enderror" name="code">
+                                          @error('code')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                    </div>
+                                   </div>
+
+
                                 
-
-                                  
-                                    <div class="form-group">
-                                    <label class=" form-control-label" for="major_id">Major_Name</label>
-                                    <div class="input-group">
-                                        <div class="input-group-addon"><i class="fa fa-laptop"></i></div>
-                                        <select class="form-control @error('major_id') is-invalid @enderror" name="major_id" id="major_id" value="{{$CourseData->major_id}}">
-                                      
-                                        @foreach($AllMajors as $major)
-                                            <option  value="{{$major->id}}" @if($CourseData->major_id == $major->id) selected @endif >{{$major->name}}</option>
-                                            @endforeach
-                                          </select>
-                                          @error('major_id')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                              </div>
-                            </div>
-                            
-
-
-                            <div class="form-group">
-                                    <label class=" form-control-label" for="faculty_id">Faculty_Name</label>
-                                    <div class="input-group">
-                                        <div class="input-group-addon"><i class="fa fa-bank"></i></div>
-                                        <select class="form-control @error('faculty_id') is-invalid @enderror" name="faculty_id" id="faculty_id">
-                                       
-                                        @foreach($AllFaculties as $Faculty)
-                                            <option value="{{$Faculty->id}}" @if($Faculty->id==$CourseData->faculty_id ) selected @endif >{{$Faculty->name}}</option>
-                                            @endforeach
-                                          </select>
-                                          @error('faculty_id')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                              </div>
-                            </div>
                            </div>
 
                                <div class="card-footer">

@@ -11,6 +11,7 @@ use App\Models\Admin\Faculty;
 use App\Models\Admin\Major;
 use App\Models\Admin\Level;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -69,6 +70,10 @@ class UserController extends Controller
     public function show(string $id)
     {
         $user = User::findOrFail($id);
+        if($user->role == 'owner' && Auth::user()->role != 'owner'){
+            return redirect()->back()->with('msg', 'You are not allowed to access this page');
+        }
+        $user = User::findOrFail($id);
         return view('dashboard.users.show', compact('user'));
     }
 
@@ -78,6 +83,9 @@ class UserController extends Controller
     public function edit(string $id)
     {
         $user = User::findOrFail($id);
+        if($user->role == 'owner' && Auth::user()->role != 'owner'){
+            return redirect()->back()->with('msg', 'You are not allowed to access this page');
+        }
         $universities = University::get();
         $faculties = Faculty::get();
         $majors = Major::get();
@@ -91,6 +99,7 @@ class UserController extends Controller
     public function update(UserRequest $request, string $id)
     {
         $user = User::findOrFail($id);
+        // return $request->all();
         $file = $request->file('image_path');
         if( !empty($student->image_path) && !empty($file) && Storage::exists($user->image_path)  ){
             Storage::delete($user->image_path);
@@ -107,12 +116,17 @@ class UserController extends Controller
         }else{
             $photo = $user->photo;
         }
+        if(empty($request->password)){
+            $password= $user->password;
+        }else{
+            $password= bcrypt($request->password);
+        }
         $user->update([
             'fname' => $request->fname,
             'lname' => $request->lname,
             'username' => $request->username,
             'email' => $request->email,
-            'password' => $request->password,
+            'password' => $password,
             'phone' => $request->phone,
             'image_path' => $photo,
             'gender' => $request->gender,
@@ -130,6 +144,10 @@ class UserController extends Controller
     public function destroy(string $id)
     {
         $user = User::findOrFail($id);
+        $user = User::findOrFail($id);
+        if($user->role == 'owner' && Auth::user()->role != 'owner'){
+            return redirect()->back()->with('msg', 'You are not allowed to access this page');
+        }
         $user->delete();
         return redirect()->back()->with('msg', 'User deleted successfully');
     }
@@ -158,4 +176,21 @@ class UserController extends Controller
         $user->forceDelete();
         return redirect()->back()->with('msg', 'User deleted permanently');
     }
+
+    public function editRole(string $id)
+    {
+        $user = User::findOrFail($id);
+        return view('dashboard.users.editRole', compact('user'));
+    }
+
+    public function updateRole(Request $request, string $id)
+    {
+        // return $request->all();
+        $user = User::findOrFail($id);
+        $user->update([
+            'role' => $request->role,
+        ]);
+        return redirect()->back()->with('msg', 'Role updated successfully');
+    }
+
 }

@@ -20,15 +20,32 @@ class LevelRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
+    public function onCreate(){
+        return [
+            
+            'name' => ['required', 'string', 'max:255', 'unique:levels,name'],
+            'description' => ['required', 'string', 'max:255']
+        ];
+
+    }
+    public function onUpdate(){
+        return [
+            
+            'name' => ['required', 'string', 'max:255', Rule::unique('levels')->ignore($this->level)],
+            'description' => ['required', 'string', 'max:255']
+        ];
+        
+    }
  
     
     public function rules(): array
     {
-        return [
-            
-            'name' => ['required', 'string', 'max:255', 'unique:levels,name'],
-            'description' => ['required', 'string', 'max:255'],
-        ];
+        if($this->ismethod('put')){
+            return $this->onUpdate();
+        }else{
+            return $this->onCreate();
+        }
+       
     }
     public function messages(): array
     {

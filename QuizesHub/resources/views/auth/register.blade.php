@@ -64,6 +64,15 @@
         "
       >
         <div class="auth-box border-top border-secondary">
+            @if (!empty($errors->all()))
+            <div class="alert alert-danger" role="alert">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+            @endif
           <div id="loginform">
             <div class="text-center pt-3 pb-3">
             </div>

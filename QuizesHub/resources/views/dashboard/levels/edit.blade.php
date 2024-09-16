@@ -15,6 +15,7 @@
 <form class="form-horizontal" action="{{route('admin.levels.update',$LevelData->id)}}" enctype="multipart/form-data" method="post" >
    @csrf
    @method('PUT')
+ 
    
                      <div class="card-body card-block">
 
@@ -24,7 +25,7 @@
                                     <label class=" form-control-label" for="name">Level_Name</label>
                                     <div class="input-group">
                                         <div class="input-group-addon"><i class="menu-icon fa fa-book"></i></div>
-                                        <input type="text" id="name" value="{{$LevelData->name}}" class="form-control @error('name') is-invalid @enderror" name="name">
+                                        <input type="text" id="name" value="{{$LevelData->name}}" name="name" class="form-control @error('name') is-invalid @enderror" >
                                           @error('name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

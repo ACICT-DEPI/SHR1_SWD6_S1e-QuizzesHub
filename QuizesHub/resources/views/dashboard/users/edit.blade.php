@@ -109,8 +109,8 @@
                                         </span>
                                     @enderror
                                 </div>
-                                @if (!@empty($user->image_path))
-                                    <img src="{{asset('storage/'.$user->image_path)}}" width="70" height="70">
+                                @if(!empty($user->image_path) && file_exists(public_path('storage/' . $user->image_path)))
+                                <img src="{{ asset('storage/' . $user->image_path) }}" width="100px" height="100px">
                                 @endif
                             </div>
                             <div class="form-group row">
@@ -197,7 +197,7 @@
                                         id="major_id">
                                         <option value="">Select Major</option>
                                         @foreach ($majors as $major)
-                                            <option value="{{ $major->id }}" @selected($user->faculty_id == $major->id)>
+                                            <option value="{{ $major->id }}" @selected($user->major_id == $major->id)>
                                                 {{ $major->name }}</option>
                                         @endforeach
                                     </select>
@@ -217,7 +217,7 @@
                                         id="level_id">
                                         <option value="">Select Level</option>
                                         @foreach ($levels as $level)
-                                            <option value="{{ $level->id }}" @selected($user->faculty_id== $level->id)>
+                                            <option value="{{ $level->id }}" @selected($user->level_id== $level->id)>
                                                 {{ $level->name }}</option>
                                         @endforeach
                                     </select>

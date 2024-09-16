@@ -29,7 +29,7 @@ class LoginController extends Controller
         // $request->session()->regenerate();
         // return redirect()->route('site.index');
 
-        if (Auth::user()->role == 'admin') {
+        if (Auth::user()->role == 'admin' || Auth::user()->role == 'owner') {
             return redirect()->route('admin.home');
         } else {
             // return redirect()->route('site.index');

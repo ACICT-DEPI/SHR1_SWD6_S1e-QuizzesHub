@@ -8,6 +8,7 @@ use App\Models\Admin\level;
 use App\Http\Requests\Admin\LevelRequest;
 use App\Models\Admin\faculty;
 
+
 class LevelController extends Controller
 {
     public function index()
@@ -45,7 +46,7 @@ class LevelController extends Controller
     }
     public function update(LevelRequest $request, string $id)
     {
-       $request->validated();
+        $validatedData=$request->validated();
         level::findorfail($id)->update([
             'name'=>$request->name,
             'description'=>$request->description,

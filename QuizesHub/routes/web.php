@@ -21,17 +21,20 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/login',[LoginController::class, 'login'])->name('login');
-Route::post('/login',[LoginController::class, 'handleLogin'])->name('handleLogin');
-Route::post('/logout',[LoginController::class, 'logout'])->name('logout');
-Route::get('/register',[RegisterController::class, 'register'])->name('register');
-Route::post('/register',[RegisterController::class, 'handleRegister'])->name('handleRegister');
 
-Route::prefix('admin')->name('admin.')->group(function () {
+Route::middleware('guest')->group(function () {
+    Route::get('/login',[LoginController::class, 'login'])->name('login');
+    Route::post('/login',[LoginController::class, 'handleLogin'])->name('handleLogin');
+    Route::get('/logout',[LoginController::class, 'logout'])->name('logout')->withoutMiddleware('guest')->middleware('auth');
+    Route::get('/register',[RegisterController::class, 'register'])->name('register');
+    Route::post('/register',[RegisterController::class, 'handleRegister'])->name('handleRegister');
+});
+
+Route::middleware(['auth','IsAdmin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/home', HomeController::class)->name('home');
 
     Route::get('/exams/archive', [ExamController::class, 'archive'])->name('exams.archive');
-    Route::get('/exams/{restore}/restore', [ExamController::class, 'restore'])->name('exams.restore');
+    Route::get('/exams/{restore}/restore', [ExamController::class, 'restore'])->name('exams.restore')->middleware('IsOwner');
     Route::resource('/exams', ExamController::class);
 
     Route::resource('/questions', QuestionController::class);
@@ -41,19 +44,20 @@ Route::prefix('admin')->name('admin.')->group(function () {
     );
 
     Route::get('/courses/archive', [CourseController::class, 'archive'])->name('courses.archive');
-    Route::post('/courses/{course}/restore', [CourseController::class, 'restore'])->name('courses.restore');
-    Route::delete('/courses/{course}/forceDelete', [CourseController::class, 'forceDelete'])->name('courses.forceDelete');
+    Route::post('/courses/{course}/restore', [CourseController::class, 'restore'])->name('courses.restore')->middleware('IsOwner');
+    Route::delete('/courses/{course}/forceDelete', [CourseController::class, 'forceDelete'])->name('courses.forceDelete')->middleware('IsOwner');
+    Route::post('/courses/{course}/addMajorsAndFaculties', [CourseController::class, 'addMajorsAndFaculties'])->name('courses.addMajorsAndFaculties');
     Route::resource('/courses', CourseController::class);
 
     Route::get('/levels/archive', [LevelController::class, 'archive'])->name('levels.archive');
-    Route::post('/levels/{level}/restore', [LevelController::class, 'restore'])->name('levels.restore');
-    Route::delete('/levels/{level}/forceDelete', [LevelController::class, 'forceDelete'])->name('levels.forceDelete');
+    Route::post('/levels/{level}/restore', [LevelController::class, 'restore'])->name('levels.restore')->middleware('IsOwner');
+    Route::delete('/levels/{level}/forceDelete', [LevelController::class, 'forceDelete'])->name('levels.forceDelete')->middleware('IsOwner');
     Route::resource('/levels', LevelController::class);
 
     Route::resource('/universities', UniversityController::class)->where(['university' => '[0-9]+']);
     Route::get('/universities/archive', [UniversityController::class, 'archive'])->name('universities.archive');
-    Route::post('/universities/{university}/restore', [UniversityController::class, 'restore'])->name('universities.restore');
-    Route::delete('/universities/{university}/forceDelete', [UniversityController::class, 'forceDelete'])->name('universities.forceDelete');
+    Route::post('/universities/{university}/restore', [UniversityController::class, 'restore'])->name('universities.restore')->middleware('IsOwner');
+    Route::delete('/universities/{university}/forceDelete', [UniversityController::class, 'forceDelete'])->name('universities.forceDelete')->middleware('IsOwner');
 
     Route::get('/universities/{university}/faculties', [UniversityController::class, 'faculties'])->name('universities.faculties');
     Route::post('/universities/{university}/faculties', [UniversityController::class, 'addFaculties'])->name('universities.addFaculties');
@@ -61,8 +65,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
     Route::resource('/faculties', FacultyController::class)->where(['faculty' => '[0-9]+']);
     Route::get('/faculties/archive', [FacultyController::class, 'archive'])->name('faculties.archive');
-    Route::post('/faculties/{faculty}/restore', [FacultyController::class, 'restore'])->name('faculties.restore');
-    Route::delete('/faculties/{faculty}/forceDelete', [FacultyController::class, 'forceDelete'])->name('faculties.forceDelete');
+    Route::post('/faculties/{faculty}/restore', [FacultyController::class, 'restore'])->name('faculties.restore')->middleware('IsOwner');
+    Route::delete('/faculties/{faculty}/forceDelete', [FacultyController::class, 'forceDelete'])->name('faculties.forceDelete')->middleware('IsOwner');
 
     Route::get('/faculties/{faculty}/majors', [FacultyController::class, 'majors'])->name('faculties.majors');
     Route::post('/faculties/{faculty}/majors', [FacultyController::class, 'addMajors'])->name('faculties.addMajors');
@@ -70,10 +74,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
     Route::resource('/majors', MajorController::class)->where(['major' => '[0-9]+']);
     Route::get('/majors/archive', [MajorController::class, 'archive'])->name('majors.archive');
-    Route::post('/majors/{major}/restore', [MajorController::class, 'restore'])->name('majors.restore');
-    Route::delete('/majors/{major}/forceDelete', [MajorController::class, 'forceDelete'])->name('majors.forceDelete');
+    Route::post('/majors/{major}/restore', [MajorController::class, 'restore'])->name('majors.restore')->middleware('IsOwner');
+    Route::delete('/majors/{major}/forceDelete', [MajorController::class, 'forceDelete'])->name('majors.forceDelete')->middleware('IsOwner');
     Route::resource('/users', UserController::class)->where(['user' => '[0-9]+']);
     Route::get('/users/archive', [UserController::class, 'archive'])->name('users.archive');
-    Route::post('/users/{user}/restore', [UserController::class, 'restore'])->name('users.restore');
-    Route::delete('/users/{user}/forceDelete', [UserController::class, 'forceDelete'])->name('users.forceDelete');
+    Route::post('/users/{user}/restore', [UserController::class, 'restore'])->name('users.restore')->middleware('IsOwner');
+    Route::delete('/users/{user}/forceDelete', [UserController::class, 'forceDelete'])->name('users.forceDelete')->middleware('IsOwner');
+    Route::get('/users/{user}/editRole', [UserController::class, 'editRole'])->name('users.editRole')->middleware('IsOwner');
+    Route::put('/users/{user}/updateRole', [UserController::class, 'updateRole'])->name('users.updateRole')->middleware('IsOwner');
 });
