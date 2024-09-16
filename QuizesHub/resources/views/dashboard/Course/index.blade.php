@@ -47,7 +47,7 @@
                               </style>
                             </form>
 
-                            </form>
+                            
                           </td>
                                         </tr>
                                         @endforeach
@@ -60,7 +60,7 @@
 
 
                 </div>
-            </div><!-- .animated -->
+            </div>
             @section('styles')
     <link rel="stylesheet" href="{{ asset('dashboard/assets') }}/css/flag-icon-css/css/flag-icon.min.css">
     <link rel="stylesheet"
@@ -88,3 +88,4 @@
     <script src="{{ asset('dashboard/assets/js/init-scripts/data-table/datatables-init.js') }}"></script>
 @endsection
 @endsection
+

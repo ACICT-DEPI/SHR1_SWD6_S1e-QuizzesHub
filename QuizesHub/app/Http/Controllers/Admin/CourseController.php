@@ -106,19 +106,25 @@ return redirect()->back()->with('messege','Course deleted successfully..');
     }
 
     public function addMajorsAndFaculties(Request $request, string $id) {
-        $course = Course::findOrFail($id);
-        $faculty_id = $request->faculty;
-        $major_id = $request->major;
-        $degree = $request->degree;
+        $request->validate([
+            'faculty' => ['required'],
+            'degree' => 'required',
+        ]);
     
+        $course = Course::findOrFail($id);
+
+        $val=$request->faculty;
+        $Ids=explode('-',$val);
+        $major_id = $Ids[0];
+        $faculty_id = $Ids[1];
+        $degree = $request->degree;
         // Check if the same major in the same faculty already exists for the course
         $existing = $course->faculties()
             ->wherePivot('faculty_id', $faculty_id)
             ->wherePivot('major_id', $major_id)
             ->exists();
-    
-            
-        if ($existing==true) {
+
+        if ($existing) {
             // If the combination already exists, update it
             $course->faculties()->updateExistingPivot($faculty_id, [
                 'major_id' => $major_id,
