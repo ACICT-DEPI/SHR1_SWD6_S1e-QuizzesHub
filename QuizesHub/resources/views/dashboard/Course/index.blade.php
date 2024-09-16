@@ -34,7 +34,7 @@
                           <td>{{$Course->name}}</td>
                            <td>{{$Course->code}}</td> 
                           <td>
-                            <a href="{{route('admin.courses.show',$Course->id)}}" class="btn btn-success" >Show</a>
+                            <a href="{{route('admin.courses.show',$Course->id)}}" class="btn btn-success" >Config</a>
                             <a href="{{route('admin.courses.edit',$Course->id)}}" class="btn btn-primary">Edit</a>
                             <form method="POST" action="{{route('admin.courses.destroy',$Course->id)}}" style="display:inline">
                               @csrf

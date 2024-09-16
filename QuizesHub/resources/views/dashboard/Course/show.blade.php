@@ -2,16 +2,10 @@
 
 @section('content')
 
-<div class="animated fadeIn">
 <div class="row">
-            <div class="col-12">
-            <div class="card">
-              @if(Session::has('messege'))
-              <alert class="alert alert-success">
-                {{Session::get('messege')}}
-              </alert>
-              @endif
-                <div class="row">
+
+
+            
 
                     <div class="col-md-12">
                         <div class="card">
@@ -62,6 +56,21 @@
                                  <form method="post" action="{{ route('admin.courses.addMajorsAndFaculties',$CourseData->id) }}" enctype="multipart/form-data">
                                  @csrf
 
+
+                                 
+                                 <div>
+                                   <label
+                                for="faculty"
+                                class="inline control-label col-form-label"
+                                style="color:rgb(0, 123, 255)"
+                                >Select faculty</label>
+                            <select name="faculty" id="faculty" class="d-inline  form-control" multiple size="2" style="height: 80px">
+                            @foreach($fs as $faculty) 
+                                 <option value="{{$faculty->id}}">{{ $faculty->name}}</option>
+                                 @endforeach
+                                </select>
+                            </div>
+
                                  
                                  
                                  <div class="form-group">
@@ -79,18 +88,19 @@
                             </div>
 
 
-                                   <div>
+                            
+                            <div>
                                    <label
-                                for="faculty"
+                                for="degree"
                                 class="inline control-label col-form-label"
                                 style="color:rgb(0, 123, 255)"
-                                >Select faculty</label>
-                            <select name="faculty" id="faculty" class="d-inline  form-control" multiple size="2" style="height: 80px">
-                            @foreach($fs as $faculty) 
-                                 <option value="{{$faculty->id}}">{{ $faculty->name}}</option>
-                                 @endforeach
-                                </select>
+                                >Degree</label>
+                                <input type="text" class="form-control" name="degree" id="degree" placeholder="Degree (Max 300)">
+                                </div>
+                           
                             </div>
+
+
 
 
 
