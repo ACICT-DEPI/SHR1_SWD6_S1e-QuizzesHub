@@ -1,75 +1,73 @@
-
 @extends('dashboard.layout.master')
+
+@section('styles')
+    <link rel="stylesheet" href="{{ asset('dashboard/assets') }}/css/flag-icon-css/css/flag-icon.min.css">
+    <link rel="stylesheet" href="{{ asset('dashboard/assets') }}/css/datatables.net-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet"
+        href="{{ asset('dashboard/assets') }}/css/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css">
+@endsection
 
 @section('content')
 
-            <div class="animated fadeIn">
-                <div class="row">
+    <div class="animated fadeIn">
+        <div class="row">
 
-                    <div class="col-md-12">
-                        <div class="card">
-                            @if (Session::has('msg'))
+            <div class="col-md-12">
+                <div class="card">
+                    @if (Session::has('msg'))
                         <alert class="alert alert-success">
                             {{ Session::get('msg') }}
                         </alert>
                     @endif
-                            <div class="card-header">
-                                <strong class="card-title">Data Table</strong>
-                            </div>
-                            <div class="card-body">
-                                <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
-                                    <thead>
-                                        <tr>
-
-                                            <th>Course_Name</th>
-                                            <th>Code</th>
-                                            
-
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                         @foreach ($CourseData as $Course)
-
-                     <tr>
-                          <td>{{$Course->name}}</td>
-                           <td>{{$Course->code}}</td> 
-                          <td>
-                            <a href="{{route('admin.courses.show',$Course->id)}}" class="btn btn-success" >Config</a>
-                            <a href="{{route('admin.courses.edit',$Course->id)}}" class="btn btn-primary">Edit</a>
-                            <form method="POST" action="{{route('admin.courses.destroy',$Course->id)}}" style="display:inline">
-                              @csrf
-                              @method('delete')
-                              <input type="submit" id="delete"  class="btn btn-danger" onclick="return confirm('Are you sure?')" value="Delete">
-                              <style>
-                                #delete{
-                                  background-color:red;
-                                }
-                              </style>
-                            </form>
-
-                            
-                          </td>
-                                        </tr>
-                                        @endforeach
-
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+                    <div class="card-header">
+                        <strong class="card-title">Faculties Table</strong>
                     </div>
+                    <div class="card-body">
+                        <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Course_Name</th>
+                                    <th>Code</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($CourseData as $Course)
+                                    <tr>
+                                        <td>{{ $Course->name }}</td>
+                                        <td>{{ $Course->code }}</td>
+                                        <td>
+                                            <a href="{{ route('admin.courses.show', $Course->id) }}"
+                                                class="btn btn-success">Config</a>
+                                            <a href="{{ route('admin.courses.edit', $Course->id) }}"
+                                                class="btn btn-primary">Edit</a>
+                                            <form method="POST" action="{{ route('admin.courses.destroy', $Course->id) }}"
+                                                style="display:inline">
+                                                @csrf
+                                                @method('delete')
+                                                <input type="submit" id="delete" class="btn btn-danger"
+                                                    onclick="return confirm('Are you sure?')" value="Delete">
+
+                                            </form>
 
 
+                                        </td>
+                                    </tr>
+                                @endforeach
+
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
-            @section('styles')
-    <link rel="stylesheet" href="{{ asset('dashboard/assets') }}/css/flag-icon-css/css/flag-icon.min.css">
-    <link rel="stylesheet"
-        href="{{ asset('dashboard/assets') }}/css/datatables.net-bs4/css/dataTables.bootstrap4.min.css">
-    <link rel="stylesheet"
-        href="{{ asset('dashboard/assets') }}/css/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css">
+
+
+        </div>
+    </div><!-- .animated -->
+
+
 @endsection
 @section('scripts')
-
     <!-- DataTables JS -->
     <script src="{{ asset('dashboard/assets/js/datatables.net/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('dashboard/assets/js/datatables.net-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
@@ -87,5 +85,3 @@
     <!-- DataTables Initialization Script -->
     <script src="{{ asset('dashboard/assets/js/init-scripts/data-table/datatables-init.js') }}"></script>
 @endsection
-@endsection
-
