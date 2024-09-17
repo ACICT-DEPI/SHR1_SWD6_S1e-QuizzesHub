@@ -105,6 +105,7 @@ return redirect()->back()->with('messege','Course deleted successfully..');
 
     }
 
+
     public function addMajorsAndFaculties(Request $request, string $id) {
         $request->validate([
             'faculty' => ['required'],
@@ -139,6 +140,7 @@ return redirect()->back()->with('messege','Course deleted successfully..');
         }
 
         return redirect()->back()->with('message', 'Course updated successfully.');
+
     }
 
 

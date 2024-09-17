@@ -74,6 +74,7 @@
                             </div>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 
                                  <div class="form-group">
@@ -82,6 +83,13 @@
                                  <!-- <div >
                                   <div class="form-group" >
 >>>>>>> 80c76f72e04573387710769e46678eb3772ccc90
+=======
+
+                                 
+                                 <!-- <div >
+                                  <div class="form-group" >
+
+>>>>>>> c1e0bca5d28b063a591dbfe2544ee33cc1e1ab56
                                     <div>
                                     <label
                                 for="major"
@@ -105,6 +113,7 @@
                                 class="inline control-label col-form-label"
                                 style="color:rgb(0, 123, 255)"
 <<<<<<< HEAD
+<<<<<<< HEAD
                                 >Select faculty</label>
                             <select name="faculty[]" id="faculty" class="d-inline  form-control" multiple size="2" style="height: 80px">
                             @foreach($fs as $faculty)
@@ -112,11 +121,18 @@
                                  @endforeach
                                 </select>
 =======
+=======
+
+>>>>>>> c1e0bca5d28b063a591dbfe2544ee33cc1e1ab56
                                 >Degree</label>
                                 <input type="text" class="form-control" name="degree" id="degree" placeholder="Degree (Max 300)">
                                 </div>
                            
+<<<<<<< HEAD
 >>>>>>> 80c76f72e04573387710769e46678eb3772ccc90
+=======
+
+>>>>>>> c1e0bca5d28b063a591dbfe2544ee33cc1e1ab56
                             </div>
 
 
