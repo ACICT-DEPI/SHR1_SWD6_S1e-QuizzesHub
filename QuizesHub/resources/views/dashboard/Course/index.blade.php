@@ -34,7 +34,7 @@
                           <td>{{$Course->name}}</td>
                            <td>{{$Course->code}}</td> 
                           <td>
-                            <a href="{{route('admin.courses.show',$Course->id)}}" class="btn btn-success" >Show</a>
+                            <a href="{{route('admin.courses.show',$Course->id)}}" class="btn btn-success" >Config</a>
                             <a href="{{route('admin.courses.edit',$Course->id)}}" class="btn btn-primary">Edit</a>
                             <form method="POST" action="{{route('admin.courses.destroy',$Course->id)}}" style="display:inline">
                               @csrf
@@ -47,7 +47,7 @@
                               </style>
                             </form>
 
-                            </form>
+                            
                           </td>
                                         </tr>
                                         @endforeach
@@ -60,7 +60,7 @@
 
 
                 </div>
-            </div><!-- .animated -->
+            </div>
             @section('styles')
     <link rel="stylesheet" href="{{ asset('dashboard/assets') }}/css/flag-icon-css/css/flag-icon.min.css">
     <link rel="stylesheet"
@@ -88,3 +88,4 @@
     <script src="{{ asset('dashboard/assets/js/init-scripts/data-table/datatables-init.js') }}"></script>
 @endsection
 @endsection
+

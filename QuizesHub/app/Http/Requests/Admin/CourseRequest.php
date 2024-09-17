@@ -31,9 +31,7 @@ class CourseRequest extends FormRequest
             
             'name' => ['required', 'string', 'unique:courses,name'],
             'code' => ['required', 'string', 'unique:courses,code', $this->uniqueCompositeRule()],
-            'degree'=>['required', 'integer'],
-            'major_id' => ['required'],
-            'faculty_id' => ['required'],
+            
         ];
     }
 
@@ -42,9 +40,7 @@ class CourseRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'max:255', Rule::unique('courses', 'name')->ignore($this->course), $this->uniqueCompositeRule()],
             'code' => ['required', 'string', 'max:255', Rule::unique('courses', 'code')->ignore($this->course)],
-            'degree' => ['required','integer'],
-            'major_id' => ['required'],
-            'faculty_id' => ['required'],
+            
         ];
     }
 
