@@ -33,9 +33,9 @@ class CourseController extends Controller
     }
     public function store(CourseRequest $request)
     {
-            
+
         $validatedData=$request->validated();
-      
+
         course::create([
             'name'=>$request->name,
             'code'=>$request->code,
@@ -61,9 +61,9 @@ class CourseController extends Controller
     public function edit(string $id)
     {
        $CourseData=course::findorfail($id);
-     
-    
-      
+
+
+
         return view('dashboard.course.edit',compact('CourseData'));
 
     }
@@ -71,7 +71,7 @@ class CourseController extends Controller
     {
 
          $request->validated();
-    
+
         course::findorfail($id)->update([
             'name'=>$request->name,
             'code'=>$request->code,
@@ -99,11 +99,12 @@ return redirect()->back()->with('messege','Course deleted successfully..');
     }
     public function restore(string $id)
     {
-       
+
         course::onlyTrashed()->findorfail($id)->restore();
         return redirect()->back()->with('messege','Course restored successfully..');
-        
+      
     }
+
 
     public function addMajorsAndFaculties(Request $request, string $id) {
         $request->validate([
@@ -139,6 +140,7 @@ return redirect()->back()->with('messege','Course deleted successfully..');
         }
     
         return redirect()->back()->with('message', 'Course updated successfully.');
+
     }
     
     

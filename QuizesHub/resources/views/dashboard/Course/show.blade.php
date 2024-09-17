@@ -30,21 +30,21 @@
                                                 @if(count($CourseData->majors)>0)
                                                 <ul style="padding-left:10px">
                                             @foreach($CourseData->majors as $major )
-                                              
+
                                             <li>{{$faculties[$CourseData->id.'-'.$major->id.'-'.$major->pivot->faculty_id]." - ".$major->name ." - ". $major->pivot->degree}}</li>
-                                                
+
                                             @endforeach
-                                            @else 
+                                            @else
                                             <span class="badge badge-danger">No majors Or faculties</span>
                                             @endif
 </ul>
-                                              
+
                                             </td>
-                                         </tr>                                
-                                                                       
-                                       
+                                         </tr>
+
+
                                     </thead>
-                                   
+
                                 </table>
                                 <style>
                                     th{
@@ -73,17 +73,19 @@
                                 </select>
                             </div>
 
+
                                  
                                  <!-- <div >
                                   <div class="form-group" >
+
                                     <div>
                                     <label
                                 for="major"
                                 class="inline control-label col-form-label"
                                 style="color:rgb(0, 123, 255)"
                                 >Select majors</label>
-                                 <select name="major" id="major" class="d-inline  form-control" multiple size="2" style="height: 80px; " >
-                                 @foreach($majors as $major) 
+                                 <select name="major[]" id="major" class="d-inline  form-control" multiple size="2" style="height: 80px; " >
+                                 @foreach($majors as $major)
                                  <option value="{{$major->id}}">{{ $major->name}}</option>
                                  @endforeach
                                 </select>
@@ -98,10 +100,12 @@
                                 for="degree"
                                 class="inline control-label col-form-label"
                                 style="color:rgb(0, 123, 255)"
+
                                 >Degree</label>
                                 <input type="text" class="form-control" name="degree" id="degree" placeholder="Degree (Max 300)">
                                 </div>
                            
+
                             </div>
 
 
