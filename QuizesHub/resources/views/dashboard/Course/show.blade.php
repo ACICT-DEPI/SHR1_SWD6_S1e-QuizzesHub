@@ -5,7 +5,7 @@
 <div class="row">
 
 
-            
+
 
                     <div class="col-md-12">
                         <div class="card">
@@ -62,10 +62,10 @@
                                 style="color:rgb(0, 123, 255)"
                                 >Select faculty And Major</label>
                             <select name="faculty" id="faculty" class="d-inline  form-control" multiple size="2" style="height: 300px">
-                            @foreach($fs as $faculty) 
+                            @foreach($fs as $faculty)
                                  <!-- <option value="{{$faculty->id}}">{{ $faculty->name}}</option> -->
                                   <optgroup label="{{$faculty->name}}" style="color:rgb(231, 76, 60);font-style:italic;font-size:17px">
-                                  @foreach($faculty->majors as $major) 
+                                  @foreach($faculty->majors as $major)
                                  <option value="{{$major->id}}-{{$faculty->id}}" style="color:black;">{{ $major->name}}</option>
                                  @endforeach
                                 </optgroup>
@@ -74,7 +74,6 @@
                             </div>
 
 
-                                 
                                  <!-- <div >
                                   <div class="form-group" >
 
@@ -94,17 +93,18 @@
                                 </div> -->
 
 
-                            
+
                             <div>
                                    <label
                                 for="degree"
                                 class="inline control-label col-form-label"
                                 style="color:rgb(0, 123, 255)"
 
+
+
                                 >Degree</label>
                                 <input type="text" class="form-control" name="degree" id="degree" placeholder="Degree (Max 300)">
                                 </div>
-                           
 
                             </div>
 

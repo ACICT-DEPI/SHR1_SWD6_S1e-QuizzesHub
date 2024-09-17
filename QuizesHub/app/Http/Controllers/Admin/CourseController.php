@@ -102,7 +102,7 @@ return redirect()->back()->with('messege','Course deleted successfully..');
 
         course::onlyTrashed()->findorfail($id)->restore();
         return redirect()->back()->with('messege','Course restored successfully..');
-      
+
     }
 
 
@@ -111,7 +111,7 @@ return redirect()->back()->with('messege','Course deleted successfully..');
             'faculty' => ['required'],
             'degree' => 'required',
         ]);
-    
+
         $course = Course::findOrFail($id);
 
         $val=$request->faculty;
@@ -132,17 +132,17 @@ return redirect()->back()->with('messege','Course deleted successfully..');
                 'degree' => $degree
             ]);
         } else {
-            
+
             // If no such combination exists, insert a new record without detaching others
             $course->faculties()->attach([
                 $faculty_id => ['major_id' => $major_id, 'degree' => $degree]
             ]);
         }
-    
+
         return redirect()->back()->with('message', 'Course updated successfully.');
 
     }
-    
-    
+
+
 
 }
