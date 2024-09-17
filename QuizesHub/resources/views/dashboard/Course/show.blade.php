@@ -36,21 +36,21 @@
                                                 @if(count($CourseData->majors)>0)
                                                 <ul style="padding-left:10px">
                                             @foreach($CourseData->majors as $major )
-                                              
+
                                             <li>{{$faculties[$CourseData->id.'-'.$major->id.'-'.$major->pivot->faculty_id]." - ".$major->name ." - ". $major->pivot->degree}}</li>
-                                                
+
                                             @endforeach
-                                            @else 
+                                            @else
                                             <span class="badge badge-danger">No majors Or faculties</span>
                                             @endif
 </ul>
-                                              
+
                                             </td>
-                                         </tr>                                
-                                                                       
-                                       
+                                         </tr>
+
+
                                     </thead>
-                                   
+
                                 </table>
                                 <style>
                                     th{
@@ -62,8 +62,8 @@
                                  <form method="post" action="{{ route('admin.courses.addMajorsAndFaculties',$CourseData->id) }}" enctype="multipart/form-data">
                                  @csrf
 
-                                 
-                                 
+
+
                                  <div class="form-group">
                                     <div>
                                     <label
@@ -71,8 +71,8 @@
                                 class="inline control-label col-form-label"
                                 style="color:rgb(0, 123, 255)"
                                 >Select majors</label>
-                                 <select name="major" id="major" class="d-inline  form-control" multiple size="2" style="height: 80px; " >
-                                 @foreach($majors as $major) 
+                                 <select name="major[]" id="major" class="d-inline  form-control" multiple size="2" style="height: 80px; " >
+                                 @foreach($majors as $major)
                                  <option value="{{$major->id}}">{{ $major->name}}</option>
                                  @endforeach
                                 </select>
@@ -85,8 +85,8 @@
                                 class="inline control-label col-form-label"
                                 style="color:rgb(0, 123, 255)"
                                 >Select faculty</label>
-                            <select name="faculty" id="faculty" class="d-inline  form-control" multiple size="2" style="height: 80px">
-                            @foreach($fs as $faculty) 
+                            <select name="faculty[]" id="faculty" class="d-inline  form-control" multiple size="2" style="height: 80px">
+                            @foreach($fs as $faculty)
                                  <option value="{{$faculty->id}}">{{ $faculty->name}}</option>
                                  @endforeach
                                 </select>
