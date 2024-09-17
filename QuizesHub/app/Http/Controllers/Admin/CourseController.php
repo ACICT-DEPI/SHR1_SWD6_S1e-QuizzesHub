@@ -40,10 +40,6 @@ class CourseController extends Controller
             'name'=>$request->name,
             'code'=>$request->code,
         ]);
-        $Course_id=course::where('name',$request->name)->first()->id;
-        $CourseData=course::findorfail($Course_id);
-        $CourseData->majors()->syncWithoutDetaching($request->major_id);
-        $CourseData->faculties()->syncWithoutDetaching($request->faculty_id);
          return redirect()->back()->with('messege','Course added successfully..');
 
     }
@@ -106,15 +102,45 @@ return redirect()->back()->with('messege','Course deleted successfully..');
 
         course::onlyTrashed()->findorfail($id)->restore();
         return redirect()->back()->with('messege','Course restored successfully..');
-      
+
     }
 
-    public function addMajorsAndFaculties(Request $request,string $id){
-        $course=course::findorfail($id);
-        return $request->validated();
-       $course->majors()->syncWithoutDetaching($request->major);
-        $course->faculties()->syncWithoutDetaching($request->faculty);
-      return redirect()->back()->with('messege','Course Added successfully..');
+    public function addMajorsAndFaculties(Request $request, string $id) {
+        $request->validate([
+            'faculty' => ['required'],
+            'degree' => 'required',
+        ]);
+
+        $course = Course::findOrFail($id);
+
+        $val=$request->faculty;
+        $Ids=explode('-',$val);
+        $major_id = $Ids[0];
+        $faculty_id = $Ids[1];
+        $degree = $request->degree;
+        // Check if the same major in the same faculty already exists for the course
+        $existing = $course->faculties()
+            ->wherePivot('faculty_id', $faculty_id)
+            ->wherePivot('major_id', $major_id)
+            ->exists();
+
+        if ($existing) {
+            // If the combination already exists, update it
+            $course->faculties()->updateExistingPivot($faculty_id, [
+                'major_id' => $major_id,
+                'degree' => $degree
+            ]);
+        } else {
+
+            // If no such combination exists, insert a new record without detaching others
+            $course->faculties()->attach([
+                $faculty_id => ['major_id' => $major_id, 'degree' => $degree]
+            ]);
+        }
+
+        return redirect()->back()->with('message', 'Course updated successfully.');
     }
+
+
 
 }

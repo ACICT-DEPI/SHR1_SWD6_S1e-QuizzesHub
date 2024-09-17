@@ -122,6 +122,7 @@
                       <button
                         class="btn btn-success float-end text-white"
                         type="submit"
+                        
                       >
                         Login
                       </button>
@@ -129,6 +130,7 @@
                   </div>
                 </div>
               </div>
+              <div style="text-align:center"> Don't have an account? <a href="{{ route('register') }}">Register</a></div>
             </form>
           </div>
         </div>

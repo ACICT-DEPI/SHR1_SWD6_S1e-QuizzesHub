@@ -30,7 +30,7 @@
                          @foreach ($UserData as $feedback)
                      <tr>
                      <td>{{ $feedback->user->fname." ".$feedback->user->lname}}</td>
-                          <td>{{ $feedback->exam->course_name}}</td>
+                          
                           <td>{{ $feedback->exam->course->name }}</td>
                           <td>{{$feedback->exam->type }}</td>
                           <td>{{ $feedback->exam->date}}</td>
