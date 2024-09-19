@@ -54,6 +54,7 @@ class CourseController extends Controller
         $faculty=faculty::where('id',$major->pivot->faculty_id)->first();
         $faculties[$CourseData->id.'-'.$major->id.'-'.$major->pivot->faculty_id]=$faculty->name;
      }
+  
 
       return view('dashboard.course.show',compact('CourseData','majors','fs','faculties'));
 

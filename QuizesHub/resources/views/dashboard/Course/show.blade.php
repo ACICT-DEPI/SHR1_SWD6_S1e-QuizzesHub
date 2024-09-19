@@ -2,6 +2,7 @@
 
 @section('content')
 
+
 <div class="row">
 
 
@@ -53,7 +54,7 @@
                                     }
                                 </style>
                                 <!-- <a href="" class="btn btn-primary">Add to another major and faculty</a> -->
-                                 <form method="post" action="{{ route('admin.courses.addMajorsAndFaculties',$CourseData->id) }}" enctype="multipart/form-data">
+                                 <!-- <form method="post" action="{{ route('admin.courses.addMajorsAndFaculties',$CourseData->id) }}" enctype="multipart/form-data">
                                  @csrf
                                  <div>
                                    <label
@@ -61,36 +62,22 @@
                                 class="inline control-label col-form-label"
                                 style="color:rgb(0, 123, 255)"
                                 >Select faculty And Major</label>
-                            <select name="faculty" id="faculty" class="d-inline  form-control" multiple size="2" style="height: 300px">
+                            <select name="faculty" id="faculty" class="d-inline  form-control" multiple size="2" style="height: 160px">
                             @foreach($fs as $faculty)
-                                 <!-- <option value="{{$faculty->id}}">{{ $faculty->name}}</option> -->
-                                  <optgroup label="{{$faculty->name}}" style="color:rgb(231, 76, 60);font-style:italic;font-size:17px">
+                                 <option value="{{$faculty->id}}">{{ $faculty->name}}</option> -->
+                                  <!-- <optgroup label="{{$faculty->name}}" style="color:rgb(231, 76, 60);font-style:italic;font-size:17px">
                                   @foreach($faculty->majors as $major)
                                  <option value="{{$major->id}}-{{$faculty->id}}" style="color:black;">{{ $major->name}}</option>
                                  @endforeach
                                 </optgroup>
                                  @endforeach
                                 </select>
-                            </div>
+                            </div> --> 
 
-
-                                 <!-- <div >
-                                  <div class="form-group" >
-
-                                    <div>
-                                    <label
-                                for="major"
-                                class="inline control-label col-form-label"
-                                style="color:rgb(0, 123, 255)"
-                                >Select majors</label>
-                                 <select name="major[]" id="major" class="d-inline  form-control" multiple size="2" style="height: 80px; " >
-                                 @foreach($majors as $major)
-                                 <option value="{{$major->id}}">{{ $major->name}}</option>
-                                 @endforeach
-                                </select>
-                            </div>
-                            </div>
-                                </div> -->
+                            
+                            @livewire('faculty-major-selector')
+                         
+                        
 
 
 
