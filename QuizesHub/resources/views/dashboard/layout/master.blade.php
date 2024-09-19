@@ -8,7 +8,9 @@
 
 <head>
     @include('dashboard.layout.head')
-    @livewireStyles 
+
+    @livewireStyles
+
 </head>
 
 <body>
@@ -60,7 +62,8 @@
     <!-- Right Panel -->
 
     @include('dashboard.layout.scripts')
-   @livewireScripts
+
+    @livewireScripts
 
 </body>
 
