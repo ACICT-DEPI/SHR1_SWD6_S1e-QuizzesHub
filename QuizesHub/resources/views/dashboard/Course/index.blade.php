@@ -41,6 +41,8 @@
                                                 class="btn btn-success">Show</a>
                                             <a href="{{ route('admin.courses.edit', $Course->id) }}"
                                                 class="btn btn-primary">Edit</a>
+                                            <a href="{{ route('admin.courses.addTomajor', $Course->id) }}"
+                                                class="btn btn-info">AddToMajor</a>   
                                             <form method="POST" action="{{ route('admin.courses.destroy', $Course->id) }}"
                                                 style="display:inline">
                                                 @csrf
@@ -49,7 +51,7 @@
                                                     onclick="return confirm('Are you sure?')" value="Delete">
 
                                             </form>
-
+                                         
 
                                         </td>
                                     </tr>
