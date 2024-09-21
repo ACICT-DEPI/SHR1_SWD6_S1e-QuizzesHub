@@ -106,20 +106,28 @@ return redirect()->back()->with('messege','Course deleted successfully..');
 
     }
 
+    public function addToMajor( string $id) {
+        return view('dashboard.Course.addtomajor',compact('id'));
+        
+    }
+
 
     public function addMajorsAndFaculties(Request $request, string $id) {
-        $request->validate([
-            'faculty' => ['required'],
+   
+  
+       
+       $request->validate([
+            'faculty' => ['required','integer'],
+            'major' => ['required','integer'],
             'degree' => 'required',
         ]);
+       
 
         $course = Course::findOrFail($id);
 
-        $val=$request->faculty;
-        $Ids=explode('-',$val);
-        $major_id = $Ids[0];
-        $faculty_id = $Ids[1];
-        $degree = $request->degree;
+        $faculty_id = $request->input('faculty');
+        $major_id = $request->input('major');
+        $degree = $request->input('degree');
         // Check if the same major in the same faculty already exists for the course
         $existing = $course->faculties()
             ->wherePivot('faculty_id', $faculty_id)
@@ -140,7 +148,7 @@ return redirect()->back()->with('messege','Course deleted successfully..');
             ]);
         }
 
-        return redirect()->back()->with('message', 'Course updated successfully.');
+        return redirect()->back()->with('message', 'Added successfully.');
 
     }
 

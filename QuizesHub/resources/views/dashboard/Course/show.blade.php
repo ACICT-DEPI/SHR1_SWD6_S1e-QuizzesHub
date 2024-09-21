@@ -74,43 +74,5 @@
                                 </select>
                             </div> --> 
 
-                            
-                            @livewire('faculty-major-selector')
-                         
-                        
-
-
-
-                            <div>
-                                   <label
-                                for="degree"
-                                class="inline control-label col-form-label"
-                                style="color:rgb(0, 123, 255)"
-
-
-
-                                >Degree</label>
-                                <input type="text" class="form-control" name="degree" id="degree" placeholder="Degree (Max 300)">
-                                </div>
-
-                            </div>
-
-
-
-
-
-                                <div class="card-footer">
-                            <button type="submit" class="btn btn-primary btn-sm" id="submit">
-                                <i class="fa fa-dot-circle-o"></i> Add Course to Major
-                            </button>
-
-                        </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-
-
-                </div>
-            </div><!-- .animated -->
+                           
 @endsection
