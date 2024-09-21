@@ -5,6 +5,7 @@ namespace App\Models\Admin;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Log;
 
 class Faculty extends Model
 {
@@ -32,4 +33,6 @@ class Faculty extends Model
     {
         return $this->belongsToMany(Major::class, 'faculty_major', 'faculty_id', 'major_id');
     }
+    
+
 }

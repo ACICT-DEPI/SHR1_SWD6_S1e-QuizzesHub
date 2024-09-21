@@ -8,6 +8,7 @@ use App\Http\Requests\Admin\UserRequest;
 use App\Models\Admin\User;
 use App\Models\Admin\University;
 use App\Models\Admin\Faculty;
+use App\Models\Admin\Feedback;
 use App\Models\Admin\Major;
 use App\Models\Admin\Level;
 use Illuminate\Support\Facades\Storage;
@@ -144,11 +145,11 @@ class UserController extends Controller
     public function destroy(string $id)
     {
         $user = User::findOrFail($id);
-        $user = User::findOrFail($id);
         if($user->role == 'owner' && Auth::user()->role != 'owner'){
             return redirect()->back()->with('msg', 'You are not allowed to access this page');
         }
         $user->delete();
+        $user->feedbacks()->delete();
         return redirect()->back()->with('msg', 'User deleted successfully');
     }
 
@@ -161,6 +162,7 @@ class UserController extends Controller
     public function restore(string $id)
     {
         User::withTrashed()->where('id', $id)->restore();
+        Feedback::withTrashed()->where('user_id', $id)->restore();
         return redirect()->route('admin.users.index')->with('msg', 'User restored successfully');
     }
 
@@ -173,6 +175,7 @@ class UserController extends Controller
                 Storage::deleteDirectory('images/users');
             }
         }
+        $user->feedbacks()->forceDelete();
         $user->forceDelete();
         return redirect()->back()->with('msg', 'User deleted permanently');
     }
