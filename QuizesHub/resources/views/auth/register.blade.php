@@ -23,22 +23,20 @@
       href="{{ asset('exam.ico') }}"
     />
     <!-- Custom CSS -->
-    <link href="{{ asset('dashboard/assets') }}/css/style.min.css" rel="stylesheet" />
+    <!-- <link href="{{ asset('dashboard/assets') }}/css/style.min.css" rel="stylesheet" /> -->
+    <link href="{{ asset('dashboard/assets') }}/css/style2.css" rel="stylesheet" />
+    <link href="{{ asset('dashboard/assets') }}/css/all.css" rel="stylesheet" />
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-      <style>
-        body{
-          background-color: lightgray;
-        }
-      </style>
+    
   </head>
 
   <body>
-    <div class="main-wrapper">
+    <!-- <div class="main-wrapper"> -->
       <!-- ============================================================== -->
       <!-- Preloader - style you can find in spinners.css -->
       <!-- ============================================================== -->
@@ -54,7 +52,7 @@
       <!-- ============================================================== -->
       <!-- Login box.scss -->
       <!-- ============================================================== -->
-      <div
+      <!-- <div
         class="
           auth-wrapper
           d-flex
@@ -62,8 +60,8 @@
           justify-content-center
           align-items-center
         "
-      >
-        <div class="auth-box border-top border-secondary">
+      > -->
+        <!-- <div class="auth-box border-top border-secondary">
             @if (!empty($errors->all()))
             <div class="alert alert-danger" role="alert">
                 <ul>
@@ -73,28 +71,28 @@
                 </ul>
             </div>
             @endif
-          <div id="loginform">
-            <div class="text-center pt-3 pb-3">
-            </div>
+
+
+            </div> -->
+            <div class="wrapper" >
+    <div class="container1">
+ <div class="sign-container"> 
+           
             <!-- Form -->
             <form
-              class="form-horizontal mt-3"
-              id="loginform"
+              id="register-form"
               action="{{ route('handleRegister') }}"
               method="post"
               novalidate
             >
             @csrf
-              <div class="row pb-4">
-                <div class="col-12">
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                          <span
-                            class="input-group-text bg-success text-white h-100"
-                            id="basic-addon1"
-                            ><i class="mdi mdi-account fs-4"></i
-                          ></span>
-                        </div>
+
+            <h1>
+                  Quiz<span style="color:#ee3b24;font-size: 30px">Hub</span></h1>
+                  <h3 style="font-family:Cursive">Register</h3> 
+                  <!-- <i class="fa-regular fa-circle-user"></i> -->
+               
+             
                         <input
                           type="text"
                           class="form-control form-control-lg"
@@ -104,15 +102,8 @@
                           required=""
                           name="fname"
                         />
-                      </div>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                          <span
-                            class="input-group-text bg-success text-white h-100"
-                            id="basic-addon1"
-                            ><i class="mdi mdi-account fs-4"></i
-                          ></span>
-                        </div>
+                     
+                 
                         <input
                           type="text"
                           class="form-control form-control-lg"
@@ -122,15 +113,8 @@
                           required=""
                           name="lname"
                         />
-                      </div>
-                      <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                          <span
-                            class="input-group-text bg-success text-white h-100"
-                            id="basic-addon1"
-                            ><i class="mdi mdi-account fs-4"></i
-                          ></span>
-                        </div>
+                      
+                      
                         <input
                           type="text"
                           class="form-control form-control-lg"
@@ -140,15 +124,6 @@
                           required=""
                           name="username"
                         />
-                      </div>
-                  <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                      <span
-                        class="input-group-text bg-success text-white h-100"
-                        id="basic-addon1"
-                        ><i class="mdi mdi-account fs-4"></i
-                      ></span>
-                    </div>
                     <input
                       type="email"
                       class="form-control form-control-lg"
@@ -158,15 +133,6 @@
                       required=""
                       name="email"
                     />
-                  </div>
-                  <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                      <span
-                        class="input-group-text bg-warning text-white h-100"
-                        id="basic-addon2"
-                        ><i class="mdi mdi-lock fs-4"></i
-                      ></span>
-                    </div>
                     <input
                       type="password"
                       class="form-control form-control-lg"
@@ -176,42 +142,39 @@
                       required=""
                       name="password"
                     />
-                  </div>
-                  <div class="form-group row">
-                    <label class="col-sm-3 text-end control-label col-form-label">Gender</label>
-                    <div class="col-md-9">
-                        <div class="form-check">
-                            <input type="radio" class="form-check-input " id="male" name="gender"
-                                value="M"/>
-                            <label class="form-check-label mb-0" for="male">Male</label>
-                        </div>
-                        <div class="form-check">
-                            <input type="radio" class="form-check-input" id="female" name="gender"
-                                value="F"/>
-                            <label class="form-check-label mb-0" for="female">Female</label>
-                        </div>
-                    </div>
-                </div>
-                </div>
-              </div>
-              <div class="row border-top border-secondary">
-                <div class="col-12">
-                  <div class="form-group">
-                    <div class="pt-3">
+                  
+                         <select name="gender" class="form-control form-control-lg">
+
+                            <option value="M">Male</option>
+                            <option value="F">Female</option>
+
+                         </select>
+                            
+                            @livewire('create-user-form')
+               
                       <button
-                        class="btn btn-success float-end text-white"
+                      class="form_btn"
                         type="submit"
                       >
-                        Register
+                      <i class="fa-solid fa-id-card" id="reg-icon"></i>
+                      Register
                       </button>
-                    </div>
-                  </div>
+                  
+            </form>
+            </div>
+              <div class="overlay-container">
+                <!-- <div class="overlay-left">
+                    <h1>Welcome Back</h1>
+                    <p>To keep connected with us please login with your personal info</p>
+                    <button class="overlay_btn" id="signIn">Sign In</button>
+                </div> -->
+                <div class="overlay-right">
+                   <img src="{{ asset('storage/loginimages/logo.png') }}"id="img1">
                 </div>
               </div>
-            </form>
-          </div>
-        </div>
-      </div>
+    </div>
+  </div>
+     
       <!-- ============================================================== -->
       <!-- Login box.scss -->
       <!-- ============================================================== -->

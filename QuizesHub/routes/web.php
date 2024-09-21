@@ -16,6 +16,10 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 
 
+use App\Livewire\Login;
+use App\Livewire\Register;
+
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -28,6 +32,8 @@ Route::middleware('guest')->group(function () {
     Route::get('/logout',[LoginController::class, 'logout'])->name('logout')->withoutMiddleware('guest')->middleware('auth');
     Route::get('/register',[RegisterController::class, 'register'])->name('register');
     Route::post('/register',[RegisterController::class, 'handleRegister'])->name('handleRegister');
+  
+   
 });
 
 Route::middleware(['auth','IsAdmin'])->prefix('admin')->name('admin.')->group(function () {
