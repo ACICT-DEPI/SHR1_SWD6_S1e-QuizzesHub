@@ -26,26 +26,11 @@ class Major extends Model
 
     public function faculties()
     {
-        return $this->belongsToMany(Faculty::class, 'course_faculty_major', 'major_id', 'faculty_id');
+        return $this->belongsToMany(Faculty::class, 'faculty_major', 'major_id', 'faculty_id');
     }
 
 
-    protected static function boot()
-    {
-        parent::boot();
-
-        static::deleting(function ($major) {
-            if ($major->isForceDeleting()) {
-                $major->courses()->forceDelete();
-            } else {
-                $major->courses()->delete();
-            }
-        });
-
-        static::restored(function ($major) {
-            $major->courses()->withTrashed()->restore();
-        });
-    }
+    
 
 }
 

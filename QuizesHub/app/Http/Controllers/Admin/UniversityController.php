@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\Admin\UniversityRequest;
 use App\Models\Admin\University;
 use App\Models\Admin\Faculty;
+use App\Models\Admin\FacultyUniversity;
 
 class UniversityController extends Controller
 {
@@ -77,6 +78,7 @@ class UniversityController extends Controller
     {
         $university = University::findOrFail($id);
         $university->delete();
+        FacultyUniversity::where('university_id', $id)->delete();
         return redirect()->back()->with('msg', 'University deleted successfully');
     }
 
@@ -89,12 +91,14 @@ class UniversityController extends Controller
     public function restore(string $id)
     {
         University::withTrashed()->where('id', $id)->restore();
+        FacultyUniversity::withTrashed()->where('university_id', $id)->restore();
         return redirect()->route('admin.universities.index')->with('msg', 'University restored successfully');
     }
 
     public function forceDelete(string $id)
     {
         $university=University::withTrashed()->where('id', $id)->first();
+        $university->faculties()->detach();
         $university->forceDelete();
         return redirect()->back()->with('msg', 'University deleted permanently');
     }

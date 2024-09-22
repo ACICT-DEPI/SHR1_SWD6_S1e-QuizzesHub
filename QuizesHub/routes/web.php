@@ -16,6 +16,10 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 
 
+use App\Livewire\Login;
+use App\Livewire\Register;
+
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -28,6 +32,8 @@ Route::middleware('guest')->group(function () {
     Route::get('/logout',[LoginController::class, 'logout'])->name('logout')->withoutMiddleware('guest')->middleware('auth');
     Route::get('/register',[RegisterController::class, 'register'])->name('register');
     Route::post('/register',[RegisterController::class, 'handleRegister'])->name('handleRegister');
+  
+   
 });
 
 Route::middleware(['auth','IsAdmin'])->prefix('admin')->name('admin.')->group(function () {
@@ -46,7 +52,8 @@ Route::middleware(['auth','IsAdmin'])->prefix('admin')->name('admin.')->group(fu
     Route::get('/courses/archive', [CourseController::class, 'archive'])->name('courses.archive');
     Route::post('/courses/{course}/restore', [CourseController::class, 'restore'])->name('courses.restore')->middleware('IsOwner');
     Route::delete('/courses/{course}/forceDelete', [CourseController::class, 'forceDelete'])->name('courses.forceDelete')->middleware('IsOwner');
-    Route::post('/courses/{course}/addMajorsAndFaculties', [CourseController::class, 'addMajorsAndFaculties'])->name('courses.addMajorsAndFaculties');
+    Route::post('/courses/{course}', [CourseController::class, 'addMajorsAndFaculties'])->name('courses.addMajorsAndFaculties');
+    Route::get('/courses/{course}/addToMajor',[CourseController::class, 'addToMajor'])->name('courses.addTomajor');
     Route::resource('/courses', CourseController::class);
 
     Route::get('/levels/archive', [LevelController::class, 'archive'])->name('levels.archive');

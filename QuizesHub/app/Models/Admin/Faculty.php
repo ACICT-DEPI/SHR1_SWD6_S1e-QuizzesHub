@@ -5,6 +5,7 @@ namespace App\Models\Admin;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Log;
 
 class Faculty extends Model
 {
@@ -30,6 +31,8 @@ class Faculty extends Model
 
     public function majors()
     {
-        return $this->belongsToMany(Major::class, 'course_faculty_major', 'faculty_id', 'major_id');
+        return $this->belongsToMany(Major::class, 'faculty_major', 'faculty_id', 'major_id');
     }
+    
+
 }

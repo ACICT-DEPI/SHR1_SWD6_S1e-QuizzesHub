@@ -15,140 +15,107 @@
     />
     <meta name="robots" content="noindex,nofollow" />
     <title>Login</title>
-    <!-- Favicon icon -->
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="16x16"
-      href="{{ asset('exam.ico') }}"
-    />
-    <!-- Custom CSS -->
-    <link href="{{ asset('dashboard/assets') }}/css/style.min.css" rel="stylesheet" />
+    <link href="{{ asset('dashboard/assets') }}/css/style2.css" rel="stylesheet" />
+    <link href="{{ asset('dashboard/assets') }}/css/all.css" rel="stylesheet" />
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
+  
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-      <style>
-        body{
-          background-color: lightgray;
-        }
-      </style>
+  
   </head>
 
   <body>
-    <div class="main-wrapper">
-      <!-- ============================================================== -->
-      <!-- Preloader - style you can find in spinners.css -->
-      <!-- ============================================================== -->
       <div class="preloader">
         <div class="lds-ripple">
           <div class="lds-pos"></div>
           <div class="lds-pos"></div>
         </div>
-      </div>
-      <!-- ============================================================== -->
-      <!-- Preloader - style you can find in spinners.css -->
-      <!-- ============================================================== -->
+       </div>
+   
       <!-- ============================================================== -->
       <!-- Login box.scss -->
       <!-- ============================================================== -->
-      <div
-        class="
-          auth-wrapper
-          d-flex
-          no-block
-          justify-content-center
-          align-items-center
-        "
-      >
-        <div class="auth-box border-top border-secondary">
-          <div id="loginform">
-            <div class="text-center pt-3 pb-3">
-            </div>
-            <!-- Form -->
-            <form
-              class="form-horizontal mt-3"
-              id="loginform"
-              action="{{ route('handleLogin') }}"
-              method="post"
-            >
-            @csrf
-              <div class="row pb-4">
-                <div class="col-12">
-                  <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                      <span
-                        class="input-group-text bg-success text-white h-100"
-                        id="basic-addon1"
-                        ><i class="mdi mdi-account fs-4"></i
-                      ></span>
-                    </div>
+      <!-- ============================================================== -->
+      <!-- Page wrapper scss in scafholding.scss -->
+      <!-- ============================================================== -->
+      <!-- ============================================================== -->
+      <!-- Page wrapper scss in scafholding.scss -->
+      <!-- ============================================================== -->
+      <!-- ============================================================== -->
+      <!-- Right Sidebar -->
+      <!-- ============================================================== -->
+      <!-- ============================================================== -->
+      <!-- Right Sidebar -->
+      <!-- ============================================================== -->
+    <!-- </div> -->
+
+
+    <body>
+  <div class="wrapper">
+    <div class="container">
+<div class="sign-container">
+
+
+             <form  action="{{ route('handleLogin') }}"
+             method="post">
+             @csrf
+          
+                  <h1>
+                  Quiz<span style="color:#ee3b24;font-size: 30px">Hub</span></h1>
+                  <!-- <i class="fa-regular fa-circle-user"></i> -->
+                <h3 style="font-family:Cursive">Signin</h3>   
+                    
                     <input
                       type="email"
-                      class="form-control form-control-lg"
+                      
                       placeholder="Email"
                       aria-label="Username"
                       aria-describedby="basic-addon1"
                       required=""
                       name="email"
                     />
-                  </div>
-                  <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                      <span
-                        class="input-group-text bg-warning text-white h-100"
-                        id="basic-addon2"
-                        ><i class="mdi mdi-lock fs-4"></i
-                      ></span>
-                    </div>
+                 
+                 
                     <input
                       type="password"
-                      class="form-control form-control-lg"
+                      
                       placeholder="Password"
                       aria-label="Password"
                       aria-describedby="basic-addon1"
                       required=""
                       name="password"
                     />
-                  </div>
-                </div>
-              </div>
-              <div class="row border-top border-secondary">
-                <div class="col-12">
-                  <div class="form-group">
-                    <div class="pt-3">
+                   
+                    
+                 
                       <button
-                        class="btn btn-success float-end text-white"
+                        class="form_btn"
                         type="submit"
                       >
-                        Login
+                      <i class="fa-solid fa-right-to-bracket"></i>
+                       Sign In
                       </button>
+                     <br> 
+                     <div>Don't have account? <a href="{{ route('register') }}" 
+                     style="text-decoration:none;color:#ee3b24;">Register</a>
                     </div>
-                  </div>
+                  </br>
+                    
+            </form>
+
+        </div>
+              <div class="overlay-container">
+                <div class="overlay-right">
+                   <img src="{{ asset('storage/loginimages/logo.png') }}"id="img1">
                 </div>
               </div>
-            </form>
-          </div>
-        </div>
-      </div>
-      <!-- ============================================================== -->
-      <!-- Login box.scss -->
-      <!-- ============================================================== -->
-      <!-- ============================================================== -->
-      <!-- Page wrapper scss in scafholding.scss -->
-      <!-- ============================================================== -->
-      <!-- ============================================================== -->
-      <!-- Page wrapper scss in scafholding.scss -->
-      <!-- ============================================================== -->
-      <!-- ============================================================== -->
-      <!-- Right Sidebar -->
-      <!-- ============================================================== -->
-      <!-- ============================================================== -->
-      <!-- Right Sidebar -->
-      <!-- ============================================================== -->
     </div>
+  </div>
+
+            
+
+</body>
     <!-- ============================================================== -->
     <!-- All Required js -->
     <!-- ============================================================== -->
