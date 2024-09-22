@@ -18,12 +18,37 @@ use App\Models\Admin\User;
 class ExamController extends Controller
 {
     public function index() {
+        $exams = Exam::get()->toArray(); // get() method gets all recoreds in exams table
+        $exam = Exam::findorfail(1)->toArray(); // find() / findorfail() methods gets one record where primary key(id) = 1
+        $questions = Exam::findorfail(4)->questions->toArray(); // get all questions that related to exam
+        $user = User::all()->toArray();
+        $username = User::findorfail(1)->university->name;
+        $user = User::with('university', 'faculty', 'level', 'major')->findOrFail(1)->toArray();
+        $x = User::findorfail(1)->university->toArray();
+        $x = Exam::with('questions.answers')->findOrFail(4)->toArray();
+        echo "<ol>";
+        foreach($x['questions'] as $question):
+            echo "<h1><li>{$question['text']}</li></h1>";
+            echo "<ul>";
+                foreach($question['answers'] as $answer):
+                    echo "<li>{$answer['text']}</li>";
+                endforeach;
+            echo "</ul>";
+        endforeach;
+        echo "</ol>";
+
+        echo '<pre>';
+        print_r($x);
+        echo '</pre>';
+        die();
+
+
         // $exams =  Exam::get()->toArray();
         // $courses = [];
-        $exams = Exam::with('course', 'faculty', 'university')->get();
+        // $exams = Exam::with('course', 'faculty', 'university')->get();
         // dd($exams);
 
-        return view('dashboard.exams.index', ['exams'=>$exams]);
+        // return view('dashboard.exams.index', ['exams'=>$exams]);
         // return view('welcome');
     }
 
