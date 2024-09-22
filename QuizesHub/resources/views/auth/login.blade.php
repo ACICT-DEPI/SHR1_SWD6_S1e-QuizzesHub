@@ -107,7 +107,7 @@
         </div>
               <div class="overlay-container">
                 <div class="overlay-right">
-                   <img src="{{ asset('storage/loginimages/logo.png') }}"id="img1">
+                   <img src="{{ asset('dashboard/assets/images/logo.png') }}"id="img1">
                 </div>
               </div>
     </div>
