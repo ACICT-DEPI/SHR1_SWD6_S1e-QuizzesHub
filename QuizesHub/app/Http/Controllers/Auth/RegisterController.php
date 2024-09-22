@@ -16,7 +16,7 @@ class RegisterController extends Controller
 
     public function handleRegister(Request $request)
     {
-        // return $request->all();
+      
         $data= $request->validate([
             'fname' => 'required',
             'lname' => 'required',
@@ -24,6 +24,9 @@ class RegisterController extends Controller
             'email' => 'required|email|unique:users,email',
             'password' => 'required|string|min:8',
             'gender' => 'required|in:M,F',
+            'university_id' => ['required','integer'],
+            'faculty_id' => ['required','integer'],
+            'major_id' => ['required','integer'],
         ]);
         // $password = Hash::make($request->password);
         // $data['password'] = $password;
@@ -36,7 +39,11 @@ class RegisterController extends Controller
             'email' => $request->email,
             'password' => bcrypt($request->password),
             'gender' => $request->gender,
+            'university_id' => $request->university_id,
+            'faculty_id' => $request->faculty_id,
+            'major_id' => $request->major_id,
         ]);
+
 
         Auth::login($user);
         return redirect()->route('admin.home');
