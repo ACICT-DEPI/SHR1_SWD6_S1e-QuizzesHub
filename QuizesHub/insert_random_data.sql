@@ -61,7 +61,8 @@ VALUES
 ('Mona', 'Hussein', 'mona.h', 'mona.hussein@example.com', NOW(), 'password_hash_7', '01222223333', '/images/mona.jpg', 'F', 'user', 2, 2, 1, 3, 'token_7', NOW(), NOW(), NULL),
 ('Youssef', 'Mahmoud', 'youssef.m', 'youssef.mahmoud@example.com', NULL, 'password_hash_8', '01044445555', '/images/youssef.jpg', 'M', 'user', 3, 1, 3, 2, 'token_8', NOW(), NOW(), NULL),
 ('Laila', 'Mohamed', 'laila.m', 'laila.mohamed@example.com', NOW(), 'password_hash_9', '01266667777', '/images/laila.jpg', 'F', 'user', 1, 3, 2, 4, 'token_9', NOW(), NOW(), NULL),
-('Omar', 'Said', 'omar.s', 'omar.said@example.com', NULL, 'password_hash_10', '01088889999', '/images/omar.jpg', 'M', 'user', 2, 2, 1, 1, 'token_10', NOW(), NOW(), NULL);
+('admin', 'admin', 'admin', 'admin@gmail.com', NOW(), '$2y$12$JFxNzD3LNCT9aDrGPpAdiea5EdH0vnNGqIXPmRoy.LAe1QlH/E4Sq', '0123123666', '/images/admin.jpg', 'M', 'owner', 1, 3, 2, 4, 'token_10', NOW(), NOW(), NULL),
+('Omar', 'Said', 'omar.s', 'omar.said@example.com', NULL, 'password_hash_10', '01088889999', '/images/omar.jpg', 'M', 'user', 2, 2, 1, 1, 'token_11', NOW(), NOW(), NULL);
 
 
 
