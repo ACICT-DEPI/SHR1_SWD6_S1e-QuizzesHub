@@ -62,10 +62,10 @@
              @csrf
           
                   <h1>
-                  Quiz<span style="color:#ee3b24;font-size: 30px">Hub</span></h1>
+                  Quiz<span style="color:#3281b9;font-size: 30px">Hub</span></h1>
                   <!-- <i class="fa-regular fa-circle-user"></i> -->
-                <h3 style="font-family:Cursive">Signin</h3>   
-                    
+              
+                    <br>
                     <input
                       type="email"
                       
@@ -98,7 +98,7 @@
                       </button>
                      <br> 
                      <div>Don't have account? <a href="{{ route('register') }}" 
-                     style="text-decoration:none;color:#ee3b24;">Register</a>
+                     style="text-decoration:none;color:#3281b9;">Register</a>
                     </div>
                   </br>
                     
@@ -107,7 +107,7 @@
         </div>
               <div class="overlay-container">
                 <div class="overlay-right">
-                   <img src="{{ asset('dashboard/assets/images/logo.png') }}"id="img1">
+                <img src="{{ asset('wepsite/assets/img/QH.png')}}"id="img1">
                 </div>
               </div>
     </div>
