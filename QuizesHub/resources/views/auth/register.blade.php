@@ -88,10 +88,10 @@
             @csrf
 
             <h1>
-                  Quiz<span style="color:#ee3b24;font-size: 30px">Hub</span></h1>
-                  <h3 style="font-family:Cursive">Register</h3> 
+                  Quiz<span style="color:#3281b9;font-size: 30px">Hub</span></h1>
+                  
                   <!-- <i class="fa-regular fa-circle-user"></i> -->
-               
+               <br>
              
                         <input
                           type="text"
@@ -159,6 +159,9 @@
                       <i class="fa-solid fa-id-card" id="reg-icon"></i>
                       Register
                       </button>
+                      <div style="font-style:italic">have account? <a href="{{ route('login') }}" 
+                     style="text-decoration:none;color:#3281b9;">Login</a>
+                    </div>
                   
             </form>
             </div>
@@ -169,7 +172,8 @@
                     <button class="overlay_btn" id="signIn">Sign In</button>
                 </div> -->
                 <div class="overlay-right">
-                   <img src="{{ asset('dashboard/assets/images/logo.png') }}"id="img1">
+                   <img src="{{ asset('wepsite/assets/img/QH.png')}}"id="img1">
+                   
                 </div>
               </div>
     </div>
