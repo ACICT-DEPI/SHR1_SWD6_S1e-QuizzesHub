@@ -41,16 +41,16 @@
                             <tbody>
                               @foreach ($exams as $exam)
                                 <tr>
-                                  <td>{{ $exam->type }}</td>
-                                  <td>{{ $exam->course->name }}</td>
-                                  <td>{{ $exam->faculty->name }}</td>
-                                  <td>{{ $exam->university->name }}</td>
-                                  <td>{{ $exam->date }}</td>
+                                  <td>{{ $exam['type'] }}</td>
+                                  <td>{{ $exam['course']['name'] }}</td>
+                                  <td>{{ $exam['course']['course_faculty_major_university'][0]['faculty']['name'] }}</td>
+                                  <td>{{ $exam['course']['course_faculty_major_university'][0]['university']['name'] }}</td>
+                                  <td>{{ $exam['date'] }}</td>
                                   <td>
-                                    <a href="{{ route('admin.exams.show', $exam->id) }}" class="btn btn-primary">Show</a>
+                                    <a href="{{ route('admin.exams.show', $exam['id']) }}" class="btn btn-primary">Show</a>
                                     {{-- <a href="#" class="btn btn-primary">Show</a> --}}
-                                    <a href="{{ route('admin.exams.edit', $exam->id)}}" class="btn btn-success">Edit</a>
-                                    <form style="display:inline" action="{{route('admin.exams.destroy', $exam->id)}}" method="POST">
+                                    <a href="{{ route('admin.exams.edit', $exam['id'])}}" class="btn btn-success">Edit</a>
+                                    <form style="display:inline" action="{{route('admin.exams.destroy', $exam['id'])}}" method="POST">
                                       @csrf
                                       @method('delete')
                                       <button class="btn btn-danger" id="delete" onclick="return confirm('Are you sure?')" value="Delete">Delete</button>

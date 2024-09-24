@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\LikeRequest;
+use App\Models\Admin\Like;
 
 use Illuminate\Http\Request;
 
@@ -26,9 +28,15 @@ class LikeController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(LikeRequest $request)
     {
-        //
+        // validate running
+        $like = Like::create([
+            'user_id' => $request->user_id,
+            'comment_id' => $request->comment_id,
+            'like' => $request->like,
+        ]);
+
     }
 
     /**
@@ -50,7 +58,7 @@ class LikeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(LikeRequest $request, string $id)
     {
         //
     }

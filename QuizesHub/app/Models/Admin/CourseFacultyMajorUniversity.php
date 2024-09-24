@@ -7,17 +7,18 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class CourseFacultyMajor extends Pivot
+class CourseFacultyMajorUniversity extends Pivot
 {
     use HasFactory;
     use SoftDeletes;
 
-    protected $table = 'course_faculty_major';
+    protected $table = 'course_faculty_major_university';
 
     protected $fillable = [
         'course_id',
         'faculty_id',
         'major_id',
+        'university_id',
         'degree',
     ];
 
@@ -34,5 +35,10 @@ class CourseFacultyMajor extends Pivot
     public function major()
     {
         return $this->belongsTo(Major::class, 'major_id', 'id');
+    }
+
+    public function university()
+    {
+        return $this->belongsTo(University::class, 'university_id', 'id');
     }
 }
