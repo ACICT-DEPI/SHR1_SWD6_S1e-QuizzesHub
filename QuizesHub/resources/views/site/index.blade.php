@@ -9,7 +9,7 @@
     <meta content="" name="description">
 
     <!-- Favicon -->
-    <link href="{{asset('wepsite/assets')}}/img/favicon.ico" rel="icon">
+    <link href="{{asset('website/assets')}}/img/favicon.ico" rel="icon">
     <link href ="{{asset('dashboard/assets')}}/css/all.css" rel="icon" type="image/x-icon">
 
     <!-- Google Web Fonts -->
@@ -22,18 +22,18 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
     <!-- Libraries Stylesheet -->
-    <link href="{{asset('wepsite/assets')}}/lib/animate/animate.min.css" rel="stylesheet">
-    <link href="{{asset('wepsite/assets')}}/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="{{asset('website/assets')}}/lib/animate/animate.min.css" rel="stylesheet">
+    <link href="{{asset('website/assets')}}/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="{{asset('wepsite/assets')}}/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{asset('website/assets')}}/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Template Stylesheet -->
-    <link href="{{asset('wepsite/assets')}}/css/style.css" rel="stylesheet">
+    <link href="{{asset('website/assets')}}/css/style.css" rel="stylesheet">
 </head>
 
 <body>
-   
+
     <!-- Spinner Start -->
     <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
         <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
@@ -46,19 +46,19 @@
     <!-- Navbar Start -->
     <nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">
         <a href="index.html" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
-            <h2 class="m-0 text-primary"><img src="{{asset('wepsite/assets')}}/img/QH.png" class="logo" alt="">QuizHub</h2>
+            <h2 class="m-0 text-primary"><img src="{{asset('website/assets')}}/img/QH.png" class="logo" alt="">QuizHub</h2>
         </a>
         <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
             <span class="navbar-toggler-icon"></span>
         </button>
 
 
-              
+
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto p-4 p-lg-0">
             @auth
-           
- 
+
+
                 <a href="index.html" class="nav-item nav-link active">Home</a>
                 <a href="about.html" class="nav-item nav-link">About</a>
                 <a href="courses.html" class="nav-item nav-link">Courses</a>
@@ -75,21 +75,21 @@
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Settings</a>
                     <div class="dropdown-menu fade-down m-0">
-                    
+
                         <a href="team.html" class="dropdown-item">profile</a>
                         <a href="{{ route('logout') }}" class="dropdown-item">logout</a>
-                        
+
                     </div>
                 </div>
-                
+
             </div>
 
-            
+
             @endauth
             <a href="{{ route('register') }}" class="btn btn-primary py-4 px-lg-5 d-none d-lg-block">Join Now<i class="fa fa-arrow-right ms-3"></i></a>
         </div>
     </nav>
- 
+
     <!-- Navbar End -->
 
 
@@ -97,7 +97,7 @@
     <div class="container-fluid p-0 mb-5">
         <div class="owl-carousel header-carousel position-relative">
             <div class="owl-carousel-item position-relative">
-                <img class="img-fluid" src="{{asset('wepsite/assets')}}/img/carousel-1.jpg" alt="">
+                <img class="img-fluid" src="{{asset('website/assets')}}/img/carousel-1.jpg" alt="">
                 <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center" style="background: rgba(24, 29, 56, .7);">
                     <div class="container">
                         <div class="row justify-content-start">
@@ -113,7 +113,7 @@
                 </div>
             </div>
             <div class="owl-carousel-item position-relative">
-                <img class="img-fluid" src="{{asset('wepsite/assets')}}/img/carousel-2.jpg" alt="">
+                <img class="img-fluid" src="{{asset('website/assets')}}/img/carousel-2.jpg" alt="">
                 <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center" style="background: rgba(24, 29, 56, .7);">
                     <div class="container">
                         <div class="row justify-content-start">
@@ -185,7 +185,7 @@
             <div class="row g-5">
                 <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s" style="min-height: 400px;">
                     <div class="position-relative h-100">
-                        <img class="img-fluid position-absolute w-100 h-100" src="{{asset('wepsite/assets')}}/img/about.jpg" alt="" style="object-fit: cover;">
+                        <img class="img-fluid position-absolute w-100 h-100" src="{{asset('website/assets')}}/img/about.jpg" alt="" style="object-fit: cover;">
                     </div>
                 </div>
                 <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.3s">
@@ -233,7 +233,7 @@
                     <div class="row g-3">
                         <div class="col-lg-12 col-md-12 wow zoomIn" data-wow-delay="0.1s">
                             <a class="position-relative d-block overflow-hidden" href="">
-                                <img class="img-fluid" src="{{asset('wepsite/assets')}}/img/cat-1.jpg" alt="">
+                                <img class="img-fluid" src="{{asset('website/assets')}}/img/cat-1.jpg" alt="">
                                 <div class="bg-white text-center position-absolute bottom-0 end-0 py-2 px-3" style="margin: 1px;">
                                     <h5 class="m-0">Web Design</h5>
                                     <small class="text-primary">49 Courses</small>
@@ -242,7 +242,7 @@
                         </div>
                         <div class="col-lg-6 col-md-12 wow zoomIn" data-wow-delay="0.3s">
                             <a class="position-relative d-block overflow-hidden" href="">
-                                <img class="img-fluid" src="{{asset('wepsite/assets')}}/img/cat-2.jpg" alt="">
+                                <img class="img-fluid" src="{{asset('website/assets')}}/img/cat-2.jpg" alt="">
                                 <div class="bg-white text-center position-absolute bottom-0 end-0 py-2 px-3" style="margin: 1px;">
                                     <h5 class="m-0">Graphic Design</h5>
                                     <small class="text-primary">49 Courses</small>
@@ -251,7 +251,7 @@
                         </div>
                         <div class="col-lg-6 col-md-12 wow zoomIn" data-wow-delay="0.5s">
                             <a class="position-relative d-block overflow-hidden" href="">
-                                <img class="img-fluid" src="{{asset('wepsite/assets')}}/img/cat-3.jpg" alt="">
+                                <img class="img-fluid" src="{{asset('website/assets')}}/img/cat-3.jpg" alt="">
                                 <div class="bg-white text-center position-absolute bottom-0 end-0 py-2 px-3" style="margin: 1px;">
                                     <h5 class="m-0">Video Editing</h5>
                                     <small class="text-primary">49 Courses</small>
@@ -262,7 +262,7 @@
                 </div>
                 <div class="col-lg-5 col-md-6 wow zoomIn" data-wow-delay="0.7s" style="min-height: 350px;">
                     <a class="position-relative d-block h-100 overflow-hidden" href="">
-                        <img class="img-fluid position-absolute w-100 h-100" src="{{asset('wepsite/assets')}}/img/cat-4.jpg" alt="" style="object-fit: cover;">
+                        <img class="img-fluid position-absolute w-100 h-100" src="{{asset('website/assets')}}/img/cat-4.jpg" alt="" style="object-fit: cover;">
                         <div class="bg-white text-center position-absolute bottom-0 end-0 py-2 px-3" style="margin:  1px;">
                             <h5 class="m-0">Online Marketing</h5>
                             <small class="text-primary">49 Courses</small>
@@ -286,7 +286,7 @@
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                     <div class="course-item bg-light">
                         <div class="position-relative overflow-hidden">
-                            <img class="img-fluid" src="{{asset('wepsite/assets')}}/img/course-1.jpg" alt="">
+                            <img class="img-fluid" src="{{asset('website/assets')}}/img/course-1.jpg" alt="">
                             <div class="w-100 d-flex justify-content-center position-absolute bottom-0 start-0 mb-4">
                                 <a href="#" class="flex-shrink-0 btn btn-sm btn-primary px-3 border-end" style="border-radius: 30px 0 0 30px;">Read More</a>
                                 <a href="#" class="flex-shrink-0 btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Join Now</a>
@@ -314,7 +314,7 @@
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
                     <div class="course-item bg-light">
                         <div class="position-relative overflow-hidden">
-                            <img class="img-fluid" src="{{asset('wepsite/assets')}}/img/course-2.jpg" alt="">
+                            <img class="img-fluid" src="{{asset('website/assets')}}/img/course-2.jpg" alt="">
                             <div class="w-100 d-flex justify-content-center position-absolute bottom-0 start-0 mb-4">
                                 <a href="#" class="flex-shrink-0 btn btn-sm btn-primary px-3 border-end" style="border-radius: 30px 0 0 30px;">Read More</a>
                                 <a href="#" class="flex-shrink-0 btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Join Now</a>
@@ -342,7 +342,7 @@
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
                     <div class="course-item bg-light">
                         <div class="position-relative overflow-hidden">
-                            <img class="img-fluid" src="{{asset('wepsite/assets')}}/img/course-3.jpg" alt="">
+                            <img class="img-fluid" src="{{asset('website/assets')}}/img/course-3.jpg" alt="">
                             <div class="w-100 d-flex justify-content-center position-absolute bottom-0 start-0 mb-4">
                                 <a href="#" class="flex-shrink-0 btn btn-sm btn-primary px-3 border-end" style="border-radius: 30px 0 0 30px;">Read More</a>
                                 <a href="#" class="flex-shrink-0 btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Join Now</a>
@@ -384,7 +384,7 @@
                 <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                     <div class="team-item bg-light">
                         <div class="overflow-hidden">
-                            <img class="img-fluid" src="{{asset('wepsite/assets')}}/img/team-1.jpg" alt="">
+                            <img class="img-fluid" src="{{asset('website/assets')}}/img/team-1.jpg" alt="">
                         </div>
                         <div class="position-relative d-flex justify-content-center" style="margin-top: -23px;">
                             <div class="bg-light d-flex justify-content-center pt-2 px-1">
@@ -402,7 +402,7 @@
                 <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
                     <div class="team-item bg-light">
                         <div class="overflow-hidden">
-                            <img class="img-fluid" src="{{asset('wepsite/assets')}}/img/team-2.jpg" alt="">
+                            <img class="img-fluid" src="{{asset('website/assets')}}/img/team-2.jpg" alt="">
                         </div>
                         <div class="position-relative d-flex justify-content-center" style="margin-top: -23px;">
                             <div class="bg-light d-flex justify-content-center pt-2 px-1">
@@ -420,7 +420,7 @@
                 <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
                     <div class="team-item bg-light">
                         <div class="overflow-hidden">
-                            <img class="img-fluid" src="{{asset('wepsite/assets')}}/img/team-3.jpg" alt="">
+                            <img class="img-fluid" src="{{asset('website/assets')}}/img/team-3.jpg" alt="">
                         </div>
                         <div class="position-relative d-flex justify-content-center" style="margin-top: -23px;">
                             <div class="bg-light d-flex justify-content-center pt-2 px-1">
@@ -438,7 +438,7 @@
                 <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
                     <div class="team-item bg-light">
                         <div class="overflow-hidden">
-                            <img class="img-fluid" src="{{asset('wepsite/assets')}}/img/team-4.jpg" alt="">
+                            <img class="img-fluid" src="{{asset('website/assets')}}/img/team-4.jpg" alt="">
                         </div>
                         <div class="position-relative d-flex justify-content-center" style="margin-top: -23px;">
                             <div class="bg-light d-flex justify-content-center pt-2 px-1">
@@ -468,7 +468,7 @@
             </div>
             <div class="owl-carousel testimonial-carousel position-relative">
                 <div class="testimonial-item text-center">
-                    <img class="border rounded-circle p-2 mx-auto mb-3" src="{{asset('wepsite/assets')}}/img/testimonial-1.jpg" style="width: 80px; height: 80px;">
+                    <img class="border rounded-circle p-2 mx-auto mb-3" src="{{asset('website/assets')}}/img/testimonial-1.jpg" style="width: 80px; height: 80px;">
                     <h5 class="mb-0">Client Name</h5>
                     <p>Profession</p>
                     <div class="testimonial-text bg-light text-center p-4">
@@ -476,7 +476,7 @@
                     </div>
                 </div>
                 <div class="testimonial-item text-center">
-                    <img class="border rounded-circle p-2 mx-auto mb-3" src="{{asset('wepsite/assets')}}/img/testimonial-2.jpg" style="width: 80px; height: 80px;">
+                    <img class="border rounded-circle p-2 mx-auto mb-3" src="{{asset('website/assets')}}/img/testimonial-2.jpg" style="width: 80px; height: 80px;">
                     <h5 class="mb-0">Client Name</h5>
                     <p>Profession</p>
                     <div class="testimonial-text bg-light text-center p-4">
@@ -484,7 +484,7 @@
                     </div>
                 </div>
                 <div class="testimonial-item text-center">
-                    <img class="border rounded-circle p-2 mx-auto mb-3" src="{{asset('wepsite/assets')}}/img/testimonial-3.jpg" style="width: 80px; height: 80px;">
+                    <img class="border rounded-circle p-2 mx-auto mb-3" src="{{asset('website/assets')}}/img/testimonial-3.jpg" style="width: 80px; height: 80px;">
                     <h5 class="mb-0">Client Name</h5>
                     <p>Profession</p>
                     <div class="testimonial-text bg-light text-center p-4">
@@ -492,7 +492,7 @@
                     </div>
                 </div>
                 <div class="testimonial-item text-center">
-                    <img class="border rounded-circle p-2 mx-auto mb-3" src="{{asset('wepsite/assets')}}/img/testimonial-4.jpg" style="width: 80px; height: 80px;">
+                    <img class="border rounded-circle p-2 mx-auto mb-3" src="{{asset('website/assets')}}/img/testimonial-4.jpg" style="width: 80px; height: 80px;">
                     <h5 class="mb-0">Client Name</h5>
                     <p>Profession</p>
                     <div class="testimonial-text bg-light text-center p-4">
@@ -503,7 +503,7 @@
         </div>
     </div>
     <!-- Testimonial End -->
-        
+
 
     <!-- Footer Start -->
     <div class="container-fluid bg-dark text-light footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
@@ -533,22 +533,22 @@
                     <h4 class="text-white mb-3">Gallery</h4>
                     <div class="row g-2 pt-2">
                         <div class="col-4">
-                            <img class="img-fluid bg-light p-1" src="{{asset('wepsite/assets')}}/img/course-1.jpg" alt="">
+                            <img class="img-fluid bg-light p-1" src="{{asset('website/assets')}}/img/course-1.jpg" alt="">
                         </div>
                         <div class="col-4">
-                            <img class="img-fluid bg-light p-1" src="{{asset('wepsite/assets')}}/img/course-2.jpg" alt="">
+                            <img class="img-fluid bg-light p-1" src="{{asset('website/assets')}}/img/course-2.jpg" alt="">
                         </div>
                         <div class="col-4">
-                            <img class="img-fluid bg-light p-1" src="{{asset('wepsite/assets')}}/img/course-3.jpg" alt="">
+                            <img class="img-fluid bg-light p-1" src="{{asset('website/assets')}}/img/course-3.jpg" alt="">
                         </div>
                         <div class="col-4">
-                            <img class="img-fluid bg-light p-1" src="{{asset('wepsite/assets')}}/img/course-2.jpg" alt="">
+                            <img class="img-fluid bg-light p-1" src="{{asset('website/assets')}}/img/course-2.jpg" alt="">
                         </div>
                         <div class="col-4">
-                            <img class="img-fluid bg-light p-1" src="{{asset('wepsite/assets')}}/img/course-3.jpg" alt="">
+                            <img class="img-fluid bg-light p-1" src="{{asset('website/assets')}}/img/course-3.jpg" alt="">
                         </div>
                         <div class="col-4">
-                            <img class="img-fluid bg-light p-1" src="{{asset('wepsite/assets')}}/img/course-1.jpg" alt="">
+                            <img class="img-fluid bg-light p-1" src="{{asset('website/assets')}}/img/course-1.jpg" alt="">
                         </div>
                     </div>
                 </div>
@@ -594,13 +594,13 @@
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="{{asset('wepsite/assets')}}/lib/wow/wow.min.js"></script>
-    <script src="{{asset('wepsite/assets')}}/lib/easing/easing.min.js"></script>
-    <script src="{{asset('wepsite/assets')}}/lib/waypoints/waypoints.min.js"></script>
-    <script src="{{asset('wepsite/assets')}}/lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="{{asset('website/assets')}}/lib/wow/wow.min.js"></script>
+    <script src="{{asset('website/assets')}}/lib/easing/easing.min.js"></script>
+    <script src="{{asset('website/assets')}}/lib/waypoints/waypoints.min.js"></script>
+    <script src="{{asset('website/assets')}}/lib/owlcarousel/owl.carousel.min.js"></script>
 
     <!-- Template Javascript -->
-    <script src="{{asset('wepsite/assets')}}/js/main.js"></script>
+    <script src="{{asset('website/assets')}}/js/main.js"></script>
 </body>
 
 </html>
