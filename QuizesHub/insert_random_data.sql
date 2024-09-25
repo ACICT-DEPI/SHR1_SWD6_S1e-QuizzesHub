@@ -88,7 +88,7 @@ VALUES
 ('final', 1, '2024-09-10', 120, NOW(), NOW()),
 ('midterm',  2,'2024-09-12', 90, NOW(), NOW()),
 ('oral', 2, '2024-09-08', '120', NOW(), NOW()),
-('final', 3, '2024-09-11', 120, NOW(), NOW());
+('final', 1, '2024-09-11', 120, NOW(), NOW());
 
 -- 16. questions Table:
 INSERT INTO questions (type, text, exam_id, created_at, updated_at)

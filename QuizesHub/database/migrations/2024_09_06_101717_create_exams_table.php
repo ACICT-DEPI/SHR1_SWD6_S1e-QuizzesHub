@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->enum('type', ['final', 'midterm', 'oral','sheet']);
             $table->unsignedBigInteger('course_id');
-            $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
+            // $table->foreign('course_id')->references('id')->on('course_faculty_major_university')->onDelete('cascade');
             $table->date('date');
             $table->integer('duration');
             $table->timestamps();

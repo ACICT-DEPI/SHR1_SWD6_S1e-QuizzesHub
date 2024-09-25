@@ -41,4 +41,9 @@ class CourseFacultyMajorUniversity extends Pivot
     {
         return $this->belongsTo(University::class, 'university_id', 'id');
     }
+
+    public function exams()
+    {
+        return $this->hasMany(Exam::class, 'course_id', 'id');
+    }
 }

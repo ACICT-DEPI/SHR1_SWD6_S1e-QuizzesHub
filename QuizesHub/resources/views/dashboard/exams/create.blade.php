@@ -30,64 +30,17 @@
                     <form class="form-horizontal" action="{{ route('admin.exams.store') }}" enctype="multipart/form-data" method="post">
                         @csrf
                         <div class="card-body card-block">
-                            {{-- university
+                            {{-- university_id --}}
                             <div class="form-group">
-                                <label for="university" class="form-control-label">University</label>
+                                <label for="university_id" class="form-control-label">Univerty Id</label>
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="menu-icon fa fa-book"></i></div>
-                                    <select name="university" id="university" class="form-control">
+                                    <select name="university_id" id="university_id" class="form-control @error('course_name') is-invalid @enderror">
                                         @foreach ($universities as $university)
-                                            
-                                        @endforeach
-                                        <option value="oral" @if(old('type')=='midterm' ) selected @endif>oral</option>
-                                        <option value="final" @if(old('type')=='midterm' ) selected @endif>final</option>
-                                    </select>
-                                </div>
-                            </div> --}}
-                            {{-- type --}}
-                            <div class="form-group">
-                                <label for="type" class="form-control-label">Type</label>
-                                <div class="input-group">
-                                    <div class="input-group-addon"><i class="menu-icon fa fa-book"></i></div>
-                                    <select name="type" id="type" class="form-control">
-                                        <option value="midterm" @if(old('type')=='midterm' ) selected @endif>midterm
-                                        </option>
-                                        <option value="oral" @if(old('type')=='midterm' ) selected @endif>oral</option>
-                                        <option value="final" @if(old('type')=='midterm' ) selected @endif>final</option>
-                                    </select>
-                                </div>
-                            </div>
-                            {{-- course_name --}}
-                            <div class="form-group">
-                                <label for="course_name" class="form-control-label">Course Name</label>
-                                <div class="input-group">
-                                    <div class="input-group-addon"><i class="menu-icon fa fa-book"></i></div>
-                                    <input 
-                                        type="text" 
-                                        name="course_name" 
-                                        id="course_name"
-                                        value="{{old('course_name')}}"
-                                        placeholder="Enter Name Of Course Exam"
-                                        class="form-control @error('course_name') is-invalid @enderror"
-                                    >
-                                    @error('course_name')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            {{-- course_id --}}
-                            <div class="form-group">
-                                <label for="course_id" class="form-control-label">Course Id</label>
-                                <div class="input-group">
-                                    <div class="input-group-addon"><i class="menu-icon fa fa-book"></i></div>
-                                    <select name="course_id" id="course_id" class="form-control @error('course_name') is-invalid @enderror">
-                                        @foreach ($courses as $course)
-                                        <option value="{{$course['id']}}">{{$course['name']}}</option>
+                                        <option value="{{$university['id']}}">{{$university['name']}}</option>
                                         @endforeach
                                     </select>
-                                    @error('course_id')
+                                    @error('university_id')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
@@ -111,21 +64,55 @@
                                     @enderror
                                 </div>
                             </div>
-                            {{-- university_id --}}
+                            {{-- course_id --}}
                             <div class="form-group">
-                                <label for="university_id" class="form-control-label">Univerty Id</label>
+                                <label for="course_id" class="form-control-label">Course Id</label>
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="menu-icon fa fa-book"></i></div>
-                                    <select name="university_id" id="university_id" class="form-control @error('course_name') is-invalid @enderror">
-                                        @foreach ($universities as $university)
-                                        <option value="{{$university['id']}}">{{$university['name']}}</option>
+                                    <select name="course_id" id="course_id" class="form-control @error('course_name') is-invalid @enderror">
+                                        @foreach ($courses as $course)
+                                        <option value="{{$course['id']}}">{{$course['name']}}</option>
                                         @endforeach
                                     </select>
-                                    @error('university_id')
+                                    @error('course_id')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
+                                </div>
+                            </div>
+                            {{-- course_name --}}
+                            <div class="form-group">
+                                <label for="course_name" class="form-control-label">Course Name</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="menu-icon fa fa-book"></i></div>
+                                    <input 
+                                        type="text" 
+                                        name="course_name" 
+                                        id="course_name"
+                                        value="{{old('course_name')}}"
+                                        placeholder="Enter Name Of Course Exam"
+                                        class="form-control @error('course_name') is-invalid @enderror"
+                                    >
+                                    @error('course_name')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            {{-- type --}}
+                            <div class="form-group">
+                                <label for="type" class="form-control-label">Type</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="menu-icon fa fa-book"></i></div>
+                                    <select name="type" id="type" class="form-control">
+                                        <option value="midterm" @if(old('type')=='midterm' ) selected @endif>midterm
+                                        </option>
+                                        <option value="oral" @if(old('type')=='oral' ) selected @endif>oral</option>
+                                        <option value="final" @if(old('type')=='fianl' ) selected @endif>final</option>
+                                        <option value="sheet" @if(old('type')=='sheet' ) selected @endif>sheet</option>
+                                    </select>
                                 </div>
                             </div>
                             {{-- date --}}
