@@ -26,6 +26,7 @@ class ResultRequest extends FormRequest
             'exam_id'=>['required', 'regex:/[0-9]+/'],
             'score'=>['required', 'regex:/[0-9]+/'],
             'total_score'=>['required', 'regex:/[0-9]+/'],
+            'completion_time' => ['required', 'integer'],
         ];
     }
 }
