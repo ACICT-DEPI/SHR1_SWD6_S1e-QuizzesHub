@@ -46,7 +46,7 @@
     <!-- Navbar Start -->
     <nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">
         <a href="index.html" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
-            <h2 class="m-0 text-primary"><img src="{{asset('website/assets')}}/img/QH.png" class="logo" alt="">QuizHub</h2>
+            <h2 class="m-0 text-primary"><img src="{{asset('website/assets')}}/img/QH.png" class="logo" alt="">QuizzesHub</h2>
         </a>
         <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
             <span class="navbar-toggler-icon"></span>
@@ -77,8 +77,13 @@
                     <div class="dropdown-menu fade-down m-0">
 
                         <a href="team.html" class="dropdown-item">profile</a>
-                        <a href="{{ route('logout') }}" class="dropdown-item">logout</a>
+                        {{-- <a href="{{ route('logout') }}" class="dropdown-item">logout</a> --}}
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <a class="dropdown-item" href="{{ route('logout') }}"  onclick="event.preventDefault();
+                                                this.closest('form').submit();"> Logout</a>
 
+                        </form>
                     </div>
                 </div>
 
@@ -86,7 +91,10 @@
 
 
             @endauth
+            @guest
             <a href="{{ route('register') }}" class="btn btn-primary py-4 px-lg-5 d-none d-lg-block">Join Now<i class="fa fa-arrow-right ms-3"></i></a>
+            @endguest
+
         </div>
     </nav>
 

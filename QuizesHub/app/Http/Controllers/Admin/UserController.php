@@ -74,7 +74,6 @@ class UserController extends Controller
         if($user->role == 'owner' && Auth::user()->role != 'owner'){
             return redirect()->back()->with('msg', 'You are not allowed to access this page');
         }
-        $user = User::findOrFail($id);
         return view('dashboard.users.show', compact('user'));
     }
 
