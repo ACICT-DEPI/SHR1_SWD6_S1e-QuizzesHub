@@ -49,14 +49,12 @@
                                 <label for="course_name" class="form-control-label">Course Name</label>
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="menu-icon fa fa-book"></i></div>
-                                    <input 
-                                        type="text" 
-                                        name="course_name" 
-                                        id="course_name"
-                                        value="{{ $exam['course_name'] }}"
-                                        placeholder="Enter Name Of Course Exam"
-                                        class="form-control @error('course_name') is-invalid @enderror"
-                                    >
+                                    {{-- @dd($courses) --}}
+                                    <select name="course_name" id="course_name" class="form-control @error('course_name') is-invalid @enderror">
+                                        @foreach ($courses as $course)
+                                        <option value="{{$course['name']}}" {{-- @if($exam['course_name'] == $course['id']) selected @endif --}}>{{$course['name']}}</option>
+                                        @endforeach
+                                    </select>
                                     @error('course_name')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -88,7 +86,7 @@
                                     <div class="input-group-addon"><i class="menu-icon fa fa-book"></i></div>
                                     <select name="faculty_id" id="faculty_id" class="form-control @error('course_name') is-invalid @enderror">
                                         @foreach ($faculties as $faculty)
-                                        <option value="{{$faculty['id']}}" @if($exam['faculty_id'] == $course['id']) selected @endif>{{$faculty['name']}}</option>
+                                        <option value="{{$faculty['id']}}" {{-- @if($exam['faculty_id'] == $course['id']) selected @endif --}}>{{$faculty['name']}}</option>
                                         @endforeach
                                     </select>
                                     @error('faculty_id')
@@ -105,7 +103,7 @@
                                     <div class="input-group-addon"><i class="menu-icon fa fa-book"></i></div>
                                     <select name="university_id" id="university_id" class="form-control @error('course_name') is-invalid @enderror">
                                         @foreach ($universities as $university)
-                                        <option value="{{$university['id']}}" @if($exam['university_id'] == $course['id']) selected @endif>{{$university['name']}}</option>
+                                        <option value="{{$university['id']}}" {{-- @if($exam['university_id'] == $course['id']) selected @endif --}} >{{$university['name']}}</option>
                                         @endforeach
                                     </select>
                                     @error('university_id')
@@ -165,3 +163,51 @@
         </div>
     </div>
 @endsection
+
+@section('question')
+
+    @section('answer')
+    @endsection
+
+@endsection
+
+
+{{-- 
+Array
+(
+    [id] => 1
+    [type] => final
+    [course_id] => 1
+    [date] => 2024-09-10
+    [duration] => 120
+    [created_at] => 2024-09-24T12:06:31.000000Z
+    [updated_at] => 2024-09-24T12:06:31.000000Z
+    [deleted_at] => 
+    [course] => Array
+        (
+            [id] => 1
+            [name] => Physics
+            [code] => PHY1
+            [created_at] => 2024-09-24T12:06:31.000000Z
+            [updated_at] => 2024-09-24T12:06:31.000000Z
+            [deleted_at] => 
+            [course_faculty_major_university] => Array
+                (
+                    [0] => Array
+                        (
+                            [id] => 1
+                            [course_id] => 1
+                            [faculty_id] => 1
+                            [major_id] => 1
+                            [university_id] => 6
+                            [degree] => 100
+                            [created_at] => 2024-09-24T12:06:31.000000Z
+                            [updated_at] => 2024-09-24T12:06:31.000000Z
+                            [deleted_at] => 
+                        )
+
+                )
+
+        )
+
+) --}}

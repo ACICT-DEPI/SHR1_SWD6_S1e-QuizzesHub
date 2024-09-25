@@ -42,9 +42,9 @@
                               @foreach ($exams as $exam)
                                 <tr>
                                   <td>{{ $exam->type }}</td>
-                                  <td>{{ $exam->course->name }}</td>
-                                  <td>{{ $exam->faculty->name }}</td>
-                                  <td>{{ $exam->university->name }}</td>
+                                  <td>{{ $exam->course->course->name }}</td>
+                                  <td>{{ $exam->course->faculty->name }}</td>
+                                  <td>{{ $exam->course->university->name }}</td>
                                   <td>{{ $exam->date }}</td>
                                   <td>
                                     <a href="{{ route('admin.exams.show', $exam->id) }}" class="btn btn-primary">Show</a>

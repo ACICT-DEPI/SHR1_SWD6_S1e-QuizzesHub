@@ -1,9 +1,8 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+
 use App\Http\Controllers\Controller;
-
-
 use Illuminate\Http\Request;
 use App\Http\Requests\Admin\ExamRequest;
 use App\Models\Admin\Exam;
@@ -13,65 +12,33 @@ use App\Models\Admin\Major;
 use App\Models\Admin\Level;
 use App\Models\Admin\Course;
 use App\Models\Admin\User;
-
+use App\Models\Admin\CourseFacultyMajorUniversity;
+use Symfony\Component\VarDumper\VarDumper;
 
 class ExamController extends Controller
 {
-    public function index() {
-        $exams = Exam::get()->toArray(); // get() method gets all recoreds in exams table
-        $exam = Exam::findorfail(1)->toArray(); // find() / findorfail() methods gets one record where primary key(id) = 1
-        $questions = Exam::findorfail(4)->questions->toArray(); // get all questions that related to exam
-        $user = User::all()->toArray();
-        $username = User::findorfail(1)->university->name;
-        $user = User::with('university', 'faculty', 'level', 'major')->findOrFail(1)->toArray();
-        $x = User::findorfail(1)->university->toArray();
-        $x = Exam::with('questions.answers')->findOrFail(4)->toArray();
-        echo "<ol>";
-        foreach($x['questions'] as $question):
-            echo "<h1><li>{$question['text']}</li></h1>";
-            echo "<ul>";
-                foreach($question['answers'] as $answer):
-                    echo "<li>{$answer['text']}</li>";
-                endforeach;
-            echo "</ul>";
-        endforeach;
-        echo "</ol>";
-
-        echo '<pre>';
-        print_r($x);
-        echo '</pre>';
-        die();
-
-
-        // $exams =  Exam::get()->toArray();
-        // $courses = [];
-        // $exams = Exam::with('course', 'faculty', 'university')->get();
-        // dd($exams);
-
-        // return view('dashboard.exams.index', ['exams'=>$exams]);
-        // return view('welcome');
+    public function index() 
+    {
+        $exams = Exam::get();
+        return view('dashboard.exams.index', compact('exams'));
     }
 
-    public function create() {
+    public function create() 
+    {
         $universities = University::get()->toArray();
         $faculties = Faculty::get()->toArray();
         $courses = Course::get()->toArray();
-        
-        return view('dashboard.exams.create', ['courses'=>$courses, 'faculties'=>$faculties, 'universities'=>$universities]);
-
-        // echo '<pre>';
-        // print_r($courses);
-        // echo '</pre>';
-        // die();
+        return view('dashboard.exams.create', compact('courses', 'faculties', 'universities'));
     }
 
-    public function archive() {
+    public function archive() 
+    {
         $exams = Exam::onlyTrashed()->get();
-        // return $exams;
         return view('dashboard.exams.archive', compact('exams'));
     }
 
-    public function store(ExamRequest $request) {
+    public function store(ExamRequest $request) 
+    {
         Exam::create([
             'type'=>$request->type,
             'course_name'=>$request->course_name,
@@ -84,30 +51,24 @@ class ExamController extends Controller
         return redirect()->back()->with('msg', 'Exam Added Successfully');
     }
 
-    public function show($id) {
-        // $exam = Exam::findorfail($id);
-        // $exam = Exam::findorfail($id);
-        // dd($exam->questions->answers);
-        // // $exam = Exam::with('questions')->get()->toArray();
-        $exam = Exam::with('course','questions.answers')->findOrFail($id);
-
-        return view('dashboard.exams.show', ['exam'=>$exam]);
+    public function show($id) 
+    {
+        $exam = Exam::findorfail($id);
+        return view('dashboard.exams.show', compact('exam'));
     }
 
-    public function edit($id) {
+    public function edit($id) 
+    {
         $universities = University::get()->toArray();
         $faculties = Faculty::get()->toArray();
-        $courses = Faculty::get()->toArray();
+        $courses = Course::get()->toArray();
         $exam = Exam::findorfail($id)->toArray();
-        // return 'edit view';
-        // echo '<pre>';
-        // print_r($exam);
-        // echo '</pre>';
-        // die();
+        $exam = Exam::with('course.courseFacultyMajorUniversity')->find($id)->toArray();
         return view('dashboard.exams.edit', ['exam'=>$exam, 'courses'=>$courses, 'faculties'=>$faculties, 'universities'=>$universities]);
     }
 
-    public function update(ExamRequest $request, $id) {
+    public function update(ExamRequest $request, $id) 
+    {
         $exam = Exam::findOrFail($id);
         $exam->update([
             'type'=>$request->type,
@@ -121,13 +82,15 @@ class ExamController extends Controller
         return redirect()->back()->with('msg', 'Updated Successfully..');
     }
 
-    public function destroy($id) {
+    public function destroy($id) 
+    {
         $exam = Exam::findorfail($id);
         $exam->delete();
         return redirect()->back()->with('msg', 'deleted succesfully');
     }
 
-    public function restore($id) {
+    public function restore($id) 
+    {
         $exam = Exam::onlyTrashed()->findOrFail($id);
         $exam->restore();
         return redirect()->back()->with('msg', 'restored successfully');
@@ -138,6 +101,4 @@ class ExamController extends Controller
         $exam->forceDelete();
         return redirect()->back()->with('msg', 'deleted permanently');
     }
-
-
 }

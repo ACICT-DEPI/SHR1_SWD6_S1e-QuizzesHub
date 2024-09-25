@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\CommentRequest;
+use App\Models\Admin\Comment;
 
 use Illuminate\Http\Request;
 
@@ -26,9 +28,15 @@ class CommentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CommentRequest $request)
     {
-        //
+        // validate running
+        Comment::create([
+            'user_id' => $request->user_id,
+            'question_id' => $request->question_id,
+            'parent_id' => $request->parent_id,
+            'comment_text' => $request->comment_text,
+        ]);
     }
 
     /**
@@ -37,6 +45,8 @@ class CommentController extends Controller
     public function show(string $id)
     {
         //
+        $comment = Comment::findorfail($id);
+        return $comment;
     }
 
     /**
@@ -45,14 +55,22 @@ class CommentController extends Controller
     public function edit(string $id)
     {
         //
+        $comment = Comment::findorfail($id);
+        return $comment;
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(CommentRequest $request, string $id)
     {
-        //
+        // validate running 
+
+        $comment = Comment::findorfail($id);
+        
+        $comment->comment_text = $request->comment_text;
+        
+        $comment->save();
     }
 
     /**
@@ -60,6 +78,7 @@ class CommentController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $comment = Comment::findorfail($id);
+        $comment->SoftDeletes();
     }
 }
