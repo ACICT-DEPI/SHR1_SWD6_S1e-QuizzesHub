@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\ExamAttemptController;
 use App\Http\Controllers\Admin\ExamController;
@@ -15,26 +16,28 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 
-
 use App\Livewire\Login;
 use App\Livewire\Register;
 use App\Livewire\AddQuestoin;
 
+
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 
 Route::get('/', function () {
     return view('site.index');
 })->name('site.index');
 
+// Route::get('/admin', function () {
+//     return view('dashboard');
+// })->middleware(['auth'/*, 'verified'*/])->name('dashboard');
 
-Route::middleware('guest')->group(function () {
-    Route::get('/login',[LoginController::class, 'login'])->name('login');
-    Route::post('/login',[LoginController::class, 'handleLogin'])->name('handleLogin');
-    Route::get('/logout',[LoginController::class, 'logout'])->name('logout')->withoutMiddleware('guest')->middleware('auth');
-    Route::get('/register',[RegisterController::class, 'register'])->name('register');
-    Route::post('/register',[RegisterController::class, 'handleRegister'])->name('handleRegister');
-  
-   
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
 Route::middleware(['auth','IsAdmin'])->prefix('admin')->name('admin.')->group(function () {
@@ -93,3 +96,8 @@ Route::middleware(['auth','IsAdmin'])->prefix('admin')->name('admin.')->group(fu
 });
 
 Route::get('/addquestion', AddQuestoin::class);
+
+require __DIR__.'/auth.php';
+
+
+

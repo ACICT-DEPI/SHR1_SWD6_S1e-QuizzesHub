@@ -1,143 +1,179 @@
+{{-- <x-guest-layout>
+    <!-- Session Status -->
+    <x-auth-session-status class="mb-4" :status="session('status')" />
+
+    <form method="POST" action="{{ route('login') }}">
+        @csrf
+
+        <!-- Email Address -->
+        <div>
+            <x-input-label for="email" :value="__('Email')" />
+            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
+            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+        </div>
+
+        <!-- Password -->
+        <div class="mt-4">
+            <x-input-label for="password" :value="__('Password')" />
+
+            <x-text-input id="password" class="block mt-1 w-full"
+                            type="password"
+                            name="password"
+                            required autocomplete="current-password" />
+
+            <x-input-error :messages="$errors->get('password')" class="mt-2" />
+        </div>
+
+        <!-- Remember Me -->
+        <div class="block mt-4">
+            <label for="remember_me" class="inline-flex items-center">
+                <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
+                <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
+            </label>
+        </div>
+
+        <div class="flex items-center justify-end mt-4">
+            @if (Route::has('password.request'))
+                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
+                    {{ __('Forgot your password?') }}
+                </a>
+            @endif
+
+            <x-primary-button class="ms-3">
+                {{ __('Log in') }}
+            </x-primary-button>
+        </div>
+    </form>
+</x-guest-layout> --}}
+
+
+
+
+
+
 <!DOCTYPE html>
-<html dir="ltr">
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <!-- Tell the browser to be responsive to screen width -->
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta
-      name="keywords"
-      content="wrappixel, admin dashboard, html css dashboard, web dashboard, bootstrap 5 admin, bootstrap 5, css3 dashboard, bootstrap 5 dashboard, Matrix lite admin bootstrap 5 dashboard, frontend, responsive bootstrap 5 admin template, Matrix admin lite design, Matrix admin lite dashboard bootstrap 5 dashboard template"
-    />
-    <meta
-      name="description"
-      content="Matrix Admin Lite Free Version is powerful and clean admin dashboard template, inpired from Bootstrap Framework"
-    />
-    <meta name="robots" content="noindex,nofollow" />
-    <title>Login</title>
-    <link href="{{ asset('dashboard/assets') }}/css/style2.css" rel="stylesheet" />
-    <link href="{{ asset('dashboard/assets') }}/css/all.css" rel="stylesheet" />
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-  
-  </head>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="shortcut icon" href="{{ asset('exam.ico') }}">
+    <title>{{ config('app.name', 'Laravel') }}</title>
 
-  <body>
-      <div class="preloader">
-        <div class="lds-ripple">
-          <div class="lds-pos"></div>
-          <div class="lds-pos"></div>
-        </div>
-       </div>
-   
-      <!-- ============================================================== -->
-      <!-- Login box.scss -->
-      <!-- ============================================================== -->
-      <!-- ============================================================== -->
-      <!-- Page wrapper scss in scafholding.scss -->
-      <!-- ============================================================== -->
-      <!-- ============================================================== -->
-      <!-- Page wrapper scss in scafholding.scss -->
-      <!-- ============================================================== -->
-      <!-- ============================================================== -->
-      <!-- Right Sidebar -->
-      <!-- ============================================================== -->
-      <!-- ============================================================== -->
-      <!-- Right Sidebar -->
-      <!-- ============================================================== -->
-    <!-- </div> -->
+    <!-- Font Icon -->
+    <link rel="stylesheet" href="{{ asset('auth/assets') }}/fonts/material-icon/css/material-design-iconic-font.min.css">
+
+    <!-- Main css -->
+    <link rel="stylesheet" href="{{ asset('auth/assets') }}/css/style.css">
 
 
-    <body>
-  <div class="wrapper">
-    <div class="container">
-<div class="sign-container">
+    <!-- Scripts -->
+    @vite([/*'resources/css/app.css',*/ 'resources/js/app.js'])
+</head>
+<body>
 
+    <div class="main">
 
-             <form  action="{{ route('handleLogin') }}"
-             method="post">
-             @csrf
-          
-                  <h1>
-                  Quiz<span style="color:#3281b9;font-size: 30px">Hub</span></h1>
-                  <!-- <i class="fa-regular fa-circle-user"></i> -->
-              
-                    <br>
-                    <input
-                      type="email"
-                      
-                      placeholder="Email"
-                      aria-label="Username"
-                      aria-describedby="basic-addon1"
-                      required=""
-                      name="email"
-                    />
-                 
-                 
-                    <input
-                      type="password"
-                      
-                      placeholder="Password"
-                      aria-label="Password"
-                      aria-describedby="basic-addon1"
-                      required=""
-                      name="password"
-                    />
-                   
-                    
-                 
-                      <button
-                        class="form_btn"
-                        type="submit"
-                      >
-                      <i class="fa-solid fa-right-to-bracket"></i>
-                       Sign In
-                      </button>
-                     <br> 
-                     <div>Don't have account? <a href="{{ route('register') }}" 
-                     style="text-decoration:none;color:#3281b9;">Register</a>
+        <!-- Sign up form -->
+        <!-- <section class="signup">
+            <div class="container">
+                <div class="signup-content">
+                    <div class="signup-form">
+                        <h2 class="form-title">Sign up</h2>
+                        <form method="POST" class="register-form" id="register-form">
+                            <div class="form-group">
+                                <label for="name"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                                <input type="text" name="name" id="name" placeholder="Your Name"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="email"><i class="zmdi zmdi-email"></i></label>
+                                <input type="email" name="email" id="email" placeholder="Your Email"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="pass"><i class="zmdi zmdi-lock"></i></label>
+                                <input type="password" name="pass" id="pass" placeholder="Password"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="re-pass"><i class="zmdi zmdi-lock-outline"></i></label>
+                                <input type="password" name="re_pass" id="re_pass" placeholder="Repeat your password"/>
+                            </div>
+                            <div class="form-group">
+                                <input type="checkbox" name="agree-term" id="agree-term" class="agree-term" />
+                                <label for="agree-term" class="label-agree-term"><span><span></span></span>I agree all statements in  <a href="#" class="term-service">Terms of service</a></label>
+                            </div>
+                            <div class="form-group form-button">
+                                <input type="submit" name="signup" id="signup" class="form-submit" value="Register"/>
+                            </div>
+                        </form>
                     </div>
-                  </br>
-                    
-            </form>
-
-        </div>
-              <div class="overlay-container">
-                <div class="overlay-right">
-                <img src="{{ asset('wepsite/assets/img/QH.png')}}"id="img1">
+                    <div class="signup-image">
+                        <figure><img src="images/signup-image.jpg" alt="sing up image"></figure>
+                        <a href="#" class="signup-image-link">I am already member</a>
+                    </div>
                 </div>
-              </div>
+            </div>
+        </section> -->
+
+        <!-- Sing in  Form -->
+        <section class="sign-in">
+            <div class="container">
+                <div class="signin-content">
+                    <div class="signin-image">
+                        <figure><img src="{{ asset('website/assets/img/QH.png')}}" alt="sing in image"></figure>
+                        <a href="{{ route('register') }}" class="signup-image-link">Create an account</a>
+                    </div>
+
+                    <div class="signin-form">
+                        <h2 class="form-title">Sign In</h2>
+                        <!-- Session Status -->
+                        <x-auth-session-status class="mb-4" :status="session('status')" />
+
+                        <form method="POST" class="register-form" id="login-form" action="{{ route('login') }}">
+                            @csrf
+
+                            <div class="form-group">
+                                <label for="email"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                                <input type="text" id="email" class="block mt-1 w-full" name="email" :value="old('email')" required autofocus autocomplete="username" placeholder="Your Email"/>
+                            </div>
+                            <div ><x-input-error :messages="$errors->get('email')" class="mt-2" /></div>
+
+                            <div class="form-group">
+                                <label for="password"><i class="zmdi zmdi-lock"></i></label>
+                                <input type="password" name="password" id="password" placeholder="Password" required autocomplete="current-password" />
+                            </div>
+                            <div ><x-input-error :messages="$errors->get('password')" class="mt-2" /></div>
+
+
+                            <div class="form-group">
+                                <input type="checkbox" name="remember_me" id="remember_me" class="agree-term" />
+                                <label for="remember_me" class="label-agree-term"><span><span></span></span>Remember me</label>
+                            </div>
+                            <div class="form-group flex items-center justify-end mt-4">
+                                @if (Route::has('password.request'))
+                                    <a style="display: inline-block" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
+                                        {{ __('Forgot your password?') }}
+                                    </a>
+                                @endif
+
+                                <div class="form-button " style="display: inline-block; margin-left:10px">
+                                    <input type="submit" name="signin" id="signin" class="form-submit" value="Log in"/>
+                                </div>
+
+                            </div>
+
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
     </div>
-  </div>
 
-            
-
-</body>
-    <!-- ============================================================== -->
-    <!-- All Required js -->
-    <!-- ============================================================== -->
-    <script src="{{ asset('dashboard/assets') }}/js/jquery.min.js"></script>
-    <!-- Bootstrap tether Core JavaScript -->
-    <script src="{{ asset('dashboard/assets') }}/js/bootstrap.bundle.min.js"></script>
-    <!-- ============================================================== -->
-    <!-- This page plugin js -->
-    <!-- ============================================================== -->
-    <script>
-      $(".preloader").fadeOut();
-      // ==============================================================
-      // Login and Recover Password
-      // ==============================================================
-      $("#to-recover").on("click", function () {
-        $("#loginform").slideUp();
-        $("#recoverform").fadeIn();
-      });
-      $("#to-login").click(function () {
-        $("#recoverform").hide();
-        $("#loginform").fadeIn();
-      });
-    </script>
-  </body>
+    <!-- JS -->
+    <script src="{{ asset('auth/assets') }}/js/jquery.min.js"></script>
+    <script src="{{ asset('auth/assets') }}/js/main.js"></script>
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
 </html>
+
