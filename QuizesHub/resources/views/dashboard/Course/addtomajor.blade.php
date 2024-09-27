@@ -3,6 +3,8 @@
 
 
 
+
+
 <form method="post" action="{{ route('admin.courses.addMajorsAndFaculties',$id) }}" enctype="multipart/form-data">
     @csrf
                          <div>
@@ -18,7 +20,7 @@
                                         </span>
                                     @enderror
                              </div>      
-@livewire('faculty-major-selector')
+@livewire('CreateUserForm')
 <div>
 
                              <div class="card-footer">
