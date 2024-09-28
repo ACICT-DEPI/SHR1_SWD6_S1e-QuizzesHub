@@ -30,7 +30,7 @@
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Settings</a>
                 <div class="dropdown-menu fade-down m-0">
 
-                    <a href="team.html" class="dropdown-item">profile</a>
+                    <a href="{{ route('profile.edit') }}" class="dropdown-item">profile</a>
                     {{-- <a href="{{ route('logout') }}" class="dropdown-item">logout</a> --}}
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
