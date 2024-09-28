@@ -18,7 +18,7 @@ use App\Http\Controllers\Auth\RegisterController;
 
 use App\Livewire\Login;
 use App\Livewire\Register;
-use App\Livewire\AddQuestoin;
+use App\Livewire\AddQuestion;
 
 
 // Route::get('/', function () {
@@ -95,7 +95,7 @@ Route::middleware(['auth','IsAdmin'])->prefix('admin')->name('admin.')->group(fu
     Route::put('/users/{user}/updateRole', [UserController::class, 'updateRole'])->name('users.updateRole')->middleware('IsOwner');
 });
 
-Route::get('/addquestion', AddQuestoin::class);
+Route::get('/addquestion', AddQuestion::class);
 
 require __DIR__.'/auth.php';
 

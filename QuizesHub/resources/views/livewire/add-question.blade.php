@@ -1,15 +1,15 @@
 <div>
     <?php 
-        $questions = [
-            [
-                'text'=>'asdf',
-                'answers'=> [
-                    1,
-                    2,
-                    3,
-                ]
-            ]
-        ];
+        // $questions = [
+        //     [
+        //         'text'=>'asdf',
+        //         'answers'=> [
+        //             1,
+        //             2,
+        //             3,
+        //         ]
+        //     ]
+        // ];
     ?>
     <!-- Display success message -->
     @if (session()->has('message'))
@@ -41,5 +41,4 @@
         <button type="button" wire:click="addQuestion" class="btn btn-primary mb-3">Add New Question</button>
         <button type="submit" class="btn btn-success">Save Questions</button>
     </form>
-<?php die(); ?>
 </div>

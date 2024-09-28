@@ -28,7 +28,7 @@ class ExamController extends Controller
         $universities = University::get()->toArray();
         $faculties = Faculty::get()->toArray();
         $courses = Course::get()->toArray();
-        return view('dashboard.exams.create', compact('courses', 'faculties', 'universities'));
+        return view('dashboard.exams.create1', compact('courses', 'faculties', 'universities'));
     }
 
     public function archive() 
