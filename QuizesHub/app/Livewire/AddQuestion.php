@@ -7,7 +7,7 @@ use App\Models\Admin\Exam;
 use App\Models\Admin\Question;
 use App\Models\Admin\Answer;
 
-class AddQuestoin extends Component
+class AddQuestion extends Component
 {
     public $exam; // Stores the current exam
     public $questions = []; // Temporary questions with answers
@@ -22,6 +22,7 @@ class AddQuestoin extends Component
     // Add a new question input
     public function addQuestion()
     {
+        echo 'hi';
         $this->questions[] = [
             'id' => null,
             'type' => 'mcq',
@@ -94,6 +95,6 @@ class AddQuestoin extends Component
 
     public function render()
     {
-        return view('livewire.add-questoin'); 
+        return view('livewire.add-question'); 
     }
 }
