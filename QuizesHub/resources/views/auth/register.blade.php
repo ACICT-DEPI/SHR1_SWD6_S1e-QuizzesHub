@@ -34,25 +34,25 @@
                             @csrf
                             <div class="form-group">
                                 <label for="fname"><i class="zmdi zmdi-account material-icons-name"></i></label>
-                                <input type="text" name="fname" id="fname" :value="old('fname')" placeholder="Your first name"/>
+                                <input type="text" name="fname" id="fname"  placeholder="Your first name" value="{{ old('fname') }}"/>
                             </div>
                             <div><x-input-error :messages="$errors->get('fname')" class="mt-2" /></div>
 
                             <div class="form-group">
                                 <label for="lname"><i class="zmdi zmdi-account material-icons-name"></i></label>
-                                <input type="text" name="lname" id="lname" :value="old('lname')" placeholder="Your last name"/>
+                                <input type="text" name="lname" id="lname"  placeholder="Your last name" value="{{ old('lname') }}"/>
                             </div>
                             <div><x-input-error :messages="$errors->get('lname')" class="mt-2" /></div>
 
                             <div class="form-group">
                                 <label for="username"><i class="zmdi zmdi-account material-icons-name"></i></label>
-                                <input type="text" name="username" id="username" :value="old('username')" placeholder="Your username"/>
+                                <input type="text" name="username" id="username" placeholder="Your username" value="{{ old('username') }}"/>
                             </div>
                             <div><x-input-error :messages="$errors->get('username')" class="mt-2" /></div>
 
                             <div class="form-group">
                                 <label for="email"><i class="zmdi zmdi-email"></i></label>
-                                <input type="text" id="email" class="block mt-1 w-full" name="email" :value="old('email')" required autofocus autocomplete="username" placeholder="Your Email"/>
+                                <input type="text" id="email" class="block mt-1 w-full" name="email" value="{{ old('email') }}" required autofocus autocomplete="username" placeholder="Your Email"/>
                             </div>
                             <div ><x-input-error :messages="$errors->get('email')" class="mt-2" /></div>
 
@@ -74,12 +74,12 @@
                                     <div class="">
                                         <input type="radio" class=" " id="male" name="gender"
                                             value="M" @if (old('gender') == 'M') checked @endif />
-                                        <label class=" " style="left: 200px; margin-bottom:10px; top:25%;" for="male">Male</label>
+                                        <label class=" " style="left: 200px; top:10px;" for="male">Male</label>
                                     </div>
                                     <div class="">
                                         <input type="radio" class="" id="female" name="gender"
                                             value="F" @if (old('gender') == 'F') checked @endif />
-                                        <label class="" style="left: 200px; top:85%;" for="female">Female</label>
+                                        <label class="" style="left: 200px; top:25px" for="female">Female</label>
                                     </div>
                                     <div ><x-input-error :messages="$errors->get('gender')" class="mt-2" /></div>
                                 </div>
