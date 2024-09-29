@@ -15,11 +15,16 @@ class University extends Model
 
     public function faculties()
     {
-        return $this->belongsToMany(Faculty::class, 'faculty_university', 'university_id', 'faculty_id');   
+        return $this->belongsToMany(Faculty::class, 'faculty_university', 'university_id', 'faculty_id');
     }
 
     public function users()
     {
         return $this->hasMany(User::class, 'university_id', 'id');
+    }
+
+    public function courses()
+    {
+        return $this->belongsToMany(Course::class, 'course_faculty_major_university', 'university_id', 'course_id');
     }
 }

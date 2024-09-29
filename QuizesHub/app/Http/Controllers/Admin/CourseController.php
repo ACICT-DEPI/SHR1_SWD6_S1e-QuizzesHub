@@ -9,7 +9,7 @@ use App\Models\Admin\Course;
 use App\Http\Requests\Admin\CourseRequest;
 use App\Models\Admin\faculty;
 use App\Models\Admin\major;
-use App\Models\Admin\CourseFacultyMajor;
+use App\Models\Admin\CourseFacultyMajorUniversity;
 use App\Models\Admin\Exam;
 use App\Models\Admin\Feedback;
 
@@ -77,7 +77,7 @@ class CourseController extends Controller
     public function destroy(string $id)
     {
         Course::findorfail($id)->delete();
-        CourseFacultyMajor::where('course_id', $id)->delete();
+        CourseFacultyMajorUniversity::where('course_id', $id)->delete();
         Exam::where('course_id', $id)->delete();
         return redirect()->back()->with('messege', ' Course deleted successfully..');
     }
@@ -88,7 +88,7 @@ class CourseController extends Controller
     }
     public function forceDelete(string $id)
     {
-        CourseFacultyMajor::where('course_id', $id)->forceDelete();
+        CourseFacultyMajorUniversity::where('course_id', $id)->forceDelete();
         Exam::where('course_id', $id)->forceDelete();
         course::onlyTrashed()->findorfail($id)->forceDelete();
         return redirect()->back()->with('messege', 'Course deleted successfully..');
@@ -97,7 +97,7 @@ class CourseController extends Controller
     {
 
         course::onlyTrashed()->findorfail($id)->restore();
-        CourseFacultyMajor::where('course_id', $id)->restore();
+        CourseFacultyMajorUniversity::where('course_id', $id)->restore();
         Exam::where('course_id', $id)->restore();
         return redirect()->back()->with('messege', 'Course restored successfully..');
     }
@@ -117,41 +117,41 @@ class CourseController extends Controller
             'university_id' => ['required', 'integer', 'exists:universities,id'], // Ensure university exists
             'degree' => ['required', 'integer'], // Degree should be an integer
         ]);
-    
+
         // Retrieve the course by its ID
         $course = Course::findOrFail($id);
-    
+
         $faculty_id = $validated['faculty_id'];
         $major_id = $validated['major_id'];
         $university_id = $validated['university_id'];
         $degree = $validated['degree'];
-    
+
         // Check if the same faculty, major, and university combination already exists for the course
         $existingPivot = $course->faculties()
             ->wherePivot('faculty_id', $faculty_id)
             ->wherePivot('major_id', $major_id)
             ->wherePivot('university_id', $university_id)
             ->exists();
-    
+
         if ($existingPivot) {
-            
+
             $course->faculties()->updateExistingPivot($faculty_id, [
                 'university_id' => $university_id,
                 'major_id' => $major_id,
                 'degree' => $degree
             ]);
-    
+
             return redirect()->back()->with('message', 'Record updated successfully.');
         } else {
-           
+
             $course->faculties()->attach($faculty_id, [
                 'university_id' => $university_id,
                 'major_id' => $major_id,
                 'degree' => $degree
             ]);
-    
+
             return redirect()->back()->with('message', 'Added successfully.');
         }
     }
-    
+
 }

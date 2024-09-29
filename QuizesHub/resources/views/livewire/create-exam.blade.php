@@ -58,8 +58,8 @@
                 <div class="input-group">
                     <div class="input-group-addon"><i class="menu-icon fa fa-book"></i></div>
                     <input 
-                        type="text" 
-                        wire:model="course_name" 
+                        type="text"
+                        wire:model="course_name"
                         id="course_name"
                         value="{{old('course_name')}}"
                         placeholder="Enter Name Of Course Exam"
@@ -91,7 +91,7 @@
                 <label for="date">Date Of Examination</label>
                 <div class="input-group">
                     <div class="input-group-addon"><i class="menu-icon fa fa-book"></i></div>
-                    <input 
+                    <input
                         type="date"
                         id="date"
                         wire:model="date"
@@ -106,7 +106,7 @@
                 <label for="duration">Time Of Exam</label>
                 <div class="input-group">
                     <div class="input-group-addon"><i class="menu-icon fa fa-book"></i></div>
-                    <input 
+                    <input
                         type="number"
                         id="duration"
                         wire:model="duration"
