@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 ?>
 
@@ -16,7 +16,9 @@
                     </alert>
                     @endif
 
-                    @livewire('CreateExam')
+                    {{-- @livewire('CreateExam') --}}
+                    {{-- @livewire('create-user-form') --}}
+                    @livewire('create-exam-form')
                 </div>
             </div>
         </div>

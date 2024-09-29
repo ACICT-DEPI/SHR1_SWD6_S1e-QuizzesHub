@@ -26,13 +26,13 @@ class Faculty extends Model
 
     public function courses()
     {
-        return $this->belongsToMany(Course::class, 'course_faculty_major', 'faculty_id', 'course_id');
+        return $this->belongsToMany(Course::class, 'course_faculty_major_university', 'faculty_id', 'course_id');
     }
 
     public function majors()
     {
         return $this->belongsToMany(Major::class, 'faculty_major', 'faculty_id', 'major_id');
     }
-    
+
 
 }

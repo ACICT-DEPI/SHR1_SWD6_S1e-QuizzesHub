@@ -21,7 +21,7 @@ class Major extends Model
 
     public function courses()
     {
-        return $this->belongsToMany(Course::class, 'course_faculty_major', 'major_id', 'course_id');
+        return $this->belongsToMany(Course::class, 'course_faculty_major_university', 'major_id', 'course_id');
     }
 
     public function faculties()
@@ -30,7 +30,7 @@ class Major extends Model
     }
 
 
-    
+
 
 }
 

@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\Admin\FacultyRequest;
 use App\Models\Admin\Course;
-use App\Models\Admin\CourseFacultyMajor;
+use App\Models\Admin\CourseFacultyMajorUniversity;
 use App\Models\Admin\Faculty;
 use App\Models\Admin\Major;
 use App\Models\Admin\University;
@@ -80,7 +80,7 @@ class FacultyController extends Controller
         $faculty = Faculty::findOrFail($id);
         $faculty->delete();
         FacultyMajor::where('faculty_id', $id)->delete();
-        CourseFacultyMajor::where('faculty_id', $id)->delete();
+        CourseFacultyMajorUniversity::where('faculty_id', $id)->delete();
         return redirect()->back()->with('msg', 'Faculty deleted successfully');
     }
 
@@ -94,7 +94,7 @@ class FacultyController extends Controller
     {
         Faculty::withTrashed()->where('id', $id)->restore();
         FacultyMajor::withTrashed()->where('faculty_id', $id)->restore();
-        CourseFacultyMajor::withTrashed()->where('faculty_id', $id)->restore();
+        CourseFacultyMajorUniversity::withTrashed()->where('faculty_id', $id)->restore();
         return redirect()->route('admin.faculties.index')->with('msg', 'Faculty restored successfully');
     }
 
