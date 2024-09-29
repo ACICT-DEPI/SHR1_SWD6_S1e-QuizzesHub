@@ -12,11 +12,13 @@
                 <div class="container">
                     <div class="row justify-content-start">
                         <div class="col-sm-10 col-lg-8">
-                            <h5 class="text-primary text-uppercase mb-3 animated slideInDown">Best Online Courses</h5>
-                            <h1 class="display-3 text-white animated slideInDown">The Best Online Learning Platform</h1>
-                            <p class="fs-5 text-white mb-4 pb-2">Vero elitr justo clita lorem. Ipsum dolor at sed stet sit diam no. Kasd rebum ipsum et diam justo clita et kasd rebum sea sanctus eirmod elitr.</p>
+                            <h5 class="text-primary text-uppercase mb-3 animated slideInDown">Best Online Exams</h5>
+                            <h1 class="display-3 text-white animated slideInDown">The Best Online Exams Platform</h1>
+                            <p class="fs-5 text-white mb-4 pb-2">you can learn from anywhere and anytime with our Quizs and Exams.</p>
                             <a href="" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Read More</a>
-                            <a href="" class="btn btn-light py-md-3 px-md-5 animated slideInRight">Join Now</a>
+                            @guest
+                            <a href=" {{ route('register') }}" class="btn btn-light py-md-3 px-md-5 animated slideInRight">Join Now</a>
+                            @endguest
                         </div>
                     </div>
                 </div>
@@ -28,11 +30,13 @@
                 <div class="container">
                     <div class="row justify-content-start">
                         <div class="col-sm-10 col-lg-8">
-                            <h5 class="text-primary text-uppercase mb-3 animated slideInDown">Best Online Courses</h5>
-                            <h1 class="display-3 text-white animated slideInDown">Get Educated Online From Your Home</h1>
-                            <p class="fs-5 text-white mb-4 pb-2">Vero elitr justo clita lorem. Ipsum dolor at sed stet sit diam no. Kasd rebum ipsum et diam justo clita et kasd rebum sea sanctus eirmod elitr.</p>
+                            <h5 class="text-primary text-uppercase mb-3 animated slideInDown">Best Online Exams</h5>
+                            <h1 class="display-3 text-white animated slideInDown">Get Exams Online From Your Home</h1>
+                            <p class="fs-5 text-white mb-4 pb-2">our exams are designed to help you improve your skills.</p>
                             <a href="" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Read More</a>
-                            <a href="" class="btn btn-light py-md-3 px-md-5 animated slideInRight">Join Now</a>
+                            @guest
+                            <a href=" {{ route('register') }}" class="btn btn-light py-md-3 px-md-5 animated slideInRight">Join Now</a>
+                            @endguest
                         </div>
                     </div>
                 </div>
@@ -101,8 +105,8 @@
             <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.3s">
                 <h6 class="section-title bg-white text-start text-primary pe-3">About Us</h6>
                 <h1 class="mb-4">Welcome to QuizHub</h1>
-                <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit.</p>
-                <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna dolore erat amet</p>
+                <p class="mb-4"> Quizzes Hub is a vibrant platform designed for quiz enthusiasts, learners, and curious minds..</p>
+                <p class="mb-4"> It offers a wide range of quizzes covering various topics, from general knowledge and current events to niche subjects like science, history, pop culture, and more. Whether you're looking to challenge yourself, learn something new, or just have fun, Quizzes Hub provides an engaging and interactive way to test your knowledge. With a user-friendly interface and regularly updated content, it’s a go-to destination for anyone looking to sharpen their wits and enjoy some friendly competition.</p>
                 <div class="row gy-2 gx-4 mb-4">
                     <div class="col-sm-6">
                         <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Skilled Instructors</p>
@@ -185,7 +189,7 @@
 <!-- Categories Start -->
 
 
-<!-- Courses Start -->
+<!-- Courses Start
 <div class="container-xxl py-5">
     <div class="container">
         <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
@@ -279,7 +283,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 <!-- Courses End -->
 
 

@@ -10,17 +10,33 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
+
     <!-- Font Icon -->
+      
     <link rel="stylesheet" href="{{ asset('auth/assets') }}/fonts/material-icon/css/material-design-iconic-font.min.css">
+     
+   <!-- livewire:css -->
+
+     <link rel="stylesheet" href="{{ asset('dashboard/assets') }}/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ asset('dashboard/assets') }}/css/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{{ asset('dashboard/assets') }}/css/themify-icons/css/themify-icons.css">
+    <link rel="stylesheet" href="{{ asset('dashboard/assets') }}/css/selectFX/css/cs-skin-elastic.css">
+     <link rel="stylesheet" href="{{ asset('dashboard/assets') }}/css/style.css">
+    
 
     <!-- Main css -->
     <link rel="stylesheet" href="{{ asset('auth/assets') }}/css/style.css">
+  
 
 
     <!-- Scripts -->
     @vite([/*'resources/css/app.css',*/ 'resources/js/app.js'])
+
+        
+        
 </head>
 <body>
+
 
     <div class="main">
 
@@ -50,6 +66,8 @@
                             </div>
                             <div><x-input-error :messages="$errors->get('username')" class="mt-2" /></div>
 
+                           
+
                             <div class="form-group">
                                 <label for="email"><i class="zmdi zmdi-email"></i></label>
                                 <input type="text" id="email" class="block mt-1 w-full" name="email" value="{{ old('email') }}" required autofocus autocomplete="username" placeholder="Your Email"/>
@@ -72,21 +90,21 @@
                                 <label for="gender"><i class=""></i>Gender</label>
                                 <div class="">
                                     <div class="">
-                                        <input type="radio" class=" " id="male" name="gender"
-                                            value="M" @if (old('gender') == 'M') checked @endif />
+                                        <input type="radio" class="" id="male" name="gender"
+                                            value="M" @if (old('gender') == 'M') checked @endif style="margin:2px" />
                                         <label class=" " style="left: 200px; top:10px;" for="male">Male</label>
                                     </div>
-                                    <div class="">
+                                    <div class="" >
                                         <input type="radio" class="" id="female" name="gender"
-                                            value="F" @if (old('gender') == 'F') checked @endif />
-                                        <label class="" style="left: 200px; top:25px" for="female">Female</label>
+                                            value="F" @if (old('gender') == 'F') checked @endif style="margin-left:2px" />
+                                        <label class="" style="left: 200px; top:25px;" for="female">Female</label>
                                     </div>
                                     <div ><x-input-error :messages="$errors->get('gender')" class="mt-2" /></div>
                                 </div>
                             </div>
-
+                               @livewire('CreateUserForm')
                             {{-- <livewire:create-user-form /> --}}
-
+                       
 
                             {{-- <div class="form-group">
                                 <label class=" form-control-label" for="level_id">Levels</label>
@@ -107,6 +125,8 @@
                                     @enderror
                                 </div>
                             </div> --}}
+                       
+                        
 
                             <div class="form-group form-button">
                                 <input type="submit" name="signup" id="signup" class="form-submit" value="Register"/>
