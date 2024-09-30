@@ -12,6 +12,7 @@ use App\Models\Admin\Question;
 use App\Models\Admin\Answer;
 use App\Models\Admin\CourseFacultyMajorUniversity;
 use Livewire\WithFileUploads;
+use Illuminate\Support\Facades\Storage;
 
 class UpdateExamForm extends Component
 {
@@ -38,27 +39,27 @@ class UpdateExamForm extends Component
     public function mount($exam)
     {
         $this->exam = $exam;
-        
+
         $this->universities = University::all();
-        
+
         $this->selectedUniversity = $exam->course->university->id;
         $this->updatedSelectedUniversity($exam->course->university->id);
-        
+
         $this->selectedFaculty = $exam->course->faculty->id;
-        $this->updatedSelectedFaculty($exam->course->faculty->id); 
-        
+        $this->updatedSelectedFaculty($exam->course->faculty->id);
+
         $this->selectedMajor = $exam->course->major->id;
         $this->updatedSelectedMajor($exam->course->major->id);
-        
+
         $this->selectedCourse = $exam->course->course->id;
         $this->examType = $exam->type;
         $this->examDate = $exam->date;
         $this->examDuration = $exam->duration;
         $this->examId = $exam->id;
-        
+
         foreach($exam->questions as $question):
             $tmpAnswers = $question->answers->toArray();
-            if($question->type == 'mcq') 
+            if($question->type == 'mcq')
             {
                 $this->questions[] = [
                     'id' => $question->id,
@@ -92,7 +93,7 @@ class UpdateExamForm extends Component
                     'text' => $question->text,
                 ];
             }
-        endforeach; 
+        endforeach;
 
     }
 
@@ -214,47 +215,80 @@ class UpdateExamForm extends Component
                 ],
             );
 
-            foreach ($question['answers'] as $answerIndex => $answer) {
-                // Handle image uploads if the answer type is 'image_path'
-                if ($answer['type'] === 'image_path') {
-                    // Save the uploaded file and get the path
-                    $imagePath = $this->uploadedImages[$index][$answerIndex]->store('/images/answers', 'public');
-                    $answerText = $imagePath;
-                } else {
-                    $answerText = $answer['text'];
-                }
+            if (isset($question['answers']) && is_array($question['answers']) && $question['type'] !== 'essay') {
+                foreach ($question['answers'] as $answerIndex => $answer) {
+                    // Handle image uploads if the answer type is 'image_path'
+                    if ($answer['type'] === 'image_path') {
+                        // Save the uploaded file and get the path
+                        if(!empty($this->uploadedImages[$index][$answerIndex]))
+                        {
+                            $imagePath = $this->uploadedImages[$index][$answerIndex]->store('/images/answers');
+                            $answerText = $imagePath;
+                        }else{
+                            $answerText = $this->questions[$index]['answers'][$answerIndex]['text'];
+                        }
+                    } else {
+                        $answerText = $answer['text'];
+                    }
 
-                Answer::updateOrCreate(
-                    [
-                        'id' => $answer['id'],
-                    ],
-                    [
-                    'question_id' => $updateOrCreateQuestion->id,
-                    'type' => $answer['type'], // 'normal_text' or 'image_path'
-                    'text' => $answerText,
-                    'is_correct' => $answer['is_correct'],]
-                );
+                    if ($question['type'] === 'true_false') {
+                        // Check if this question already has true/false answers
+                        $existingAnswer = Answer::where('question_id', $updateOrCreateQuestion->id)
+                            ->where('text', $answerText)
+                            ->first();
+
+                        if (!$existingAnswer) {
+                            // Only create the answer if it doesn't exist
+                            Answer::create([
+                                'question_id' => $updateOrCreateQuestion->id,
+                                'type' => $answer['type'],
+                                'text' => $answerText,
+                                'is_correct' => $answer['is_correct'],
+                            ]);
+                        }
+                    } else {
+                        // For other question types, just update or create the answer
+                        Answer::updateOrCreate(
+                            [
+                                'id' => $answer['id'],
+                            ],
+                            [
+                                'question_id' => $updateOrCreateQuestion->id,
+                                'type' => $answer['type'],
+                                'text' => $answerText,
+                                'is_correct' => $answer['is_correct'],
+                            ]
+                        );
+                    }
+                }
             }
+
         }
 
 
         // Optionally, you can reset the questions array or show a success message
-        $this->questions = [];
+        // $this->questions = [];
         session()->flash('message', 'Questions and answers saved successfully!');
     }
 
     public function deleteQuestion($questionIndex)
     {
-        if(!empty($this->questions[$questionIndex]['id']))
-        {
-            $question = Question::findorfail($this->questions[$questionIndex]['id']);
-            if($question)
-            {
-                $question->delete();
+        if (!empty($this->questions[$questionIndex]['id'])) {
+            $question = Question::findOrFail($this->questions[$questionIndex]['id']);
+
+            if ($this->questions[$questionIndex]['type'] !== 'essay' ) {
+                foreach ($this->questions[$questionIndex]['answers'] as $answer) {
+                    if ($answer['type'] === 'image_path' && !empty($answer['text'])) {
+                        Storage::delete($answer['text']);
+                    }
+                }
             }
-        } 
+
+            $question->delete();
+        }
+
         unset($this->questions[$questionIndex]);
-        $this->questions = array_values($this->questions); // re-index array
+        $this->questions = array_values($this->questions); // Re-index array
     }
 
     public function render()

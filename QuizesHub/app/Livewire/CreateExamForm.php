@@ -156,7 +156,7 @@ class CreateExamForm extends Component
                 // Handle image uploads if the answer type is 'image_path'
                 if ($answer['type'] === 'image_path') {
                     // Save the uploaded file and get the path
-                    $imagePath = $this->uploadedImages[$index][$answerIndex]->store('/images/answers', 'public');
+                    $imagePath = $this->uploadedImages[$index][$answerIndex]->store('/images/answers');
                     $answerText = $imagePath;
                 } else {
                     $answerText = $answer['text'];
