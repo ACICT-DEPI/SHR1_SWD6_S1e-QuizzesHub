@@ -108,8 +108,9 @@ class CourseController extends Controller
     }
 
 
-    public function addMajorsAndFaculties(Request $request, string $id)
+    public function addCourseToMajor(Request $request, string $id)
     {
+    
         // Validate the input fields
         $validated = $request->validate([
             'faculty_id' => ['required', 'integer', 'exists:faculties,id'], // Ensure faculty exists

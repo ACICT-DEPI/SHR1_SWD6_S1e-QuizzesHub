@@ -1,11 +1,13 @@
 @extends('dashboard.layout.master')
 @section('content')
 
+@if(session()->has('message'))
+<div class="alert alert-success">
+    {{ session()->get('message') }}
+</div>
+@endif
 
-
-
-
-<form method="post" action="{{ route('admin.courses.addMajorsAndFaculties',$id) }}" enctype="multipart/form-data">
+<form method="post" action="{{ route('admin.courses.addCourseToMajor',$id) }}" enctype="multipart/form-data">
     @csrf
                          <div>
                                 <label
