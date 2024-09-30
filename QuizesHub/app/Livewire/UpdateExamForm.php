@@ -224,6 +224,10 @@ class UpdateExamForm extends Component
                         {
                             $imagePath = $this->uploadedImages[$index][$answerIndex]->store('/images/answers');
                             $answerText = $imagePath;
+                            if(!empty($answer['text']))
+                            {
+                                Storage::delete($answer['text']);
+                            }
                         }else{
                             $answerText = $this->questions[$index]['answers'][$answerIndex]['text'];
                         }
@@ -267,7 +271,7 @@ class UpdateExamForm extends Component
 
 
         // Optionally, you can reset the questions array or show a success message
-        // $this->questions = [];
+        $this->questions = [];
         session()->flash('message', 'Questions and answers saved successfully!');
     }
 
@@ -284,7 +288,7 @@ class UpdateExamForm extends Component
                 }
             }
 
-            $question->delete();
+            $question->forceDelete();
         }
 
         unset($this->questions[$questionIndex]);
