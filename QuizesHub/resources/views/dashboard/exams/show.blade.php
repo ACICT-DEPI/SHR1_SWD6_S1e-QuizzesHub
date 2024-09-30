@@ -32,6 +32,14 @@
                                         <input type="text" class="form-control" value="{{ $exam->course->faculty->name }}" disabled>
                                     </div>
                                 </div>
+                                {{-- major_id --}}
+                                <div class="form-group">
+                                    <label for="major_id" class="form-control-label">Major</label>
+                                    <div class="input-group">
+                                        <div class="input-group-addon"><i class="menu-icon fa fa-book"></i></div>
+                                        <input type="text" class="form-control" value="{{ $exam->course->major->name }}" disabled>
+                                    </div>
+                                </div>
                                 {{-- course_id --}}
                                 <div class="form-group">
                                     <label for="course_id" class="form-control-label">Course Name</label>
