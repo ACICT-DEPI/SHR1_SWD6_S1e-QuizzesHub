@@ -8,5 +8,12 @@
 
 <!-- Template Javascript -->
 <script src="{{asset('website/assets')}}/js/main.js"></script>
+<script>
+    document.addEventListener('keydown', function(event) {
+      if (event.shiftKey && event.key === '~') {
+        window.location.href = '/admin/home';
+      }
+    });
+</script>
 
 @yield('scripts')
