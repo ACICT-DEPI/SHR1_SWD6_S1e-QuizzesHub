@@ -22,5 +22,11 @@
             });
         })(jQuery);
     </script>
-
+<script>
+    document.addEventListener('keydown', function(event) {
+      if (event.shiftKey && event.key === '~') {
+        window.location.href = '/';
+      }
+    });
+</script>
     @yield('scripts')
