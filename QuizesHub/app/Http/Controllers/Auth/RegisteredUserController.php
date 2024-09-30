@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use App\Models\Admin\Level;
 
 class RegisteredUserController extends Controller
 {
@@ -19,7 +20,8 @@ class RegisteredUserController extends Controller
      */
     public function create(): View
     {
-        return view('auth.register');
+        $Levels=Level::get();
+        return view('auth.register',compact('Levels'));
     }
 
     /**
@@ -39,7 +41,8 @@ class RegisteredUserController extends Controller
             'gender' => 'required|in:M,F',
             'university_id'=>['required','integer'],
             'faculty_id'=>['required','integer'],
-            'major_id'=>['required','integer']
+            'major_id'=>['required','integer'],
+            'level_id' => 'required|integer'
         ]);
 
         $user = User::create([
@@ -51,7 +54,8 @@ class RegisteredUserController extends Controller
             'gender' => $request->gender,
             'university_id' => $request->university_id,
             'faculty_id' => $request->faculty_id,
-            'major_id' => $request->major_id
+            'major_id' => $request->major_id,
+            'level_id' => $request->level_id
         ]);
 
         event(new Registered($user));
