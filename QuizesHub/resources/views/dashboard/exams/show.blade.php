@@ -18,7 +18,7 @@
                             <div class="card-body card-block">
                                 {{-- university_id --}}
                                 <div class="form-group">
-                                    <label for="university_id" class="form-control-label">Univerty Id</label>
+                                    <label for="university_id" class="form-control-label">Univerty</label>
                                     <div class="input-group">
                                         <div class="input-group-addon"><i class="menu-icon fa fa-book"></i></div>
                                         <input type="text" class="form-control" value="{{ $exam->course->university->name }}" class="form-control" disabled>
@@ -26,7 +26,7 @@
                                 </div>
                                 {{-- faculty_id --}}
                                 <div class="form-group">
-                                    <label for="faculty_id" class="form-control-label">Faculty Id</label>
+                                    <label for="faculty_id" class="form-control-label">Faculty</label>
                                     <div class="input-group">
                                         <div class="input-group-addon"><i class="menu-icon fa fa-book"></i></div>
                                         <input type="text" class="form-control" value="{{ $exam->course->faculty->name }}" disabled>
@@ -34,7 +34,7 @@
                                 </div>
                                 {{-- course_id --}}
                                 <div class="form-group">
-                                    <label for="course_id" class="form-control-label">Course Id</label>
+                                    <label for="course_id" class="form-control-label">Course Name</label>
                                     <div class="input-group">
                                         <div class="input-group-addon"><i class="menu-icon fa fa-book"></i></div>
                                         <input type="text" class="form-control" value="{{ $exam->course->course->name }}" disabled>
@@ -42,10 +42,10 @@
                                 </div>
                                 {{-- course_name --}}
                                 <div class="form-group">
-                                    <label for="course_name" class="form-control-label">Course Name</label>
+                                    <label for="course_name" class="form-control-label">Course Code</label>
                                     <div class="input-group">
                                         <div class="input-group-addon"><i class="menu-icon fa fa-book"></i></div>
-                                        <input type="text" class="form-control" value="{{ $exam->course->course->name }}" disabled>
+                                        <input type="text" class="form-control" value="{{ $exam->course->course->code }}" disabled>
                                     </div>
                                 </div>
                                 {{-- type --}}
@@ -98,7 +98,7 @@
                                 </div>
                             </div>
                         </form>
-                        
+
                         <?php $it = 1; ?>
                         <form class="form-horizontal" action="" enctype="" method="">
                             <div class="card-body card-block">
@@ -110,14 +110,14 @@
                                         <div class="input-group-addon">{{$question->type}}</div>
                                         <input type="text" class="form-control" value="{{ $question->text }}" class="form-control" disabled>
                                     </div>
-                                    
+
                                     <label class="form-control-label">Answers</label>
                                     @foreach ($question->answers as $answer)
                                         <div class="input-group">
                                             <div class="input-group-addon">{{$answer->type}}</div>
-                                            @if($answer->type == 'image_path') 
+                                            @if($answer->type == 'image_path')
                                                 <img src="{{asset('storage/'.$answer->text)}}" alt="" width="100" height="100">
-                                            @else 
+                                            @else
                                                 <input type="text" class="form-control" value="{{ $answer->text }}" class="form-control" disabled>
                                             @endif
                                             <input type="radio" name="{{$it}}" @if($answer->is_correct) checked @endif disabled>
@@ -129,7 +129,7 @@
                             </div>
                         </form>
                         </form>
-                    <a href="#" class="btn btn-success">Edit</a>
+                    <a href="{{ route('admin.exams.edit', $exam->id) }}" class="btn btn-success">Edit</a>
                     </div>
                 </div>
             </div>
