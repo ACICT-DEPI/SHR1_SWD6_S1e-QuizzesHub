@@ -59,12 +59,17 @@ class ExamController extends Controller
 
     public function edit($id) 
     {
-        $universities = University::get()->toArray();
-        $faculties = Faculty::get()->toArray();
-        $courses = Course::get()->toArray();
-        $exam = Exam::findorfail($id)->toArray();
-        $exam = Exam::with('course.courseFacultyMajorUniversity')->find($id)->toArray();
-        return view('dashboard.exams.edit', ['exam'=>$exam, 'courses'=>$courses, 'faculties'=>$faculties, 'universities'=>$universities]);
+        // $universities = University::get()->toArray();
+        // $faculties = Faculty::get()->toArray();
+        // $courses = Course::get()->toArray();
+        // $exam = Exam::findorfail($id)->toArray();
+        // $exam = Exam::with('course.courseFacultyMajorUniversity')->find($id)->toArray(); 
+        // return view('dashboard.exams.edit', ['exam'=>$exam, 'courses'=>$courses, 'faculties'=>$faculties, 'universities'=>$universities]);
+        $universities = University::get();
+        $faculties = Faculty::get();
+        $courses = Course::get();
+        $exam = Exam::findorfail($id);
+        return view('dashboard.exams.edit', compact('exam', 'courses', 'faculties', 'universities'));
     }
 
     public function update(ExamRequest $request, $id) 

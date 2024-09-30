@@ -13,7 +13,7 @@ use App\Models\Admin\Answer;
 use App\Models\Admin\CourseFacultyMajorUniversity;
 use Livewire\WithFileUploads;
 
-class CreateExamForm extends Component
+class UpdateExamForm extends Component
 {
     use WithFileUploads;
 
@@ -34,10 +34,66 @@ class CreateExamForm extends Component
 
     public $questions = []; // To hold questions and their answers
     public $uploadedImages = [];
-
-    public function mount()
+    public $exam;
+    public function mount($exam)
     {
+        $this->exam = $exam;
+        
         $this->universities = University::all();
+        
+        $this->selectedUniversity = $exam->course->university->id;
+        $this->updatedSelectedUniversity($exam->course->university->id);
+        
+        $this->selectedFaculty = $exam->course->faculty->id;
+        $this->updatedSelectedFaculty($exam->course->faculty->id); 
+        
+        $this->selectedMajor = $exam->course->major->id;
+        $this->updatedSelectedMajor($exam->course->major->id);
+        
+        $this->selectedCourse = $exam->course->course->id;
+        $this->examType = $exam->type;
+        $this->examDate = $exam->date;
+        $this->examDuration = $exam->duration;
+        $this->examId = $exam->id;
+        
+        foreach($exam->questions as $question):
+            $tmpAnswers = $question->answers->toArray();
+            if($question->type == 'mcq') 
+            {
+                $this->questions[] = [
+                    'id' => $question->id,
+                    'type' => $question->type,
+                    'text' => $question->text,
+                    'answers' => [
+                        ['id' => $tmpAnswers[0]['id'], 'type'=>$tmpAnswers[0]['type'], 'text'=>$tmpAnswers[0]['text'], 'is_correct'=>$tmpAnswers[0]['is_correct']],
+                        ['id' => $tmpAnswers[1]['id'], 'type'=>$tmpAnswers[1]['type'], 'text'=>$tmpAnswers[1]['text'], 'is_correct'=>$tmpAnswers[1]['is_correct']],
+                        ['id' => $tmpAnswers[2]['id'], 'type'=>$tmpAnswers[2]['type'], 'text'=>$tmpAnswers[2]['text'], 'is_correct'=>$tmpAnswers[2]['is_correct']],
+                        ['id' => $tmpAnswers[3]['id'], 'type'=>$tmpAnswers[3]['type'], 'text'=>$tmpAnswers[3]['text'], 'is_correct'=>$tmpAnswers[3]['is_correct']],
+                    ],
+                ];
+            }
+            else if($question->type == 'true_false')
+            {
+                $this->questions[] = [
+                    'id' => $question->id,
+                    'type' => $question->type,
+                    'text' => $question->text,
+                    'answers' => [
+                        ['id' => $tmpAnswers[0]['id'], 'type'=>$tmpAnswers[0]['type'], 'text'=>$tmpAnswers[0]['text'], 'is_correct'=>$tmpAnswers[0]['is_correct']],
+                        ['id' => $tmpAnswers[1]['id'], 'type'=>$tmpAnswers[1]['type'], 'text'=>$tmpAnswers[1]['text'], 'is_correct'=>$tmpAnswers[1]['is_correct']],
+                    ]
+                ];
+            }
+            else if($question->type == 'essay')
+            {
+                $this->questions[] = [
+                    'id' => $question->id,
+                    'type' => $question->type,
+                    'text' => $question->text,
+                ];
+            }
+        endforeach; 
+
     }
 
     public function updatedSelectedUniversity($universityId)
@@ -101,13 +157,14 @@ class CreateExamForm extends Component
     {
         // Initialize the question with an empty array, including answers
         $this->questions[] = [
+            'id' => null,
             'type' => '',    // Question type (mcq, essay, true_false)
             'text' => '',    // Question text
             'answers' => [
-                ['type' => 'normal_text', 'text' => '', 'is_correct' => false],
-                ['type' => 'normal_text', 'text' => '', 'is_correct' => false],
-                ['type' => 'normal_text', 'text' => '', 'is_correct' => false],
-                ['type' => 'normal_text', 'text' => '', 'is_correct' => false],
+                ['id' => null, 'type' => 'normal_text', 'text' => '', 'is_correct' => false],
+                ['id' => null, 'type' => 'normal_text', 'text' => '', 'is_correct' => false],
+                ['id' => null, 'type' => 'normal_text', 'text' => '', 'is_correct' => false],
+                ['id' => null, 'type' => 'normal_text', 'text' => '', 'is_correct' => false],
             ],
         ];
     }
@@ -118,8 +175,8 @@ class CreateExamForm extends Component
         foreach ($this->questions as $index => $question) {
             if ($question['type'] === 'true_false') {
                 $this->questions[$index]['answers'] = [
-                    ['type' => 'normal_text', 'text' => 'True', 'is_correct' => $this->questions[$index]['answers'][0]['is_correct']],
-                    ['type' => 'normal_text', 'text' => 'False', 'is_correct' => $this->questions[$index]['answers'][1]['is_correct']],
+                    ['id' => null, 'type' => 'normal_text', 'text' => 'True', 'is_correct' => $this->questions[$index]['answers'][0]['is_correct']],
+                    ['id' => null, 'type' => 'normal_text', 'text' => 'False', 'is_correct' => $this->questions[$index]['answers'][1]['is_correct']],
                 ];
             }
 
@@ -146,11 +203,16 @@ class CreateExamForm extends Component
 
         // Create the question in the database
         foreach ($this->questions as $index => $question) {
-            $createdQuestion = Question::create([
-                'exam_id' => $this->examId,
-                'type' => $question['type'],
-                'text' => $question['text'],
-            ]);
+            $updateOrCreateQuestion = Question::updateOrCreate(
+                [
+                    'id' => $question['id'],
+                ],
+                [
+                    'exam_id' => $this->examId,
+                    'type' => $question['type'],
+                    'text' => $question['text'],
+                ],
+            );
 
             foreach ($question['answers'] as $answerIndex => $answer) {
                 // Handle image uploads if the answer type is 'image_path'
@@ -162,12 +224,16 @@ class CreateExamForm extends Component
                     $answerText = $answer['text'];
                 }
 
-                Answer::create([
-                    'question_id' => $createdQuestion->id,
+                Answer::updateOrCreate(
+                    [
+                        'id' => $answer['id'],
+                    ],
+                    [
+                    'question_id' => $updateOrCreateQuestion->id,
                     'type' => $answer['type'], // 'normal_text' or 'image_path'
                     'text' => $answerText,
-                    'is_correct' => $answer['is_correct'],
-                ]);
+                    'is_correct' => $answer['is_correct'],]
+                );
             }
         }
 
@@ -177,8 +243,22 @@ class CreateExamForm extends Component
         session()->flash('message', 'Questions and answers saved successfully!');
     }
 
+    public function deleteQuestion($questionIndex)
+    {
+        if(!empty($this->questions[$questionIndex]['id']))
+        {
+            $question = Question::findorfail($this->questions[$questionIndex]['id']);
+            if($question)
+            {
+                $question->delete();
+            }
+        } 
+        unset($this->questions[$questionIndex]);
+        $this->questions = array_values($this->questions); // re-index array
+    }
+
     public function render()
     {
-        return view('livewire.create-exam-form');
+        return view('livewire.update-exam-form');
     }
 }
