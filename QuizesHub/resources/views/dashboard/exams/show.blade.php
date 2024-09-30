@@ -114,8 +114,12 @@
                                     <label class="form-control-label">Answers</label>
                                     @foreach ($question->answers as $answer)
                                         <div class="input-group">
-                                            <div class="input-group-addon">normal_text</div>
-                                            <input type="text" class="form-control" value="{{ $answer->text }}" class="form-control" disabled>
+                                            <div class="input-group-addon">{{$answer->type}}</div>
+                                            @if($answer->type == 'image_path') 
+                                                <img src="{{asset('storage/'.$answer->text)}}" alt="" width="100" height="100">
+                                            @else 
+                                                <input type="text" class="form-control" value="{{ $answer->text }}" class="form-control" disabled>
+                                            @endif
                                             <input type="radio" name="{{$it}}" @if($answer->is_correct) checked @endif disabled>
                                         </div>
                                     @endforeach
