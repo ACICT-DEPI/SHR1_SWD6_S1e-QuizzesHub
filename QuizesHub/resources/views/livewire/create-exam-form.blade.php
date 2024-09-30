@@ -94,16 +94,16 @@
             </div>
         </div>
         <hr>
-        <button wire:click="createExam">Create Exam</button>
+        <button class="btn btn-success" wire:click="createExam">Create Exam</button>
         <hr>
         <div class="card-body card-block">
             <!-- Only show the question form once the exam is created -->
             @if($examId)
                 <label for=""><h3>Questions for the Exam</h3></label>
-            
+
                 <!-- Add a question button -->
-                <button wire:click="addQuestion">Add Question</button>
-            
+                <button class="btn btn-info" wire:click="addQuestion">Add Question</button>
+
                 <!-- Display questions dynamically -->
                 @foreach($questions as $index => $question)
                     <div class="form-group">
@@ -119,7 +119,7 @@
                             </div>
                             <input type="text" class="form-control" wire:model.live="questions.{{ $index }}.text" placeholder="Question Text">
                         </div>
-            
+
                         <label class="form-control-label">Answers</label>
                         @if($question['type'] === 'mcq')
                             @foreach($question['answers'] as $answerIndex => $answer)
@@ -135,7 +135,7 @@
                                     @elseif($answer['type'] === 'image_path')
                                         <input type="file" class="form-control" wire:model.live="uploadedImages.{{ $index }}.{{ $answerIndex }}">
                                     @endif
-            
+
                                     <label>
                                         <input type="checkbox" wire:model.live="questions.{{ $index }}.answers.{{ $answerIndex }}.is_correct">
                                         Correct
@@ -162,15 +162,15 @@
                         @endif
                     </div>
                 @endforeach
-            
-                <button wire:click="saveQuestions">Save Questions and Answers</button>
-            
+
+                <button class="btn btn-success" wire:click="saveQuestions">Save Questions and Answers</button>
+
                 @if (session()->has('message'))
                     <div>{{ session('message') }}</div>
                 @endif
             @endif
         </div>
-        
+
     </div>
 
 </div>
