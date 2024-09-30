@@ -125,7 +125,7 @@ class UpdateExamForm extends Component
         $this->courses = Course::whereIn('id', $courses->pluck('course_id'))->get();
     }
 
-    public function createExam()
+    public function updateExam()
     {
         $this->validate([
             'selectedUniversity' => 'required',
@@ -136,9 +136,9 @@ class UpdateExamForm extends Component
             'examDate' => 'required|date',
             'examDuration' => 'required|numeric',
         ]);
-
-        // Create the exam and get its ID
-        $exam = Exam::create([
+        $exam = Exam::find($this->examId);
+        
+        $exam ->Update([
             'course_id' => CourseFacultyMajorUniversity::where('course_id', $this->selectedCourse)
                 ->where('faculty_id', $this->selectedFaculty)
                 ->where('major_id', $this->selectedMajor)

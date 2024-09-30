@@ -93,7 +93,7 @@
         </div>
     </div>
     <hr>
-    <button wire:click="createExam">Update Exam</button>
+    <button class="btn btn-success" wire:click="updateExam">Update Exam</button>
     <hr>
     <div class="card-body card-block">
         <!-- Only show the question form once the exam is created -->
@@ -101,11 +101,11 @@
         <label for=""><h3>Questions for the Exam</h3></label>
 
             <!-- Add a question button -->
-            <button wire:click="addQuestion">Add Question</button>
+            <button class="btn btn-info" wire:click="addQuestion">Add Question</button>
 
             <!-- Display questions dynamically -->
             @foreach($questions as $index => $question)
-                <hr> 
+                <hr>
                 <div class="form-group">
                     <label for="question" class="form-control-label">Question {{ $index + 1 }}</label>
                     <div class="input-group">
@@ -164,16 +164,16 @@
                     @elseif($question['type'] === 'essay')
                         <div class="input-gourp">
                             <p>Essay questions do not require predefined answers.</p>
-                        </div>    
+                        </div>
                     @endif
-                    
+
                     <div>
                         <button class="btn btn-danger" wire:click='deleteQuestion({{$index}})'>Delete Question {{$index+1}}</button>
                     </div>
                 </div>
             @endforeach
 
-            <button wire:click="saveQuestions">Save Questions and Answers</button>
+            <button class="btn btn-success" wire:click="saveQuestions">Save Questions and Answers</button>
 
             @if (session()->has('message'))
                 <div>{{ session('message') }}</div>
