@@ -103,17 +103,17 @@
                                 </div>
                             </div>
                                @livewire('CreateUserForm')
-                            {{-- <livewire:create-user-form /> --}}
+                            <!-- {{-- <livewire:create-user-form /> --}} -->
                        
-
-                            {{-- <div class="form-group">
+                            
+                             <div class="form-group" style="margin-top: 20px;">
                                 <label class=" form-control-label" for="level_id">Levels</label>
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-laptop"></i></div>
                                     <select class="form-control @error('level_id') is-invalid @enderror" name="level_id"
                                         id="level_id">
                                         <option value="">Select Level</option>
-                                        @foreach ($levels as $level)
+                                        @foreach ($Levels as $level)
                                             <option value="{{ $level->id }}" @selected(old('level_id') == $level->id)>
                                                 {{ $level->name }}</option>
                                         @endforeach
@@ -124,7 +124,7 @@
                                         </span>
                                     @enderror
                                 </div>
-                            </div> --}}
+                            </div> 
                        
                         
 
