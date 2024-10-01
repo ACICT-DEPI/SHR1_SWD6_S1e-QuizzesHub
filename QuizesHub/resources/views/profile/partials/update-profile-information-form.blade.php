@@ -17,16 +17,61 @@
         @csrf
         @method('patch')
 
-        <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" />
-            <x-input-error class="mt-2" :messages="$errors->get('name')" />
+        <div class="mb-3">
+            <label for="fname"><i class="zmdi zmdi-account material-icons-name"></i>Fname </label>
+            <input type="text" id="fname" value="{{ old('fname', $user->fname) }}" style="width: 80%; border-radius: 0.375rem; display: inline-block !important;"
+             class="form-control @error('fname') is-invalid @enderror" name="fname" placeholder="Your first name">
+            @error('fname')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
         </div>
 
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)" required autocomplete="username" />
-            <x-input-error class="mt-2" :messages="$errors->get('email')" />
+        <div class="mb-3">
+            <label for="lname"><i class="zmdi zmdi-account material-icons-name"></i>Lname </label>
+            <input type="text" id="lname" value="{{ old('lname', $user->lname) }}" style="width: 80%; border-radius: 0.375rem; display: inline-block !important;"
+             class="form-control @error('lname') is-invalid @enderror" name="lname" placeholder="Your last name">
+            @error('lname')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
+        </div>
+
+        <div class="mb-3">
+            <label for="phone"><i class="zmdi zmdi-account material-icons-name"></i>Phone </label>
+            <input type="text" id="phone" value="{{ old('phone', $user->phone) }}" style="width: 80%; border-radius: 0.375rem; display: inline-block !important;"
+             class="form-control @error('phone') is-invalid @enderror" name="phone" placeholder="Your phone number">
+            @error('phone')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
+        </div>
+
+        <div class="mb-3">
+            <label for="username"><i class="zmdi zmdi-account material-icons-name"></i>Username </label>
+            <input type="text" id="username" value="{{ old('username', $user->username) }}" style="width: 80%; border-radius: 0.375rem; display: inline-block !important;"
+             class="form-control @error('username') is-invalid @enderror" name="username" placeholder="Your username">
+            @error('username')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
+        </div>
+
+
+        <div class="mb-3">
+            <label class=" form-control-label" for="email">Email</label>
+            <input type="email" id="email"  value="{{ old('email', $user->email) }}" style="width: 80%; border-radius: 0.375rem; display: inline-block !important;"
+            class="form-control @error('email') is-invalid @enderror" name="email" placeholder="Your email">
+            @error('email')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
+
 
             @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! $user->hasVerifiedEmail())
                 <div>
@@ -47,8 +92,30 @@
             @endif
         </div>
 
+        <div class="mb-3">
+            <label  class=" text-end control-label col-form-label " style="position:relative; top:-12px; margin-right:10px;">Gender</label>
+            <div class=" col-md-3" style="display: inline-block !important;">
+                <div class="form-check">
+                    <input type="radio" class="form-check-input " id="male" name="gender"
+                        value="M" @if( $user->gender == 'M') checked @endif />
+                    <label class="form-check-label mb-0" for="male">Male</label>
+                </div>
+                <div class="form-check">
+                    <input type="radio" class="form-check-input" id="female" name="gender"
+                        value="F" @if ($user->gender == 'F') checked @endif />
+                    <label class="form-check-label mb-0" for="female">Female</label>
+                </div>
+                @error('gender')
+                    <span class="text-danger">{{ $message }}</span>
+                @enderror
+            </div>
+        </div>
+
+        @livewire('update-user-form', ['user' => $user])
+
         <div class="flex items-center gap-4">
-            <x-primary-button>{{ __('Save') }}</x-primary-button>
+            <button type="submit" class="btn btn-primary">
+                {{ __('Save') }}
 
             @if (session('status') === 'profile-updated')
                 <p
