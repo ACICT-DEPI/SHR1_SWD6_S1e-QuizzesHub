@@ -15,6 +15,9 @@ use App\Http\Controllers\Admin\FacultyController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Models\Admin\user;
+use App\Models\Admin\course;
+
 
 use App\Livewire\Login;
 use App\Livewire\Register;
@@ -27,7 +30,13 @@ use App\Livewire\Register;
 
 
 Route::get('/', function () {
-    return view('site.index');
+    $user=user::where('id',Auth::user()->id)->first();
+    $Courses=[];
+  foreach($user->courses() as $course){
+    $Courses[] = course::where('id',$course->course_id)->first();    
+  } 
+     return view('site.index',compact('Courses'));
+    
 })->name('site.index');
 
 // Route::get('/admin', function () {

@@ -60,8 +60,8 @@ class RegisteredUserController extends Controller
 
         event(new Registered($user));
 
-        Auth::login($user);
-   
-        return redirect(route('site.index', absolute: false));
+       $user=Auth::login($user);
+     
+       return redirect(route('site.index', absolute: false));
     }
 }
