@@ -119,6 +119,14 @@
                         </div>
                         <input type="text" class="form-control" wire:model.live="questions.{{ $index }}.text" placeholder="Question Text" value="{{$question['text']}}">
                     </div>
+                    <div class="input-group">
+                        @if ($errors->has("questions.$index.type"))
+                            <span class="alert alert-danger">{{ $errors->first("questions.$index.type") }}</span>
+                        @endif
+                        @if ($errors->has("questions.$index.text"))
+                            <span class="alert alert-danger">{{ $errors->first("questions.$index.text") }}</span>
+                        @endif
+                    </div>
 
                     <label class="form-control-label">Answers</label>
                     @if($question['type'] === 'mcq')

@@ -204,6 +204,16 @@ class UpdateExamForm extends Component
 
         // Create the question in the database
         foreach ($this->questions as $index => $question) {
+            $this->validate(
+                [
+                "questions.$index.text" => 'required',
+                "questions.$index.type" => 'required',
+                ],
+                [
+                "questions.$index.text.required" => "The text field for question #".($index+1)." is required.",
+                "questions.$index.type.required" => "The type field for question #".($index+1)." is required.",
+                ]
+            );
             $updateOrCreateQuestion = Question::updateOrCreate(
                 [
                     'id' => $question['id'],
