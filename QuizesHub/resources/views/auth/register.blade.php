@@ -12,9 +12,9 @@
 
 
     <!-- Font Icon -->
-      
+
     <link rel="stylesheet" href="{{ asset('auth/assets') }}/fonts/material-icon/css/material-design-iconic-font.min.css">
-     
+
    <!-- livewire:css -->
 
      <link rel="stylesheet" href="{{ asset('dashboard/assets') }}/css/bootstrap.min.css">
@@ -22,18 +22,18 @@
     <link rel="stylesheet" href="{{ asset('dashboard/assets') }}/css/themify-icons/css/themify-icons.css">
     <link rel="stylesheet" href="{{ asset('dashboard/assets') }}/css/selectFX/css/cs-skin-elastic.css">
      <link rel="stylesheet" href="{{ asset('dashboard/assets') }}/css/style.css">
-    
+
 
     <!-- Main css -->
     <link rel="stylesheet" href="{{ asset('auth/assets') }}/css/style.css">
-  
+
 
 
     <!-- Scripts -->
     @vite([/*'resources/css/app.css',*/ 'resources/js/app.js'])
 
-        
-        
+
+
 </head>
 <body>
 
@@ -66,7 +66,7 @@
                             </div>
                             <div><x-input-error :messages="$errors->get('username')" class="mt-2" /></div>
 
-                           
+
 
                             <div class="form-group">
                                 <label for="email"><i class="zmdi zmdi-email"></i></label>
@@ -104,29 +104,28 @@
                             </div>
                                @livewire('CreateUserForm')
                             <!-- {{-- <livewire:create-user-form /> --}} -->
-                       
-                            
-                             <div class="form-group" style="margin-top: 20px;">
+
+
+                            <div class="form-group" style="margin-top: 20px;">
                                 <label class=" form-control-label" for="level_id">Levels</label>
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-laptop"></i></div>
-                                    <select class="form-control @error('level_id') is-invalid @enderror" name="level_id"
-                                        id="level_id">
+                                    <select class="form-control @error('level_id') is-invalid @enderror" name="level_id" id="level_id">
                                         <option value="">Select Level</option>
                                         @foreach ($Levels as $level)
-                                            <option value="{{ $level->id }}" @selected(old('level_id') == $level->id)>
-                                                {{ $level->name }}</option>
+                                        <option value="{{ $level->id }}" @selected(old('level_id')==$level->id)>
+                                            {{ $level->name }}</option>
                                         @endforeach
                                     </select>
                                     @error('level_id')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                     @enderror
                                 </div>
-                            </div> 
-                       
-                        
+                            </div>
+
+
 
                             <div class="form-group form-button">
                                 <input type="submit" name="signup" id="signup" class="form-submit" value="Register"/>

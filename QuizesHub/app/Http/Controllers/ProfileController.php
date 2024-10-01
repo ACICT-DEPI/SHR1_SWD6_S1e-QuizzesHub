@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use App\Models\Admin\Level;
 
 class ProfileController extends Controller
 {
@@ -16,7 +17,8 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): View
     {
-        return view('profile.edit', [
+        $levels=Level::get();
+        return view('profile.edit',compact('levels'), [
             'user' => $request->user(),
         ]);
     }

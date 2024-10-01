@@ -15,5 +15,5 @@
       }
     });
 </script>
-
+@livewireScripts
 @yield('scripts')

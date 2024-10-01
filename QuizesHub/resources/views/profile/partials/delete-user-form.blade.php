@@ -14,6 +14,7 @@
         x-on:click.prevent="$dispatch('open-modal', 'confirm-user-deletion')"
     >{{ __('Delete Account') }}</x-danger-button>
 
+
     <x-modal name="confirm-user-deletion" :show="$errors->userDeletion->isNotEmpty()" focusable>
         <form method="post" action="{{ route('profile.destroy') }}" class="p-6">
             @csrf
@@ -27,7 +28,15 @@
                 {{ __('Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.') }}
             </p>
 
-            <div class="mt-6">
+            <div class="mt-6 mb-3">
+
+                {{-- <label for="passwoed"><i class="zmdi zmdi-account material-icons-name"></i>Password </label>
+                <input type="passwoed" id="passwoed"
+                    style="width: 40%; border-radius: 0.375rem; display: inline-block !important;"
+                    class="form-control @error('passwoed') is-invalid @enderror" name="passwoed"
+                    placeholder="Your Password">
+                <x-input-error :messages="$errors->updatePassword->get('passwoed')" class="mt-2" /> --}}
+
                 <x-input-label for="password" value="{{ __('Password') }}" class="sr-only" />
 
                 <x-text-input
