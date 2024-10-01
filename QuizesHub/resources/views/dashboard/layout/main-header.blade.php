@@ -36,13 +36,13 @@
             </a>
 
             <div class="user-menu dropdown-menu">
-                <a class="nav-link" href="#"><i class="fa fa-user"></i> {{ Auth::user()->fname }}</a>
+                <a class="nav-link" href="{{ route('profile.edit') }}"><i class="fa fa-user"></i> {{ Auth::user()->fname }}</a>
 
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
                     <a class="nav-link" href="{{ route('logout') }}"  onclick="event.preventDefault();
                                         this.closest('form').submit();"><i class="fa fa-power-off"></i> Logout</a>
-                    
+
                 </form>
             </div>
         </div>
