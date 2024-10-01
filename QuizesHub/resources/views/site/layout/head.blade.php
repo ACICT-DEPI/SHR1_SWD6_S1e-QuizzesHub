@@ -27,4 +27,5 @@
     <!-- Template Stylesheet -->
     <link href="{{asset('website/assets')}}/css/style.css" rel="stylesheet">
 
+    @livewireStyles
     @yield('styles')

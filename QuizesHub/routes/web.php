@@ -30,13 +30,9 @@ use App\Livewire\Register;
 
 
 Route::get('/', function () {
-    $user=user::where('id',Auth::user()->id)->first();
-    $Courses=[];
-  foreach($user->courses() as $course){
-    $Courses[] = course::where('id',$course->course_id)->first();    
-  } 
-     return view('site.index',compact('Courses'));
-    
+
+     return view('site.index');
+
 })->name('site.index');
 
 // Route::get('/admin', function () {

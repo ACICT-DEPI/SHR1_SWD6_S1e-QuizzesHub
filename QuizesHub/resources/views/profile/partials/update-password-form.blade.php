@@ -1,4 +1,4 @@
-<section>
+<section style="max-width: 39rem">
     <header>
         <h2 class="text-lg font-medium text-gray-900">
             {{ __('Update Password') }}
@@ -13,26 +13,37 @@
         @csrf
         @method('put')
 
-        <div>
-            <x-input-label for="update_password_current_password" :value="__('Current Password')" />
-            <x-text-input id="update_password_current_password" name="current_password" type="password" class="mt-1 block w-full" autocomplete="current-password" />
-            <x-input-error :messages="$errors->updatePassword->get('current_password')" class="mt-2" />
+        <div class="mb-3">
+            <label for="Current_Password"><i class="zmdi zmdi-account material-icons-name"></i>Current Password </label>
+            <input type="passwoed" id="Current_Password"
+                style="width: 60%; border-radius: 0.375rem; display: inline-block !important;"
+                class="form-control @error('Current_Password') is-invalid @enderror" name="Current_Password"
+                placeholder="Your Current Password">
+                <x-input-error :messages="$errors->updatePassword->get('current_password')" class="mt-2" />
         </div>
 
-        <div>
-            <x-input-label for="update_password_password" :value="__('New Password')" />
-            <x-text-input id="update_password_password" name="password" type="password" class="mt-1 block w-full" autocomplete="new-password" />
-            <x-input-error :messages="$errors->updatePassword->get('password')" class="mt-2" />
+        <div class="mb-3">
+            <label for="password"><i class="zmdi zmdi-account material-icons-name"></i>New Password </label>
+            <input type="passwoed" id="password"
+                style="width: 60%; border-radius: 0.375rem; display: inline-block !important;"
+                class="form-control @error('password') is-invalid @enderror" name="password"
+                placeholder="Your Current Password">
+                <x-input-error :messages="$errors->updatePassword->get('password')" class="mt-2" />
         </div>
 
-        <div>
-            <x-input-label for="update_password_password_confirmation" :value="__('Confirm Password')" />
-            <x-text-input id="update_password_password_confirmation" name="password_confirmation" type="password" class="mt-1 block w-full" autocomplete="new-password" />
+        <div class="mb-3">
+            <label for="password_confirmation"><i class="zmdi zmdi-account material-icons-name"></i>Confirm Password </label>
+            <input type="passwoed" id="password_confirmation"
+                style="width: 60%; border-radius: 0.375rem; display: inline-block !important;"
+                class="form-control @error('password_confirmation') is-invalid @enderror" name="password_confirmation"
+                placeholder="Your Current password_confirmation">
             <x-input-error :messages="$errors->updatePassword->get('password_confirmation')" class="mt-2" />
         </div>
 
+
         <div class="flex items-center gap-4">
-            <x-primary-button>{{ __('Save') }}</x-primary-button>
+            <button type="submit" class="btn btn-success mt-3" style="width: 35%; border-radius: 0.375rem; display: inline-block !important;">
+                {{ __('Save') }}
 
             @if (session('status') === 'password-updated')
                 <p
