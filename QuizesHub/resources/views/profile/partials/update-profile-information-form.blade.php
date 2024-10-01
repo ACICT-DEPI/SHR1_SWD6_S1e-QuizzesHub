@@ -1,4 +1,35 @@
-<section style="max-width: 28rem !important;">
+@section('styles')
+<style>
+    .container5 {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    .left,
+    .right {
+        flex: 1;
+        padding: 10px;
+    }
+
+    /* Optional: Adjust for smaller screens */
+    @media (max-width: 768px) {
+        .container5 {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .left,
+        .right {
+            width: 100%;
+        }
+    }
+</style>
+@endsection
+<section style="max-width: 28rem !important;" class="left">
+    @if (session()->has('status'))
+    <div class="alert alert-success">{{ session('status') }}</div>
+    @endif
     <header>
         <h2 class="text-lg font-medium text-gray-900">
             {{ __('Profile Information') }}
@@ -16,7 +47,7 @@
     <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6">
         @csrf
         @method('patch')
-        <div >
+        <div>
             <div class="mb-3">
                 <label for="fname"><i class="zmdi zmdi-account material-icons-name"></i>Fname </label>
                 <input type="text" id="fname" value="{{ old('fname', $user->fname) }}"
@@ -107,12 +138,12 @@
                 <div class=" col-md-3" style="display: inline-block !important;">
                     <div class="form-check">
                         <input type="radio" class="form-check-input " id="male" name="gender" value="M"
-                         @if($user->gender == 'M') checked @endif />
+                            @if($user->gender == 'M') checked @endif />
                         <label class="form-check-label mb-0" for="male">Male</label>
                     </div>
                     <div class="form-check">
                         <input type="radio" class="form-check-input" id="female" name="gender" value="F"
-                        @if($user->gender == 'F') checked @endif />
+                            @if($user->gender == 'F') checked @endif />
                         <label class="form-check-label mb-0" for="female">Female</label>
                     </div>
                     @error('gender')
@@ -129,7 +160,7 @@
                     <select class="form-control @error('level_id') is-invalid @enderror" name="level_id" id="level_id">
                         <option value="">Select Level</option>
                         @foreach ($levels as $level)
-                        <option value="{{ $level->id }}" @selected(old('level_id', $user->level->id)==$level->id)>
+                        <option value="{{ $level->id }}" @selected($user->level_id== $level->id)>
                             {{ $level->name }}</option>
                         @endforeach
                     </select>
@@ -142,7 +173,8 @@
             </div>
 
             <div class="flex items-center gap-4">
-                <button type="submit" class="btn btn-success mt-3" style="width: 50%; border-radius: 0.375rem; display: inline-block !important;">
+                <button type="submit" class="btn btn-success mt-3"
+                    style="width: 50%; border-radius: 0.375rem; display: inline-block !important;">
                     {{ __('Save') }}
 
                     @if (session('status') === 'profile-updated')
@@ -155,6 +187,6 @@
 
 </section>
 
-<section style="max-width: 25rem !important; position:absolute; right: 150px; top: 250px;" >
+<section style="max-width: 25rem !important;" class="right">
     @livewire('update-user-photo', ['user' => $user])
 </section>

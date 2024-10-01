@@ -14,29 +14,29 @@
         @method('put')
 
         <div class="mb-3">
-            <label for="Current_Password"><i class="zmdi zmdi-account material-icons-name"></i>Current Password </label>
-            <input type="passwoed" id="Current_Password"
+            <label for="current_password"><i class="zmdi zmdi-account material-icons-name"></i>Current Password </label>
+            <input type="password" id="current_password"
                 style="width: 60%; border-radius: 0.375rem; display: inline-block !important;"
-                class="form-control @error('Current_Password') is-invalid @enderror" name="Current_Password"
+                class="form-control @error('current_password') is-invalid @enderror" name="current_password"
                 placeholder="Your Current Password">
                 <x-input-error :messages="$errors->updatePassword->get('current_password')" class="mt-2" />
         </div>
 
         <div class="mb-3">
             <label for="password"><i class="zmdi zmdi-account material-icons-name"></i>New Password </label>
-            <input type="passwoed" id="password"
+            <input type="password" id="password"
                 style="width: 60%; border-radius: 0.375rem; display: inline-block !important;"
                 class="form-control @error('password') is-invalid @enderror" name="password"
-                placeholder="Your Current Password">
+                placeholder="Your Current password">
                 <x-input-error :messages="$errors->updatePassword->get('password')" class="mt-2" />
         </div>
 
         <div class="mb-3">
             <label for="password_confirmation"><i class="zmdi zmdi-account material-icons-name"></i>Confirm Password </label>
-            <input type="passwoed" id="password_confirmation"
+            <input type="password" id="password_confirmation"
                 style="width: 60%; border-radius: 0.375rem; display: inline-block !important;"
                 class="form-control @error('password_confirmation') is-invalid @enderror" name="password_confirmation"
-                placeholder="Your Current password_confirmation">
+                placeholder="confirm password">
             <x-input-error :messages="$errors->updatePassword->get('password_confirmation')" class="mt-2" />
         </div>
 
