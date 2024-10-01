@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">
-    <a href="index.html" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
+    <a href="{{ route('site.index') }}" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
         <h2 class="m-0 text-primary"><img src="{{asset('website/assets')}}/img/QH.png" class="logo" alt="">QuizzesHub</h2>
     </a>
     <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
@@ -13,7 +13,7 @@
         @auth
 
 
-            <a href="index.html" class="nav-item nav-link active">Home</a>
+            <a href="{{ route('site.index') }}" class="nav-item nav-link active">Home</a>
             <a href="about.html" class="nav-item nav-link">About</a>
             <a href="courses.html" class="nav-item nav-link">Courses</a>
             <div class="nav-item dropdown">

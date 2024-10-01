@@ -77,6 +77,15 @@ class User extends Authenticatable
         return $this->belongsTo(Major::class, 'major_id', 'id');
     }
 
+    public function courses()
+    {
+        return CourseFacultyMajorUniversity::where('university_id', $this->university_id)
+            ->where('faculty_id', $this->faculty_id)
+            ->where('major_id', $this->major_id)
+            ->get();
+        // return $this->belongsToMany(Course::class, 'course_faculty_major_universities', 'user_id', 'course_id')->withPivot('university_id', 'faculty_id', 'major_id');
+    }
+
     public function level()
     {
         return $this->belongsTo(Level::class, 'level_id', 'id');
