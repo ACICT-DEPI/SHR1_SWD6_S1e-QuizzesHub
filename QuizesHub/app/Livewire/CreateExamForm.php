@@ -124,7 +124,9 @@ class CreateExamForm extends Component
             }
 
             if($question['type'] === 'essay') {
-                $this->questions[$index]['answers'] = [];
+                $this->questions[$index]['answers'] = [
+                    ['type' => 'normal_text', 'text' => 'no answer yet', 'is_correct' => true],
+                ];
             }
         }
     }
