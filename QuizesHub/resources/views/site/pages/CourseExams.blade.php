@@ -1,6 +1,6 @@
 @extends('site.layout.master')
 @section('content')
-
+@if(!empty($exams))
 <div class="container-xxl py-5">
     <div class="container">
         <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
@@ -11,6 +11,7 @@
         </div>
 
 <!-- ------------------------------------------------------------------------------- -->
+
 @foreach($exams as $exam)
 <section  class="shadow-lg p-3 mb-5 bg-body rounded" style="max-width: 39rem;margin-left: 28%" >
    
@@ -20,14 +21,14 @@
             <h1>The Best {{ $exam->type }} Exam </h1>
              <p data-wow-delay="0.1s">You Can Start Exam Now</p>
         </h2>
-        <form method="get" action="#" class="mt-6 space-y-6">
+        <form method="get" action="{{ route('quiz.quiz', $exam->id) }}" class="mt-6 space-y-6">
         <button type="submit" class="btn btn-success mt-3" style="width: 35%; border-radius: 0.375rem; display: inline-block !important;" data-wow-delay="0.1s">
         {{ __('Start Exam ') }}
         </form>
 
 </section>
 @endforeach
-
+@endif
 <!-- ------------------------------------------------------------------------------- -->
                   
         
