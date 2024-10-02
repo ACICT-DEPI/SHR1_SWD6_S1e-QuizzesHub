@@ -30,22 +30,13 @@
 
             <div class="mt-6 mb-3">
 
-                {{-- <label for="passwoed"><i class="zmdi zmdi-account material-icons-name"></i>Password </label>
-                <input type="passwoed" id="passwoed"
+                <label for="passwoed"><i class="zmdi zmdi-account material-icons-name"></i>Password </label>
+                <input type="password" id="password"
                     style="width: 40%; border-radius: 0.375rem; display: inline-block !important;"
-                    class="form-control @error('passwoed') is-invalid @enderror" name="passwoed"
+                    class="form-control @error('password') is-invalid @enderror" name="password"
                     placeholder="Your Password">
-                <x-input-error :messages="$errors->updatePassword->get('passwoed')" class="mt-2" /> --}}
+                <x-input-error :messages="$errors->updatePassword->get('password')" class="mt-2" />
 
-                <x-input-label for="password" value="{{ __('Password') }}" class="sr-only" />
-
-                <x-text-input
-                    id="password"
-                    name="password"
-                    type="password"
-                    class="mt-1 block w-3/4"
-                    placeholder="{{ __('Password') }}"
-                />
 
                 <x-input-error :messages="$errors->userDeletion->get('password')" class="mt-2" />
             </div>
