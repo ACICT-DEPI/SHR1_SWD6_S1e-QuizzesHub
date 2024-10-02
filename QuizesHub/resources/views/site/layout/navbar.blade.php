@@ -29,7 +29,7 @@
                         @endphp
                         
                         @foreach ($courses as $course)
-                        <a href="#" class="dropdown-item">{{ $course->name }}</a>
+                        <a href="{{ route('CourseExams',$course->id) }}" class="dropdown-item">{{ $course->name }}</a>
                         @endforeach
 
                     @else
