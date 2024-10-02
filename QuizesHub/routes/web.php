@@ -17,6 +17,7 @@ use App\Http\Controllers\Admin\FacultyController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\CourseExamsController;
 use App\Models\Admin\user;
 use App\Models\Admin\course;
 
@@ -46,10 +47,13 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+    Route::get('CourseExams/{course}', [CourseExamsController::class, 'CourseExams'])->name('CourseExams');
+  
     Route::get('/quiz/{id}', [QuizController::class, 'quiz'])->name('quiz.quiz');
     Route::post('/quiz/{id}', [QuizController::class, 'submit'])->name('quiz.submit');
     Route::get('/quiz/{id}/feedback', [QuizController::class, 'feedBack'])->name('quiz.feedback');
     Route::post('/quiz/{id}/feedback', [QuizController::class, 'storeFeedBack'])->name('quiz.feedback');
+
 });
 
 Route::middleware(['auth','IsAdmin'])->prefix('admin')->name('admin.')->group(function () {
@@ -110,6 +114,9 @@ Route::middleware(['auth','IsAdmin'])->prefix('admin')->name('admin.')->group(fu
 
 
 require __DIR__.'/auth.php';
+
+
+
 
 
 
