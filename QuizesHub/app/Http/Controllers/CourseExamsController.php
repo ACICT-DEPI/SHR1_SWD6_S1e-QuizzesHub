@@ -11,6 +11,7 @@ class CourseExamsController extends Controller
     {
         $course = Course::find($course);
         $exams = $course->exams;
-         return view('site.pages.CourseExams',compact('exams'));
+      
+         return view('site.pages.CourseExams',compact('exams','course'));
     }
 }
