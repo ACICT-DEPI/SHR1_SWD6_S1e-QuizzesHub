@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\QuizController;
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\ExamAttemptController;
 use App\Http\Controllers\Admin\ExamController;
@@ -44,7 +46,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
     Route::get('CourseExams/{course}', [CourseExamsController::class, 'CourseExams'])->name('CourseExams');
+  
+    Route::get('/quiz/{id}', [QuizController::class, 'quiz'])->name('quiz.quiz');
+    Route::post('/quiz/{id}', [QuizController::class, 'submit'])->name('quiz.submit');
+    Route::get('/quiz/{id}/feedback', [QuizController::class, 'feedBack'])->name('quiz.feedback');
+    Route::post('/quiz/{id}/feedback', [QuizController::class, 'storeFeedBack'])->name('quiz.feedback');
+
 });
 
 Route::middleware(['auth','IsAdmin'])->prefix('admin')->name('admin.')->group(function () {

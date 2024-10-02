@@ -157,7 +157,7 @@
                             </div>
                         @elseif($question['type'] === 'essay')
                             <div class="input-group">
-                                <p>Essay questions do not require predefined answers.</p>
+                                <input type="text" class="form-control" wire:model.live="questions.{{ $index }}.answers.{{0}}.text" value="no answer yet">
                             </div>
                         @endif
                     </div>
