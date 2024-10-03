@@ -11,12 +11,17 @@
                 <div class="input-group">
                     <div class="input-group-addon"><i class="menu-icon fa fa-book"></i></div>
                     <select wire:model.live="selectedUniversity" class="form-control">
-                        <option value="">Choose University</option>
+                        <option>Choose University</option>
                         @foreach($universities as $university)
                             <option value="{{ $university->id }}">{{ $university->name }}</option>
                         @endforeach
                     </select>
                 </div>
+                @error('selectedUniversity')
+                    <div class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </div>
+                @enderror
             </div>
             {{-- faculty_id --}}
             <div class="form-group">
@@ -91,6 +96,11 @@
                     <div class="input-group-addon"><i class="menu-icon fa fa-book"></i></div>
                     <input type="number" wire:model.live="examDuration" placeholder="Duration in minutes" class="form-control" min="1" max="300">
                 </div>
+                @error('examDuration')
+                    <div class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </div>
+                @enderror
             </div>
         </div>
         <hr>

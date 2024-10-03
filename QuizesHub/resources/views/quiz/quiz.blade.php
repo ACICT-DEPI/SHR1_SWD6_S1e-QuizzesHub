@@ -12,6 +12,20 @@
     <link rel="stylesheet" href="{{ asset('dashboard/assets') }}/css/selectFX/css/cs-skin-elastic.css">
     <link rel="stylesheet" href="{{ asset('dashboard/assets') }}/css/style.css">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+    <style>
+        #timer {
+            margin: 5% auto;
+            padding: 5px;
+            border: 5px solid white;
+            border-radius: 20%;
+        }
+        .question-container {
+            height: 300px;
+        }
+        #control-btns {
+            margin: 1% auto;
+        }
+    </style>
 </head>
 <body>
     <div class="content mt-3">
@@ -107,14 +121,14 @@
                             <form id="submit-quiz-form" class="form-horizontal" action="{{ route('quiz.submit', $exam->id) }}" enctype="" method="POST">
                                 @csrf
                                 <div class="card-body card-block">
-                                    <div id="timer">
+                                    <div id="timer" class="btn btn-primary">
 
                                     </div>
-                                    <input type="number" id="timer-input" name="timer_input" value="">
+                                    <input type="hidden" id="timer-input" name="timer_input" value="">
 
                                     @foreach($exam->questions as $index => $question)
                                         <div class="question-container" style="display: none;" id="question-{{ $index }}">
-                                            <label>{{ $index + 1 }}. {{ $question->text }}</label>
+                                            <label>[{{ $index + 1 }}] {{ $question->text }}</label>
 
                                             <!-- If it's MCQ or true/false -->
                                             @if($question->type == 'mcq' || $question->type == 'true_false')
@@ -136,10 +150,26 @@
                                             @endif
                                         </div>
                                     @endforeach
+                                    <input type="range" class="form-range" id="range" step="1" value="1" min="1" max="{{ count($exam->questions->toArray()) }}">
 
-                                    <button type="button" id="prev-question" style="opacity: 0.5;">Previous</button>
-                                    <button type="button" id="next-question">Next</button>
-                                    <button type="submit" id="submit-quiz" style="display: none;">Submit Answers</button>
+                                </div>
+                                
+                                {{-- buttons --}}
+                                <div id="control-btns">
+                                    <ul class="pagination">
+                                        <li class="page-item">
+                                            <button class="page-link" type="button" id="prev-question" style="opacity: 0.5;">&laquo;</button>
+                                            {{-- <a class="page-link" href="#" aria-label="Previous">
+                                                <span aria-hidden="true">&laquo;</span>
+                                                <span class="sr-only">Previous</span>
+                                            </a> --}}
+                                        </li>
+                                        <li class="page-item"><a class="page-link" href="#"><span id="currentQuestion"></span>/{{ count($exam->questions->toArray()) }}</a></li>
+                                        <li class="page-item">
+                                            <button class="page-link" type="button" class="btn btn-primary" id="next-question">&raquo;</button>
+                                            <button class="page-link" type="submit" class="btn btn-success" id="submit-quiz" style="display: none;">Submit Answers</button>
+                                        </li>
+                                    </ul>
                                 </div>
                             </form>
                         </div>
@@ -151,9 +181,8 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // var totalTime = {{ $exam->duration * 60 }};
-            var totalTime = 10;
-            
+            var totalTime = {{ $exam->duration * 60 }};
+            // var totalTime = 10;
 
             let currentQuestionIndex = 0;
             let totalQuestions = {{ count($exam->questions) }};
@@ -161,8 +190,6 @@
             
             document.getElementById('begin-btn').addEventListener('click', function() {
                 const interval = setInterval(() => {
-                // var totalTime = {{$exam->duration}};
-                console.log(totalTime);
                 const minutes = Math.floor(totalTime / 60);
                 const seconds = totalTime % 60;
                 document.getElementById('timer').textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
@@ -180,6 +207,8 @@
             });
 
             document.getElementById('question-0').style.display = 'block';
+            document.getElementById('currentQuestion').textContent = `${currentQuestionIndex+1}`;
+            document.getElementById('range').value = `${currentQuestionIndex+1}`;
 
             // Show the next question
             document.getElementById('next-question').addEventListener('click', function() {
@@ -194,6 +223,8 @@
                     document.getElementById('next-question').style.display = 'none';
                     document.getElementById('submit-quiz').style.display = 'inline-block';
                 }
+                document.getElementById('currentQuestion').textContent = currentQuestionIndex+1;
+                document.getElementById('range').value = `${currentQuestionIndex+1}`;
             });
 
             // Show the previous question
@@ -209,6 +240,8 @@
                 if (currentQuestionIndex == 0) {
                     document.getElementById('prev-question').style.opacity = 0.5;
                 }
+                document.getElementById('currentQuestion').textContent = currentQuestionIndex+1;
+                document.getElementById('range').value = `${currentQuestionIndex+1}`;
             });
 
             // Before submit the exam, display a confirm

@@ -1,18 +1,6 @@
-<?php 
-    // echo '<pre>';
-    //     print_r($universities);
-    // echo '</pre>';
-    // echo '<pre>';
-    //     print_r($faculties);
-    // echo '</pre>';
-    // echo '<pre>';
-    //     print_r($courses);
-    // echo '</pre>';
+<?php
 
-
-    // die();
 ?>
-
 
 @extends('dashboard.layout.master')
 
@@ -27,139 +15,9 @@
                     </alert>
                     @endif
 
-                    <form class="form-horizontal" action="{{ route('admin.exams.store') }}" enctype="multipart/form-data" method="post">
-                        @csrf
-                        <div class="card-body card-block">
-                            {{-- university_id --}}
-                            <div class="form-group">
-                                <label for="university_id" class="form-control-label">Univerty Id</label>
-                                <div class="input-group">
-                                    <div class="input-group-addon"><i class="menu-icon fa fa-book"></i></div>
-                                    <select name="university_id" id="university_id" class="form-control @error('course_name') is-invalid @enderror">
-                                        @foreach ($universities as $university)
-                                        <option value="{{$university['id']}}">{{$university['name']}}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('university_id')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            {{-- faculty_id --}}
-                            <div class="form-group">
-                                <label for="faculty_id" class="form-control-label">Faculty Id</label>
-                                <div class="input-group">
-                                    <div class="input-group-addon"><i class="menu-icon fa fa-book"></i></div>
-                                    <select name="faculty_id" id="faculty_id" class="form-control @error('course_name') is-invalid @enderror">
-                                        @foreach ($faculties as $faculty)
-                                        <option value="{{$faculty['id']}}">{{$faculty['name']}}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('faculty_id')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            {{-- course_id --}}
-                            <div class="form-group">
-                                <label for="course_id" class="form-control-label">Course Id</label>
-                                <div class="input-group">
-                                    <div class="input-group-addon"><i class="menu-icon fa fa-book"></i></div>
-                                    <select name="course_id" id="course_id" class="form-control @error('course_name') is-invalid @enderror">
-                                        @foreach ($courses as $course)
-                                        <option value="{{$course['id']}}">{{$course['name']}}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('course_id')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            {{-- course_name --}}
-                            <div class="form-group">
-                                <label for="course_name" class="form-control-label">Course Name</label>
-                                <div class="input-group">
-                                    <div class="input-group-addon"><i class="menu-icon fa fa-book"></i></div>
-                                    <input 
-                                        type="text" 
-                                        name="course_name" 
-                                        id="course_name"
-                                        value="{{old('course_name')}}"
-                                        placeholder="Enter Name Of Course Exam"
-                                        class="form-control @error('course_name') is-invalid @enderror"
-                                    >
-                                    @error('course_name')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            {{-- type --}}
-                            <div class="form-group">
-                                <label for="type" class="form-control-label">Type</label>
-                                <div class="input-group">
-                                    <div class="input-group-addon"><i class="menu-icon fa fa-book"></i></div>
-                                    <select name="type" id="type" class="form-control">
-                                        <option value="midterm" @if(old('type')=='midterm' ) selected @endif>midterm
-                                        </option>
-                                        <option value="oral" @if(old('type')=='oral' ) selected @endif>oral</option>
-                                        <option value="final" @if(old('type')=='fianl' ) selected @endif>final</option>
-                                        <option value="sheet" @if(old('type')=='sheet' ) selected @endif>sheet</option>
-                                    </select>
-                                </div>
-                            </div>
-                            {{-- date --}}
-                            <div class="form-group">
-                                <label for="date">Date Of Examination</label>
-                                <div class="input-group">
-                                    <div class="input-group-addon"><i class="menu-icon fa fa-book"></i></div>
-                                    <input 
-                                        type="date"
-                                        id="date"
-                                        name="date"
-                                        value="{{old('date')}}"
-                                        class="form-control @error('course_name') is-invalid @enderror"
-                                    >
-                                    {{-- @error --}}
-                                </div>
-                            </div>
-                            {{-- duration --}}
-                            <div class="form-group">
-                                <label for="duration">Time Of Exam</label>
-                                <div class="input-group">
-                                    <div class="input-group-addon"><i class="menu-icon fa fa-book"></i></div>
-                                    <input 
-                                        type="number"
-                                        id="duration"
-                                        name="duration"
-                                        value="{{old('duration')}}"
-                                        class="form-control @error('course_name') is-invalid @enderror"
-                                        placeholder="Time In Minutes"
-                                    >
-                                    {{-- @error --}}
-                                    @error('duration')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="card-footer">
-                            <button type="submit" class="btn btn-success btn-sm" id="submit">
-                                <i class="fa fa-dot-circle-o"></i> Add Exam
-                            </button>
-                        </div>
-
-                    </form>
+                    {{-- @livewire('CreateExam') --}}
+                    {{-- @livewire('create-user-form') --}}
+                    @livewire('create-exam-form')
                 </div>
             </div>
         </div>

@@ -23,14 +23,14 @@
                             <a href="{{ route('site.index') }}"><strong class="card-title">QuizzesHub</strong></a>
                         </div>
                         <div class="card-body">
-                            @if (Session::has('message'))
-                            <alert class="alert alert-success">
-                                {{ Session::get('message') }}
-                            </alert>
-                            @endif
                             <form class="form-horizontal" action="{{ route('quiz.feedback', $examId) }}" enctype="" method="POST">
                                 @csrf
                                 <div class="card-body card-block">
+                                    @if (Session::has('message'))
+                                    <div class="alert alert-success">
+                                        {{ Session::get('message') }}
+                                    </div>
+                                    @endif
                                     <div class="form-group">
                                         <label for="rating">rating</label>
                                         <div class="input-group">
@@ -66,7 +66,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <p>QuizzesHub :)</p>
+                                        <a href="{{ route('site.index') }}">QuizzesHub :)</a>
                                     </div>
                                 </div>
                             </form>
