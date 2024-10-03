@@ -127,7 +127,7 @@
                                 @foreach($exam->questions as $index => $question)
                                 <hr>
                                     <div class="question-container"  id="question-{{ $index }}">
-                                        <label>{{ $index + 1 }}. {{ $question->text }}</label>
+                                        <label>[{{ $index + 1 }}] {{ $question->text }}</label>
     
                                         <!-- If it's MCQ or true/false -->
                                         @if($question->type == 'mcq' || $question->type == 'true_false')
@@ -135,8 +135,8 @@
                                                 <div>
                                                     <input 
                                                         @if(in_array($answer->id, $user_answers)) checked @endif
-                                                        type="radio" name="question[{{ $question->id }}]" value="{{ $answer->id }}" id="answer-{{ $answer->id }}" disabled>
-                                                    <?php echo $answer->is_correct; ?>
+                                                        type="radio" name="question[{{ $question->id }}]" value="{{ $answer->id }}" id="answer-{{ $answer->id }}">
+                                                    <?php // echo $answer->is_correct; ?>
                                                     <label @if($answer->is_correct === 1) class='correct_answer' @endif @if(in_array($answer->id, $user_answers)) class='wrong_answer' @endif
                                                         for="answer-{{ $answer->id }}">{{ $answer->text }}</label>
                                                 </div>
@@ -148,7 +148,7 @@
                                             <div>
                                                 <input 
                                                     @if(in_array($answer->id, $user_answers)) checked @endif
-                                                    type="radio" name="question[{{ $question->id }}]" value="{{ $answer->id }}"  id="answer-{{ $answer->id }}" disabled>
+                                                    type="radio" name="question[{{ $question->id }}]" value="{{ $answer->id }}"  id="answer-{{ $answer->id }}">
                                                 <label @if($answer->is_correct === 1) class='correct_answer' @endif @if(in_array($answer->id, $user_answers)) class='wrong_answer' @endif
                                                     for="answer-{{ $answer->id }}">answer by your self</label>
                                             </div>
@@ -158,10 +158,18 @@
                                     </div>
                                 @endforeach
     
-                                <!-- Submit Button -->
-                                <button type="submit" id="submit-quiz" style="display: none;">Submit Answers</button>
+                            </div>
+                        </form>
+
+                        <form action="">
+                            {{-- feedback for exam --}}
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <button class="form-control" class="btn btn-primary">FeedBack</button>
                                 </div>
-                            </form>
+                                <p>this feedback help us to solve the issues in exams</p>
+                            </div>
+                        </form>
                         </div>
                     </div>
                 </div>

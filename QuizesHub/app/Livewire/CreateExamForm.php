@@ -70,6 +70,8 @@ class CreateExamForm extends Component
 
     public function createExam()
     {
+        
+
         $this->validate([
             'selectedUniversity' => 'required',
             'selectedFaculty' => 'required',
@@ -79,7 +81,7 @@ class CreateExamForm extends Component
             'examDate' => 'required|date',
             'examDuration' => 'required|numeric',
         ]);
-
+        dd('Validation triggered');
         // Create the exam and get its ID
         $exam = Exam::create([
             'course_id' => CourseFacultyMajorUniversity::where('course_id', $this->selectedCourse)

@@ -30,4 +30,16 @@ class ExamRequest extends FormRequest
             'duration'=>['required', 'regex:/[0-9]+/'],
         ];
     }
+
+    public function messages(): array
+    {
+        return [
+            'type.*' => 'this field is required',
+            'course_id.*' => 'this field is required',
+            'faculty_id.*' => 'this field is required',
+            'university_id.*' => 'this field is required',
+            'date.*' => 'this field is required',
+            'duration.*' => 'this field is required',
+        ];
+    }
 }

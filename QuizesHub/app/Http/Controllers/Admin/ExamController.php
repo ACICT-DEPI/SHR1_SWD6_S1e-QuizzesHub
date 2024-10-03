@@ -28,7 +28,7 @@ class ExamController extends Controller
         $universities = University::get()->toArray();
         $faculties = Faculty::get()->toArray();
         $courses = Course::get()->toArray();
-        return view('dashboard.exams.create1', compact('courses', 'faculties', 'universities'));
+        return view('dashboard.exams.create', compact('courses', 'faculties', 'universities'));
     }
 
     public function archive() 
@@ -59,12 +59,6 @@ class ExamController extends Controller
 
     public function edit($id) 
     {
-        // $universities = University::get()->toArray();
-        // $faculties = Faculty::get()->toArray();
-        // $courses = Course::get()->toArray();
-        // $exam = Exam::findorfail($id)->toArray();
-        // $exam = Exam::with('course.courseFacultyMajorUniversity')->find($id)->toArray(); 
-        // return view('dashboard.exams.edit', ['exam'=>$exam, 'courses'=>$courses, 'faculties'=>$faculties, 'universities'=>$universities]);
         $universities = University::get();
         $faculties = Faculty::get();
         $courses = Course::get();
