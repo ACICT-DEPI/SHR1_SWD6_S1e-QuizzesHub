@@ -20,6 +20,7 @@
             <h5 class="text-primary text-uppercase mb-3 animated slideInDown" data-wow-delay="0.1s">{{ $exam->type }} Exam</h5>
             <h1>The Best {{ $exam->type }} Exam </h1>
              <p data-wow-delay="0.1s">You Can Start Exam Now</p>
+             <p data-wow-delay="0.1s">{{$exam->date}}</p>
         </h2>
         <form method="get" action="{{ route('quiz.quiz', $exam->id) }}" class="mt-6 space-y-6">
         <button type="submit" class="btn btn-success mt-3" style="width: 35%; border-radius: 0.375rem; display: inline-block !important;" data-wow-delay="0.1s">
