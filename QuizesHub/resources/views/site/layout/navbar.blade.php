@@ -27,7 +27,7 @@
                         $courses[] = App\Models\Admin\course::where('id',$course->course_id)->first();
                         }
                         @endphp
-                        
+
                         @foreach ($courses as $course)
                         <a href="{{ route('CourseExams',$course->id) }}" class="dropdown-item">{{ $course->name }}</a>
                         @endforeach
@@ -45,7 +45,6 @@
                 <div class="dropdown-menu fade-down m-0">
 
                     <a href="{{ route('profile.edit') }}" class="dropdown-item">profile</a>
-                    {{-- <a href="{{ route('logout') }}" class="dropdown-item">logout</a> --}}
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
                         <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
