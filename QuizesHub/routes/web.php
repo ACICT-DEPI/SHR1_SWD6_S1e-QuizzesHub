@@ -42,13 +42,13 @@ Route::get('/', function () {
 //     return view('dashboard');
 // })->middleware(['auth'/*, 'verified'*/])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::get('CourseExams/{course}', [CourseExamsController::class, 'CourseExams'])->name('CourseExams');
-  
+
     Route::get('/quiz/{id}', [QuizController::class, 'quiz'])->name('quiz.quiz');
     Route::post('/quiz/{id}', [QuizController::class, 'submit'])->name('quiz.submit');
     Route::get('/quiz/{id}/feedback', [QuizController::class, 'feedBack'])->name('quiz.feedback');
@@ -56,7 +56,7 @@ Route::middleware('auth')->group(function () {
 
 });
 
-Route::middleware(['auth','IsAdmin'])->prefix('admin')->name('admin.')->group(function () {
+Route::middleware(['auth','IsAdmin','verified'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/home', HomeController::class)->name('home');
 
     Route::get('/exams/archive', [ExamController::class, 'archive'])->name('exams.archive');

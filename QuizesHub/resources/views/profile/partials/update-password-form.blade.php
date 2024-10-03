@@ -27,7 +27,7 @@
             <input type="password" id="password"
                 style="width: 60%; border-radius: 0.375rem; display: inline-block !important;"
                 class="form-control @error('password') is-invalid @enderror" name="password"
-                placeholder="Your Current password">
+                placeholder="Your New password">
                 <x-input-error :messages="$errors->updatePassword->get('password')" class="mt-2" />
         </div>
 
