@@ -32,91 +32,35 @@
                         <div class="card-header">
                             <a href="{{ route('site.index') }}"><strong class="card-title">QuizzesHub</strong></a>
                         </div>
-                        <div class="card-body" id="begin-screen">
-                            <form class="form-horizontal" action="" enctype="" method="">
-                                <div class="card-body card-block">
-                                    {{-- university_id --}}
-                                    <div class="form-group">
-                                        <label for="university_id" class="form-control-label">University</label>
-                                        <div class="input-group">
-                                            <div class="input-group-addon"><i class="menu-icon fa fa-book"></i></div>
-                                            <input type="text" id="university_id" class="form-control" value="{{ $exam->course->university->name }}" class="form-control" disabled>
+                        
+                        <div class="catd-body" id="begin-screen">
+                            <div class="container mt-5">
+                                <div class="card shadow-lg">
+                                    <div class="card-header text-center bg-primary text-white">
+                                        <h3>{{ $exam->course->university->name }}</h3>
+                                        <h5>{{ $exam->course->faculty->name }}</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <h4 class="card-title text-center">Course: {{ $exam->course->course->name }} [{{ $exam->course->course->code }}]</h4>
+                                        
+                                        <div class="row mt-4">
+                                            <div class="col-md-6">
+                                                <p><strong>Major:</strong> {{ $exam->course->major->name }}</p>
+                                                <p><strong>Type:</strong> {{ $exam->type}}</p>
+                                                <p><strong>Date:</strong> {{ $exam->date}}</p>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><strong>Duration:</strong> {{ $exam->duration }}</p>
+                                                <p><strong>Number of Questions:</strong> {{ count($exam->questions->toArray()) }}</p>
+                                                <p><strong>Number of Correct Answer:</strong> {{ $score }}</p>
+                                            </div>
                                         </div>
                                     </div>
-                                    {{-- faculty_id --}}
-                                    <div class="form-group">
-                                        <label for="faculty_id" class="form-control-label">Faculty</label>
-                                        <div class="input-group">
-                                            <div class="input-group-addon"><i class="menu-icon fa fa-book"></i></div>
-                                            <input type="text" id="faculty_id" class="form-control" value="{{ $exam->course->faculty->name }}" disabled>
-                                        </div>
-                                    </div>
-                                    {{-- major_id --}}
-                                    <div class="form-group">
-                                        <label for="major_id" class="form-control-label">Major</label>
-                                        <div class="input-group">
-                                            <div class="input-group-addon"><i class="menu-icon fa fa-book"></i></div>
-                                            <input type="text" id="major_id" class="form-control" value="{{ $exam->course->major->name }}" disabled>
-                                        </div>
-                                    </div>
-                                    {{-- course_id --}}
-                                    <div class="form-group">
-                                        <label for="course_id" class="form-control-label">Course Name</label>
-                                        <div class="input-group">
-                                            <div class="input-group-addon"><i class="menu-icon fa fa-book"></i></div>
-                                            <input type="text" id="course_id" class="form-control" value="{{ $exam->course->course->name }}" disabled>
-                                        </div>
-                                    </div>
-                                    {{-- course_name --}}
-                                    <div class="form-group">
-                                        <label for="course_name" class="form-control-label">Course Code</label>
-                                        <div class="input-group">
-                                            <div class="input-group-addon"><i class="menu-icon fa fa-book"></i></div>
-                                            <input type="text" id="course_name" class="form-control" value="{{ $exam->course->course->code }}" disabled>
-                                        </div>
-                                    </div>
-                                    {{-- type --}}
-                                    <div class="form-group">
-                                        <label for="type" class="form-control-label">Type</label>
-                                        <div class="input-group">
-                                            <div class="input-group-addon"><i class="menu-icon fa fa-book"></i></div>
-                                            <input type="text" id="type" class="form-control" value="{{ $exam->type }}" disabled>
-                                        </div>
-                                    </div>
-                                    {{-- date --}}
-                                    <div class="form-group">
-                                        <label for="date">Date Of Examination</label>
-                                        <div class="input-group">
-                                            <div class="input-group-addon"><i class="menu-icon fa fa-book"></i></div>
-                                            <input type="text" id="date" class="form-control" value="{{ $exam->date }}" disabled>
-                                        </div>
-                                    </div>
-                                    {{-- no_of_questions --}}
-                                    <div class="form-group">
-                                        <label for="no_of_questions">Number Of Questions</label>
-                                        <div class="input-group">
-                                            <div class="input-group-addon"><i class="menu-icon fa fa-book"></i></div>
-                                            <input type="text" id="no_of_questions" class="form-control" value="{{ count($exam->questions->toArray()) }}" disabled>
-                                        </div>
-                                    </div>
-                                    {{-- duration --}}
-                                    <div class="form-group">
-                                        <label for="duration">Time In Minutes</label>
-                                        <div class="input-group">
-                                            <div class="input-group-addon"><i class="menu-icon fa fa-book"></i></div>
-                                            <input type="text" id="duration" class="form-control" value="{{ $exam->duration }}" disabled>
-                                        </div>
-                                    </div>
-                                    {{-- no_of_correct_answer --}}
-                                    <div class="form-group">
-                                        <label for="no_of_correct_answer">Number Of Correct Answer</label>
-                                        <div class="input-group">
-                                            <div class="input-group-addon"><i class="menu-icon fa fa-book"></i></div>
-                                            <input type="text" id="no_of_correct_answer" class="form-control" value="{{ $score }}" disabled>
-                                        </div>
+                                    <div class="card-footer text-center text-muted">
+                                        Good Luck {{ Auth::user()->fname}}!
                                     </div>
                                 </div>
-                            </form>
+                            </div>
                         </div>
                         <div class="card-body" id="quiz-screen">
                             <form class="form-horizontal" action="{{ route('quiz.submit', $exam->id) }}" enctype="" method="POST">
