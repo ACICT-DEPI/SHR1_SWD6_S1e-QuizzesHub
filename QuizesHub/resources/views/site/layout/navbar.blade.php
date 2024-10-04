@@ -11,7 +11,7 @@
 
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <div class="navbar-nav ms-auto p-4 p-lg-0">
- @auth
+            @auth
             <a href="{{ route('site.index') }}" class="nav-item nav-link active">Home</a>
             <a href="about.html" class="nav-item nav-link">About</a>
 
@@ -51,9 +51,9 @@
                     </form>
                 </div>
             </div>
-                   
+
         </div>
- @endauth
+        @endauth
         @guest
         <a href="{{ route('register') }}" class="btn btn-primary py-4 px-lg-5 d-none d-lg-block">Join Now<i
                 class="fa fa-arrow-right ms-3"></i></a>
@@ -62,7 +62,7 @@
     </div>
 </nav>
 <style>
-    body{
+    body {
         overflow-x: hidden;
     }
 </style>
