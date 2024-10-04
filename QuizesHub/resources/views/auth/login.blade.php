@@ -59,6 +59,7 @@
                                 <input type="checkbox" name="remember_me" id="remember_me" class="agree-term" />
                                 <label for="remember_me" class="label-agree-term"><span><span></span></span>Remember me</label>
                             </div>
+
                             <div class="form-group flex items-center justify-end mt-4">
                                 @if (Route::has('password.request'))
                                     <a style="display: inline-block" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
@@ -70,6 +71,15 @@
                                     <input type="submit" name="signin" id="signin" class="form-submit" value="Log in"/>
                                 </div>
 
+                            </div>
+                            <div class="form-group my-2">
+                                <a href="{{ route('socialite.redirect', 'google') }}" style="background: green; color: #fff; padding: 5px; border-radius:5px;">
+                                    <strong>Google</strong>
+                                </a>
+
+                                <a href="{{ route('socialite.redirect', 'facebook') }}" style="background: blue; color: #fff; padding: 5px; border-radius:5px; margin-left: 20px;" >
+                                    <strong>Facebook</strong>
+                                </a>
                             </div>
 
                         </form>

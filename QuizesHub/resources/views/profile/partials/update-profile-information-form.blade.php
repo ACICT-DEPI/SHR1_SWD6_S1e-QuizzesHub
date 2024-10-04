@@ -160,7 +160,7 @@
                     <select class="form-control @error('level_id') is-invalid @enderror" name="level_id" id="level_id">
                         <option value="">Select Level</option>
                         @foreach ($levels as $level)
-                        <option value="{{ $level->id }}" @selected($user->level_id== $level->id)>
+                        <option value="{{ $level->id }}" @selected(isset($user->level_id) && $user->level_id== $level->id)>
                             {{ $level->name }}</option>
                         @endforeach
                     </select>
