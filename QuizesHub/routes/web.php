@@ -49,6 +49,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('CourseExams/{course}', [CourseExamsController::class, 'CourseExams'])->name('CourseExams');
 
+    Route::get('contact', function () {
+      return view('site.pages.contact');
+    })->name('site.contact');
+
+    Route::get('AboutUs', function () {
+        return view('site.pages.about');
+      })->name('site.about');
+
     Route::get('/quiz/{id}', [QuizController::class, 'quiz'])->name('quiz.quiz');
     Route::post('/quiz/{id}', [QuizController::class, 'submit'])->name('quiz.submit');
     Route::get('/quiz/{id}/feedback', [QuizController::class, 'feedBack'])->name('quiz.feedback');
