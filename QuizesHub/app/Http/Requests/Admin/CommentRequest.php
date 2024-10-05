@@ -24,8 +24,8 @@ class CommentRequest extends FormRequest
         return [
             'comment_text' => ['required', 'string', 'max:1000'],
             'user_id' => ['required', 'integer'],
-            'question_id' => ['integer'],
-            'parent_id' => ['integer'],
+            'question_id' => ['required', 'integer'],
+            'parent_id' => ['nullable','integer'],
         ];
     }
 }
