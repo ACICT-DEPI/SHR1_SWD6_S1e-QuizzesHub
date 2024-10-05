@@ -30,7 +30,7 @@
                         <div class="card-header">
                             <a href="{{ route('site.index') }}"><strong class="card-title">QuizzesHub</strong></a>
                         </div>
-                        
+
                         <div class="catd-body" id="begin-screen">
                             <div class="container mt-5">
                                 <div class="card shadow-lg">
@@ -40,7 +40,7 @@
                                     </div>
                                     <div class="card-body">
                                         <h4 class="card-title text-center">Course: {{ $exam->course->course->name }} [{{ $exam->course->course->code }}]</h4>
-                                        
+
                                         <div class="row mt-4">
                                             <div class="col-md-6">
                                                 <p><strong>Major:</strong> {{ $exam->course->major->name }}</p>
@@ -60,38 +60,38 @@
                             </div>
                         </div>
                         <div class="card-body" id="quiz-screen">
-                            <form class="form-horizontal" action="{{ route('quiz.submit', $exam->id) }}" enctype="" method="POST">
-                                @csrf
+                            {{-- <form class="form-horizontal" action="{{ route('quiz.submit', $exam->id) }}" enctype="" method="POST"> --}}
+                                {{-- @csrf --}}
                                 <div class="card-body card-block">
-                                    
+
                                 <!-- Loop through questions -->
                                 @foreach($exam->questions as $index => $question)
                                 <hr>
                                     <div class="question-container"  id="question-{{ $index }}">
                                         <label>[{{ $index + 1 }}] {{ $question->text }}</label>
-    
+
                                         <!-- If it's MCQ or true/false -->
                                         @if($question->type == 'mcq' || $question->type == 'true_false')
                                             @foreach($question->answers as $answer)
                                                 <div>
-                                                    <input 
+                                                    <input
                                                         type="radio" name="question[{{ $question->id }}]" value="{{ $answer->id }}" id="answer-{{ $answer->id }}">
                                                     <?php // echo $answer->is_correct; ?>
-                                                    <label @if($answer->is_correct === 1) class='correct_answer' @endif 
+                                                    <label @if($answer->is_correct === 1) class='correct_answer' @endif
                                                         for="answer-{{ $answer->id }}">{{ $answer->text }}</label>
                                                 </div>
                                             @endforeach
-    
+
                                         <!-- If it's an essay question -->
                                         @elseif($question->type == 'essay')
                                             @foreach ($question->answers as $answer)
                                             <div>
-                                                <input 
+                                                <input
                                                     type="radio" name="question[{{ $question->id }}]" value="{{ $answer->id }}"  id="answer-{{ $answer->id }}">
-                                                <label @if($answer->is_correct === 1) class='correct_answer' @endif 
+                                                <label @if($answer->is_correct === 1) class='correct_answer' @endif
                                                     for="answer-{{ $answer->id }}">answer by your self</label>
                                             </div>
-                                                
+
                                             @endforeach
                                         @endif
                                     </div>
@@ -103,7 +103,7 @@
                                         @endif
                                         <form action="{{ route('comment.store') }}" method="post">
                                             @csrf
-                                            <input type="hidden" name="question_id" value="{{$question->id}}">
+                                            <input type="text" name="question_id" value="{{$question->id}}">
                                             <div class="form-group">
                                                 <div class="input-group">
                                                     <textarea name="comment" id="comment" cols="30" rows="2" class="form-control" placeholder="comment.."></textarea>
@@ -123,9 +123,9 @@
                                         </form>
                                     </div>
                                 @endforeach
-    
+
                             </div>
-                        </form>
+                        {{-- </form> --}}
 
                         <form action="">
                             {{-- feedback for exam --}}
@@ -142,6 +142,6 @@
             </div>
         </div><!-- .animated -->
     </div><!-- .content -->
-    
+
 </body>
 </html>

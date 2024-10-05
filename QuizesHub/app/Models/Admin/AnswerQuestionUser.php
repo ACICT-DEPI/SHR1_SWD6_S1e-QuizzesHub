@@ -9,6 +9,8 @@ class AnswerQuestionUser extends Model
 {
     use HasFactory;
     // public $incrementing=false;
+
+    protected $table='answer_question_user';
     protected $fillable =['user_id','question_id','selected_answer_id','exam_user_id'];
 
     public function question()
