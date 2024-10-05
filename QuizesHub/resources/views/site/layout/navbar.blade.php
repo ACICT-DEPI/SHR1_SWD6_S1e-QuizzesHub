@@ -77,7 +77,7 @@
                     @endphp
                     <a href="{{ route('profile.edit') }}" class="dropdown-item">@if($image != null)<img
                             src="{{asset('storage/'.$image)}}" class="rounded-circle" style="width: 30px; height: 30px;"
-                            alt="">@else <img src="{{asset('website/assets')}}/img/user.jpg" class="rounded-circle"
+                            alt="">@else <img src="{{asset('dashboard/assets')}}/images/default.jpg" class="rounded-circle"
                             style="width: 30px; height: 30px;" alt="">@endif profile</a>
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
