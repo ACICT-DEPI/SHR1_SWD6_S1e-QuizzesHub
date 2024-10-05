@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\CommentRequest;
 use App\Models\Admin\Comment;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
@@ -32,11 +32,13 @@ class CommentController extends Controller
     {
         // validate running
         Comment::create([
-            'user_id' => $request->user_id,
+            'user_id' => Auth::id(),
             'question_id' => $request->question_id,
             'parent_id' => $request->parent_id,
-            'comment_text' => $request->comment_text,
+            'comment_text' => $request->comment,
         ]);
+
+        return redirect()->back()->with('message', 'Comment Sended Successfuly!');
     }
 
     /**

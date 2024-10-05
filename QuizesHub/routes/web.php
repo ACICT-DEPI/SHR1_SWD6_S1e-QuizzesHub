@@ -49,6 +49,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('CourseExams/{course}', [CourseExamsController::class, 'CourseExams'])->name('CourseExams');
 
+    Route::post('/quiz/comment', function() {
+        return 'store comment';
+    })->name('comment.store');
+
     Route::get('contact', function () {
       return view('site.pages.contact');
     })->name('site.contact');
@@ -62,10 +66,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
       })->name('site.ReadMore');
 
     Route::get('/quiz/{id}', [QuizController::class, 'quiz'])->name('quiz.quiz');
+    Route::get('/quiz/{id}/show', [QuizController::class, 'show'])->name('quiz.show');
     Route::post('/quiz/{id}', [QuizController::class, 'submit'])->name('quiz.submit');
     Route::get('/quiz/{id}/feedback', [QuizController::class, 'feedBack'])->name('quiz.feedback');
     Route::post('/quiz/{id}/feedback', [QuizController::class, 'storeFeedBack'])->name('quiz.feedback');
 
+    
 });
 
 Route::middleware(['auth','IsAdmin','verified'])->prefix('admin')->name('admin.')->group(function () {

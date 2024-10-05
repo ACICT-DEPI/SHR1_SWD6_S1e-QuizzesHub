@@ -91,4 +91,10 @@ class QuizController extends Controller
 
         return redirect()->back()->with('message', 'Message Sended Successfully');
     }
+
+    public function show($examId)
+    {
+        $exam = Exam::findorfail($examId);
+        return view('quiz.show', compact('exam'));
+    }
 }
