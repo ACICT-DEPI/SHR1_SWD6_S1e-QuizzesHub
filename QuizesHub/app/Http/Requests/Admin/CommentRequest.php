@@ -21,11 +21,22 @@ class CommentRequest extends FormRequest
      */
     public function rules(): array
     {
+        // dd("x");
         return [
             'comment_text' => ['required', 'string', 'max:1000'],
-            'user_id' => ['required', 'integer'],
+            // 'user_id' => ['required', 'integer'],
             'question_id' => ['required', 'integer'],
             'parent_id' => ['nullable','integer'],
+        ];
+    }
+
+    public function messages(): array 
+    {
+        return [
+            'comment_text.required' => 'comment_text field is required',
+            'user_id.required' => 'user_id field is required',
+            'question_id.required' => 'question_id field is required',
+            'parent_id.required' => 'parent_id field is required',
         ];
     }
 }

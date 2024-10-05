@@ -35,7 +35,7 @@ class CommentController extends Controller
             'user_id' => Auth::id(),
             'question_id' => $request->question_id,
             'parent_id' => $request->parent_id,
-            'comment_text' => $request->comment,
+            'comment_text' => $request->comment_text,
         ]);
 
         return redirect()->back()->with('message', 'Comment Sended Successfuly!');
