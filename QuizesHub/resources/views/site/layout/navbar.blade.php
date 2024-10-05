@@ -1,3 +1,4 @@
+
 <nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">
     <a href="{{ route('site.index') }}" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
         <h2 class="m-0 text-primary"><img src="{{asset('website/assets')}}/img/QH.png" class="logo" alt="">QuizzesHub
@@ -32,15 +33,15 @@
 
 
 
-            <a href="{{ route('site.index') }}" class="nav-item nav-link active"><i class="fa fa-home"></i> Home</a>
-            @if(request()->path() != 'AboutUs')
-            <a href="{{ route('site.about') }}" class="nav-item nav-link"><i class="fa fa-user"
+            <a href="{{ route('site.index') }}" class="nav-item nav-link @if(request()->path() == '/') active @endif "><i class="fa fa-home" style="color: #06BBCC"></i> Home</a>
+            
+            <a href="{{ route('site.about') }}" class="nav-item nav-link @if(request()->path() == 'AboutUs') active @endif"><i class="fa fa-user"
                     style="color: #06BBCC"></i> About</a>
-            @endif
+           
 
             <div class="nav-item dropdown">
-                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-book"
-                        style="color: #06BBCC"></i> Courses</a>
+                <a href="#" class="nav-link dropdown-toggle " data-bs-toggle="dropdown"><i class="fa fa-book"
+                         style="color: #06BBCC"></i> Courses</a>
                 <div class="dropdown-menu fade-down m-0">
                     @if(!empty(Auth::user()->courses()))
 
@@ -63,10 +64,10 @@
             </div>
 
 
-            @if(request()->path() != 'contact')
-            <a href="{{ route('site.contact') }}" class="nav-item nav-link"><i class="fa fa-phone-alt"
+            
+            <a href="{{ route('site.contact') }}" class="nav-item nav-link @if(request()->path() == 'contact') active @endif"><i class="fa fa-phone-alt"
                     style="color: #06BBCC"></i> Contact</a>
-            @endif
+           
 
             <div class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-user"
