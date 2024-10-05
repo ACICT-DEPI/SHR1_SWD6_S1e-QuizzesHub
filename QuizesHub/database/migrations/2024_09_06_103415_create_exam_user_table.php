@@ -11,14 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('exam_attempts', function (Blueprint $table) {
+        Schema::create('exam_user', function (Blueprint $table) {
             $table->id();
-            $table->unsignedbiginteger('user_id')->notNullable();
-            $table->integer('attempt_number')->notNullable();
-            $table->timestamp('start_time');
-            $table->timestamp('end_time')->nullable();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('exam_id')->constrained()->onDelete('cascade');
             $table->integer('score');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->integer('completion_time'); // Store duration in minutes or seconds
             $table->timestamps();
             $table->softDeletes();
         });
@@ -29,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('exam_attempts');
+        Schema::dropIfExists('results');
     }
 };

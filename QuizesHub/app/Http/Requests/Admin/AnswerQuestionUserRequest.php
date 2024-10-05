@@ -5,7 +5,7 @@ namespace App\Http\Requests\Admin;
 use Illuminate\Foundation\Http\FormRequest;
 
 
-class AnswerAttemptRequest extends FormRequest
+class AnswerQuestionUserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -20,32 +20,15 @@ class AnswerAttemptRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
-    public function onUpdate(): array
-    {
-        return [
-            'user_id' => ['required', 'integer'],
-            'question_id' => ['required', 'integer'],
-            'selected_answer_id' => ['required', 'integer'],
-            'attempt_number' => ['required', 'integer'],
-        ];
-    }
-    public function onCreate(): array
-    {
-        return [
-            'id' => ['required', 'integer', 'unique:answer_attempts,id'],
-            'user_id' => ['required', 'integer'],
-            'question_id' => ['required', 'integer'],
-            'selected_answer_id' => ['required', 'integer'],
-            'attempt_number' => ['required', 'integer'],
-        ];
-    }
+    
     public function rules(): array
     {
-        if (@request()->isMethod('put')) {
-            return $this->onUpdate();
-        } else {
-            return $this->onCreate();
-        }
+        return [
+            'user_id' => ['required', 'integer'],
+            'question_id' => ['required', 'integer'],
+            'selected_answer_id' => ['required', 'integer'],
+            'exam_user_id' => ['required', 'integer'],
+        ];
     }
     public function messages(): array
     {

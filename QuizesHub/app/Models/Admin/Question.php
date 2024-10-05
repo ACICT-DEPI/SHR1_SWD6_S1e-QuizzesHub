@@ -21,8 +21,8 @@ class Question extends Model
         return $this->belongsTo(Exam::class, 'exam_id', 'id');
     }
 
-    public function answerAttempts() {
-        return $this->hasMany(AnswerAttempt::class, 'question_id', 'id');
+    public function AnswerQuestionUser() {
+        return $this->hasMany(AnswerQuestionUser::class, 'question_id', 'id');
     }
 
     public function answers() {
@@ -33,5 +33,12 @@ class Question extends Model
         return $this->hasMany(Comment::class, 'question_id', 'id');
     }
 
+    public function user() {
+        return $this->belongsToMany(User::class, 'answer_question_user', 'question_id', 'user_id')->withPivot('selected_answer_id', 'exam_user_id', 'created_at', 'updated_at');
+    }
+
+    public function ExamUser() {
+        return $this->belongsToMany(User::class, 'answer_question_user', 'question_id', 'exam_user_id')->withPivot('selected_answer_id', 'user_id', 'created_at', 'updated_at');
+    }
 
 }

@@ -4,19 +4,19 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\Admin\ResultRequest;
-use App\Models\Admin\Result;
+use App\Http\Requests\Admin\ExamUserRequest;
+use App\Models\Admin\ExamUser;
 use App\Models\Admin\Exam;
 // use App\Models\User;
 
-class ResultController extends Controller
+class ExamUserController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return Result::get()->toArray();
+        return ExamUser::get()->toArray();
     }
 
     /**
@@ -31,7 +31,7 @@ class ResultController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(ResultRequest $request)
+    public function store(ExamUserRequest $request)
     {
         return 'stored';
     }
@@ -43,7 +43,7 @@ class ResultController extends Controller
     {
         // $exam = Exam::findorfail();
         // $user = User::findorfail();
-        return Result::findorfail($id);
+        return ExamUser::findorfail($id);
     }
 
     /**
@@ -53,17 +53,17 @@ class ResultController extends Controller
     {
         $exams = Exam::get();
 
-        $Result = Result::findorfail($id);
+        $ExamUser = ExamUser::findorfail($id);
         return 'edit view';
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(ResultRequest $request, string $id)
+    public function update(ExamUserRequest $request, string $id)
     {
-        $Result = Result::findorfail($id);
-        $Result->update([
+        $ExamUser = ExamUser::findorfail($id);
+        $ExamUser->update([
             'user_id'=>$request->user_id,
             'exam_id'=>$request->exam_id,
             'score'=>$request->score,
@@ -78,25 +78,25 @@ class ResultController extends Controller
      */
     public function destroy(string $id)
     {
-        $Result = Result::findorfail($id);
-        $Result->delete();
+        $ExamUser = ExamUser::findorfail($id);
+        $ExamUser->delete();
         return redirect()->back()->with('msg', 'Archived successfully');
     }
 
     public function archive() {
-        $Results = Result::onlyTrashed()->get()->toArray();
-        return $Results;
+        $ExamUsers = ExamUser::onlyTrashed()->get()->toArray();
+        return $ExamUsers;
     }
 
     public function restore(string $id) {
-        $Result = Result::onlyTrashed()->findorfail($id);
-        $Result->restore();
+        $ExamUser = ExamUser::onlyTrashed()->findorfail($id);
+        $ExamUser->restore();
         return redirect()->back()->with('msg', 'restored successfully');
     }
 
     public function forceDelete(string $id) {
-        $Result = Result::withTrashed()->where('id', $id);
-        $Result->forceDelete();
+        $ExamUser = ExamUser::withTrashed()->where('id', $id);
+        $ExamUser->forceDelete();
         return redirect()->back()->with('msg', 'deleted successfully');
     }
 }

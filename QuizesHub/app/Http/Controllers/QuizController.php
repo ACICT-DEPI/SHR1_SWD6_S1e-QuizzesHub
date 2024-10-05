@@ -8,7 +8,7 @@ use App\Http\Requests\FeedBackRequest;
 
 use Illuminate\Support\Facades\Auth;
 use App\Models\Admin\Exam;
-use App\Models\Admin\Result;
+use App\Models\Admin\ExamUser;
 use App\Models\Admin\feedBack;
 use App\Models\Admin\User;
 use Carbon\Carbon;
@@ -19,7 +19,7 @@ class QuizController extends Controller
     {
         $userId = Auth::id();
         $exam = Exam::findorfail($examId);
-        
+
         return view('quiz.quiz', compact('userId', 'exam'));
     }
 
@@ -53,7 +53,7 @@ class QuizController extends Controller
             }
         }
 
-        if(!Result::where('user_id', $userId)->where('exam_id', $examId)->exists()) {
+        if(!ExamUser::where('user_id', $userId)->where('exam_id', $examId)->exists()) {
             $initScore = Auth::user()->score;
             Auth::user()->score = $initScore + $score + intval($request->timer_input / 60);
             Auth::user()->save();
@@ -61,7 +61,7 @@ class QuizController extends Controller
 
 
 
-        Result::create([
+        ExamUser::create([
             'user_id' => Auth::id(),
             'exam_id' => $examId,
             'score' => $score,
@@ -74,7 +74,7 @@ class QuizController extends Controller
     }
 
     public function feedBack($examId)
-    {   
+    {
         $userId = Auth::id();
 
         return view('quiz.feed-back', compact('examId', 'userId'));

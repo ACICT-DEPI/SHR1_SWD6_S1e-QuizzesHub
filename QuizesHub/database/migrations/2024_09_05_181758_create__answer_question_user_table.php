@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('answer_attempts', function (Blueprint $table) {
+        Schema::create('answer_question_user', function (Blueprint $table) {
             $table->id();
             $table->unsignedbiginteger('user_id')->notNullable();
             $table->unsignedbiginteger('question_id')->notNullable();
             $table->unsignedbiginteger('selected_answer_id')->notNullable();
-            $table->integer('attempt_number')->notNullable();
+            $table->unsignedBigInteger('exam_user_id')->notNullable();
             $table->timestamps();
             $table->softDeletes();
         });

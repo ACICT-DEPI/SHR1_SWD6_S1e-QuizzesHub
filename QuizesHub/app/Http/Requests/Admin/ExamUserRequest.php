@@ -4,7 +4,7 @@ namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ResultRequest extends FormRequest
+class ExamUserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,7 +25,6 @@ class ResultRequest extends FormRequest
             'user_id'=>['required', 'regex:/[0-9]+/'],
             'exam_id'=>['required', 'regex:/[0-9]+/'],
             'score'=>['required', 'regex:/[0-9]+/'],
-            'total_score'=>['required', 'regex:/[0-9]+/'],
             'completion_time' => ['required', 'integer'],
         ];
     }

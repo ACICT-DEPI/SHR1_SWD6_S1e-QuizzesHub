@@ -253,9 +253,14 @@ VALUES
   (37, 'normal_text', 'no existing answers yet', 0, NOW(), NOW());
 
 
+-- 17. results Table:
+INSERT INTO exam_user ( user_id, exam_id, score, completion_time, created_at, updated_at)
+VALUES
+( 1, 1, 85, 100,  NOW(), NOW()),
+( 2, 2, 90, 100,NOW(), NOW());
 
 -- 3. answer_attempts Table:
-INSERT INTO answer_attempts ( user_id, question_id, selected_answer_id, attempt_number, created_at, updated_at)
+INSERT INTO answer_question_user ( user_id, question_id, selected_answer_id, exam_user_id, created_at, updated_at)
 VALUES
 (1, 1, 2, 1, NOW(), NOW()),
 (2, 2, 3, 1, NOW(), NOW());
@@ -274,19 +279,6 @@ INSERT INTO comments (user_id, question_id, parent_id, comment_text, created_at,
 VALUES
 (1, 1, NULL, 'This is a comment', NOW(), NOW()),
 ( 2, 1, 1, 'This is a reply', NOW(), NOW());
-
-
-
-
-
-
-
--- 8. exam_attempts Table:
-INSERT INTO exam_attempts (user_id, exam_id, attempt_number, start_time, end_time, score, created_at, updated_at)
-VALUES
-(1, 1, 1, NOW(), NULL, 85, NOW(), NOW()),
-(2, 2, 1, NOW(), NULL, 90, NOW(), NOW());
-
 
 
 
@@ -328,21 +320,6 @@ INSERT INTO password_reset_tokens (email, token, created_at)
 VALUES
 ('user1@example.com', 'randomtoken1', NOW()),
 ('user2@example.com', 'randomtoken2', NOW());
-
-
-
-
-
-
-
--- 17. results Table:
-INSERT INTO results ( user_id, exam_id, score, total_score, completion_time, created_at, updated_at)
-VALUES
-( 1, 1, 85, 100, 120, NOW(), NOW()),
-( 2, 2, 90, 100, 90, NOW(), NOW());
-
-
-
 
 
 -- 20. sessions Table:

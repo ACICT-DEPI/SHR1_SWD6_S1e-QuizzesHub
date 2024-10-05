@@ -29,6 +29,8 @@ return new class extends Migration
             $table->unsignedBigInteger('major_id')->nullable();
             $table->unsignedBigInteger('level_id')->nullable();
             $table->rememberToken();
+            $table->string('provider_id')->nullable();
+            $table->string('provider')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
