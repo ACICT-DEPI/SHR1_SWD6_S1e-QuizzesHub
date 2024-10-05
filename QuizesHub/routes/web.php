@@ -19,6 +19,8 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\CourseExamsController;
 use App\Models\Admin\user;
 use App\Models\Admin\course;
+use App\Http\Controllers\Admin\CommentController;
+
 
 
 use App\Livewire\Login;
@@ -48,9 +50,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('CourseExams/{course}', [CourseExamsController::class, 'CourseExams'])->name('CourseExams');
 
-    Route::post('/quiz/comment', function() {
-        return 'store comment';
-    })->name('comment.store');
+    Route::post('/quiz/comment', [CommentController::class, 'store'])->name('comment.store');
 
     Route::get('contact', function () {
       return view('site.pages.contact');

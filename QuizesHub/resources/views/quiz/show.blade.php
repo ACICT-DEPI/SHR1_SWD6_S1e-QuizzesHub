@@ -64,6 +64,16 @@
                                 {{-- @csrf --}}
                                 <div class="card-body card-block">
 
+                                    @error('comment_text')
+                                        <div class="alert alert-danger">
+                                            <span>{{ $message }}</span>
+                                        </div>
+                                    @enderror
+                                    @if (Session::has('message'))
+                                        <div class="alert alert-success">
+                                            {{ Session::get('message') }}
+                                        </div>
+                                    @endif
                                 <!-- Loop through questions -->
                                 @foreach($exam->questions as $index => $question)
                                 <hr>
@@ -96,29 +106,16 @@
                                         @endif
                                     </div>
                                     <div class="comment">
-                                        @if (Session::has('message'))
-                                            <div class="alert alert-success">
-                                                {{ Session::get('message') }}
-                                            </div>
-                                        @endif
                                         <form action="{{ route('comment.store') }}" method="post">
                                             @csrf
-                                            <input type="text" name="question_id" value="{{$question->id}}">
+                                            <input type="hidden" name="question_id" value="{{$question->id}}">
+                                            <input type="hidden" name="parent_id" value=''>
                                             <div class="form-group">
                                                 <div class="input-group">
-                                                    <textarea name="comment" id="comment" cols="30" rows="2" class="form-control" placeholder="comment.."></textarea>
+                                                    <textarea name="comment_text" id="comment" cols="30" rows="2" class="form-control" placeholder="if u have any comments or issue let us to solve it.."></textarea>
                                                     <button type="submit" class="btn btn-primary">Send</button>
                                                 </div>
-                                                <label for="comment">if u have any comments or issue let us to solve it</label>
-                                                @error('comment')
-                                                    <div class="alert alert-danger">
-                                                        <span>{{ $message }}</span>
-                                                    </div>
-                                                @enderror
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="input-group">
-                                                </div>
+                                                
                                             </div>
                                         </form>
                                     </div>
