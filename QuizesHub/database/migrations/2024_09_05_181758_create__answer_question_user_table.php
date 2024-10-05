@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedbiginteger('user_id')->notNullable();
             $table->unsignedbiginteger('question_id')->notNullable();
-            $table->unsignedbiginteger('selected_answer_id')->Nullable();
+            $table->unsignedbiginteger('selected_answer_id')->nullable();
             $table->unsignedBigInteger('exam_user_id')->notNullable();
             $table->timestamps();
             $table->softDeletes();
