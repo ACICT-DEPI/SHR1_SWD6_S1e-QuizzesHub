@@ -34,10 +34,10 @@
 
 
             <a href="{{ route('site.index') }}" class="nav-item nav-link @if(request()->path() == '/') active @endif "><i class="fa fa-home" style="color: #06BBCC"></i> Home</a>
-            
+
             <a href="{{ route('site.about') }}" class="nav-item nav-link @if(request()->path() == 'AboutUs') active @endif"><i class="fa fa-user"
                     style="color: #06BBCC"></i> About</a>
-           
+
 
             <div class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle " data-bs-toggle="dropdown"><i class="fa fa-book"
@@ -64,10 +64,10 @@
             </div>
 
 
-            
+
             <a href="{{ route('site.contact') }}" class="nav-item nav-link @if(request()->path() == 'contact') active @endif"><i class="fa fa-phone-alt"
                     style="color: #06BBCC"></i> Contact</a>
-           
+
 
             <div class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-user"
@@ -76,7 +76,7 @@
                     @php
                     $image = Auth::user()->image_path;
                     @endphp
-                    <a href="{{ route('profile.edit') }}" class="dropdown-item">@if($image != null)<img
+                    <a href="{{ route('profile.edit') }}" class="dropdown-item">@if($image != null && file_exists('storage/'.Auth::user()->image_path))<img
                             src="{{asset('storage/'.$image)}}" class="rounded-circle" style="width: 30px; height: 30px;"
                             alt="">@else <img src="{{asset('dashboard/assets')}}/images/default.jpg" class="rounded-circle"
                             style="width: 30px; height: 30px;" alt="">@endif profile</a>

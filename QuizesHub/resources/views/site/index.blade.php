@@ -45,6 +45,7 @@
     </div>
 </div>
 <!-- Carousel End -->
+@auth
 <div class="container-xxl py-5 category">
     <div class="container">
         <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
@@ -80,8 +81,9 @@ $courses[] = App\Models\Admin\course::where('id',$course->course_id)->first();
                     </div>
                 </div>
             </div>
-    @endforeach       
+    @endforeach
 @endif
+@endauth
 <!-- Testimonial Start -->
 <!-- <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
     <div class="container">
