@@ -57,6 +57,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return view('site.pages.about');
       })->name('site.about');
 
+      Route::get('ReadMore', function () {
+        return view('site.pages.ReadMore');
+      })->name('site.ReadMore');
+
     Route::get('/quiz/{id}', [QuizController::class, 'quiz'])->name('quiz.quiz');
     Route::post('/quiz/{id}', [QuizController::class, 'submit'])->name('quiz.submit');
     Route::get('/quiz/{id}/feedback', [QuizController::class, 'feedBack'])->name('quiz.feedback');
