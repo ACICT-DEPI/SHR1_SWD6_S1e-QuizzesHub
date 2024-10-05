@@ -9,9 +9,7 @@
                 @if(request()->path() != 'contact')
                   <a class="btn btn-link" href="{{ route('site.contact') }}">Contact Us</a>
               @endif
-                <a class="btn btn-link" href="">Privacy Policy</a>
-                <a class="btn btn-link" href="">Terms & Condition</a>
-                <a class="btn btn-link" href="">FAQs & Help</a>
+             
             </div>
             <div class="col-lg-3 col-md-6">
                 <h4 class="text-white mb-3">Contact</h4>
