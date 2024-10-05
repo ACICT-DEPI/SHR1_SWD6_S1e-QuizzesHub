@@ -4,7 +4,6 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QuizController;
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\ExamAttemptController;
 use App\Http\Controllers\Admin\ExamController;
 use App\Http\Controllers\Admin\QuestionController;
 use App\Http\Controllers\Admin\FeedbackController;

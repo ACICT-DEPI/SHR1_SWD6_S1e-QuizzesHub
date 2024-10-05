@@ -22,16 +22,13 @@ class Exam extends Model
         return $this->belongsTo(CourseFacultyMajorUniversity::class, 'course_id', 'id');
     }
 
-    public function examAttempts() {
-        return $this->hasMany(ExamAttempt::class, 'exam_id', 'id');
-    }
 
     public function questions() {
         return $this->hasMany(Question::class, 'exam_id', 'id');
     }
 
-    public function results() {
-        return $this->hasMany(Result::class, 'exam_id', 'id');
+    public function ExamUser() {
+        return $this->hasMany(ExamUser::class, 'exam_id', 'id');
     }
 
     public function feedbacks()
@@ -41,7 +38,7 @@ class Exam extends Model
 
     public function users()
     {
-        return $this->belongsToMany(Exam::class, 'exam_attempts', 'exam_id', 'user_id')->withPivot('score', 'attempt_number', 'start_time', 'end_time', 'created_at', 'updated_at', 'deleted_at');
+        return $this->belongsToMany(User::class, 'exam_user', 'exam_id', 'user_id')->withPivot('score', 'completion_time', 'created_at', 'updated_at');
     }
 
 }

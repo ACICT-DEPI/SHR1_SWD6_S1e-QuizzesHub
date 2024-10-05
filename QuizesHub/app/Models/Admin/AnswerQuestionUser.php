@@ -5,11 +5,11 @@ namespace App\Models\Admin;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class AnswerAttempt extends Model
+class AnswerQuestionUser extends Model
 {
     use HasFactory;
     // public $incrementing=false;
-    protected $fillable =['user_id','question_id','selected_answer_id','attempt_number'];
+    protected $fillable =['user_id','question_id','selected_answer_id','exam_user_id'];
 
     public function question()
     {
@@ -22,6 +22,11 @@ class AnswerAttempt extends Model
     public function user()
     {
        return $this->belongsto(User::class,'user_id','id');
+    }
+
+    public function exam_user()
+    {
+       return $this->belongsto(ExamUser::class,'exam_user_id','id');
     }
 
 

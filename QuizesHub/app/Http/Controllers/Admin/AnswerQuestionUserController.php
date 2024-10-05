@@ -3,26 +3,26 @@
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Admin\AnswerAttempt;
-use App\Http\Requests\Admin\AnswerAttemptRequest;
+use App\Models\Admin\AnswerQuestionUser;
+use App\Http\Requests\Admin\AnswerQuestionUserRequest;
 
-class AnswerAttemptController extends Controller
+class AnswerQuestionUserController extends Controller
 {
     public function index()
     {
-       $AnswerAttemptData=AnswerAttempt::all();
-       return $AnswerAttemptData;
-       //return view('admin.index',compact('AnswerAttemptData'));
+       $AnswerQuestionUserData=AnswerQuestionUser::all();
+       return $AnswerQuestionUserData;
+       //return view('admin.index',compact('AnswerQuestionUserData'));
     }
     public function create()
     {
         //return view('admin.create');
         return "create";
     }
-    public function store(AnswerAttemptRequest $request)
+    public function store(AnswerQuestionUserRequest $request)
     {
         $validatedData=$request->validate();
-        AnswerAttempt::create([
+        AnswerQuestionUser::create([
             'id'=>$request->id,
             'user_id'=>$request->user_id,
             'question_id'=>$request->question_id,
@@ -35,20 +35,20 @@ class AnswerAttemptController extends Controller
     }
     public function show(string $id)
     {
-        $AnswerAttemptData=AnswerAttempt::findorfail($id);
-        // return view('admin.show',compact('AnswerAttemptData'));
+        $AnswerQuestionUserData=AnswerQuestionUser::findorfail($id);
+        // return view('admin.show',compact('AnswerQuestionUserData'));
         return "show";
     }
     public function edit(string $id)
     {
-       $AnswerAttemptData=AnswerAttempt::findorfail($id);
-    //    return view('admin.update',compact('AnswerAttemptData'));
+       $AnswerQuestionUserData=AnswerQuestionUser::findorfail($id);
+    //    return view('admin.update',compact('AnswerQuestionUserData'));
         return "edit";
     }
-    public function update(AnswerAttemptRequest $request, string $id)
+    public function update(AnswerQuestionUserRequest $request, string $id)
     {
         $request->validate();
-        AnswerAttempt::findorfail($id)->update([
+        AnswerQuestionUser::findorfail($id)->update([
             'user_id'=>$request->user_id,
             'question_id'=>$request->question_id,
             'selected_answer_id'=>$request->selected_answer_id,
@@ -59,24 +59,24 @@ class AnswerAttemptController extends Controller
     }
     public function destroy(string $id)
     {
-        AnswerAttempt::findorfail($id)->delete();
+        AnswerQuestionUser::findorfail($id)->delete();
         // return redirect()->back()->with('messege','Answer attempt deleted successfully..');
         return "destroy";
     }
     public function archive(){
-        $AnswerAttemptData=AnswerAttempt::onlyTrashed()->get();
-        // return view('admin.archive',compact('AnswerAttemptData'));
+        $AnswerQuestionUserData=AnswerQuestionUser::onlyTrashed()->get();
+        // return view('admin.archive',compact('AnswerQuestionUserData'));
         return "archive";
     }
     public function forceDelet(string $id)
     {
-        AnswerAttempt::onlyTrashed()->findorfail($id)->forceDelete();
+        AnswerQuestionUser::onlyTrashed()->findorfail($id)->forceDelete();
         // return redirect()->back()->with('messege','Answer attempt deleted successfully..');
         return "forceDelet";
     }
     public function restore(string $id)
     {
-        AnswerAttempt::onlyTrashed()->findorfail($id)->restore();
+        AnswerQuestionUser::onlyTrashed()->findorfail($id)->restore();
         // return redirect()->back()->with('messege','Answer attempt deleted successfully..');
         return "restore";
     }

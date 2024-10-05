@@ -100,7 +100,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function exams()
     {
-        return $this->belongsToMany(Exam::class, 'exam_attempts', 'user_id', 'exam_id')->withPivot('score', 'attempt_number', 'start_time', 'end_time', 'created_at', 'updated_at', 'deleted_at');
+        return $this->belongsToMany(Exam::class, 'exam_user', 'user_id', 'exam_id')->withPivot('score', 'completion_time', 'created_at', 'updated_at', 'deleted_at');
     }
 
     public function feedbacks()
@@ -108,18 +108,24 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Feedback::class, 'user_id', 'id');
     }
 
-    public function results()
+    public function ExamUser()
     {
-        return $this->hasMany(Result::class, 'user_id', 'id');
+        return $this->hasMany(ExamUser::class, 'user_id', 'id');
     }
 
-    public function answerAttempts()
+    public function AnswerQuestionUser()
     {
-        return $this->hasMany(AnswerAttempt::class, 'user_id', 'id');
+        return $this->hasMany(AnswerQuestionUser::class, 'user_id', 'id');
     }
 
-    public function examAttempts()
+    public function questions()
     {
-        return $this->hasMany(ExamAttempt::class, 'user_id', 'id');
+        return $this->belongsToMany(Question::class, 'answer_question_user', 'user_id', 'question_id')->withPivot('selected_answer_id', 'exam_user_id', 'created_at', 'updated_at', 'deleted_at');
     }
+
+    public function answers()
+    {
+        return $this->belongsToMany(Answer::class, 'answer_question_user', 'user_id', 'selected_answer_id')->withPivot('question_id', 'exam_user_id', 'created_at', 'updated_at', 'deleted_at');
+    }
+
 }
