@@ -12,6 +12,7 @@ use App\Models\Admin\ExamUser;
 use App\Models\Admin\feedBack;
 use App\Models\Admin\User;
 use Carbon\Carbon;
+use App\Models\Admin\AnswerQuestionUser;
 
 class QuizController extends Controller
 {
@@ -30,6 +31,7 @@ class QuizController extends Controller
         $score = 0;
         $userAnswers = $request->validated();
         $user_answers = [];
+        $selected_answers = [];
 
         // Loop through each question in the exam
         foreach ($exam->questions as $question) {
@@ -51,23 +53,35 @@ class QuizController extends Controller
                     $score++; // Giving 1 point for submitting an essay answer
                 }
             }
+
+            $selected_answers[$question->id] =  $userAnswerId;
         }
 
         if(!ExamUser::where('user_id', $userId)->where('exam_id', $examId)->exists()) {
             $initScore = Auth::user()->score;
-            Auth::user()->score = $initScore + $score + intval($request->timer_input / 60);
+            Auth::user()->score = ($initScore + $score + intval($request->timer_input / 60));
             Auth::user()->save();
         }
 
 
 
-        ExamUser::create([
+        $exam_user_id = ExamUser::create([
             'user_id' => Auth::id(),
             'exam_id' => $examId,
             'score' => $score,
-            'total_score' => count($exam->questions->toArray()),
-            'completion_time' => intval($request->timer_input / 60),
+            'completion_time' => intval($exam->duration * 60) - intval($request->timer_input),
         ]);
+
+
+        // dd()
+        foreach($selected_answers as $question_id => $answer_id):
+            AnswerQuestionUser::create([
+                'user_id' => Auth::id(),
+                'question_id' => $question_id,
+                'selected_answer_id' => $answer_id,
+                'exam_user_id' => $exam_user_id->id,
+            ]);
+        endforeach;
 
 
         return view('quiz.result', compact('userId', 'exam', 'score', 'user_answers'));
