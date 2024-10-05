@@ -53,6 +53,18 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return 'store comment';
     })->name('comment.store');
 
+    Route::get('contact', function () {
+      return view('site.pages.contact');
+    })->name('site.contact');
+
+    Route::get('AboutUs', function () {
+        return view('site.pages.about');
+      })->name('site.about');
+
+      Route::get('ReadMore', function () {
+        return view('site.pages.ReadMore');
+      })->name('site.ReadMore');
+
     Route::get('/quiz/{id}', [QuizController::class, 'quiz'])->name('quiz.quiz');
     Route::get('/quiz/{id}/show', [QuizController::class, 'show'])->name('quiz.show');
     Route::post('/quiz/{id}', [QuizController::class, 'submit'])->name('quiz.submit');
