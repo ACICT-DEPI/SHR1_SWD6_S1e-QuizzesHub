@@ -15,17 +15,10 @@ use App\Http\Controllers\Admin\UniversityController;
 use App\Http\Controllers\Admin\FacultyController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\CourseExamsController;
-use App\Models\Admin\user;
-use App\Models\Admin\course;
 
-use App\Http\Controllers\Admin\CommentController;
 use App\Http\Controllers\SiteController;
 
 
-
-
-use App\Livewire\Login;
-use App\Livewire\Register;
 
 
 
@@ -45,9 +38,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::get('CourseExams/{course}', [CourseExamsController::class, 'CourseExams'])->name('CourseExams');
-
-
     Route::get('contact', function () {
       return view('site.pages.contact');
     })->name('site.contact');
@@ -60,13 +50,18 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return view('site.pages.ReadMore');
       })->name('site.ReadMore');
 
+
+});
+
+Route::middleware(['auth', 'verified', 'IsAuthorized'])->group(function () {
+
+    Route::get('CourseExams/{course}', [CourseExamsController::class, 'CourseExams'])->name('CourseExams')->withoutMiddleware('IsAuthorized')->middleware('IsAuthorized2');
+
     Route::post('/quiz/{id}', [QuizController::class, 'quiz'])->name('quiz.quiz');
     Route::get('/quiz/{id}', [QuizController::class, 'show'])->name('quiz.show');
     Route::post('/quiz/{id}/submit', [QuizController::class, 'submit'])->name('quiz.submit');
     Route::get('/quiz/{id}/feedback', [QuizController::class, 'feedBack'])->name('quiz.feedback');
     Route::post('/quiz/{id}/feedback', [QuizController::class, 'storeFeedBack'])->name('quiz.feedback');
-
-
 });
 
 Route::middleware(['auth','IsAdmin','verified'])->prefix('admin')->name('admin.')->group(function () {
