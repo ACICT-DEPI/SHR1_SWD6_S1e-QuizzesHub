@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="{{ asset('dashboard/assets') }}/css/selectFX/css/cs-skin-elastic.css">
     <link rel="stylesheet" href="{{ asset('dashboard/assets') }}/css/style.css">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+    @vite(['resources/css/app.css','resources/js/app.js'])
     <style>
         .correct_answer {
             background-color: lightgreen;
@@ -19,6 +20,33 @@
         .wrong_answer {
             background-color: tomato;
         }
+        .select5 {
+            appearance: none;
+            padding: 10px 15px;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+            font-size: 16px;
+            color: #333;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-left: 10rem;
+        }
+
+        .select5:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+
+        .select5:hover {
+            border-color: #007bff;
+        }
+
+        .option5 {
+            padding: 10px;
+        }
+
     </style>
 </head>
 <body>
@@ -32,14 +60,14 @@
                         </div>
 
                         <div class="catd-body" id="begin-screen">
-                            <div class="container mt-5">
-                                <div class="card shadow-lg">
+                            <div class="container mt-5 align-items-center justify-center " style="display: flex" >
+                                <div class="card shadow-lg " style="width: 65%;  ">
                                     <div class="card-header text-center bg-primary text-white">
-                                        <h3>{{ $exam->course->university->name }}</h3>
-                                        <h5>{{ $exam->course->faculty->name }}</h5>
+                                        <h3 style="font-size: 1.75rem !important; font-weight: 500 !important;">{{ $exam->course->university->name }}</h3>
+                                        <h5 style="font-size: 1.25rem !important; font-weight: 500 !important;">{{ $exam->course->faculty->name }}</h5>
                                     </div>
                                     <div class="card-body">
-                                        <h4 class="card-title text-center">Course: {{ $exam->course->course->name }} [{{ $exam->course->course->code }}]</h4>
+                                        <h4 style="font-size: 1.5rem !important; font-weight: 500 !important;" class="card-title text-center">Course: {{ $exam->course->course->name }} [{{ $exam->course->course->code }}]</h4>
 
                                         <div class="row mt-4">
                                             <div class="col-md-6">
@@ -107,7 +135,7 @@
                                         @endif
                                     </div>
                                     <div class="comment">
-                                        <form action="{{ route('comment.store') }}" method="post">
+                                        {{-- <form action="{{ route('comment.store') }}" method="post">
                                             @csrf
                                             <input type="hidden" name="question_id" value="{{$question->id}}">
                                             <input type="hidden" name="parent_id" value=''>
@@ -116,9 +144,15 @@
                                                     <textarea name="comment_text" id="comment" cols="30" rows="2" class="form-control" placeholder="if u have any comments or issue let us to solve it.."></textarea>
                                                     <button type="submit" class="btn btn-primary">Send</button>
                                                 </div>
-                                                
+
                                             </div>
-                                        </form>
+                                        </form> --}}
+
+
+                                            <livewire:comments :model="$question"/>
+
+
+
                                     </div>
                                 @endforeach
 

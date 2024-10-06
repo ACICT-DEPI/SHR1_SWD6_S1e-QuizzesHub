@@ -275,10 +275,10 @@ VALUES
 
 
 -- 5. comments Table:
-INSERT INTO comments (user_id, question_id, parent_id, comment_text, created_at, updated_at)
-VALUES
-(1, 1, NULL, 'This is a comment', NOW(), NOW()),
-( 2, 1, 1, 'This is a reply', NOW(), NOW());
+-- INSERT INTO comments (user_id, question_id, parent_id, comment_text, created_at, updated_at)
+-- VALUES
+-- (1, 1, NULL, 'This is a comment', NOW(), NOW()),
+-- ( 2, 1, 1, 'This is a reply', NOW(), NOW());
 
 
 
@@ -296,10 +296,10 @@ VALUES
 
 
 -- 12. likes Table:
-INSERT INTO likes ( user_id, comment_id, `like`, created_at, updated_at)
-VALUES
-( 1, 1, 'yes', NOW(), NOW()),
-( 2, 2, 'no', NOW(), NOW());
+-- INSERT INTO likes ( user_id, comment_id, `like`, created_at, updated_at)
+-- VALUES
+-- ( 1, 1, 'yes', NOW(), NOW()),
+-- ( 2, 2, 'no', NOW(), NOW());
 
 
 

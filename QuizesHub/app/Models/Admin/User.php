@@ -8,12 +8,14 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Usamamuneerchaudhary\Commentify\Traits\HasUserAvatar;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
 
     use HasFactory, Notifiable;
     use SoftDeletes;
+    use HasUserAvatar;
 
     /**
      * The attributes that are mass assignable.
@@ -93,10 +95,6 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->belongsTo(Level::class, 'level_id', 'id');
     }
 
-    public function comments()
-    {
-        return $this->hasMany(Comment::class, 'user_id', 'id');
-    }
 
     public function exams()
     {
