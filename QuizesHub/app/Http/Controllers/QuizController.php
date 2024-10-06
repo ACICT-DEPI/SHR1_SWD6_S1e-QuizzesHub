@@ -58,8 +58,10 @@ class QuizController extends Controller
         }
 
         if(!ExamUser::where('user_id', $userId)->where('exam_id', $examId)->exists()) {
-            $initScore = Auth::user()->score;
-            Auth::user()->score = ($initScore + $score + intval($request->timer_input / 60));
+            Auth::user()->score = (Auth::user()->score + $score + intval($request->timer_input / 60));
+            if($score > count($exam->questions->toArray())/2) {
+                Auth::user()->score = Auth::user()->score + intval($request->timer_input / 60);
+            }
             Auth::user()->save();
         }
 

@@ -20,6 +20,8 @@ use App\Http\Controllers\CourseExamsController;
 use App\Models\Admin\user;
 use App\Models\Admin\course;
 use App\Http\Controllers\Admin\CommentController;
+use App\Http\Controllers\SiteController;
+
 
 
 
@@ -33,11 +35,7 @@ use App\Livewire\Register;
 // });
 
 
-Route::get('/', function () {
-
-     return view('site.index');
-
-})->name('site.index');
+Route::get('/', [SiteController::class, 'index'])->name('site.index');
 
 // Route::get('/admin', function () {
 //     return view('dashboard');
@@ -64,9 +62,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return view('site.pages.ReadMore');
       })->name('site.ReadMore');
 
-    Route::get('/quiz/{id}', [QuizController::class, 'quiz'])->name('quiz.quiz');
-    Route::get('/quiz/{id}/show', [QuizController::class, 'show'])->name('quiz.show');
-    Route::post('/quiz/{id}', [QuizController::class, 'submit'])->name('quiz.submit');
+    Route::post('/quiz/{id}', [QuizController::class, 'quiz'])->name('quiz.quiz');
+    Route::get('/quiz/{id}', [QuizController::class, 'show'])->name('quiz.show');
+    Route::post('/quiz/{id}/submit', [QuizController::class, 'submit'])->name('quiz.submit');
     Route::get('/quiz/{id}/feedback', [QuizController::class, 'feedBack'])->name('quiz.feedback');
     Route::post('/quiz/{id}/feedback', [QuizController::class, 'storeFeedBack'])->name('quiz.feedback');
 
