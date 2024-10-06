@@ -22,7 +22,7 @@
                             <div class="form-group">
                                 <label class=" form-control-label" for="name">University Name</label>
                                 <div class="input-group">
-                                    <div class="input-group-addon"><i class="menu-icon fa fa-book"></i></div>
+                                    <div class="input-group-addon"><i class="menu-icon fa fa-pencil"></i></div>
                                     <input type="text" id="name" value="{{ old('name') }}"
                                         class="form-control @error('name') is-invalid @enderror" name="name" placeholder="University Name">
                                     @error('name')
