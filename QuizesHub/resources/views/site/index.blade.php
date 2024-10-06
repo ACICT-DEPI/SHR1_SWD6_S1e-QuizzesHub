@@ -1,5 +1,4 @@
 
-
 @extends('site.layout.master')
 
 @section('content')
@@ -373,4 +372,34 @@
     </div>
 </div>
 <!-- Testimonial End -->
+<div class="container">
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered">
+            <caption>Top Users</caption>
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Who</th>
+                <th scope="col">Points</th>
+              </tr>
+            </thead>
+            <tbody>
+                @foreach($top_users as $index => $user)
+                <tr>
+                <th scope="row">{{ $index + 1 }}</th>
+                <td>{{ $user->fname . ' ' . $user->lname }}</td>
+                <td>{{ $user->score }}</td>
+                </tr>
+                @endforeach
+            </tbody>
+            <tfoot>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Who</th>
+                  <th scope="col">Points</th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
 @endsection
