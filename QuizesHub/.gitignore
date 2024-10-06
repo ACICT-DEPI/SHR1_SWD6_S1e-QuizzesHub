@@ -5,7 +5,7 @@
 /public/storage
 /storage/*.key
 /vendor/*
-!/vendor/usamamuneerchaudhary/commentify/*
+!/vendor/usamamuneerchaudhary/*
 .env
 .env.backup
 .env.production
