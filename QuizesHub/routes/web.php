@@ -14,12 +14,9 @@ use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\UniversityController;
 use App\Http\Controllers\Admin\FacultyController;
 use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\CourseExamsController;
 use App\Models\Admin\user;
 use App\Models\Admin\course;
-use App\Http\Controllers\Admin\CommentController;
 
 
 
@@ -50,7 +47,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('CourseExams/{course}', [CourseExamsController::class, 'CourseExams'])->name('CourseExams');
 
-    Route::post('/quiz/comment', [CommentController::class, 'store'])->name('comment.store');
 
     Route::get('contact', function () {
       return view('site.pages.contact');
@@ -70,7 +66,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/quiz/{id}/feedback', [QuizController::class, 'feedBack'])->name('quiz.feedback');
     Route::post('/quiz/{id}/feedback', [QuizController::class, 'storeFeedBack'])->name('quiz.feedback');
 
-    
+
 });
 
 Route::middleware(['auth','IsAdmin','verified'])->prefix('admin')->name('admin.')->group(function () {
