@@ -117,7 +117,7 @@
                                                         type="radio" name="question[{{ $question->id }}]" value="{{ $answer->id }}" id="answer-{{ $answer->id }}">
                                                     <?php // echo $answer->is_correct; ?>
                                                     <label @if($answer->is_correct === 1) class='correct_answer' @endif
-                                                        for="answer-{{ $answer->id }}">{{ $answer->text }} </label> 
+                                                        for="answer-{{ $answer->id }}">{{ $answer->text }} </label>
                                                 </div>
                                             @endforeach
 

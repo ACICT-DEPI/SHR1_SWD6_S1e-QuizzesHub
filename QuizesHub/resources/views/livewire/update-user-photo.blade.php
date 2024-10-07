@@ -31,6 +31,9 @@
     @endif
 
     <button wire:click="save"  class="my-3 btn btn-success"
-        style="width: 50%; border-radius: 0.375rem; display: inline-block !important;" type="submit">Save Photo</button>
+        style="width: 40%; border-radius: 0.375rem; display: inline-block !important;" type="submit">Save Photo</button>
+
+        <button wire:click="deletePhoto"  class="my-3 btn btn-danger"
+        style="width: 40%; border-radius: 0.375rem; display: inline-block !important;" type="submit">Delete Photo</button>
 
 </div>

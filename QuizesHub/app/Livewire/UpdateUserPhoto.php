@@ -27,7 +27,22 @@ class UpdateUserPhoto extends Component
 
     }
 
+    public function deletePhoto()
+    {
+        $user = Auth::user();
 
+        // Delete the current photo if exists
+        if ($user->image_path && Storage::exists($user->image_path)) {
+            Storage::delete($user->image_path);
+            $user->image_path = null;
+            $user->save();
+            $this->currentPhoto = null;
+            session()->flash('message', 'Profile photo deleted successfully.');
+        } else {
+            session()->flash('error', 'No profile photo to delete.');
+        }
+    }
+    
     public function save()
     {
         $this->validate([

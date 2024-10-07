@@ -4,7 +4,9 @@
     <div class="form-group">
         <label class=" form-control-label" for="university_id">University</label>
         <div class="input-group">
+            @if(request()->route()->parameters())
             <div class="input-group-addon"><i class="fa fa-bank"></i></div>
+            @endif
             <select wire:model.live="selectedUniversity" class="form-control @error('university_id') is-invalid @enderror"
                 name="university_id" id="university_id">
                 <option value="">Select University</option>
@@ -25,7 +27,9 @@
     <div class="form-group">
         <label class=" form-control-label" for="faculty_id">Faculty</label>
         <div class="input-group">
+            @if(request()->route()->parameters())
             <div class="input-group-addon"><i class="fa fa-bank"></i></div>
+            @endif
             <select wire:model.live="selectedFaculty" class="form-control @error('faculty_id') is-invalid @enderror"
                 name="faculty_id" id="faculty_id">
                 <option value="">Select Faculty</option>
@@ -46,7 +50,9 @@
     <div class="form-group">
         <label class=" form-control-label" for="major_id">Major</label>
         <div class="input-group">
+            @if(request()->route()->parameters())
             <div class="input-group-addon"><i class="fa fa-bank"></i></div>
+            @endif
             <select wire:model.live="selectedMajor" class="form-control @error('major_id') is-invalid @enderror"
                 name="major_id" id="major_id">
                 <option value="">Select major</option>
