@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\UniversityController;
 use App\Http\Controllers\Admin\FacultyController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\CourseExamsController;
+use App\Http\Controllers\Admin\ChartController;
 
 use App\Http\Controllers\SiteController;
 
@@ -117,6 +118,10 @@ Route::middleware(['auth','IsAdmin','verified'])->prefix('admin')->name('admin.'
     Route::delete('/users/{user}/forceDelete', [UserController::class, 'forceDelete'])->name('users.forceDelete')->middleware('IsOwner');
     Route::get('/users/{user}/editRole', [UserController::class, 'editRole'])->name('users.editRole')->middleware('IsOwner');
     Route::put('/users/{user}/updateRole', [UserController::class, 'updateRole'])->name('users.updateRole')->middleware('IsOwner');
+
+    Route::get('/charts/most-universities', [ChartController::class, 'getMostUniversities']);
+    Route::get('/top-users-data', [ChartController::class, 'getTopUsersByScore']);
+    Route::get('/popular-courses-data', [ChartController::class, 'getMostPopularCourses']);
 });
 
 
