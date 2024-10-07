@@ -3,7 +3,18 @@
     <a href="{{ route('site.index') }}" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
         <h2 class="m-0 text-primary"><img src="{{asset('website/assets')}}/img/QH.png" class="logo" alt="">QuizzesHub
         </h2>
+        
     </a>
+    @auth
+    <a href="{{ route('profile.edit') }}"> 
+        @if(!empty(Auth::user()->image_path) && file_exists('storage/'.Auth::user()->image_path))
+            <img src="{{ asset('storage/'.Auth::user()->image_path )}} " alt="" width="30" height="30" class="rounded-circle">
+        @else 
+            <img src="{{ asset('dashboard/assets/images/default.jpg') }} " alt="" width="30" height="30" class="rounded-circle">
+        @endif 
+        {{ Auth::user()->username }} | {{ Auth::user()->score }}
+    </a>
+    @endauth
     <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -41,7 +52,7 @@
 
             <div class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle " data-bs-toggle="dropdown"><i class="fa fa-book"
-                         style="color: #06BBCC"></i> Courses</a>
+                        style="color: #06BBCC"></i> Courses</a>
                 <div class="dropdown-menu fade-down m-0">
                     @if(!empty(Auth::user()->courses()))
 
@@ -76,10 +87,17 @@
                     @php
                     $image = Auth::user()->image_path;
                     @endphp
-                    <a href="{{ route('profile.edit') }}" class="dropdown-item">@if($image != null && file_exists('storage/'.Auth::user()->image_path))<img
-                            src="{{asset('storage/'.$image)}}" class="rounded-circle" style="width: 30px; height: 30px;"
-                            alt="">@else <img src="{{asset('dashboard/assets')}}/images/default.jpg" class="rounded-circle"
-                            style="width: 30px; height: 30px;" alt="">@endif profile</a>
+                    <a href="{{ route('profile.edit') }}" class="dropdown-item">
+                        @if($image != null && file_exists('storage/'.Auth::user()->image_path))
+                            <img src="{{asset('storage/'.$image)}}" class="rounded-circle" style="width: 30px; height: 30px;" alt="">
+                        @else 
+                            <img src="{{asset('dashboard/assets')}}/images/default.jpg" class="rounded-circle" style="width: 30px; height: 30px;" alt="">
+                        @endif 
+                        profile
+                    </a>
+                    @if(Auth::user()->role == 'owner' || Auth::user()->role == 'admin')
+                        <a href="{{ route('admin.home') }}" class="dropdown-item">dashboard</a>
+                    @endif 
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
                         <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();

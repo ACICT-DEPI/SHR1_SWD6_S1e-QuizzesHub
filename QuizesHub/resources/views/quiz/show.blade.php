@@ -112,12 +112,14 @@
                                         @if($question->type == 'mcq' || $question->type == 'true_false')
                                             @foreach($question->answers as $answer)
                                                 <div>
-                                                    <small class="badge bg-info">({{ count($answer->AnswerQuestionUser) }})</small>
                                                     <input
                                                         type="radio" name="question[{{ $question->id }}]" value="{{ $answer->id }}" id="answer-{{ $answer->id }}">
                                                     <?php // echo $answer->is_correct; ?>
                                                     <label @if($answer->is_correct === 1) class='correct_answer' @endif
+
                                                         for="answer-{{ $answer->id }}">{{ $answer->text }} </label> 
+                                                        <small class="badge bg-info">Selected By {{ count($answer->AnswerQuestionUser) }} Student</small>
+
                                                 </div>
                                             @endforeach
 

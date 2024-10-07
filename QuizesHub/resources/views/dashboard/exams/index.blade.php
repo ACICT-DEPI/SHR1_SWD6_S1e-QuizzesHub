@@ -8,6 +8,7 @@
         href="{{ asset('dashboard/assets') }}/css/datatables.net-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet"
         href="{{ asset('dashboard/assets') }}/css/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css">
+        @livewireStyles
 @endsection
 
 
@@ -17,6 +18,7 @@
         <div class="row">
 
             <div class="col-md-12">
+ {{--
                 <div class="card">
                   @if (Session::has('msg'))
                         <alert class="alert alert-success">
@@ -73,8 +75,10 @@
                         </table>
                     </div>
                 </div>
-            </div>
+--}}
+                @livewire('exam-filter')
 
+            </div>
 
         </div>
     </div><!-- .animated -->
@@ -82,6 +86,7 @@
 @endsection
 
 @section('scripts')
+@livewireScripts
 
     <!-- DataTables JS -->
     <script src="{{ asset('dashboard/assets/js/datatables.net/js/jquery.dataTables.min.js') }}"></script>

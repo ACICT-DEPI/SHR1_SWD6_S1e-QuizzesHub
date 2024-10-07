@@ -109,7 +109,10 @@
                             {{-- feedback for exam --}}
                             <div class="form-group">
                                 <div class="input-group">
-                                    <button class="form-control" class="btn btn-primary">FeedBack</button>
+                                    <a 
+                                        href="{{ route('quiz.feedback', $exam->id)}}"
+                                        class="form-control btn btn-primary"
+                                    >FeedBack</a>
                                 </div>
                                 <p>this feedback help us to solve the issues in exams</p>
                             </div>

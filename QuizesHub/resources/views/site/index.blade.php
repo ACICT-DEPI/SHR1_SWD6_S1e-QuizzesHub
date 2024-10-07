@@ -130,7 +130,7 @@ $courses[] = App\Models\Admin\course::where('id',$course->course_id)->first();
 <div class="container">
     <div class="table-responsive">
         <table class="table table-striped table-bordered">
-            <caption>Top Users</caption>
+            <caption>Top Users &copy; QuizzesHub</caption>
             <thead>
               <tr>
                 <th scope="col">#</th>
@@ -139,21 +139,20 @@ $courses[] = App\Models\Admin\course::where('id',$course->course_id)->first();
               </tr>
             </thead>
             <tbody>
+                @if($top_users->isEmpty())
+                <tr>
+                    <td colspan="3" class="text-center">No users yet.</td>
+                </tr>
+                @else 
                 @foreach($top_users as $index => $user)
-                <tr>
-                <th scope="row">{{ $index + 1 }}</th>
-                <td>{{ $user->fname . ' ' . $user->lname }}</td>
-                <td>{{ $user->score }}</td>
-                </tr>
+                    <tr>
+                    <th scope="row">{{ $index + 1 }}</th>
+                    <td>{{ $user->fname . ' ' . $user->lname }}</td>
+                    <td>{{ $user->score }}</td>
+                    </tr>
                 @endforeach
+                @endif
             </tbody>
-            <tfoot>
-                <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">Who</th>
-                  <th scope="col">Points</th>
-                </tr>
-            </tfoot>
         </table>
     </div>
 </div>
