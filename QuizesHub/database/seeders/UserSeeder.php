@@ -17,12 +17,13 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         User::firstOrCreate([
-            'fname' => 'Mohamed',
-            'lname' => 'Nayef',
-            'username' => 'mohamednayef',
-            'email' => 'mohamednayef@gmail.com',
-            'password' => Hash::make('password'),
-            'phone' => '01026660223',
+            'fname' => 'Owner',
+            'lname' => 'Owner',
+            'username' => 'owner',
+            'email' => 'owner@quizzeshub.com',
+            'email_verified_at' => NOW(),
+            'password' => Hash::make('12345678'),
+            'phone' => '01231236666',
             'image_path' => null,
             'gender' => 'M',
             'role' => 'owner',
@@ -32,5 +33,42 @@ class UserSeeder extends Seeder
             'major_id' => null,
             'level_id' => null,
         ]);
+        User::firstOrCreate([
+            'fname' => 'Admin',
+            'lname' => 'Admin',
+            'username' => 'admin',
+            'email' => 'admin@quizzeshub.com',
+            'email_verified_at' => NOW(),
+            'password' => Hash::make('12345678'),
+            'phone' => '01231236666',
+            'image_path' => null,
+            'gender' => 'M',
+            'role' => 'admin',
+            'score' => '0',
+            'university_id' => null,
+            'faculty_id' => null,
+            'major_id' => null,
+            'level_id' => null,
+        ]);
+        User::firstOrCreate([
+            'fname' => 'User',
+            'lname' => 'User',
+            'username' => 'user',
+            'email' => 'user@quizzeshub.com',
+            'email_verified_at' => NOW(),
+            'password' => Hash::make('12345678'),
+            'phone' => '01231236666',
+            'image_path' => null,
+            'gender' => 'M',
+            'role' => 'user',
+            'score' => '0',
+            'university_id' => null,
+            'faculty_id' => null,
+            'major_id' => null,
+            'level_id' => null,
+        ]);
+            // $table->rememberToken();
+            // $table->string('provider_id')->nullable();
+            // $table->string('provider')->nullable();
     }
 }

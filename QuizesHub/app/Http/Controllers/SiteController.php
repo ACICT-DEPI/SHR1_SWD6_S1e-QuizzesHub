@@ -16,11 +16,12 @@ class SiteController extends Controller
             $faculty_id = Auth::user()->faculty->id;
             $top_users = User::where('university_id', $university_id)
                             ->where('faculty_id', $faculty_id)
+                            ->where('score','>',0)
                             ->take(3)
                             ->orderBy('score', 'desc')
                             ->get();
         } else {
-            $top_users = User::take(3)->orderBy('score', 'desc')->get();
+            $top_users = User::where('score','>',0)->take(3)->orderBy('score', 'desc')->get();
         }
 
         return view('site.index', compact('top_users'));
