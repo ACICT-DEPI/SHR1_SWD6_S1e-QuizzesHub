@@ -18,7 +18,66 @@
         <div class="row">
 
             <div class="col-md-12">
+ {{--
+                <div class="card">
+                  @if (Session::has('msg'))
+                        <alert class="alert alert-success">
+                            {{ Session::get('msg') }}
+                        </alert>
+                    @endif
+                    <div class="card-header">
+                        <strong class="card-title">Data Table</strong>
+                    </div>
+                    <div class="card-body">
+                        <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Course Name</th>
+                                    <th>Faculty</th>
+                                    <th>University</th>
+                                    <th>Date</th>
+                                    <th>Operations</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                              @foreach ($exams as $exam)
+                                <tr>
+                                  <td>{{ $exam->type }}</td>
+                                  <td>{{ $exam->course->course->name }}</td>
+                                  <td>{{ $exam->course->faculty->name }}</td>
+                                  <td>{{ $exam->course->university->name }}</td>
+                                  <td>{{ $exam->date }}</td>
+                                  <td>
+                                    <a href="{{ route('admin.exams.show', $exam->id) }}" class="btn btn-primary">Show</a>
+                                    {{-- <a href="#" class="btn btn-primary">Show</a> --}}
+                                    <a href="{{ route('admin.exams.edit', $exam->id)}}" class="btn btn-success" >Edit</a>
+                                    <form style="display:inline" action="{{route('admin.exams.destroy', $exam->id)}}" method="POST">
+                                      @csrf
+                                      @method('delete')
+                                      <button class="btn btn-danger" id="delete" onclick="return confirm('Are you sure?')" value="Delete" >Delete</button>
+                                    </form>
+                                    {{-- <a href="#" class="btn btn-danger">Delete</a> --}}
+                                  </td>
+                                </tr>
+                              @endforeach
+                            </tbody>
+                            <tfoot>
+                              <tr>
+                                <th>Type</th>
+                                <th>Course Name</th>
+                                <th>Faculty</th>
+                                <th>University</th>
+                                <th>Date</th>
+                                <th>Operations</th>
+                              </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+--}}
                 @livewire('exam-filter')
+
             </div>
 
         </div>

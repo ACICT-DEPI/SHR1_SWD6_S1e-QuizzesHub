@@ -11,8 +11,8 @@
             <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.3s">
                 <h6 class="section-title bg-white text-start text-primary pe-3">About Us</h6>
                 <h1 class="mb-4">Welcome to QuizHub</h1>
-                <p class="mb-4"> Quizzes Hub is a vibrant platform designed for quiz enthusiasts, learners, and curious minds..</p>
-                <p class="mb-4"> It offers a wide range of quizzes covering various topics, from general knowledge and current events to niche subjects like science, history, pop culture, and more. Whether you're looking to challenge yourself, learn something new, or just have fun, Quizzes Hub provides an engaging and interactive way to test your knowledge. With a user-friendly interface and regularly updated content, it’s a go-to destination for anyone looking to sharpen their wits and enjoy some friendly competition.</p>
+                <p class="mb-4"> Quizzes Hub is a vibrant platform designed for Online quiz..</p>
+                <p class="mb-4"> It offers a wide range of Online quizzes for students to practice and improve their skills and thim can also add feedbacks and comments to improve our courses and exams, and it also offer alot of Courses but only student shoud select his university,faculty and his Major...</p>
                 <div class="row gy-2 gx-4 mb-4">
                     <div class="col-sm-6">
                         <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>More Courses</p>

@@ -22,7 +22,7 @@
                             <div class="form-group">
                                 <label class=" form-control-label" for="fname">fName</label>
                                 <div class="input-group">
-                                    <div class="input-group-addon"><i class="menu-icon fa fa-book"></i></div>
+                                    <div class="input-group-addon"><i class="menu-icon fa fa-user"></i></div>
                                     <input type="text" id="fname" value="{{ old('fname') }}"
                                         class="form-control @error('fname') is-invalid @enderror" name="fname">
                                     @error('fname')
@@ -35,7 +35,7 @@
                             <div class="form-group">
                                 <label class=" form-control-label" for="lname">lName</label>
                                 <div class="input-group">
-                                    <div class="input-group-addon"><i class="menu-icon fa fa-book"></i></div>
+                                    <div class="input-group-addon"><i class="menu-icon fa fa-user"></i></div>
                                     <input type="text" id="lname" value="{{ old('lname') }}"
                                         class="form-control @error('lname') is-invalid @enderror" name="lname">
                                     @error('lname')
@@ -48,7 +48,7 @@
                             <div class="form-group">
                                 <label class=" form-control-label" for="username">Username</label>
                                 <div class="input-group">
-                                    <div class="input-group-addon"><i class="menu-icon fa fa-book"></i></div>
+                                    <div class="input-group-addon"><i class="menu-icon fa fa-user"></i></div>
                                     <input type="text" id="username" value="{{ old('username') }}"
                                         class="form-control @error('username') is-invalid @enderror" name="username">
                                     @error('username')
@@ -61,7 +61,7 @@
                             <div class="form-group">
                                 <label class=" form-control-label" for="email">Email</label>
                                 <div class="input-group">
-                                    <div class="input-group-addon"><i class="menu-icon fa fa-book"></i></div>
+                                    <div class="input-group-addon"><i class="menu-icon fa fa-envelope"></i></div>
                                     <input type="email" id="email" value="{{ old('email') }}"
                                         class="form-control @error('email') is-invalid @enderror" name="email">
                                     @error('email')
@@ -74,7 +74,7 @@
                             <div class="form-group">
                                 <label class=" form-control-label" for="phone">Phone</label>
                                 <div class="input-group">
-                                    <div class="input-group-addon"><i class="menu-icon fa fa-book"></i></div>
+                                    <div class="input-group-addon"><i class="menu-icon fa fa-phone"></i></div>
                                     <input type="text" id="phone" value="{{ old('phone') }}"
                                         class="form-control @error('phone') is-invalid @enderror" name="phone">
                                     @error('phone')
@@ -87,7 +87,7 @@
                             <div class="form-group">
                                 <label class=" form-control-label" for="password">Password</label>
                                 <div class="input-group">
-                                    <div class="input-group-addon"><i class="menu-icon fa fa-book"></i></div>
+                                    <div class="input-group-addon"><i class="menu-icon fa fa-lock"></i></div>
                                     <input type="password" id="password" value="{{ old('password') }}"
                                         class="form-control @error('password') is-invalid @enderror" name="password">
                                     @error('password')
@@ -100,7 +100,7 @@
                             <div class="form-group">
                                 <label class=" form-control-label" for="image_path">Photo</label>
                                 <div class="input-group">
-                                    <div class="input-group-addon"><i class="menu-icon fa fa-book"></i></div>
+                                    <div class="input-group-addon"><i class="menu-icon fa fa-image"></i></div>
                                     <input type="file" id="image_path" value="{{ old('image_path') }}"
                                         class="form-control @error('image_path') is-invalid @enderror" name="image_path">
                                     @error('image_path')

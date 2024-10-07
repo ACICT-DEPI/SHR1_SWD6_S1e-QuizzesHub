@@ -21,7 +21,7 @@
                             <div class="form-group">
                                 <label class=" form-control-label" for="name">Faculty Name</label>
                                 <div class="input-group">
-                                    <div class="input-group-addon"><i class="menu-icon fa fa-book"></i></div>
+                                    <div class="input-group-addon"><i class="menu-icon fa fa-pencil-square-o"></i></div>
                                     <input type="text" id="name" value="{{ $faculty->name }}"
                                         class="form-control @error('name') is-invalid @enderror" name="name">
                                     @error('name')

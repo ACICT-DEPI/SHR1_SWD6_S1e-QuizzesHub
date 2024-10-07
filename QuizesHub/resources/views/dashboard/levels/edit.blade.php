@@ -24,7 +24,7 @@
                                 <div class="form-group">
                                     <label class=" form-control-label" for="name">Level_Name</label>
                                     <div class="input-group">
-                                        <div class="input-group-addon"><i class="menu-icon fa fa-book"></i></div>
+                                        <div class="input-group-addon"><i class="menu-icon fa fa-pencil"></i></div>
                                         <input type="text" id="name" value="{{$LevelData->name}}" name="name" class="form-control @error('name') is-invalid @enderror" >
                                           @error('name')
                                     <span class="invalid-feedback" role="alert">
@@ -38,7 +38,7 @@
                                    <div class="form-group">
                                     <label class=" form-control-label" for="description">Description</label>
                                     <div class="input-group">
-                                        <div class="input-group-addon"><i class="menu-icon fa fa-book"></i></div>
+                                        <div class="input-group-addon"><i class="menu-icon fa fa-pencil"></i></div>
                                         <input type="text" id="description" value="{{$LevelData->description}}" class="form-control @error('description') is-invalid @enderror" name="description">
                                           @error('description')
                                     <span class="invalid-feedback" role="alert">
