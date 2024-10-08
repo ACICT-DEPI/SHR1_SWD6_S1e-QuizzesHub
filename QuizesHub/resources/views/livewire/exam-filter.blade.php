@@ -10,44 +10,53 @@
         </div>
         <div class="card-body">
             {{-- selected_university --}}
-            <div>
-                <select wire:model="selectedUniversity">
-                    <option value="">Filter University</option>
-                    @foreach ($universities as $university)
-                        <option value="{{ $university->id }}">{{ $university->name }}</option>
-                    @endforeach
-                </select>
-                <button wire:click='filterUniversity'>filter</button>
+            <div class="mb-3">
+                <div class="input-group">
+                    <select wire:model="selectedUniversity" class="form-control">
+                        <option value="">Filter University</option>
+                        @foreach ($universities as $university)
+                            <option value="{{ $university->id }}">{{ $university->name }}</option>
+                        @endforeach
+                    </select>
+                    <button wire:click='filterUniversity' class="btn btn-primary">apply</button>
+
+                </div>
             </div>
             {{-- selected_faculty --}}
-            <div>
-                <select wire:model="selectedFaculty">
-                    <option value="">Filter Faculty</option>
-                    @foreach ($faculties as $faculty)
-                        <option value="{{ $faculty->id }}">{{ $faculty->name }}</option>
-                    @endforeach
-                </select>
-                <button wire:click='filterFaculty'>filter</button>
+            <div class="mb-3">
+                <div class="input-group">
+                    <select wire:model="selectedFaculty" class="form-control">
+                        <option value="">Filter Faculty</option>
+                        @foreach ($faculties as $faculty)
+                            <option value="{{ $faculty->id }}">{{ $faculty->name }}</option>
+                        @endforeach
+                    </select>
+                    <button wire:click='filterFaculty' class="btn btn-primary">apply</button>
+                </div>
             </div>
             {{-- selected_major --}}
-            <div>
-                <select wire:model="selectedMajor">
-                    <option value="">Filter Major</option>
-                    @foreach ($majors as $major)
-                        <option value="{{ $major->id }}">{{ $major->name }}</option>
-                    @endforeach
-                </select>
-                <button wire:click='filterMajor'>filter</button>
+            <div class="mb-3">
+                <div class="input-group">
+                    <select wire:model="selectedMajor" class="form-control">
+                        <option value="">Filter Major</option>
+                        @foreach ($majors as $major)
+                            <option value="{{ $major->id }}">{{ $major->name }}</option>
+                        @endforeach
+                    </select>
+                    <button wire:click='filterMajor' class="btn btn-primary">apply</button>
+                </div>
             </div>
             {{-- selected_type --}}
-            <div>
-                <select wire:model="selectedType">
-                    <option value="{{null}}">Filter Type</option>
-                    @foreach ($types as $type)
-                        <option value="{{ $type }}">{{ $type }}</option>
-                    @endforeach
-                </select>
-                <button wire:click='filterType'>filter</button>
+            <div class="mb-3">
+                <div class="input-group">
+                    <select wire:model="selectedType" class="form-control">
+                        <option value="{{null}}">Filter Type</option>
+                        @foreach ($types as $type)
+                            <option value="{{ $type }}">{{ $type }}</option>
+                        @endforeach
+                    </select>
+                    <button wire:click='filterType' class="btn btn-primary">apply</button>
+                </div>
             </div>
             <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
                 <thead>

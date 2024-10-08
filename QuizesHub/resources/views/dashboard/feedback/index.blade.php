@@ -27,11 +27,13 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                         @foreach ($UserData as $feedback)
+                                        @dd($UserData->user->fname)
+                         @foreach($UserData as $feedback)
                      <tr>
-                     <td>{{ $feedback->user->fname." ".$feedback->user->lname}}</td>
+                     {{-- <td>{{ $feedback->user->fname . " " . $feedback->user->lname}}</td> --}}
+                    @dd($feedback->user)
                           
-                          <td>{{ $feedback->exam->course->name }}</td>
+                          <td>{{ $feedback->exam->course->course->name }}</td>
                           <td>{{$feedback->exam->type }}</td>
                           <td>{{ $feedback->exam->date}}</td>
                           <td>{{ $feedback->rating}}</td>

@@ -57,7 +57,8 @@ class UserRequest extends FormRequest
             'university_id' => 'required|integer',
             'faculty_id' => 'required|integer',
             'major_id' => 'required|integer',
-            'level_id' => 'required|integer',
+            // 'level_id' => 'required|integer',
+            'level_id' => ['required', 'regex:/(1|2|3|4)/']
         ];
     }
     public function rules(): array

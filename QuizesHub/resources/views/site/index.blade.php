@@ -15,6 +15,7 @@
                             <h1 class="display-3 text-white animated slideInDown">The Best Online Exams Platform</h1>
                             <p class="fs-5 text-white mb-4 pb-2">you can learn from anywhere and anytime with our Quizs and Exams.</p>
                             <a href="{{route('site.ReadMore')}}" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Read More</a>
+                            <a href="{{route('newexams.create')}}" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Add Exam</a>
                             @guest
                             <a href=" {{ route('register') }}" class="btn btn-light py-md-3 px-md-5 animated slideInRight">Join Now</a>
                             @endguest
@@ -155,5 +156,9 @@ $courses[] = App\Models\Admin\course::where('id',$course->course_id)->first();
             </tbody>
         </table>
     </div>
+    \( 2^3 \)
+    \[ \int_0^1 x^2 \, dx \]
 </div>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 @endsection
