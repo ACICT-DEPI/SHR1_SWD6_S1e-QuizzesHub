@@ -149,7 +149,14 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
         if($user->role == 'owner' && Auth::user()->role != 'owner'){
+
             return redirect()->back()->with('msg', 'You are not allowed to access this page');
+
+        }
+        if($user->role == 'owner' && Auth::user()->role == 'owner'){
+            if($user->id == Auth::user()->id){
+                return redirect()->back()->with('msg', 'You are not allowed to access this page');
+            }
         }
         $user->delete();
         $user->feedbacks()->delete();
