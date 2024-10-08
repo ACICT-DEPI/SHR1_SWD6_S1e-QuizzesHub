@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Site;
+
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Admin\User;
 
@@ -25,5 +27,20 @@ class SiteController extends Controller
         }
 
         return view('site.index', compact('top_users'));
+    }
+
+    public function about()
+    {
+        return view('site.pages.about');
+    }
+
+    public function contact()
+    {
+        return view('site.pages.contact');
+    }
+
+    public function ReadMore()
+    {
+        return view('site.pages.ReadMore');
     }
 }
