@@ -16,7 +16,8 @@ use App\Http\Controllers\Admin\FacultyController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\CourseExamsController;
 use App\Http\Controllers\Admin\ChartController;
-
+use App\Http\Controllers\NewExamController;
+use App\Http\Controllers\Admin\NewExamAdminController;
 use App\Http\Controllers\SiteController;
 
 
@@ -51,6 +52,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return view('site.pages.ReadMore');
       })->name('site.ReadMore');
 
+
+    Route::get('/newexams/create', [NewExamController::class, 'create'])->name('newexams.create');
+    Route::post('/newexams', [NewExamController::class, 'store'])->name('newexams.store');
 
 });
 
@@ -122,6 +126,11 @@ Route::middleware(['auth','IsAdmin','verified'])->prefix('admin')->name('admin.'
     Route::get('/charts/most-universities', [ChartController::class, 'getMostUniversities']);
     Route::get('/top-users-data', [ChartController::class, 'getTopUsersByScore']);
     Route::get('/popular-courses-data', [ChartController::class, 'getMostPopularCourses']);
+
+    // add new exam
+    Route::get('/newexams', [NewExamAdminController::class, 'index'])->name('newexams.index');
+    Route::get('/newexams/{id}', [NewExamAdminController::class, 'show'])->name('newexams.show');
+    Route::delete('/newexams/{id}', [NewExamAdminController::class, 'delete'])->name('newexams.delete');
 });
 
 

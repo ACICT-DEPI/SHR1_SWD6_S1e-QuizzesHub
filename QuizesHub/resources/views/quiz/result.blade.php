@@ -32,10 +32,10 @@
                         <div class="card-header">
                             <a href="{{ route('site.index') }}"><strong class="card-title">QuizzesHub</strong></a>
                         </div>
-                        
                         <div class="catd-body" id="begin-screen">
                             <div class="container mt-5">
                                 <div class="card shadow-lg">
+                                    
                                     <div class="card-header text-center bg-primary text-white">
                                         <h3>{{ $exam->course->university->name }}</h3>
                                         <h5>{{ $exam->course->faculty->name }}</h5>
@@ -59,6 +59,9 @@
                                     <div class="card-footer text-center text-muted">
                                         Good Luck {{ Auth::user()->fname}}!
                                     </div>
+                                    <alert class="alert alert-success">
+                                        {{ $msg }}
+                                    </alert>
                                 </div>
                             </div>
                         </div>
@@ -123,6 +126,7 @@
             </div>
         </div><!-- .animated -->
     </div><!-- .content -->
-    
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </body>
 </html>

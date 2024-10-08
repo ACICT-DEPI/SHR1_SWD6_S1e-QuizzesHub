@@ -165,7 +165,8 @@
                             {{-- feedback for exam --}}
                             <div class="form-group">
                                 <div class="input-group">
-                                    <button class="form-control" class="btn btn-primary">FeedBack</button>
+                                    <a href="{{ route('quiz.feedback', $exam->id) }}" class="btn btn-primary">FeedBack</a>
+                                    {{-- <button class="form-control" class="btn btn-primary">FeedBack</button> --}}
                                 </div>
                                 <p>this feedback help us to solve the issues in exams</p>
                             </div>
@@ -179,3 +180,6 @@
 
 </body>
 </html>
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>

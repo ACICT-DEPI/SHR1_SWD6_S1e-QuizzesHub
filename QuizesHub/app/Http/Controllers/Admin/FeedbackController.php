@@ -12,7 +12,8 @@ class FeedbackController extends Controller
 {
     public function index()
     {
-        $UserData = Feedback::with('user')->get();
+        // $UserData = Feedback::with('user')->get();
+        $UserData = feedback::get();
          return view('dashboard.feedback.index',compact('UserData'));
     }
     public function create()

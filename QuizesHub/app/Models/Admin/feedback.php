@@ -22,7 +22,7 @@ class Feedback extends Model
 
     public function user()
     {
-       return $this->belongsto(User::class,'user_id','id');
+       return $this->belongsto(User::class, 'user_id', 'id');
     }
 
 

@@ -87,6 +87,15 @@
 
                 </ul>
             </li>
+            <li class="menu-item-has-children dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-tasks"></i>New Exams</a>
+                <ul class="sub-menu children dropdown-menu">
+                    <li><i class="fa fa-id-badg"></i><a href="{{ route('admin.newexams.index')}}">All Exams</a></li>
+                    {{-- <li><i class="fa fa-id-plus"></i><a href="{{ route('admin.majors.create')}}">Add Exam</a></li> --}}
+                    {{-- <li><i class="fa fa-id-plus"></i><a href="{{ route('admin.majors.archive')}}">Archive</a></li> --}}
+
+                </ul>
+            </li>
 
         </ul>
     </div><!-- /.navbar-collapse -->
