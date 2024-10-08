@@ -44,9 +44,13 @@ class UserController extends Controller
     {
         // return $request->all();
         $file = $request->file('image_path');
-        $photoExt = $file->getClientOriginalExtension();
-        $photoName = $request->username . '.' . $photoExt;
-        $photo = $file->storeAs('images/users', $photoName);
+        if(empty($file)){
+            $photo = null;
+        }else{
+            $photoExt = $file->getClientOriginalExtension();
+            $photoName = $request->username . '.' . $photoExt;
+            $photo = $file->storeAs('images/users', $photoName);
+        }
         User::create([
             'fname' => $request->fname,
             'lname' => $request->lname,
