@@ -30,6 +30,3 @@ Route::get('/charts/most-universities', [ChartController::class, 'getMostUnivers
 Route::get('/top-users-data', [ChartController::class, 'getTopUsersByScore']);
 Route::get('/popular-courses-data', [ChartController::class, 'getMostPopularCourses']);
 
-
-
-

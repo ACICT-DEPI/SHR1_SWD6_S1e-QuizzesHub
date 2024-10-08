@@ -39,5 +39,4 @@ class Question extends Model
     public function ExamUser() {
         return $this->belongsToMany(User::class, 'answer_question_user', 'question_id', 'exam_user_id')->withPivot('selected_answer_id', 'user_id', 'created_at', 'updated_at');
     }
-
 }

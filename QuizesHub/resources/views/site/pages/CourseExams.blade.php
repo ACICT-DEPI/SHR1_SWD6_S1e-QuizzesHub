@@ -63,12 +63,16 @@
             margin-right: 0.5rem;
         }
 
-</style>
-@foreach($exams as $exam)
+        .container {
+            margin: 1% auto;
+        }
 
+</style>
+<?php $x = 1; ?>
+{{-- @foreach($exams as $exam)
 <div class="container my-5">
     <div class="row">
-        <div class="col-md-4 mb-4">
+        <div class="col-md-6 mb-4">
             <div class="card exam-card">
                 <div class="card-header">
                     {{ $exam->type }} 
@@ -106,7 +110,58 @@
         </div>
     </div>
 </div>
-@endforeach
+@endforeach --}}
+
+<div class="container my-5">
+    <div class="row">
+        @if(Session::has('message'))
+            <div class="alert alert-danger">
+                {{ Session::get('message') }}
+            </div>
+        @endif 
+        @foreach($exams as $exam)
+            <div class="col-md-4 mb-4"> 
+                <div class="card exam-card">
+                    <div class="card-header">
+                        {{ $exam->type }} 
+                        @if($exam->ExamUser()->where('user_id', Auth::id())->count() > 0) 
+                            <i class="bi bi-check white"></i>
+                        @endif
+                    </div>
+                    <div class="card-body">
+                        <div class="exam-info">
+                            <i class="bi bi-calendar icon"></i> {{ $exam->date }}
+                        </div>
+                        <div class="exam-info">
+                            <i class="bi bi-clock icon"></i> {{ $exam->duration }} m
+                        </div>
+                        <div class="exam-info">
+                            <i class="bi bi-question-circle"></i> {{ count($exam->questions->toArray()) }} <strong>Questions</strong>
+                        </div>
+                        @if($exam->ExamUser()->where('user_id', Auth::id())->count() > 0) 
+                            <div class="exam-info">
+                                <i class="bi bi-arrow-up-circle"></i> Highest Score: {{ $exam->ExamUser()->where('user_id', Auth::id())->orderBy('score', 'desc')->first()->score }}/{{ count($exam->questions->toArray()) }}
+                            </div>
+                            <div class="exam-info">
+                                <i class="bi bi-arrow-repeat"></i> Attempt Number: {{ $exam->ExamUser()->where('user_id', Auth::id())->count() }}
+                            </div>
+                        @endif
+                        <div class="exam-info">
+                            <form action="{{ route('quiz.quiz', $exam->id) }}" method="POST" style="display: inline">
+                                @csrf
+                                <button class="btn btn-primary">Start Quiz</button>
+                            </form>
+                            <a href="{{ route('quiz.show', $exam->id) }}" class="btn btn-primary">Show Quiz</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+    </div>
+</div>
+
+
+
 @endif
 <!-- ------------------------------------------------------------------------------- -->
                   
