@@ -100,8 +100,7 @@
         @if($examId)
         <label for=""><h3>Questions for the Exam</h3></label>
 
-            <!-- Add a question button -->
-            <button class="btn btn-info" wire:click="addQuestion">Add Question</button>
+
 
             <!-- Display questions dynamically -->
             @foreach($questions as $index => $question)
@@ -181,6 +180,8 @@
                 </div>
             @endforeach
 
+            <!-- Add a question button -->
+            <button class="btn btn-info" wire:click="addQuestion">Add Question</button>
             <button class="btn btn-success" wire:click="saveQuestions">Save Questions and Answers</button>
 
             @if (session()->has('message'))

@@ -16,7 +16,7 @@
         .correct_answer {
 
             background-color: lightgreen;
-            
+
         }
         .wrong_answer {
             background-color: tomato;
@@ -35,14 +35,14 @@
                         <div class="catd-body" id="begin-screen">
                             <div class="container mt-5">
                                 <div class="card shadow-lg">
-                                    
+
                                     <div class="card-header text-center bg-primary text-white">
                                         <h3>{{ $exam->course->university->name }}</h3>
                                         <h5>{{ $exam->course->faculty->name }}</h5>
                                     </div>
                                     <div class="card-body">
                                         <h4 class="card-title text-center">Course: {{ $exam->course->course->name }} [{{ $exam->course->course->code }}]</h4>
-                                        
+
                                         <div class="row mt-4">
                                             <div class="col-md-6">
                                                 <p><strong>Major:</strong> {{ $exam->course->major->name }}</p>
@@ -69,18 +69,18 @@
                             <form class="form-horizontal" action="{{ route('quiz.submit', $exam->id) }}" enctype="" method="POST">
                                 @csrf
                                 <div class="card-body card-block">
-                                    
+
                                 <!-- Loop through questions -->
                                 @foreach($exam->questions as $index => $question)
                                 <hr>
                                     <div class="question-container"  id="question-{{ $index }}">
                                         <label>[{{ $index + 1 }}] {{ $question->text }}</label>
-    
+
                                         <!-- If it's MCQ or true/false -->
                                         @if($question->type == 'mcq' || $question->type == 'true_false')
                                             @foreach($question->answers as $answer)
                                                 <div>
-                                                    <input 
+                                                    <input
                                                         @if(in_array($answer->id, $user_answers)) checked @endif
                                                         type="radio" name="question[{{ $question->id }}]" value="{{ $answer->id }}" id="answer-{{ $answer->id }}">
                                                     <?php // echo $answer->is_correct; ?>
@@ -88,23 +88,23 @@
                                                         for="answer-{{ $answer->id }}">{{ $answer->text }}</label>
                                                 </div>
                                             @endforeach
-    
+
                                         <!-- If it's an essay question -->
                                         @elseif($question->type == 'essay')
                                             @foreach ($question->answers as $answer)
                                             <div>
-                                                <input 
+                                                <input
                                                     @if(in_array($answer->id, $user_answers)) checked @endif
                                                     type="radio" name="question[{{ $question->id }}]" value="{{ $answer->id }}"  id="answer-{{ $answer->id }}">
                                                 <label @if($answer->is_correct === 1) class='correct_answer' @endif @if(in_array($answer->id, $user_answers)) class='wrong_answer' @endif
                                                     for="answer-{{ $answer->id }}">answer by your self</label>
                                             </div>
-                                                
+
                                             @endforeach
                                         @endif
                                     </div>
                                 @endforeach
-    
+
                             </div>
                         </form>
 
@@ -112,7 +112,7 @@
                             {{-- feedback for exam --}}
                             <div class="form-group">
                                 <div class="input-group">
-                                    <a 
+                                    <a
                                         href="{{ route('quiz.feedback', $exam->id)}}"
                                         class="form-control btn btn-primary"
                                     >FeedBack</a>

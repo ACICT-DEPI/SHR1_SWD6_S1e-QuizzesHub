@@ -137,7 +137,7 @@ class UpdateExamForm extends Component
             'examDuration' => 'required|numeric',
         ]);
         $exam = Exam::find($this->examId);
-        
+
         $exam ->Update([
             'course_id' => CourseFacultyMajorUniversity::where('course_id', $this->selectedCourse)
                 ->where('faculty_id', $this->selectedFaculty)
