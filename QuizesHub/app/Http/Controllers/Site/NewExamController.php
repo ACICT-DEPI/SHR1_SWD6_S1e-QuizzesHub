@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Site;
 
+use App\Http\Controllers\Controller;
 use App\Models\Admin\NewExam;
 use App\Models\Admin\University;
 use App\Models\Admin\Faculty;
@@ -45,7 +46,7 @@ class NewExamController extends Controller
     public function store(NewExamRequest $request)
     {
         // dd(time());
-        $file = $request->file('file'); 
+        $file = $request->file('file');
         $fileExt = $file->getClientOriginalExtension();
         $fileName = "file" . time() . '.' . $fileExt;
         // dd($fileName);

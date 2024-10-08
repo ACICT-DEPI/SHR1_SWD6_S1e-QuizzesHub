@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\QuizController;
+use App\Http\Controllers\Site\ProfileController;
+use App\Http\Controllers\Site\QuizController;
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\ExamController;
@@ -14,43 +14,30 @@ use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\UniversityController;
 use App\Http\Controllers\Admin\FacultyController;
 use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\CourseExamsController;
+use App\Http\Controllers\Site\CourseExamsController;
 use App\Http\Controllers\Admin\ChartController;
-use App\Http\Controllers\NewExamController;
+use App\Http\Controllers\Site\NewExamController;
 use App\Http\Controllers\Admin\NewExamAdminController;
-use App\Http\Controllers\SiteController;
+use App\Http\Controllers\Site\SiteController;
 
 
 
 
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
 
 
 Route::get('/', [SiteController::class, 'index'])->name('site.index');
 
-// Route::get('/admin', function () {
-//     return view('dashboard');
-// })->middleware(['auth'/*, 'verified'*/])->name('dashboard');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::get('contact', function () {
-      return view('site.pages.contact');
-    })->name('site.contact');
 
-    Route::get('AboutUs', function () {
-        return view('site.pages.about');
-      })->name('site.about');
-
-      Route::get('ReadMore', function () {
-        return view('site.pages.ReadMore');
-      })->name('site.ReadMore');
+    Route::get('contact', [SiteController::class, 'contact'])->name('site.contact');
+    Route::get('AboutUs', [SiteController::class, 'about'])->name('site.about');
+    Route::get('ReadMore', [SiteController::class, 'ReadMore'])->name('site.ReadMore');
 
 
     Route::get('/newexams/create', [NewExamController::class, 'create'])->name('newexams.create');
