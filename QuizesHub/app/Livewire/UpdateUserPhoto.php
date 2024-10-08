@@ -42,7 +42,7 @@ class UpdateUserPhoto extends Component
             session()->flash('error', 'No profile photo to delete.');
         }
     }
-    
+
     public function save()
     {
         $this->validate([

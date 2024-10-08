@@ -63,10 +63,11 @@ class UpdateUserForm extends Component
 
     public function updateUser()
     {
+        dd($this->selectedUniversity, $this->selectedFaculty, $this->selectedMajor);
         $this->validate([
-            'selectedUniversity' => 'required',
-            'selectedFaculty' => 'required',
-            'selectedMajor' => 'required',
+            'selectedUniversity' => ['required','integer', 'exists:universities,id'],
+            'selectedFaculty' => ['required','integer', 'exists:faculties,id'],
+            'selectedMajor' => ['required','integer', 'exists:majors,id'],
         ]);
 
         // Update the user's university, faculty, and major

@@ -17,6 +17,7 @@
     <div>
         <input class="my-3 btn btn-primary"
             style="width: 80%; border-radius: 0.375rem; display: inline-block !important;" type="file"
+            name="photo"
             wire:model.live="photo" >
         @error('photo') <span class="error">{{ $message }}</span> @enderror
     </div>
@@ -25,8 +26,13 @@
     @if ($photo)
     <div>
         Photo Preview:
+        @if($photo->getClientOriginalExtension()== 'jpg' || $photo->getClientOriginalExtension()== 'jpeg' || $photo->getClientOriginalExtension()== 'png')
         <img src="{{ $photo->temporaryUrl() }}" alt="Preview" class="my-3"
-            style="width: 200px; height:200px; border-radius:50%">
+        style="width: 200px; height:200px; border-radius:50%">
+        @else
+        <p>No photo available.</p>
+        @endif
+
     </div>
     @endif
 

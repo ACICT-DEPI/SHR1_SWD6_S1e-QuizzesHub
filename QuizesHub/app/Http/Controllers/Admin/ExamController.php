@@ -13,17 +13,18 @@ use App\Models\Admin\Level;
 use App\Models\Admin\Course;
 use App\Models\Admin\User;
 use App\Models\Admin\CourseFacultyMajorUniversity;
+use App\Models\Admin\Feedback;
 use Symfony\Component\VarDumper\VarDumper;
 
 class ExamController extends Controller
 {
-    public function index() 
+    public function index()
     {
         $exams = Exam::get();
         return view('dashboard.exams.index', compact('exams'));
     }
 
-    public function create() 
+    public function create()
     {
         $universities = University::get()->toArray();
         $faculties = Faculty::get()->toArray();
@@ -31,13 +32,13 @@ class ExamController extends Controller
         return view('dashboard.exams.create', compact('courses', 'faculties', 'universities'));
     }
 
-    public function archive() 
+    public function archive()
     {
         $exams = Exam::onlyTrashed()->get();
         return view('dashboard.exams.archive', compact('exams'));
     }
 
-    public function store(ExamRequest $request) 
+    public function store(ExamRequest $request)
     {
         Exam::create([
             'type'=>$request->type,
@@ -51,13 +52,13 @@ class ExamController extends Controller
         return redirect()->back()->with('msg', 'Exam Added Successfully');
     }
 
-    public function show($id) 
+    public function show($id)
     {
         $exam = Exam::findorfail($id);
         return view('dashboard.exams.show', compact('exam'));
     }
 
-    public function edit($id) 
+    public function edit($id)
     {
         $universities = University::get();
         $faculties = Faculty::get();
@@ -66,7 +67,7 @@ class ExamController extends Controller
         return view('dashboard.exams.edit', compact('exam', 'courses', 'faculties', 'universities'));
     }
 
-    public function update(ExamRequest $request, $id) 
+    public function update(ExamRequest $request, $id)
     {
         $exam = Exam::findOrFail($id);
         $exam->update([
@@ -81,22 +82,25 @@ class ExamController extends Controller
         return redirect()->back()->with('msg', 'Updated Successfully..');
     }
 
-    public function destroy($id) 
+    public function destroy($id)
     {
         $exam = Exam::findorfail($id);
+        Feedback::where('exam_id', $id)->delete();
         $exam->delete();
         return redirect()->back()->with('msg', 'deleted succesfully');
     }
 
-    public function restore($id) 
+    public function restore($id)
     {
         $exam = Exam::onlyTrashed()->findOrFail($id);
         $exam->restore();
+        Feedback::where('exam_id', $id)->restore();
         return redirect()->back()->with('msg', 'restored successfully');
     }
 
     public function forceDelete($id) {
         $exam = Exam::withTrashed()->where('id', $id);
+        Feedback::where('exam_id', $id)->forceDelete();
         $exam->forceDelete();
         return redirect()->back()->with('msg', 'deleted permanently');
     }
