@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\Admin;
 
+use App\Helpers\ApiHelper;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Admin\Faculty;
@@ -15,8 +16,12 @@ class FacultyController extends Controller
     public function index()
     {
         $faculties = Faculty::get();
-        $faculties = FacultyResource::collection($faculties);
-        return response()->json($faculties);
+        if(count($faculties) > 0){
+            $faculties = FacultyResource::collection($faculties);
+            return ApiHelper::getResponse(200, 'Faculties found', $faculties);
+        }else{
+            return ApiHelper::getResponse(200, 'Faculties not found');
+        }
     }
 
     /**
@@ -24,7 +29,14 @@ class FacultyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validated();
+        $faculty = Faculty::create($data);
+        if($faculty){
+            $faculty = new FacultyResource($faculty);
+            return ApiHelper::getResponse(201, 'Faculty created', $faculty);
+        }else{
+            return ApiHelper::getResponse(200, 'Faculty not created');
+        }
     }
 
     /**
@@ -32,9 +44,13 @@ class FacultyController extends Controller
      */
     public function show(string $id)
     {
-        $faculty = Faculty::findOrFail($id);
-        $faculty = new FacultyResource($faculty);
-        return response()->json($faculty);
+        $faculty = Faculty::find($id);
+        if($faculty){
+            $faculty= new FacultyResource($faculty);
+            return ApiHelper::getResponse(200, 'Faculty found', $faculty);
+        }else{
+            return ApiHelper::getResponse(200, 'Faculty not found');
+        }
     }
 
     /**
@@ -42,7 +58,15 @@ class FacultyController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $data = $request->validated();
+        $faculty = Faculty::find($id);
+        if($faculty){
+            $faculty->update($data);
+            $faculty = new FacultyResource($faculty);
+            return ApiHelper::getResponse(200, 'Faculty updated', $faculty);
+        }else{
+            return ApiHelper::getResponse(200, 'Faculty not found');
+        }
     }
 
     /**
@@ -50,6 +74,12 @@ class FacultyController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $faculty = Faculty::find($id);
+        if($faculty){
+            $faculty->delete();
+            return ApiHelper::getResponse(200, 'Faculty deleted');
+        }else{
+            return ApiHelper::getResponse(200, 'Faculty not found');
+        }
     }
 }

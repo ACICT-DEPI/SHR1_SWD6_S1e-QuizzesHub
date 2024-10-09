@@ -34,6 +34,10 @@
                                     <td>{{ $user->phone }}</td>
                                 </tr>
                                 <tr>
+                                    <th>Score</th>
+                                    <td>{{ $user->score }}</td>
+                                </tr>
+                                <tr>
                                     <th>Image</th>
                                     <td>
                                         @if (!empty($user->image_path) && file_exists(public_path('storage/' . $user->image_path)))

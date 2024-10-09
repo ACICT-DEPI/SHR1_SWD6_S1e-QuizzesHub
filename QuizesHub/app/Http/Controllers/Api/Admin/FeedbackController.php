@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\Admin;
 
+use App\Helpers\ApiHelper;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Admin\Feedback;
@@ -15,8 +16,12 @@ class FeedbackController extends Controller
     public function index()
     {
         $feedbacks = Feedback::get();
-        $feedbacks = FeedbackResource::collection($feedbacks);
-        return response()->json($feedbacks);
+        if(count($feedbacks) > 0){
+            $feedbacks = FeedbackResource::collection($feedbacks);
+            return ApiHelper::getResponse(200, 'Feedbacks found', $feedbacks);
+        }else{
+            return ApiHelper::getResponse(200, 'Feedbacks not found');
+        }
     }
 
     /**
@@ -24,7 +29,14 @@ class FeedbackController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validated();
+        $feedback = Feedback::create($data);
+        if($feedback){
+            $feedback = new FeedbackResource($feedback);
+            return ApiHelper::getResponse(201, 'Feedback created', $feedback);
+        }else{
+            return ApiHelper::getResponse(200, 'Feedback not created');
+        }
     }
 
     /**
@@ -32,9 +44,13 @@ class FeedbackController extends Controller
      */
     public function show(string $id)
     {
-        $feedback = Feedback::findOrFail($id);
-        $feedback = new FeedbackResource($feedback);
-        return response()->json($feedback);
+        $feedback = Feedback::find($id);
+        if($feedback){
+            $feedback= new FeedbackResource($feedback);
+            return ApiHelper::getResponse(200, 'Feedback found', $feedback);
+        }else{
+            return ApiHelper::getResponse(200, 'Feedback not found');
+        }
     }
 
     /**
@@ -42,7 +58,15 @@ class FeedbackController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $data = $request->validated();
+        $feedback = Feedback::find($id);
+        if($feedback){
+            $feedback->update($data);
+            $feedback = new FeedbackResource($feedback);
+            return ApiHelper::getResponse(200, 'Feedback updated', $feedback);
+        }else{
+            return ApiHelper::getResponse(200, 'Feedback not found');
+        }
     }
 
     /**
@@ -50,6 +74,12 @@ class FeedbackController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $feedback = Feedback::find($id);
+        if($feedback){
+            $feedback->delete();
+            return ApiHelper::getResponse(200, 'Feedback deleted');
+        }else{
+            return ApiHelper::getResponse(200, 'Feedback not found');
+        }
     }
 }
