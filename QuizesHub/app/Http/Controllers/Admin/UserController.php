@@ -134,6 +134,7 @@ class UserController extends Controller
             'phone' => $request->phone,
             'image_path' => $photo,
             'gender' => $request->gender,
+            'score' => $request->score,
             'university_id' => $request->university_id,
             'faculty_id' => $request->faculty_id,
             'major_id' => $request->major_id,

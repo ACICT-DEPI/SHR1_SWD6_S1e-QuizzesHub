@@ -69,7 +69,7 @@ class UserRequest extends FormRequest
             'role' => 'nullable|in:user,admin',
             'university_id' => 'required|integer|exists:universities,id',
             'faculty_id' => 'required|integer|exists:faculties,id',
-            'selectedMajor' => ['required','integer', 'exists:majors,id'],
+            'major_id' => ['required','integer', 'exists:majors,id'],
             'level_id' => 'required|integer|exists:levels,id',
 
         ];

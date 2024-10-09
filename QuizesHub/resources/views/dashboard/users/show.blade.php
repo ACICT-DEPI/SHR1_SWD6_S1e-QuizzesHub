@@ -50,6 +50,10 @@
                                     <td>{{ $user->role }}</td>
                                 </tr>
                                 <tr>
+                                    <th>Score</th>
+                                    <td>{{ $user->score }}</td>
+                                </tr>
+                                <tr>
                                     <th>University</th>
                                     @if(!empty($user->University))
                                     <td>{{ $user->University->name }}</td>
