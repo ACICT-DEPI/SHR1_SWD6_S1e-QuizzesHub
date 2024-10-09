@@ -15,8 +15,6 @@
                     </alert>
                     @endif
 
-                    {{-- @livewire('CreateExam') --}}
-                    {{-- @livewire('create-user-form') --}}
                     @livewire('create-exam-form')
                 </div>
             </div>

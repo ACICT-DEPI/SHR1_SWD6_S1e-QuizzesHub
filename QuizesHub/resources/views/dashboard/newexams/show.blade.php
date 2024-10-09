@@ -105,8 +105,8 @@
                                     </div>
                                 </div>
                                 {{-- image --}}
-                                <img src="{{ asset("storage/".$exam->image_path)}}" alt="">
-                                <iframe src="{{ asset("storage/".$exam->image_path)}}" frameborder="0"></iframe>
+                                {{-- <img src="{{ asset("storage/".$exam->image_path)}}" alt=""> --}}
+                                <iframe src="{{ asset("storage/".$exam->file_path)}}" frameborder="0"></iframe>
                             </div>
                         </form>
                     </div>

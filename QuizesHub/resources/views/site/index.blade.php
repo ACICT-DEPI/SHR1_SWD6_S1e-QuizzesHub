@@ -34,6 +34,7 @@
                             <h1 class="display-3 text-white animated slideInDown">Get Exams Online From Your Home</h1>
                             <p class="fs-5 text-white mb-4 pb-2">our exams are designed to help you improve your skills.</p>
                             <a href="{{route('site.ReadMore')}}" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Read More</a>
+                            <a href="{{route('newexams.create')}}" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Add Exam</a>
                             @guest
                             <a href=" {{ route('register') }}" class="btn btn-light py-md-3 px-md-5 animated slideInRight">Join Now</a>
                             @endguest
@@ -131,7 +132,7 @@ $courses[] = App\Models\Admin\course::where('id',$course->course_id)->first();
 <div class="container">
     <div class="table-responsive">
         <table class="table table-striped table-bordered">
-            <caption>Top Users &copy; QuizzesHub</caption>
+            <caption>Top Users @QuizzesHub</caption>
             <thead>
               <tr>
                 <th scope="col">#</th>
@@ -156,8 +157,6 @@ $courses[] = App\Models\Admin\course::where('id',$course->course_id)->first();
             </tbody>
         </table>
     </div>
-    \( 2^3 \)
-    \[ \int_0^1 x^2 \, dx \]
 </div>
 <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>

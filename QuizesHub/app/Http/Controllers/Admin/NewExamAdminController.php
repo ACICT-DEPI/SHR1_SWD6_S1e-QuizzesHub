@@ -22,7 +22,10 @@ class NewExamAdminController extends Controller
 
     public function destroy($id)
     {
-        NewExam::findorfain($id)->destroy();
+        $exam = NewExam::findorfail($id);
+        unlink($exam->file_path);
+        $exam->destroy();
+        
         return redirect()->back()->with('message', 'the exam deleted successfully');
     }
 }
