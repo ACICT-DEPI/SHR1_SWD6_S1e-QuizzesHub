@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\Admin;
 
+use App\Helpers\ApiHelper;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Admin\Level;
@@ -15,8 +16,12 @@ class LevelController extends Controller
     public function index()
     {
         $levels = Level::get();
-        $levels = LevelResource::collection($levels);
-        return response()->json($levels);
+        if(count($levels) > 0){
+            $levels = LevelResource::collection($levels);
+            return ApiHelper::getResponse(200, 'Levels found', $levels);
+        }else{
+            return ApiHelper::getResponse(200, 'Levels not found');
+        }
     }
 
     /**
@@ -24,7 +29,14 @@ class LevelController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validated();
+        $level = Level::create($data);
+        if($level){
+            $level = new LevelResource($level);
+            return ApiHelper::getResponse(201, 'Level created', $level);
+        }else{
+            return ApiHelper::getResponse(200, 'Level not created');
+        }
     }
 
     /**
@@ -32,9 +44,13 @@ class LevelController extends Controller
      */
     public function show(string $id)
     {
-        $level = Level::findOrFail($id);
-        $level = new LevelResource($level);
-        return response()->json($level);
+        $level = Level::find($id);
+        if($level){
+            $level= new LevelResource($level);
+            return ApiHelper::getResponse(200, 'Level found', $level);
+        }else{
+            return ApiHelper::getResponse(200, 'Level not found');
+        }
     }
 
     /**
@@ -42,7 +58,15 @@ class LevelController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $data = $request->validated();
+        $level = Level::find($id);
+        if($level){
+            $level->update($data);
+            $level = new LevelResource($level);
+            return ApiHelper::getResponse(200, 'Level updated', $level);
+        }else{
+            return ApiHelper::getResponse(200, 'Level not found');
+        }
     }
 
     /**
@@ -50,6 +74,12 @@ class LevelController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $level = Level::find($id);
+        if($level){
+            $level->delete();
+            return ApiHelper::getResponse(200, 'Level deleted');
+        }else{
+            return ApiHelper::getResponse(200, 'Level not found');
+        }
     }
 }

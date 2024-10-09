@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\Admin;
 
+use App\Helpers\ApiHelper;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Admin\Exam;
@@ -15,8 +16,12 @@ class ExamController extends Controller
     public function index()
     {
         $exams = Exam::get();
-        $exams = ExamResource::collection($exams);
-        return response()->json($exams);
+        if(count($exams) > 0){
+            $exams = ExamResource::collection($exams);
+            return ApiHelper::getResponse(200, 'Exams found', $exams);
+        }else{
+            return ApiHelper::getResponse(200, 'Exams not found');
+        }
     }
 
     /**
@@ -24,7 +29,14 @@ class ExamController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validated();
+        $exam = Exam::create($data);
+        if($exam){
+            $exam = new ExamResource($exam);
+            return ApiHelper::getResponse(201, 'Exam created', $exam);
+        }else{
+            return ApiHelper::getResponse(200, 'Exam not created');
+        }
     }
 
     /**
@@ -32,9 +44,13 @@ class ExamController extends Controller
      */
     public function show(string $id)
     {
-        $exam = Exam::findOrFail($id);
-        $exam = new ExamResource($exam);
-        return response()->json($exam);
+        $exam = Exam::find($id);
+        if($exam){
+            $exam= new ExamResource($exam);
+            return ApiHelper::getResponse(200, 'Exam found', $exam);
+        }else{
+            return ApiHelper::getResponse(200, 'Exam not found');
+        }
     }
 
     /**
@@ -42,7 +58,15 @@ class ExamController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $data = $request->validated();
+        $exam = Exam::find($id);
+        if($exam){
+            $exam->update($data);
+            $exam = new ExamResource($exam);
+            return ApiHelper::getResponse(200, 'Exam updated', $exam);
+        }else{
+            return ApiHelper::getResponse(200, 'Exam not found');
+        }
     }
 
     /**
@@ -50,6 +74,12 @@ class ExamController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $exam = Exam::find($id);
+        if($exam){
+            $exam->delete();
+            return ApiHelper::getResponse(200, 'Exam deleted');
+        }else{
+            return ApiHelper::getResponse(200, 'Exam not found');
+        }
     }
 }

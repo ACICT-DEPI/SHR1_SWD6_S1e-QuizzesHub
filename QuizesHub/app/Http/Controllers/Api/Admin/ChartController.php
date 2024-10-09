@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Helpers\ApiHelper;
 
 
 class ChartController extends Controller
@@ -22,7 +23,7 @@ class ChartController extends Controller
             $university->name = explode(' ', $university->name)[0];
         }
 
-        return response()->json($universities);
+        return ApiHelper::getResponse(200, 'Universities found', $universities);
     }
 
     public function getTopUsersByScore()
@@ -34,7 +35,7 @@ class ChartController extends Controller
             ->limit(7)
             ->get();
 
-        return response()->json($users);
+        return ApiHelper::getResponse(200, 'Users found', $users);
     }
 
     public function getMostPopularCourses()
@@ -51,6 +52,6 @@ class ChartController extends Controller
             ->get();
 
         // Return the data as JSON for the chart
-        return response()->json($courses);
+        return ApiHelper::getResponse(200, 'Courses found', $courses);
     }
 }
