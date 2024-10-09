@@ -28,6 +28,13 @@
     </style>
 </head>
 <body>
+    <?php 
+        if(session('submited') && session('submited')=='yes') {
+            session(['submited' => 'no']);
+            header('Location: /');
+            exit();
+        }
+        ?>
     <div class="content mt-3">
         <div class="animated fadeIn">
             <div class="row">
@@ -69,7 +76,7 @@
                             </div>
                         </div>
                         <div class="card-body" id="quiz-screen" style="display: none">
-                            <form id="submit-quiz-form" class="form-horizontal" action="{{ route('quiz.submit', $exam->id) }}" enctype="" method="POST">
+                            <form id="submit-quiz-form" class="form-horizontal" action="{{ route('quiz.submit', $exam->id) }}" enctype="" method="POST" name="form">
                                 @csrf
                                 <div class="card-body card-block">
                                     <div id="timer" class="btn btn-primary">
@@ -207,6 +214,7 @@
                 if (confirmation) {
                     this.submit(); // If the user confirms, submit the form
                 }
+                document.form.reset();
             });
         });
     </script>

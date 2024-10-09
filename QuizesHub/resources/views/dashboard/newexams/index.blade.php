@@ -94,8 +94,7 @@
                                     <td>{{ $exam->university->name }}</td>
                                     <td>
                                     <a href="{{ route('admin.newexams.show', $exam->id) }}" class="btn btn-primary">Show</a>
-                                    {{-- <a href="#" class="btn btn-primary">Show</a> --}}
-                                    <form style="display:inline" action="{{route('admin.exams.destroy', $exam->id)}}" method="POST">
+                                    <form style="display:inline" action="{{ route('admin.newexams.delete', $exam->id)}}" method="POST">
                                         @csrf
                                         @method('delete')
                                         <button class="btn btn-danger" id="delete" onclick="return confirm('Are you sure?')" value="Delete">Delete</button>

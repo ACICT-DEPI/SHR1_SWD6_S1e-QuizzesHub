@@ -32,6 +32,17 @@ class QuizController extends Controller
 
     public function submit(QuizRequest $request, $examId)
     {
+        if (Session::has('test')) {
+            // إذا تم تحديث الصفحة، إعادة توجيه المستخدم
+            $exam = Exam::findorfail($examId);
+            return view('quiz.show', compact('exam'));
+        }
+    
+        // إذا كانت الصفحة تم تحميلها للمرة الأولى، ضع علامة على الجلسة
+        Session::flash('test', true);
+        Session::flash('submited', true);
+        session(['submited'=>'yes']);
+
         $userId = Auth::id();
         $exam = Exam::findorfail($examId);
         $score = 0;
@@ -78,6 +89,7 @@ class QuizController extends Controller
         $regard = intval($regard);
 
         Auth::user()->score = Auth::user()->score + $regard;
+        Auth::user()->score = max(Auth::user()->score, 0);
         Auth::user()->save();
 
         // if(!ExamUser::where('user_id', $userId)->where('exam_id', $examId)->exists()) {
@@ -107,7 +119,7 @@ class QuizController extends Controller
                 'exam_user_id' => $exam_user_id->id,
             ]);
         endforeach;
-
+        $request = '';
 
         return view('quiz.result', compact('userId', 'exam', 'score', 'user_answers'))->with('msg', "you have gain $regard points");
     }
@@ -127,8 +139,10 @@ class QuizController extends Controller
             'rating' => $request->rating,
             'comments' => $request->comment,
         ]);
+        Auth::user()->score = Auth::user()->score + 10;
+        Auth::user()->save();
 
-        return redirect()->back()->with('message', 'Message Sended Successfully');
+        return redirect()->back()->with('message', 'Message Sended Successfully and you gained 10 points');
     }
 
     public function show($examId)

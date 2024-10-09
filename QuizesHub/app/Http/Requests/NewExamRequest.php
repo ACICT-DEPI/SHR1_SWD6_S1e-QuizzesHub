@@ -28,7 +28,7 @@ class NewExamRequest extends FormRequest
             'major_id' => ['required', 'integer', 'exists:majors,id'],
             'course_id' => ['required', 'integer', 'exists:courses,id'],
             'type'=>['required', 'regex:/(final|midterm|oral|sheet)/'],
-            'file' => ['required', 'mimes:pdf,docx'],
+            'file' => ['required', 'mimes:pdf,docx', 'max:10000'],
         ];
     }
 

@@ -50,11 +50,10 @@ class NewExamController extends Controller
         $fileExt = $file->getClientOriginalExtension();
         $fileName = "file" . time() . '.' . $fileExt;
         // dd($fileName);
-        $file = $file->storeAs('files/newexams', $fileName);
-
+        $file_path = $file->storeAs('files/newexams', $fileName);
         NewExam::create([
             'user_id' => Auth::id(),
-            'image_path' => $file,
+            'file_path' => $file_path,
             'university_id' => $request->university_id,
             'faculty_id' => $request->faculty_id,
             'major_id' => $request->major_id,
