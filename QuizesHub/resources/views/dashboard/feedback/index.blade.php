@@ -27,11 +27,10 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @dd($UserData->user->fname)
                          @foreach($UserData as $feedback)
                      <tr>
-                     {{-- <td>{{ $feedback->user->fname . " " . $feedback->user->lname}}</td> --}}
-                    @dd($feedback->user)
+                     <td>{{ $feedback->user->fname . " " . $feedback->user->lname}}</td>
+                    
                           
                           <td>{{ $feedback->exam->course->course->name }}</td>
                           <td>{{$feedback->exam->type }}</td>
@@ -42,7 +41,7 @@
                             <a href="{{route('admin.feedbacks.show',$feedback->id)}}" class="btn btn-primary" id="show">Show</a>
 
 
-                            </form>
+                           
                           </td>
                                         </tr>
                                         @endforeach
