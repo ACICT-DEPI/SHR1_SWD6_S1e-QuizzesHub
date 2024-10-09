@@ -74,6 +74,7 @@
                 <div class="input-group">
                     <div class="input-group-addon"><i class="menu-icon fa fa-paperclip"></i></div>
                     <select wire:model.live="examType" class="form-control">
+                        <option value="">Choose Type</option>
                         <option value="midterm">Midterm</option>
                         <option value="final">Final</option>
                         <option value="oral">Oral</option>
