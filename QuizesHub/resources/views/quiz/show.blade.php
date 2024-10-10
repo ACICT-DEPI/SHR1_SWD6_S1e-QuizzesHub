@@ -61,7 +61,7 @@
 
                         <div class="catd-body" id="begin-screen">
                             <div class="container mt-5 align-items-center justify-center " style="display: flex" >
-                                <div class="card shadow-lg " style="width: 65%;  ">
+                                <div class="card shadow-lg " style="width: 75%;  ">
                                     <div class="card-header text-center bg-primary text-white">
                                         <h3 style="font-size: 1.75rem !important; font-weight: 500 !important;">{{ $exam->course->university->name }}</h3>
                                         <h5 style="font-size: 1.25rem !important; font-weight: 500 !important;">{{ $exam->course->faculty->name }}</h5>
@@ -130,7 +130,9 @@
                                                 <input
                                                     type="radio" name="question[{{ $question->id }}]" value="{{ $answer->id }}"  id="answer-{{ $answer->id }}">
                                                 <label @if($answer->is_correct === 1) class='correct_answer' @endif
-                                                    for="answer-{{ $answer->id }}">answer by your self</label>
+                                                    for="answer-{{ $answer->id }}">{{ $answer->text }}</label>
+                                                    <small class="badge bg-info">Selected By {{ count($answer->AnswerQuestionUser) }} Student</small>
+
                                             </div>
 
                                             @endforeach

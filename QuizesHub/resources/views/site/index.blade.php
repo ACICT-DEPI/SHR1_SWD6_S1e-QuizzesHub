@@ -14,10 +14,10 @@
                             <h5 class="text-primary text-uppercase mb-3 animated slideInDown">Best Online Exams</h5>
                             <h1 class="display-3 text-white animated slideInDown">The Best Online Exams Platform</h1>
                             <p class="fs-5 text-white mb-4 pb-2">you can learn from anywhere and anytime with our Quizs and Exams.</p>
-                            <a href="{{route('site.ReadMore')}}" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Read More</a>
-                            <a href="{{route('newexams.create')}}" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Add Exam</a>
+                            <a href="{{route('site.ReadMore')}}" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft" wire:navigate>Read More</a>
+                            <a href="{{route('newexams.create')}}" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft" wire:navigate>Add Exam</a>
                             @guest
-                            <a href=" {{ route('register') }}" class="btn btn-light py-md-3 px-md-5 animated slideInRight">Join Now</a>
+                            <a href=" {{ route('register') }}" class="btn btn-light py-md-3 px-md-5 animated slideInRight" wire:navigate>Join Now</a>
                             @endguest
                         </div>
                     </div>
@@ -33,10 +33,10 @@
                             <h5 class="text-primary text-uppercase mb-3 animated slideInDown">Best Online Exams</h5>
                             <h1 class="display-3 text-white animated slideInDown">Get Exams Online From Your Home</h1>
                             <p class="fs-5 text-white mb-4 pb-2">our exams are designed to help you improve your skills.</p>
-                            <a href="{{route('site.ReadMore')}}" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Read More</a>
-                            <a href="{{route('newexams.create')}}" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Add Exam</a>
+                            <a href="{{route('site.ReadMore')}}" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft" wire:navigate>Read More</a>
+                            <a href="{{route('newexams.create')}}" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft" wire:navigate>Add Exam</a>
                             @guest
-                            <a href=" {{ route('register') }}" class="btn btn-light py-md-3 px-md-5 animated slideInRight">Join Now</a>
+                            <a href=" {{ route('register') }}" class="btn btn-light py-md-3 px-md-5 animated slideInRight" wire:navigate>Join Now</a>
                             @endguest
                         </div>
                     </div>
@@ -77,7 +77,7 @@ $courses[] = App\Models\Admin\course::where('id',$course->course_id)->first();
                 <div class="service-item text-center pt-3">
                     <div class="p-4">
                         <i class="fa fa-3x fa-graduation-cap text-primary mb-4"></i>
-                        <a href="{{ route('CourseExams',$course->id) }}" class="dropdown-item">{{ $course->name }}</a>
+                        <a href="{{ route('CourseExams',$course->id) }}" class="dropdown-item" wire:navigate>{{ $course->name }}</a>
                         <p>Start {{ $course->name }} Exams Now</p>
                     </div>
                 </div>
