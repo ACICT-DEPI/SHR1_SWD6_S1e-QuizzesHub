@@ -12,6 +12,11 @@
     <link rel="stylesheet" href="{{ asset('dashboard/assets') }}/css/selectFX/css/cs-skin-elastic.css">
     <link rel="stylesheet" href="{{ asset('dashboard/assets') }}/css/style.css">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+    <!-- Icon Font Stylesheet -->
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
     @vite(['resources/css/app.css','resources/js/app.js'])
     <style>
         .correct_answer {
@@ -60,8 +65,8 @@
                         </div>
 
                         <div class="catd-body" id="begin-screen">
-                            <div class="container mt-5 align-items-center justify-center " style="display: flex" >
-                                <div class="card shadow-lg " style="width: 75%;  ">
+                            <div class="container mt-5 d-flex justify-content-center">
+                                <div class="card shadow-lg w-100 w-md-75">
                                     <div class="card-header text-center bg-primary text-white">
                                         <h3 style="font-size: 1.75rem !important; font-weight: 500 !important;">{{ $exam->course->university->name }}</h3>
                                         <h5 style="font-size: 1.25rem !important; font-weight: 500 !important;">{{ $exam->course->faculty->name }}</h5>
@@ -71,18 +76,18 @@
 
                                         <div class="row mt-4">
                                             <div class="col-md-6">
-                                                <p><strong>Major:</strong> {{ $exam->course->major->name }}</p>
-                                                <p><strong>Type:</strong> {{ $exam->type}}</p>
-                                                <p><strong>Date:</strong> {{ $exam->date}}</p>
+                                                <p><i class="bi bi-code-square"></i> <strong>Major:</strong> {{ $exam->course->major->name }}</p>
+                                                <p><i class="bi bi-code-square"></i> <strong>Type:</strong> {{ $exam->type}}</p>
+                                                <p><i class="bi bi-calendar icon"></i> <strong>Date:</strong> {{ $exam->date}}</p>
                                             </div>
                                             <div class="col-md-6">
-                                                <p><strong>Duration:</strong> {{ $exam->duration }}</p>
-                                                <p><strong>Number of Questions:</strong> {{ count($exam->questions->toArray()) }}</p>
+                                                <p><i class="bi bi-clock icon"></i> <strong>Duration:</strong> {{ $exam->duration }}</p>
+                                                <p><i class="bi bi-question-circle"></i> <strong>Number of Questions:</strong> {{ count($exam->questions->toArray()) }}</p>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="card-footer text-center text-muted">
-                                        Good Luck {{ Auth::user()->fname}}!
+                                        Good Luck {{ Auth::user()->fname}} ^_^
                                     </div>
                                 </div>
                             </div>
@@ -116,8 +121,11 @@
                                                         type="radio" name="question[{{ $question->id }}]" value="{{ $answer->id }}" id="answer-{{ $answer->id }}">
                                                     <?php // echo $answer->is_correct; ?>
                                                     <label @if($answer->is_correct === 1) class='correct_answer' @endif
-
-                                                        for="answer-{{ $answer->id }}">{{ $answer->text }} </label> 
+                                                        for="answer-{{ $answer->id }}">
+                                                        @if($answer->type == 'normal_text') {{ $answer->text }} 
+                                                        @else <img src="{{asset('storage/'. $answer->text)}}" alt="" width="100" height="100">
+                                                        @endif 
+                                                    </label> 
                                                         <small class="badge bg-info">Selected By {{ count($answer->AnswerQuestionUser) }} Student</small>
 
                                                 </div>

@@ -125,7 +125,8 @@
                     <div class="card-header">
                         {{ $exam->type }} 
                         @if($exam->ExamUser()->where('user_id', Auth::id())->count() > 0) 
-                            <i class="bi bi-check white"></i>
+                            <i class="bi bi-check2-circle"></i>
+
                         @endif
                     </div>
                     <div class="card-body">
@@ -136,7 +137,7 @@
                             <i class="bi bi-clock icon"></i> {{ $exam->duration }} m
                         </div>
                         <div class="exam-info">
-                            <i class="bi bi-question-circle"></i> {{ count($exam->questions->toArray()) }} <strong>Questions</strong>
+                                {{ count($exam->questions->toArray()) }} <strong>Questions</strong>
                         </div>
                         @if($exam->ExamUser()->where('user_id', Auth::id())->count() > 0) 
                             <div class="exam-info">
