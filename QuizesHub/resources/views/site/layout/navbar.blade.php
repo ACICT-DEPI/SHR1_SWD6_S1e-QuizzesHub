@@ -12,7 +12,7 @@
         @else 
             <img src="{{ asset('dashboard/assets/images/default.jpg') }} " alt="" width="30" height="30" class="rounded-circle">
         @endif 
-        {{ Auth::user()->username }} | {{ Auth::user()->score }}
+        {{ Auth::user()->fname }} | {{ Auth::user()->score }}
     </a>
     @endauth
     <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
