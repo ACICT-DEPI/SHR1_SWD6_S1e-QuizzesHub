@@ -91,6 +91,9 @@ class UpdateExamForm extends Component
                     'id' => $question->id,
                     'type' => $question->type,
                     'text' => $question->text,
+                    'answers' => [
+                        ['id' => $tmpAnswers[0]['id'], 'type'=>$tmpAnswers[0]['type'], 'text'=>$tmpAnswers[0]['text'], 'is_correct'=>$tmpAnswers[0]['is_correct']],
+                    ]
                 ];
             }
         endforeach;
@@ -240,7 +243,7 @@ class UpdateExamForm extends Component
                 ],
             );
 
-            if (isset($question['answers']) && is_array($question['answers']) && $question['type'] !== 'essay') {
+            if (isset($question['answers']) && is_array($question['answers']) ) {
                 foreach ($question['answers'] as $answerIndex => $answer) {
                     // Handle image uploads if the answer type is 'image_path'
                     if ($answer['type'] === 'image_path') {
@@ -277,17 +280,22 @@ class UpdateExamForm extends Component
                         }
                     } else {
                         // For other question types, just update or create the answer
-                        Answer::updateOrCreate(
-                            [
-                                'id' => $answer['id'],
-                            ],
-                            [
+                        if(!empty($answer['id'])){
+                            Answer::where('id', $answer['id'])->update([
                                 'question_id' => $updateOrCreateQuestion->id,
                                 'type' => $answer['type'],
                                 'text' => $answerText,
                                 'is_correct' => $answer['is_correct'],
-                            ]
-                        );
+                            ]);
+                        }else{
+                            Answer::create([
+                                'question_id' => $updateOrCreateQuestion->id,
+                                'type' => $answer['type'],
+                                'text' => $answerText,
+                                'is_correct' => $answer['is_correct'],
+                            ]);
+                        }
+
                     }
                 }
             }

@@ -168,9 +168,9 @@
                                 wire:click="setCorrectAnswer({{ $index }}, 1)"
                                 {{ $question['answers'][1]['is_correct'] ? 'checked' : '' }}>
                         </div>
-                    @elseif($question['type'] === 'essay')
-                        <div class="input-gourp">
-                            <p>Essay questions do not require predefined answers.</p>
+                        @elseif($question['type'] === 'essay')
+                        <div class="input-group">
+                            <input type="text" class="form-control" wire:model.debounce="questions.{{ $index }}.answers.{{0}}.text" value="no answer yet">
                         </div>
                     @endif
 
