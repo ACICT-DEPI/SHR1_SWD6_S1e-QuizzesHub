@@ -130,7 +130,7 @@
                     <label class="form-control-label">Answers</label>
                     @if($question['type'] === 'mcq')
                         @foreach($question['answers'] as $answerIndex => $answer)
-                            <div class="input-group">
+                            <div class="input-group" wire:key="answer-{{ $index }}-{{ $answerIndex }}">
                                 <div class="input-group-addon">
                                     <select wire:model.live="questions.{{ $index }}.answers.{{ $answerIndex }}.type" class="form-control">
                                         <option value="normal_text" @if($answer['type'] == 'normal_text') selected @endif>
@@ -142,14 +142,14 @@
                                     </select>
                                 </div>
                                 @if($answer['type'] === 'normal_text')
-                                    <input type="text" class="form-control" wire:model.live="questions.{{ $index }}.answers.{{ $answerIndex }}.text" placeholder="Answer Text" value="{{$answer['text']}}">
+                                    <input type="text" class="form-control" wire:model.debounce="questions.{{ $index }}.answers.{{ $answerIndex }}.text" placeholder="Answer Text" value="{{$answer['text']}}">
                                 @elseif($answer['type'] === 'image_path')
                                     <img src="{{asset('storage/'. $answer['text'])}}" alt="" width="100" height="100">
-                                    <input type="file" class="form-control" wire:model.live="uploadedImages.{{ $index }}.{{ $answerIndex }}">
+                                    <input type="file" class="form-control" wire:model.debounce="uploadedImages.{{ $index }}.{{ $answerIndex }}">
                                 @endif
 
                                 <label>
-                                    <input type="checkbox" wire:model.live="questions.{{ $index }}.answers.{{ $answerIndex }}.is_correct" @if($answer['is_correct']) checked @endif>
+                                    <input type="checkbox" wire:model.debounce="questions.{{ $index }}.answers.{{ $answerIndex }}.is_correct" @if($answer['is_correct']) checked @endif>
                                     Correct
                                 </label>
                             </div>

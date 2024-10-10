@@ -170,23 +170,29 @@ class UpdateExamForm extends Component
         ];
     }
 
-    public function updated($propertyName)
+    public function updatedQuestions($value, $key)
     {
-        foreach ($this->questions as $index => $question) {
+        // Extract the question index and the property being updated
+        list($questionIndex, $property) = explode('.', $key);
+
+        // Check if the updated property is the question type
+        if ($property === 'type') {
+            $question = $this->questions[$questionIndex];
+
             if ($question['type'] === 'true_false') {
                 // Reset answers for true_false questions
-                $this->questions[$index]['answers'] = [
-                    ['type' => 'normal_text', 'text' => 'True', 'is_correct' => $this->questions[$index]['answers'][0]['is_correct'] ?? false],
-                    ['type' => 'normal_text', 'text' => 'False', 'is_correct' => $this->questions[$index]['answers'][1]['is_correct'] ?? false],
+                $this->questions[$questionIndex]['answers'] = [
+                    ['type' => 'normal_text', 'text' => 'True', 'is_correct' => false],
+                    ['type' => 'normal_text', 'text' => 'False', 'is_correct' => false],
                 ];
             } elseif ($question['type'] === 'essay') {
                 // Reset answers for essay questions
-                $this->questions[$index]['answers'] = [
+                $this->questions[$questionIndex]['answers'] = [
                     ['type' => 'normal_text', 'text' => 'no answer yet', 'is_correct' => true],
                 ];
             } elseif ($question['type'] === 'mcq') {
                 // Reset answers for mcq questions with 4 empty options
-                $this->questions[$index]['answers'] = [
+                $this->questions[$questionIndex]['answers'] = [
                     ['type' => 'normal_text', 'text' => '', 'is_correct' => false],
                     ['type' => 'normal_text', 'text' => '', 'is_correct' => false],
                     ['type' => 'normal_text', 'text' => '', 'is_correct' => false],
