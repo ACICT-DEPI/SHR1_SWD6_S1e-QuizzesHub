@@ -4,10 +4,10 @@
             <div class="col-lg-3 col-md-6">
                 <h4 class="text-white mb-3">Quick Link</h4>
                 @if(request()->path() != 'AboutUs')
-                 <a class="btn btn-link" href="{{route('site.about')}}">About Us</a>
+                 <a class="btn btn-link" href="{{route('site.about')}}" wire:navigate>About Us</a>
                @endif  
                 @if(request()->path() != 'contact')
-                  <a class="btn btn-link" href="{{ route('site.contact') }}">Contact Us</a>
+                  <a class="btn btn-link" href="{{ route('site.contact') }}" wire:navigate>Contact Us</a>
               @endif
              
             </div>
@@ -15,7 +15,7 @@
                 <h4 class="text-white mb-3">Contact</h4>
                 <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>123 Street, Sharqia, Egypt</p>
                 <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+01026660223</p>
-                <a href="mailto:quizzeshub@gmail" class="mb-2" ><i class="fa fa-envelope me-3"></i>quizzeshub@gmail.com</a>
+                <a href="mailto:quizzeshub@gmail" class="mb-2" wire:navigate><i class="fa fa-envelope me-3"></i>quizzeshub@gmail.com</a>
               
             </div>
             <div class="col-lg-3 col-md-6">
@@ -57,7 +57,7 @@
               
                 <div class="col-md-6 text-center text-md-end">
                     <div class="footer-menu">
-                        <a href="{{ route('site.index') }}">Home</a>
+                        <a href="{{ route('site.index') }}" wire:navigate>Home</a>
                      
                     </div>
                 </div>

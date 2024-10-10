@@ -1,18 +1,18 @@
 
 <nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">
-    <a href="{{ route('site.index') }}" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
+    <a href="{{ route('site.index') }}" class="navbar-brand d-flex align-items-center px-4 px-lg-5" wire:navigate>
         <h2 class="m-0 text-primary"><img src="{{asset('website/assets')}}/img/QH.png" class="logo" alt="">QuizzesHub
         </h2>
         
     </a>
     @auth
-    <a href="{{ route('profile.edit') }}"> 
+    <a href="{{ route('profile.edit') }}" wire:navigate> 
         @if(!empty(Auth::user()->image_path) && file_exists('storage/'.Auth::user()->image_path))
             <img src="{{ asset('storage/'.Auth::user()->image_path )}} " alt="" width="30" height="30" class="rounded-circle">
         @else 
             <img src="{{ asset('dashboard/assets/images/default.jpg') }} " alt="" width="30" height="30" class="rounded-circle">
         @endif 
-        {{ Auth::user()->username }} | {{ Auth::user()->score }}
+        {{ Auth::user()->fname }} | {{ Auth::user()->score }}
     </a>
     @endauth
     <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
@@ -44,9 +44,9 @@
 
 
 
-            <a href="{{ route('site.index') }}" class="nav-item nav-link @if(request()->path() == '/') active @endif "><i class="fa fa-home" style="color: #06BBCC"></i> Home</a>
+            <a href="{{ route('site.index') }}" class="nav-item nav-link @if(request()->path() == '/') active @endif " wire:navigate><i class="fa fa-home" style="color: #06BBCC"></i> Home</a>
 
-            <a href="{{ route('site.about') }}" class="nav-item nav-link @if(request()->path() == 'AboutUs') active @endif"><i class="fa fa-user"
+            <a href="{{ route('site.about') }}" class="nav-item nav-link @if(request()->path() == 'AboutUs') active @endif" wire:navigate><i class="fa fa-user"
                     style="color: #06BBCC"></i> About</a>
 
 
@@ -64,7 +64,7 @@
                     @endphp
 
                     @foreach ($courses as $course)
-                    <a href="{{ route('CourseExams',$course->id) }}" class="dropdown-item">{{ $course->name }}</a>
+                    <a href="{{ route('CourseExams',$course->id) }}" class="dropdown-item" wire:navigate>{{ $course->name }}</a>
                     @endforeach
 
                     @else
@@ -76,18 +76,18 @@
 
 
 
-            <a href="{{ route('site.contact') }}" class="nav-item nav-link @if(request()->path() == 'contact') active @endif"><i class="fa fa-phone-alt"
+            <a href="{{ route('site.contact') }}" class="nav-item nav-link @if(request()->path() == 'contact') active @endif" wire:navigate><i class="fa fa-phone-alt"
                     style="color: #06BBCC"></i> Contact</a>
 
 
             <div class="nav-item dropdown">
-                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-user"
+                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" ><i class="fa fa-user"
                         style="color: #06BBCC"></i><span></span> Settings</a>
                 <div style="min-width: 0px !important; width:110px;" class="dropdown-menu fade-down m-0">
                     @php
                     $image = Auth::user()->image_path;
                     @endphp
-                    <a href="{{ route('profile.edit') }}" class="dropdown-item">
+                    <a href="{{ route('profile.edit') }}" class="dropdown-item" wire:navigate>
                         @if($image != null && file_exists('storage/'.Auth::user()->image_path))
                             <img src="{{asset('storage/'.$image)}}" class="rounded-circle" style="width: 30px; height: 30px;" alt="">
                         @else 
@@ -102,7 +102,7 @@
                         @csrf
                         <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                         this.closest('form').submit();"><i class="fa fa-sign-out-alt"
-                                style="margin-right: 5%; margin-left: 5%;"></i>Logout</a>
+                                style="margin-right: 5%; margin-left: 5%;" wire:navigate></i>Logout</a>
 
 
                     </form>
@@ -114,7 +114,7 @@
         @endauth
 
         @guest
-        <a href="{{ route('register') }}" class="btn btn-primary py-4 px-lg-5 d-none d-lg-block">Join Now<i
+        <a href="{{ route('register') }}" class="btn btn-primary py-4 px-lg-5 d-none d-lg-block" wire:navigate>Join Now<i
                 class="fa fa-arrow-right ms-3"></i></a>
         @endguest
 

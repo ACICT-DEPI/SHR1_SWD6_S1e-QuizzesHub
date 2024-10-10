@@ -54,6 +54,9 @@ Route::middleware(['auth', 'verified', 'IsAuthorized'])->group(function () {
     Route::post('/quiz/{id}/submit', [QuizController::class, 'submit'])->name('quiz.submit');
     Route::get('/quiz/{id}/feedback', [QuizController::class, 'feedBack'])->name('quiz.feedback');
     Route::post('/quiz/{id}/feedback', [QuizController::class, 'storeFeedBack'])->name('quiz.feedback');
+    
+    Route::get('/quiz/{id}/submit', [QuizController::class, 'show'])->name('quiz.show1');
+
 });
 
 Route::middleware(['auth','IsAdmin','verified'])->prefix('admin')->name('admin.')->group(function () {
