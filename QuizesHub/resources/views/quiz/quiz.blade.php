@@ -70,7 +70,7 @@
                                         </div>
                                     </div>
                                     <div class="card-footer text-center text-muted">
-                                        Good Luck {{ Auth::user()->fname}}!
+                                        Good Luck {{ Auth::user()->fname}} ^_^
                                     </div>
                                 </div>
                             </div>
