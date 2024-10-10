@@ -120,7 +120,7 @@ Route::middleware(['auth','IsAdmin','verified'])->prefix('admin')->name('admin.'
     // add new exam
     Route::get('/newexams', [NewExamAdminController::class, 'index'])->name('newexams.index');
     Route::get('/newexams/{id}', [NewExamAdminController::class, 'show'])->name('newexams.show');
-    Route::delete('/newexams/{id}', [NewExamAdminController::class, 'delete'])->name('newexams.delete');
+    Route::delete('/newexams/{id}', [NewExamAdminController::class, 'destroy'])->name('newexams.delete');
 });
 
 
