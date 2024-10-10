@@ -72,6 +72,19 @@
                                 </div>
                             </div>
                             <div class="form-group">
+                                <label class=" form-control-label" for="score">score</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="menu-icon fa fa-envelope"></i></div>
+                                    <input type="text" id="score"  value="{{ $user->score }}"
+                                        class="form-control @error('score') is-invalid @enderror" name="score">
+                                    @error('score')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <label class=" form-control-label" for="phone">Phone</label>
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="menu-icon fa fa-phone"></i></div>
@@ -131,7 +144,7 @@
                                     @enderror
                                 </div>
                             </div>
-                            
+
                             @livewire('update-user-form', ['user' => $user])
 
                             <div class="form-group">

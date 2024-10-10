@@ -5,6 +5,9 @@ namespace App\Http\Requests\Admin;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use App\Models\Admin\Course;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Validation\ValidationException;
+use App\Helpers\ApiHelper;
 
 class CourseRequest extends FormRequest
 {
@@ -21,6 +24,15 @@ class CourseRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
+    protected function failedValidation(Validator $validator)
+    {
+        if($this->is('api/*')){
+            $response = ApiHelper::getResponse(422, 'Validation error', $validator->messages()->all());
+            throw new ValidationException($validator, $response);
+        }else{
+            parent::failedValidation($validator);
+        }
+    }
     public function uniqueCompositeRule()
     {
         return Rule::unique('courses', 'code');
@@ -28,10 +40,10 @@ class CourseRequest extends FormRequest
     public function onCreate(): array
     {
         return [
-            
+
             'name' => ['required', 'string', 'unique:courses,name'],
             'code' => ['required', 'string', 'unique:courses,code', $this->uniqueCompositeRule()],
-            
+
         ];
     }
 
@@ -40,7 +52,7 @@ class CourseRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'max:255', Rule::unique('courses', 'name')->ignore($this->course), $this->uniqueCompositeRule()],
             'code' => ['required', 'string', 'max:255', Rule::unique('courses', 'code')->ignore($this->course)],
-            
+
         ];
     }
 
@@ -53,7 +65,7 @@ class CourseRequest extends FormRequest
         return $this->onCreate();
     }
 
-   
+
 
     public function messages(): array
     {

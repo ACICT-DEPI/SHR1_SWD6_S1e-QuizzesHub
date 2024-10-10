@@ -17,7 +17,7 @@ class NewExam extends Model
 
     protected $fillable = [
         'user_id',
-        'image_path',
+        'file_path',
         'university_id',
         'faculty_id',
         'major_id',

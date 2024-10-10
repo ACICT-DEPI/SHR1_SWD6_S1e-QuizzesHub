@@ -17,11 +17,7 @@
                         @endforeach
                     </select>
                 </div>
-                @error('selectedUniversity')
-                    <div class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </div>
-                @enderror
+                <div><x-input-error :messages="$errors->get('selectedUniversity')" class="mt-2" /></div>
             </div>
             {{-- faculty_id --}}
             <div class="form-group">
@@ -37,6 +33,7 @@
                         </select>
                     @endif
                 </div>
+                <div><x-input-error :messages="$errors->get('selectedFaculty')" class="mt-2" /></div>
             </div>
             {{-- major_id --}}
             <div class="form-group">
@@ -52,6 +49,7 @@
                         </select>
                     @endif
                 </div>
+                <div><x-input-error :messages="$errors->get('selectedMajor')" class="mt-2" /></div>
             </div>
             {{-- course_id --}}
             <div class="form-group">
@@ -67,19 +65,22 @@
                         </select>
                     @endif
                 </div>
-            </div>
+                <div><x-input-error :messages="$errors->get('selectedCourse')" class="mt-2" /></div>
+                </div>
             {{-- type --}}
             <div class="form-group">
                 <label for="type" class="form-control-label">Type</label>
                 <div class="input-group">
                     <div class="input-group-addon"><i class="menu-icon fa fa-paperclip"></i></div>
                     <select wire:model.live="examType" class="form-control">
+                        <option value="">Choose Type</option>
                         <option value="midterm">Midterm</option>
                         <option value="final">Final</option>
                         <option value="oral">Oral</option>
                         <option value="sheet">Sheet</option>
                     </select>
                 </div>
+                <div><x-input-error :messages="$errors->get('examType')" class="mt-2" /></div>
             </div>
             {{-- date --}}
             <div class="form-group">
@@ -88,6 +89,7 @@
                     <div class="input-group-addon"><i class="menu-icon fa fa-calendar"></i></div>
                     <input type="date" wire:model.live="examDate" class="form-control">
                 </div>
+                <div><x-input-error :messages="$errors->get('examDate')" class="mt-2" /></div>
             </div>
             {{-- duration --}}
             <div class="form-group">
@@ -96,11 +98,8 @@
                     <div class="input-group-addon"><i class="menu-icon fa fa-clock-o"></i></div>
                     <input type="number" wire:model.live="examDuration" placeholder="Duration in minutes" class="form-control" min="1" max="300">
                 </div>
-                @error('examDuration')
-                    <div class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </div>
-                @enderror
+                <div><x-input-error :messages="$errors->get('examDuration')" class="mt-2" /></div>
+
             </div>
         </div>
         <hr>
@@ -111,8 +110,7 @@
             @if($examId)
                 <label for=""><h3>Questions for the Exam</h3></label>
 
-                <!-- Add a question button -->
-                <button class="btn btn-info" wire:click="addQuestion">Add Question</button>
+
 
                 <!-- Display questions dynamically -->
                 @foreach($questions as $index => $question)
@@ -173,6 +171,8 @@
                     </div>
                 @endforeach
 
+                <!-- Add a question button -->
+                <button class="btn btn-info" wire:click="addQuestion">Add Question</button>
                 <button class="btn btn-success" wire:click="saveQuestions">Save Questions and Answers</button>
 
                 @if (session()->has('message'))

@@ -1,4 +1,3 @@
-
 @extends('dashboard.layout.master')
 
 @section('content')
@@ -30,8 +29,13 @@
                          @foreach($UserData as $feedback)
                      <tr>
                      <td>{{ $feedback->user->fname . " " . $feedback->user->lname}}</td>
+<<<<<<< HEAD
                     
                           
+=======
+
+
+>>>>>>> a37e1360803d7f99bb67c687fd9afeb75f71fef3
                           <td>{{ $feedback->exam->course->course->name }}</td>
                           <td>{{$feedback->exam->type }}</td>
                           <td>{{ $feedback->exam->date}}</td>
@@ -41,7 +45,11 @@
                             <a href="{{route('admin.feedbacks.show',$feedback->id)}}" class="btn btn-primary" id="show">Show</a>
 
 
+<<<<<<< HEAD
                            
+=======
+
+>>>>>>> a37e1360803d7f99bb67c687fd9afeb75f71fef3
                           </td>
                                         </tr>
                                         @endforeach
@@ -82,7 +90,3 @@
     <script src="{{ asset('dashboard/assets/js/init-scripts/data-table/datatables-init.js') }}"></script>
 @endsection
 @endsection
-
-
-
-

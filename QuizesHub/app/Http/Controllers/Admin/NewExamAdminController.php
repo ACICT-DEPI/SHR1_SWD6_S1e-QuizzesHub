@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Admin\NewExam;
+use Illuminate\Support\Facades\Storage;
 
 class NewExamAdminController extends Controller
 {
@@ -22,7 +23,10 @@ class NewExamAdminController extends Controller
 
     public function destroy($id)
     {
-        NewExam::findorfain($id)->destroy();
+        $exam = NewExam::findorfail($id);
+        Storage::delete($exam->file_path);
+        $exam->delete();
+
         return redirect()->back()->with('message', 'the exam deleted successfully');
     }
 }

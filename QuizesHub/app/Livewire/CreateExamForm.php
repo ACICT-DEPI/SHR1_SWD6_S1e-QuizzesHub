@@ -70,7 +70,7 @@ class CreateExamForm extends Component
 
     public function createExam()
     {
-        
+
 
         $this->validate([
             'selectedUniversity' => 'required',
@@ -81,7 +81,7 @@ class CreateExamForm extends Component
             'examDate' => 'required|date',
             'examDuration' => 'required|numeric',
         ]);
-     
+
         // Create the exam and get its ID
         $exam = Exam::create([
             'course_id' => CourseFacultyMajorUniversity::where('course_id', $this->selectedCourse)
@@ -116,22 +116,30 @@ class CreateExamForm extends Component
 
     public function updated($propertyName)
     {
-        // Handle the case for true_false questions by resetting to two predefined answers
         foreach ($this->questions as $index => $question) {
             if ($question['type'] === 'true_false') {
+                // Reset answers for true_false questions
                 $this->questions[$index]['answers'] = [
-                    ['type' => 'normal_text', 'text' => 'True', 'is_correct' => $this->questions[$index]['answers'][0]['is_correct']],
-                    ['type' => 'normal_text', 'text' => 'False', 'is_correct' => $this->questions[$index]['answers'][1]['is_correct']],
+                    ['type' => 'normal_text', 'text' => 'True', 'is_correct' => $this->questions[$index]['answers'][0]['is_correct'] ?? false],
+                    ['type' => 'normal_text', 'text' => 'False', 'is_correct' => $this->questions[$index]['answers'][1]['is_correct'] ?? false],
                 ];
-            }
-
-            if($question['type'] === 'essay') {
+            } elseif ($question['type'] === 'essay') {
+                // Reset answers for essay questions
                 $this->questions[$index]['answers'] = [
                     ['type' => 'normal_text', 'text' => 'no answer yet', 'is_correct' => true],
+                ];
+            } elseif ($question['type'] === 'mcq') {
+                // Reset answers for mcq questions with 4 empty options
+                $this->questions[$index]['answers'] = [
+                    ['type' => 'normal_text', 'text' => '', 'is_correct' => false],
+                    ['type' => 'normal_text', 'text' => '', 'is_correct' => false],
+                    ['type' => 'normal_text', 'text' => '', 'is_correct' => false],
+                    ['type' => 'normal_text', 'text' => '', 'is_correct' => false],
                 ];
             }
         }
     }
+
 
     public function setCorrectAnswer($questionIndex, $answerIndex)
     {
