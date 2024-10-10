@@ -131,7 +131,7 @@
                         <label class="form-control-label">Answers</label>
                         @if($question['type'] === 'mcq')
                             @foreach($question['answers'] as $answerIndex => $answer)
-                                <div class="input-group">
+                                <div class="input-group" wire:key="answer-{{ $index }}-{{ $answerIndex }}">
                                     <div class="input-group-addon">
                                         <select wire:model.live="questions.{{ $index }}.answers.{{ $answerIndex }}.type">
                                             <option value="normal_text">Text</option>
@@ -139,13 +139,13 @@
                                         </select>
                                     </div>
                                     @if($answer['type'] === 'normal_text')
-                                        <input type="text" class="form-control" wire:model.live="questions.{{ $index }}.answers.{{ $answerIndex }}.text" placeholder="Answer Text">
+                                        <input type="text" class="form-control" wire:model.debounce="questions.{{ $index }}.answers.{{ $answerIndex }}.text" placeholder="Answer Text">
                                     @elseif($answer['type'] === 'image_path')
-                                        <input type="file" class="form-control" wire:model.live="uploadedImages.{{ $index }}.{{ $answerIndex }}">
+                                        <input type="file" class="form-control" wire:model.debounce="uploadedImages.{{ $index }}.{{ $answerIndex }}">
                                     @endif
 
                                     <label>
-                                        <input type="checkbox" wire:model.live="questions.{{ $index }}.answers.{{ $answerIndex }}.is_correct">
+                                        <input type="checkbox" wire:model.debounce="questions.{{ $index }}.answers.{{ $answerIndex }}.is_correct">
                                         Correct
                                     </label>
                                 </div>
