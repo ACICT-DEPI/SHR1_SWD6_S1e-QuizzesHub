@@ -106,7 +106,17 @@
                                 </div>
                                 {{-- image --}}
                                 {{-- <img src="{{ asset("storage/".$exam->image_path)}}" alt=""> --}}
-                                <iframe src="{{ asset("storage/".$exam->file_path)}}" frameborder="0"></iframe>
+                                {{-- PDF Preview --}}
+                                <div class="form-group">
+                                    <label for="pdf">Exam File</label>
+                                    <iframe src="{{ asset('storage/' . $exam->file_path) }}" type="application/pdf" style="width:100%; height:500px;" frameborder="0"></iframe>
+
+                                </div>
+
+                                {{-- Download Button --}}
+                                <div class="form-group">
+                                    <a href="{{ asset('storage/' . $exam->file_path) }}" class="btn btn-primary" download>Download Exam File</a>
+                                </div>
                             </div>
                         </form>
                     </div>
