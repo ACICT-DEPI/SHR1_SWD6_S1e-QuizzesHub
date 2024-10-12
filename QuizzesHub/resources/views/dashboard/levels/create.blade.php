@@ -13,9 +13,9 @@
 
 <form class="form-horizontal" action="{{route('admin.levels.store')}}"  enctype="multipart/form-data" method="post" >
    @csrf
-   
+
                      <div class="card-body card-block">
-                
+
                                 <div class="form-group">
                                     <label class=" form-control-label" for="name">Level_Name</label>
                                     <div class="input-group">
@@ -31,7 +31,7 @@
 
 
 
-                                   
+
                                 <div class="form-group">
                                     <label class=" form-control-label" for="description">Description</label>
                                     <div class="input-group">
@@ -48,19 +48,19 @@
 
 
 
-                                   
-                                
-                                
 
-                                  
-                                   
+
+
+
+
+
                                <div class="card-footer">
                                 <button type="submit" class="btn btn-success btn-sm" id="submit">
-                                    <i class="fa fa-dot-circle-o"></i> Add Course
+                                    <i class="fa fa-dot-circle-o"></i> Add Level
                                 </button>
-                               
-                               
 
-                             
+
+
+
 </form>
 @endsection
