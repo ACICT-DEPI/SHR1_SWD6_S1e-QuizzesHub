@@ -59,9 +59,15 @@
                                     <div class="card-footer text-center text-muted">
                                         Good Luck {{ Auth::user()->fname}} ^_^
                                     </div>
-                                    <alert class="alert alert-success">
-                                        {{ $msg }}
+                                    @if($regard < 0)
+                                    <alert class="alert alert-danger">
+                                        You Have Lose {{ $regard }} points. Be carful, you should pass 60% of the exam. if u lost your points u will not able to take another exam
                                     </alert>
+                                    @else
+                                    <alert class="alert alert-success">
+                                        You Have Gain {{ $regard }} points.
+                                    </alert>
+                                    @endif
                                 </div>
                             </div>
                         </div>
