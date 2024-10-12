@@ -17,8 +17,8 @@ class ProfileUpdateRequest extends FormRequest
     {
         $userId = $this->user()->id;
         return [
-            'fname' => 'required',
-            'lname' => 'required',
+            'fname' => ['required','string' ,'regex:/^[^<>]*$/'],
+            'lname' => ['required','string' ,'regex:/^[^<>]*$/'],
             'username' => ['required',Rule::unique('users', 'username')->ignore($userId, 'id')],
             'email' => ['required','email',Rule::unique('users', 'email')->ignore($userId, 'id')],
             'phone' => ['nullable', 'regex:/^(010|011|012|015)[0-9]{8}$/',Rule::unique('users', 'phone')->ignore($userId, 'id')],
