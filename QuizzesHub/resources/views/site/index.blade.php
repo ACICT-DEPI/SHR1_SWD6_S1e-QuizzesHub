@@ -15,7 +15,7 @@
                             <h1 class="display-3 text-white animated slideInDown">The Best Online Exams Platform</h1>
                             <p class="fs-5 text-white mb-4 pb-2">you can learn from anywhere and anytime with our Quizs and Exams.</p>
                             <a href="{{route('site.ReadMore')}}" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft" wire:navigate>Read More</a>
-                            <a href="{{route('newexams.create')}}" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft" wire:navigate>Add Exam</a>
+                            <a href="{{route('newexams.create')}}" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft" wire:navigate>Send New Exam</a>
                             @guest
                             <a href=" {{ route('register') }}" class="btn btn-light py-md-3 px-md-5 animated slideInRight" wire:navigate>Join Now</a>
                             @endguest
@@ -34,7 +34,7 @@
                             <h1 class="display-3 text-white animated slideInDown">Get Exams Online From Your Home</h1>
                             <p class="fs-5 text-white mb-4 pb-2">our exams are designed to help you improve your skills.</p>
                             <a href="{{route('site.ReadMore')}}" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft" wire:navigate>Read More</a>
-                            <a href="{{route('newexams.create')}}" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft" wire:navigate>Add Exam</a>
+                            <a href="{{route('newexams.create')}}" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft" wire:navigate>Send New Exam</a>
                             @guest
                             <a href=" {{ route('register') }}" class="btn btn-light py-md-3 px-md-5 animated slideInRight" wire:navigate>Join Now</a>
                             @endguest

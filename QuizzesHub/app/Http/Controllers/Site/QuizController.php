@@ -92,15 +92,6 @@ class QuizController extends Controller
         Auth::user()->score = max(Auth::user()->score, 0);
         Auth::user()->save();
 
-        // if(!ExamUser::where('user_id', $userId)->where('exam_id', $examId)->exists()) {
-        //     Auth::user()->score = (Auth::user()->score + $score + intval($request->timer_input / 60));
-        //     if($score > count($exam->questions->toArray())/2) {
-        //         Auth::user()->score = Auth::user()->score + intval($request->timer_input / 60);
-        //     }
-        //     Auth::user()->save();
-        // }
-
-
 
         $exam_user_id = ExamUser::create([
             'user_id' => Auth::id(),
@@ -121,7 +112,8 @@ class QuizController extends Controller
         endforeach;
         $request = '';
 
-        return view('quiz.result', compact('userId', 'exam', 'score', 'user_answers'))->with('msg', "you have gain $regard points");
+        if($regard)
+        return view('quiz.result', compact('userId', 'exam', 'score', 'user_answers', 'regard'))->with('msg', "you have gain $regard points");
     }
 
     public function feedBack($examId)

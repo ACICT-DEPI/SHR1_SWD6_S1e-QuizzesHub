@@ -106,7 +106,7 @@
                                                 @foreach ($question->answers as $answer)
                                                     <div>
                                                         <input type="radio" name="question[{{ $question->id }}]" value="{{ $answer->id }}"  id="answer-{{ $answer->id }}">
-                                                        <label for="answer-{{ $answer->id }}">{{ $answer->text }}</label>
+                                                        <label for="answer-{{ $answer->id }}">Answer yourself</label>
                                                     </div>
                                                 @endforeach
                                             @endif

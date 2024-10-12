@@ -164,6 +164,16 @@ class CreateExamForm extends Component
         // dd($this->questions);
         // Create the question in the database
         foreach ($this->questions as $index => $question) {
+            $this->validate(
+                [
+                "questions.$index.text" => 'required',
+                "questions.$index.type" => 'required',
+                ],
+                [
+                "questions.$index.text.required" => "The text field for question #".($index+1)." is required.",
+                "questions.$index.type.required" => "The type field for question #".($index+1)." is required.",
+                ]
+            );
             $createdQuestion = Question::create([
                 'exam_id' => $this->examId,
                 'type' => $question['type'],

@@ -89,6 +89,9 @@
                                     <div class="card-footer text-center text-muted">
                                         Good Luck {{ Auth::user()->fname}} ^_^
                                     </div>
+                                    <div class="card-footer text-center text-muted">
+                                        - note that, the number before answer indicate for the number of students that select this answer
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -117,6 +120,7 @@
                                         @if($question->type == 'mcq' || $question->type == 'true_false')
                                             @foreach($question->answers as $answer)
                                                 <div>
+                                                    <small class="badge bg-info">{{ count($answer->AnswerQuestionUser) }}</small>
                                                     <input
                                                         type="radio" name="question[{{ $question->id }}]" value="{{ $answer->id }}" id="answer-{{ $answer->id }}">
                                                     <?php // echo $answer->is_correct; ?>
@@ -126,7 +130,6 @@
                                                         @else <img src="{{asset('storage/'. $answer->text)}}" alt="" width="100" height="100">
                                                         @endif 
                                                     </label> 
-                                                        <small class="badge bg-info">Selected By {{ count($answer->AnswerQuestionUser) }} Student</small>
 
                                                 </div>
                                             @endforeach
@@ -135,12 +138,11 @@
                                         @elseif($question->type == 'essay')
                                             @foreach ($question->answers as $answer)
                                             <div>
+                                                <small class="badge bg-info">{{ count($answer->AnswerQuestionUser) }}</small>
                                                 <input
                                                     type="radio" name="question[{{ $question->id }}]" value="{{ $answer->id }}"  id="answer-{{ $answer->id }}">
                                                 <label @if($answer->is_correct === 1) class='correct_answer' @endif
                                                     for="answer-{{ $answer->id }}">{{ $answer->text }}</label>
-                                                    <small class="badge bg-info">Selected By {{ count($answer->AnswerQuestionUser) }} Student</small>
-
                                             </div>
 
                                             @endforeach
