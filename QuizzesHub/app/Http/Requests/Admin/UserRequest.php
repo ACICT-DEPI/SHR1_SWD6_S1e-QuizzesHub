@@ -36,8 +36,8 @@ class UserRequest extends FormRequest
     private function onCreate(): array
     {
         return [
-            'fname' => 'required',
-            'lname' => 'required',
+            'fname' => ['required','string' ,'regex:/^[^<>]*$/'],
+            'lname' => ['required','string' ,'regex:/^[^<>]*$/'],
             'username' => 'required|unique:users,username',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|string|min:8',
@@ -56,8 +56,8 @@ class UserRequest extends FormRequest
     {
         $userId = $this->route('user');
         return [
-            'fname' => 'required',
-            'lname' => 'required',
+            'fname' => ['required','string' ,'regex:/^[^<>]*$/'],
+            'lname' => ['required','string' ,'regex:/^[^<>]*$/'],
             // 'username' => 'required||unique:users,username,'.$this->username.'username',
             'username' => ['required',Rule::unique('users', 'username')->ignore($userId, 'id')],
             'email' => ['required','email',Rule::unique('users', 'email')->ignore($userId, 'id')],
