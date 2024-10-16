@@ -12,6 +12,7 @@ use App\Models\Admin\Exam;
 use App\Models\Admin\ExamUser;
 use App\Models\Admin\feedBack;
 use App\Models\Admin\User;
+use App\Models\Admin\Answer;
 use Carbon\Carbon;
 use App\Models\Admin\AnswerQuestionUser;
 use Illuminate\Support\Facades\Session;
@@ -49,6 +50,13 @@ class QuizController extends Controller
         $userAnswers = $request->validated();
         $user_answers = [];
         $selected_answers = [];
+
+        $exam = Exam::find($examId); // Replace $examId with the actual exam ID
+        $answers_in_site = Answer::whereHas('question', function ($query) use ($exam) {
+            $query->where('exam_id', $exam->id);
+        })->where('is_correct', 1)->get();
+        // dd(count($answers_in_site->toArray()));
+
 
         // Loop through each question in the exam
         foreach ($exam->questions as $question) {
@@ -88,11 +96,6 @@ class QuizController extends Controller
 
         $regard = intval($regard);
 
-        Auth::user()->score = Auth::user()->score + $regard;
-        Auth::user()->score = max(Auth::user()->score, 0);
-        Auth::user()->save();
-
-
         $exam_user_id = ExamUser::create([
             'user_id' => Auth::id(),
             'exam_id' => $examId,
@@ -112,8 +115,17 @@ class QuizController extends Controller
         endforeach;
         $request = '';
 
-        if($regard)
-        return view('quiz.result', compact('userId', 'exam', 'score', 'user_answers', 'regard'))->with('msg', "you have gain $regard points");
+
+        if(count($exam->questions->toArray()) == count($answers_in_site->toArray())) {
+            Auth::user()->score = Auth::user()->score + $regard;
+            Auth::user()->score = max(Auth::user()->score, 0);
+            Auth::user()->save();
+
+            return view('quiz.result', compact('userId', 'exam', 'score', 'user_answers', 'regard'));
+        } else {
+            $regard = 0;
+            return view('quiz.result', compact('userId', 'exam', 'score', 'user_answers', 'regard'));
+        }
     }
 
     public function feedBack($examId)

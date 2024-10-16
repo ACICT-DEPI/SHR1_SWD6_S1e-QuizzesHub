@@ -63,9 +63,13 @@
                                     <alert class="alert alert-danger">
                                         You Have Lose {{ $regard }} points. Be carful, you should pass 60% of the exam. if u lost your points u will not able to take another exam
                                     </alert>
-                                    @else
+                                    @elseif($regard > 0)
                                     <alert class="alert alert-success">
                                         You Have Gain {{ $regard }} points.
+                                    </alert>
+                                    @else
+                                    <alert class="alert alert-success">
+                                        We don't have refernce answers now, but the number before the answer indicate that number of studnets that select this answer
                                     </alert>
                                     @endif
                                 </div>
@@ -86,11 +90,12 @@
                                         @if($question->type == 'mcq' || $question->type == 'true_false')
                                             @foreach($question->answers as $answer)
                                                 <div>
+                                                    <small class="badge bg-info">{{ count($answer->AnswerQuestionUser) }}</small>
                                                     <input
                                                         @if(in_array($answer->id, $user_answers)) checked @endif
                                                         type="radio" name="question[{{ $question->id }}]" value="{{ $answer->id }}" id="answer-{{ $answer->id }}">
                                                     <?php // echo $answer->is_correct; ?>
-                                                    <label @if($answer->is_correct === 1) class='correct_answer' @endif @if(in_array($answer->id, $user_answers)) class='wrong_answer' @endif
+                                                    <label @if($regard!=0) @if($answer->is_correct === 1) class='correct_answer' @endif @if(in_array($answer->id, $user_answers)) class='wrong_answer' @endif @endif
                                                         for="answer-{{ $answer->id }}">{{ $answer->text }}</label>
                                                 </div>
                                             @endforeach

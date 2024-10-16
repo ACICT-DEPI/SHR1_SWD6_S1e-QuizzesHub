@@ -112,7 +112,7 @@
                             <a href="{{ route('quiz.show', $exam->id) }}" class="btn btn-primary">Show Quiz</a>
                         </div>
                         <div>
-                            <i>{{ count($exam->users->toArray()) }} student submit this quiz</i>
+                            <i>{{ $exam->users()->distinct('user_id')->count() }} student submit this quiz, {{ count($exam->users->toArray()) }} Attempt</i>
                         </div>
                     </div>
                 </div>
